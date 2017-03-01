@@ -17,11 +17,10 @@ public class Advertise implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 
+	
 	@Column(name="create_time")
 	private Timestamp createTime;
 
-	@Column(name="create_user_id")
-	private Long createUserId;
 
 	@Column(name="last_update_time")
 	private Timestamp lastUpdateTime;
@@ -34,6 +33,7 @@ public class Advertise implements Serializable {
 	private String pic;
 	private String tip;
 	private String title;
+	private String price;
 
 	private Long typeid;
 	@Column(name="pic_type")
@@ -59,6 +59,13 @@ public class Advertise implements Serializable {
 
 	public void setCreateTime(Timestamp createTime) {
 		this.createTime = createTime;
+	}	
+	public String getPrice() {
+		return this.price;
+	}
+
+	public void setPrice(String price) {
+		this.price = price;
 	}
 
 	public Timestamp getLastUpdateTime() {
@@ -107,20 +114,6 @@ public class Advertise implements Serializable {
 
 	public void setTitle(String title) {
 		this.title = title;
-	}
-
-	/**
-	 * @return the createUserId
-	 */
-	public Long getCreateUserId() {
-		return createUserId;
-	}
-
-	/**
-	 * @param createUserId the createUserId to set
-	 */
-	public void setCreateUserId(Long createUserId) {
-		this.createUserId = createUserId;
 	}
 
 	/**

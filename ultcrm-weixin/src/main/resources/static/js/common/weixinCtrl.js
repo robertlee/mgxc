@@ -59,7 +59,10 @@ ultcrm.controller('weixinCtrl',
 		case 'cardlist':
 			$state.go('index.cardList',{}, {reload: true}); 
 			break;
-		default:
+		case 'coachlist':
+			$state.go('index.cardList',{}, {reload: true}); 
+			break;		
+		default:		
 			$scope.handleParamState(state);
 			break;
 		}

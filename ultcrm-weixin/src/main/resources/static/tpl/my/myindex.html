@@ -47,24 +47,24 @@
 </style>
 
 <ion-view view-title="芒果学车●我的">
-	<ion-content class="bg-background-grey my-content">	
-	
+	<ion-content class="bg-background-grey my-content">		
 		<div class="customer-info clearfix" ng-click="toProfileList()">
 			<div class="avatar" style="border-color:#085E88">
 				<img ng-src="{{customer.headimgurl}}">
 			</div>
-			<!-- 如果没有电话，昵称居中 -->
+			
 			<div class="detail">
 				<p ng-class="{name:customer.phone,nickname:!customer.phone}">{{customer.name?customer.name:customer.nickname}}&nbsp;&nbsp;&nbsp; {{ convertSex(customer.sex) }}</p>
 				<p ng-if="customer.phone" class="phone">{{customer.phone}}</p>
 			</div>
 			<i class="icon icon-right ion-ios-arrow-right"></i>
 		</div>	
+		
 		<div class="v-spacer"></div>
 		<div class="list">
 	    	 <div class="item item-clickable">
 			    <div class="icon iconfont icon-myorder icon-left"></div>
-			    <div class="text">课程订单状态</div>
+			    <div class="text">订单状态</div>
 			 </div>
 			 
 			 <div class="item row">
@@ -92,6 +92,7 @@
 						<p style="color: #999">已结束</p>
 					</div>
 				</div>
+				
 				<div class="col">
 					<div class="shortcut shortcut-small" ng-click="toOrderList('comment')" style="position:relative">
 						<div class="icon iconfont icon-comment">
@@ -106,26 +107,21 @@
 	    <div class="list">
 	    	 <div class="item item-clickable" ng-click="toChild()">
 			    <div class="icon iconfont icon-mytech icon-left"></div>
-			    <div class="text">报名儿童</div>
-			    <i class="icon icon-right ion-ios-arrow-right"></i> 
+			    <div class="text">报名业务</div>			    
 			 </div>
-	    </div>
-	    
+	    </div>	    
 	    <div class="v-spacer"></div>
 	    <div class="list">
 	    	 <div class="item item-clickable" ng-click="toWallet()">
 			    <div class="icon iconfont icon-mycards icon-left"></div>
-			    <div class="text">我的卡包</div>
-			    <i class="icon icon-right ion-ios-arrow-right"></i> 
+			    <div class="text">我的卡包</div>				
 			 </div>
 	    </div>
-	    
 	    <div class="v-spacer"></div>
 	    <div class="list">
 	    	 <div class="item item-clickable" ng-click="toScores()">
 			    <div class="icon iconfont  icon-myscore icon-left"></div>
-			    <div class="text">我的积分</div>
-			    <i class="icon icon-right ion-ios-arrow-right"></i> 
+			    <div class="text">我的积分</div>			    
 			 </div>
 	    </div> 
 	</ion-content>

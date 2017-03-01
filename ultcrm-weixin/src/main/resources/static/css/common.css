@@ -458,6 +458,62 @@
   height: auto;
   line-height: normal;
 }
+
+
+
+
+/*********************************************************** list1 列表 *******************************************/
+.list1 {
+  margin-bottom: 0;
+}
+/*列表条目,可点击的条目*/
+.list1 .item.item-clickable {
+  position: relative;
+  height: 55px;
+  line-height: 55px;
+  padding: 0;
+  border-color: #ededed;
+  border-width: 1px;
+  color: #999999;
+}
+/*可点击列表的右侧信息,如：查看详情*/
+.item-clickable .icon-left {
+  position: absolute;
+  left: 13.2px;
+  font-size: 24.2px;
+  color: #999999;
+  margin: auto;
+  height: 55px;
+  line-height: 55px;
+}
+.item-clickable .lefttext {
+  position: absolute;
+  left: 53.9px;
+  font-size: 16.5px;
+  color: #333333;
+  height: 55px;
+  line-height: 55px;
+}
+.item-clickable .icon-right {
+  position: absolute;
+  left: 50%;  
+  font-size: 24.2px;
+  width: 24.2px;
+  color: #999999;
+  height: 55px;
+  line-height: 55px;
+}
+.item-clickable .righttext {
+  position: absolute;
+  left: calc(50% + 53.9px);
+  left: -webkit-calc(50% + 53.9px);
+  font-size: 16.5px;
+  color: #333333;
+  height: 55px;
+  line-height: 55px;
+}
+
+
 /*********************************************************** shortcut 快捷方式 *******************************************/
 /*将上面是图标，下面是文字的控件称为shortcut，文字居中*/
 .shortcut {
@@ -712,6 +768,29 @@
   white-space: pre-wrap;
 }
 /********************************************* 订单列表 *************************************/
+.service-info {
+  position: relative;
+  padding: 19.8px 13.2px;
+  border-bottom: solid 1px #e0e0e0;
+  background-size: 100%;
+ /* background: -webkit-linear-gradient(left bottom, #fa0, #fe0);*/
+ /*  background: -moz-linear-gradient(left bottom, #fa0,#fe0);*/  
+}
+.service-info .avatar {
+  float: left;
+}
+.service-info p {
+  padding: 0;
+  margin: 0;
+}
+.service-info .detail {
+  position: relative;
+  float: left;
+  height: 71px;
+  padding-left: 16.5px;
+}
+/********************************************* 订单列表 *************************************/
+
 .card.card-order {
   margin: 0;
   padding: 0;
@@ -774,7 +853,7 @@
   background-size: 100%;
   /* 拉伸 */
   background: -webkit-linear-gradient(left bottom, #0c669f, #01a6cc);
-  background: -moz-linear-gradient(left bottom, #0c669f, #01a6cc);
+  background: -moz-linear-gradient(left bottom, #fa0,#fe0);
 }
 .customer-info .avatar {
   float: left;

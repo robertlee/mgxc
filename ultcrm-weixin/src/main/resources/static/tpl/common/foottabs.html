@@ -6,7 +6,6 @@
  	color: #35b2e3;
  	border-color: transparent !important;
  }
-
  .footbar.tabs-icon-top .tab-item .icon {
     display: block;
     margin: 0 auto;
@@ -21,25 +20,22 @@
 
 <ion-tabs class="footbar tabs-icon-top tabs-color-active" ng-controller="foottabsCtrl" >
 
-  <ion-tab title="活动" icon-off="iconfont icon-activity-off" icon-on="iconfont icon-activity-on" ui-sref='index.home' on-deselect="clearTabsHistory()">
+  <ion-tab title="首页" icon-off="iconfont icon-activity-off" icon-on="iconfont icon-activity-on" ui-sref='index.home' on-deselect="clearTabsHistory()">
     <ion-nav-view name="index-home"></ion-nav-view>
   </ion-tab>
 
-  
   <ion-tab title="报名" icon-off="iconfont icon-service-off" icon-on="iconfont icon-service-on" ui-sref='index.service' on-deselect="clearTabsHistory()">
     <ion-nav-view name="index-service"></ion-nav-view>
   </ion-tab>
 
- 
   <!-- Account Tab -->
-  <ion-tab title="状态" icon-off="iconfont icon-order-off" icon-on="iconfont icon-order-on" ui-sref='index.orderOrderList' on-deselect="clearTabsHistory()">
-    <ion-nav-view name="index-order"></ion-nav-view>
+  <ion-tab title="教练" icon-off="iconfont icon-order-off" icon-on="iconfont icon-order-on" ui-sref='index.coachlist' on-deselect="clearTabsHistory()">
+    <ion-nav-view name="index-coach"></ion-nav-view>
   </ion-tab>
-  
-    <!-- Account Tab -->
+
+  <!-- Account Tab -->
   <ion-tab title="我的" icon-off="iconfont icon-my-off" icon-on="iconfont icon-my-on" ui-sref="index.myindex" on-deselect="clearTabsHistory()">
     <ion-nav-view name="index-my"></ion-nav-view>
   </ion-tab>
-  
-
+ 
 </ion-tabs>

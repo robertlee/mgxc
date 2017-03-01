@@ -1,31 +1,31 @@
-//home页面的控制器
-ultcrm.controller('homeCtrl', function($scope,$http,$state,$stateParams,$window,$location,$sanitize,$ionicPopup,$ionicSlideBoxDelegate,appointmentService,customerDataService) {
-	
-	$http.get('/getAdvertiseList').success(function(result) {    	
-		$scope.activityList=[];    	
-		var i=0;
-    	for (var item in result)	
-		{
-			$scope.activityList[i]={template:"<div class='ad-text0'>"+result[i].title+"</div>"};
-			i++;
-		}
-    	
-    }).
-    error(function() {
-    	$scope.activityList = [];//清空select
-    });	
+ultcrm.controller('homeCtrl', function($scope,$http,$location,$state,$stateParams,$ionicPopup) {
+	//初始化数据
 
-	
-	
-	
-	//$scope.activityList=[{template:"<div class='ad-text0'>2016年8月28日——2016年9月30日止</div>"},
-	//                     {template:"<div class='ad-text0'>南昌乐天作文培训月卡火热销售中</div>"},
-	//                     {template:"<div class='ad-text0'>2016年9月30日——2016年10月30日止</div>"}];	
-	$scope.toActivityDetail=function(index){
-		console.log(index);
-		$state.go('index.activityDetail',{id:index},{reload:true});
+	//导航切换函数
+
+	$scope.click_service=function(){
+		
+		$state.go('index.service',{},{reload:true});
 	};
-	
-
+	//展示教练详情
+	$scope.click_teacher=function(id){
+		if(id==0)
+		{
+			$state.go('index.coachlist',{},{reload:true});
+		}
+		else
+		{
+			$state.go('index.teacherDetail',{id:id},{reload:true});
+		}
+		
+	};
+	//微信内部跳转
+	$scope.jumpToUrl = function(path) {
+		$location.path(path);
+		var curUrl = $location.absUrl();	
+	};
+	//展示课程详情
+	$scope.showCourseDetail=function(index){
+		$state.go('index.courseDetail',{index:index},{reload:true});
+	};	
 });
-
