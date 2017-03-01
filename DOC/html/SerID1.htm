@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<!-- saved from url=(0092)http://weixin.juzixueche.com/juzi/custom/jstc?ServiceID=4bfcf304-c138-460d-8cea-bdb72bed0825 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"><meta name="format-detection" content="telephone=no"><title>我是学员 - 桔子学车</title><link rel="stylesheet" href="./SerID1_files/style.css"></head><body><div class="fixtop hasmenu tc-theme"><a href="javascript:history.back();" class="back"></a><div class="uc-center">考证服务</div><a href="javascript:;" class="btn">&nbsp;</a></div><div class="tc-bg tc-mt"><div class="tc-le"><h1>深圳计时学车服务 </h1><div class="aq">服务特点: 自主自由，计时付费</div><div class="gr2"><i class="price">¥<strong>2980</strong>.00</i><span class="w1">12个月拿证</span></div><div class="gr3"><a href="http://weixin.juzixueche.com/juzi/custom/jstc?ServiceID=4bfcf304-c138-460d-8cea-bdb72bed0825#" class="btn9 btn10">查看服务介绍&gt;&gt;</a></div></div><img src="./SerID1_files/jstc.png" class="tc-lb"></div><div class="tc-ltype"><a href="javascript:;" class="active">C1手动</a><a href="javascript:;" data-id="41">C2自动 500元</a></div><div class="tc-intro"><div class="tit">计时学车服务包含以下服务</div><ul><li>480车管所考试费+10元驾驶证制证费</li><li>2490元（指标费 / 科一培训费 / 服务费  )</li><li>赠送韶关长训(价值800元)</li><li>赠送意外险</li></ul></div><div class="tc-intro"><div class="tit">不包含以下服务</div><ul><li>练车费（120元/小时，按小时算）</li><li>补考费（科目一35元 / 科目二65元 / 科目三140元）</li><li>照相及体检费</li></ul></div><div class="tc-intro"><div class="tit">报名条件</div><ul><li>深圳有效居住信息6个月 (可找桔子学车查询)</li><li>年龄45岁以下</li><li>无色盲，色弱，身体残疾等</li></ul></div><div class="menu tc-mb"><div class="box pd1"><div class="menu-text">学车流程</div><a href="http://weixin.juzixueche.com/juzi/custom/szprogress" class="more"></a></div><div class="box pd1 bor-top"><div class="menu-text">帮助FAQ</div><a href="http://weixin.juzixueche.com/juzi/custom/servicefaq" class="more"></a></div></div><footer class="jzbox fixgrey"><a href="javascript:;" class="bnt">现在报名</a><span class="buycount"><span class="appcount">129</span>人已报名</span></footer><div id="subscribebox" class="overlay hide"><div class="stlayer"><div class="alic"><img src="./SerID1_files/qrcode_for_gh_8b6c7c93aef8_258.jpg" width="100%"></div><div class="alic">请长按关注公众号后查看</div></div></div><script src="./SerID1_files/zepto.min.js.下载"></script><script src="./SerID1_files/underscore-min.js.下载"></script><script src="./SerID1_files/jweixin-1.0.0.js.下载">   </script><script src="./SerID1_files/App.js.下载"></script><script src="./SerID1_files/custom.js.下载"></script><script>var app = new App();
+App.Storage.set('CityID', '28558');
+var initFn = function(met) {
+  if(navigator.userAgent.indexOf('MicroMessenger') > 0 && location.href.indexOf('juzi/custom/') > -1) {        
+      if(App.Storage.has('Coordinate') && (+new Date) - +App.Storage.get('Coordinate_gtime') < 9e5) {
+        App.initSDK();
+        met in app && app[met]();
+        return;
+      }
+      App.initSDK(function() {
+        app.showTip('正在获取地理位置...');
+        app.getLocation(function(resp) {
+          app.hideTip();
+          var coor = resp.point.lng.toFixed(8) + ',' +resp.point.lat.toFixed(8);
+          App.Storage.set('Coordinate', coor);
+          App.Storage.set('Coordinate_gtime', +new Date);
+          met in app && app[met]();
+        })
+      });    
+  } else {
+    App.Storage.set('Coordinate', '114.23461829,22.69288919');
+    met in app && app[met]();
+  } 
+};</script><div class="loading"><span class="txt"></span></div><script>initFn('Cus_tcinit')</script><div id="qq-sendUrl-btn"></div></body></html>
