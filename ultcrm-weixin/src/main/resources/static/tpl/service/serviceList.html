@@ -88,6 +88,7 @@
 	.show .buy {
 		display: block;
 		width: 35px;
+		height: 30px;
 		text-align: center;
 		background-color: #0C0;
 		color: white;
@@ -98,7 +99,7 @@
 		border:1px solid #2AA5F8;
 		color:#2AA5F8;
 		font-weight:bold;
-	/* 	font-size:2.4em; */
+	
 	}
 	
 </style>
@@ -113,24 +114,24 @@
 			</div>
 			<div id="div1">
 				<ul class='show'>	
-					<a href="http://{{defaultURL}}SerID{{$index}}.htm" style="text-decoration:none;color:black">
-						<table>				
-							<th class='table_title'>
-								{{business.name}}
-							</th>																
-						</table>	
-						<table>
-							<tr>
-								<td class='teach_font'><a href="http://{{defaultURL}}SerID{{$index}}.htm" style="text-decoration:none;color:black">简介:{{business.introduce}}</a></td>							
-								<td >
-									<a class="buy" style="color:white" ng-click='click_buy({{$index}})'>支付</a>
-								</td>
-							</tr>	
-							<tr>																	
-								<td class='teach_font'><a href="http://{{defaultURL}}SerID{{$index}}.htm" style="text-decoration:none;color:red">报价:{{business.price}}</a></td>									
-							<tr>	
-						</table>
-					</a>
+					
+					<table>				
+						<th class='table_title'>
+							{{business.name}}
+						</th>																
+					</table>
+					<table>
+						<tr>
+							<td class='teach_font'><a href="http://{{defaultURL}}SerID{{$index}}.htm" style="text-decoration:none;color:black">简介:{{business.introduce}}</a></td>							
+							<td >
+								<a class="buy" style="color:white" ng-click='click_buy({{$index}},$event)'>支付</a>
+							</td>
+						</tr>
+						<tr>
+							<td class='teach_font'><a href="http://{{defaultURL}}SerID{{$index}}.htm" style="text-decoration:none;color:red">报价:{{business.price}}</a></td>									
+						<tr>	
+					</table>
+					
 				</ul>
 			</div>
 		</div>

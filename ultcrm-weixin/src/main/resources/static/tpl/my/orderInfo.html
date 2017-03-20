@@ -80,7 +80,7 @@
 		</style>
 		<div class="list aptment-detail-list">
 			<div class="item item-single flexible">
-				<div class="row aptment-desc"><p>培训详情</p></div>
+				<div class="row aptment-desc"><p>学车详情</p></div>
 			</div>			
 			<div class="91jppx-icon"></div>
 			<div class="item item-single">				
@@ -92,27 +92,12 @@
 				                                    <p class="col content" ng-if="orderInfo.startClassTime !=NULL">{{orderInfo.startClassTime|limitTo:10}}</p>
 				</div>
 			</div>			
-
 			<div class="item item-single">				
-				<div class="row"><p class="title">名称:</p><p class="col content">{{orderInfo.classname}} 课程{{orderInfo.classId}}</p></div>
+				<div class="row"><p class="title">名称:</p><p class="col content">{{orderInfo.classname}} </p></div>
 			</div>	
-
-   		
-			<div class="item item-single" >
-				<div class="row">
-					<p class="title" >学费:</p><p class="col content">{{orderInfo.price|currency:"￥"}}</p>
-				</div> 
-			</div>	
-			<div class="item item-single" >
-				<div class="row">
-					<p class="title" >学时:</p><p class="col content">{{orderInfo.classHour}} 小时</p>
-				</div> 
+			<div class="item item-single">				
+				<div class="row"><p class="title">  ID:</p><p class="col content">MGXC2017_{{orderInfo.classId}}</p></div>
 			</div>				
-			<div class="item item-single" >
-				<div class="row">
-					<p class="title" >学员:</p><p class="col content">{{orderInfo.childName}}</p>
-				</div> 
-			</div>
 
 		</div>
 

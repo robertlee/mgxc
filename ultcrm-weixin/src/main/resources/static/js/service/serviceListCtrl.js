@@ -11,8 +11,9 @@ ultcrm.controller('serviceListCtrl', function($scope,$http,$state,$stateParams,$
     	$scope.businessList = [];//清空select
     });	
 	
-	$scope.click_buy=function(index){
+	$scope.click_buy=function(index,$event){
 		
+				$event.stopPropagation();
 			    var inform= $scope.businessList[index];
 				 	
 				var openId = customerData.openid;

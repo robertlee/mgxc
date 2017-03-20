@@ -4,7 +4,7 @@ ultcrm.controller('coachlistCtrl', function($scope,$http,$location,$state,$timeo
 		var iContent1 = 0;
 		var iContent2 = 0;
 		$scope.div1 = true;//显示
-		$scope.div2 = false;//隐藏		
+		$scope.div2 = false;//隐藏
 		$scope.siteDist =  ["南山区训练场", "福田区训练场", "宝安区训练场", "龙华新区训练场", "龙岗区训练场", "坪山新区训练场"];
 		$scope.title1 = "title1 change1";
 		$scope.title2 = "title2 change2";
@@ -34,31 +34,31 @@ ultcrm.controller('coachlistCtrl', function($scope,$http,$location,$state,$timeo
         });
 		
 		
-		$scope.selectSite=function(selectedSite){
-		$http.get('/getCoachAllList/'+selectedSite).success(function(result) {
-        	//先清空原始数据
-        	$scope.divContent1 = new Array();
-        	$scope.divContent2 = new Array();
-		    iContent1 = 0;
-		    iContent2 = 0;			
-        	if(result != null)
-	        {
-				for (var i = 0 ; i < result.length; i ++) {
-					if(result[i].desc != "C1" ){					
-						$scope.divContent2[iContent2]=result[i];
-						iContent2 = iContent2+1;
+		$scope.selectSite=function(selectedSite){			
+			$http.get('/getCoachAllList/'+selectedSite).success(function(result) {
+				//先清空原始数据
+				$scope.divContent1 = new Array();
+				$scope.divContent2 = new Array();
+				iContent1 = 0;
+				iContent2 = 0;			
+				if(result != null)
+				{
+					for (var i = 0 ; i < result.length; i ++) {
+						if(result[i].desc != "C1" ){					
+							$scope.divContent2[iContent2]=result[i];
+							iContent2 = iContent2+1;
+						}
+						else{										
+							$scope.divContent1[iContent1]=result[i];
+							iContent1 = iContent1+1;
+						}									
 					}
-					else{										
-						$scope.divContent1[iContent1]=result[i];
-						iContent1 = iContent1+1;
-					}									
 				}
-	        }
-        }).
-        error(function() {
-        	$scope.divContent1 = null;
-        	$scope.divContent2 = null;
-        });			
+			}).
+			error(function() {
+				$scope.divContent1 = null;
+				$scope.divContent2 = null;
+			});			
 		
 		};		
 
@@ -77,9 +77,10 @@ ultcrm.controller('coachlistCtrl', function($scope,$http,$location,$state,$timeo
 				$scope.title2 = "title2 change1";
 			}
 		};
-		$scope.toTimeSelect=function(coachId){
+		$scope.toTimeSelect=function(coachId,$event){			
+			$event.stopPropagation();
 			var openId = customerData.openid;
-			 $http.get("/getCoachAllList").success(function(data){
+			 $http.get("/getCoachById/"+coachId).success(function(data){
 				 if(data.code == 'existorder') {
 	                 //如果存在相似的预约单
 			  } else {
@@ -99,7 +100,7 @@ ultcrm.controller('coachlistCtrl', function($scope,$http,$location,$state,$timeo
 		$scope.toServiceStore=function(){
 			$state.go('index.serviceStore',{},{reload:true});
 		};			
-		//定时切换导航图片
-		$scope.myActiveSlide=0;
+		
+		
 });
 

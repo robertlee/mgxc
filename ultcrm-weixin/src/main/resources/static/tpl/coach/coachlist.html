@@ -9,12 +9,12 @@ body{
 	width:100%;
 	height:1px;
 	margin-bottom:1px;
-/* 	border:1px solid red; */
+
 }
 
 .title_div li{
 	list-style-type:none;
-/* 	border:1px solid red; */
+
 }
 
 .title_div li.title0{
@@ -40,7 +40,7 @@ body{
 .title_div li.title{
 	height:40px;
 	margin:15px 0px 0px 0px;
-/* 	border:1px solid red; */
+
 }
 .title_div li.title img{
 	width:100%;
@@ -57,7 +57,7 @@ body{
 	list-style-type:none;
 	margin-left:0px;
 	margin-top:10px;
-/* 	border:1px solid red; */
+
 }
 .class_title li{
 	float:left;
@@ -118,7 +118,7 @@ body{
 	width:80px;
 	height:100px;
 	margin-left:10px;
-/* 	border:1px solid red; */
+
 }
 .show img{
 	width:80px;
@@ -130,7 +130,7 @@ body{
 	height:100px;
 	margin-left:5px;
 	border-bottom:2px solid #DDDDDD;
-/* 	border:1px solid red; */
+
 }
 .show table td{
 	height:auto;
@@ -144,7 +144,7 @@ body{
 	color:red;
 }
 .table_title span.title_count{
-/* 	font-size:1.4em; */
+
 }
 .table_teach{
 	vertical-align: top;
@@ -162,11 +162,12 @@ body{
 #div1 .show .buy {
     border: 1px solid green;  
     font-weight: bold;
-
+	height:30px;
 }
 .show .buy {
     display: block;
     width: 35px;
+	height: 30px
     text-align: center;
     background-color: #0C0;
     color: white;
@@ -176,15 +177,14 @@ body{
 	border:1px solid #2AA5F8;
 	color:#2AA5F8;
 	font-weight:bold;
-/* 	font-size:2.4em; */
+	height:30px;
+
 }
 
 .banner{
 	width:100%;
-/* 	x-overflow:hidden; */
 	height:100px;
-	position:relative;
-/* 	border:1px solid red; */
+	position:relative;	
 }
 .banner li{
 	margin:0;
@@ -197,7 +197,6 @@ body{
 	margin-left:0px;
 	margin-top:0px;
 	height:100px;
-/* 	border:1px solid red; */
 }
 .banList li{
 	width:100%;
@@ -249,8 +248,7 @@ body{
 						<select ng-model="selectedSite" ng-options="siteId for siteId in siteDist" 
 														ng-change="selectSite(selectedSite)">
 														<option value="">--请选择--</option>
-						</select>
-						
+						</select>						
 				</div> 	
 				<ul class="class_title">
 					<li class="{{title1}}"><a id="navon1" ng-click="switchNav('navon1')">C1手动档</a></li>
@@ -265,45 +263,44 @@ body{
 								<table>
 									<tr>										
 										<th class='table_title'>
-											<a ng-click="showCoachDetail({{item.id}})"  style="text-decoration:none;color:black">{{item.name}}</a>
+											<a ng-click="showCoachDetail({{item.id}})"style="text-decoration:none;color:black">{{item.name}}</a>
 										</th>										
 									</tr>
 									<tr>
 										<td class='teach_font'><a ng-click='showCoachDetail({{item.id}})' style="text-decoration:none;color:black">类型:{{item.desc}}</a></td>
 										<td class='teach_font'><a ng-click='showCoachDetail({{item.id}})' style="text-decoration:none;color:black">教龄:{{item.techage}}年</a></td>
 										<td >
-											<a class="buy" ng-click='toTimeSelect({{item.id}})'>预约</a>
+											<a class="buy" ng-click='toTimeSelect({{item.id}},$event)'>预约</a>
 										</td>										
 									</tr>	
 									<tr>										
-										<td class='teach_font'><a ng-click='showCoachDetail({{item.id}})' style="text-decoration:none;color:black">评分:5星</a></td>
-										<td class='teach_font'><a ng-click='showCoachDetail({{item.id}})' style="text-decoration:none;color:black">点击名称查看教练详情！</a></td>									
-									<tr>	
+										<td class='teach_font'><a ng-click='showCoachDetail({{item.id}})' style="text-decoration:none;color:black">评分:5星</a></td>																
+									<tr>									
 								</table>
 							</li>
 						</ul>
 					</div>
 					
-					<div id="div2" ng-show="div2" ng-repeat="item in divContent2 | orderBy:'id'">
+					<div id="div2" ng-show="div2" ng-repeat="item in divContent2 | orderBy:id">
 						<ul class='show'  ng-click='showCoachDetail({{item.id}})'>
-							<li class='show_img'><img ng-src="../../img/course/coach_default.png" ng-click='showCoachDetail({{item.id}})'></li>
+							<li class='show_img'><img ng-src="../../img/course/coach_default.png" ></li>
 							<li>
 								<table>
 									<tr>										
 										<th class='table_title'>
-											<a ng-click="showCoachDetail({{item.id}})"  style="text-decoration:none;color:black">{{item.name}}</a>
+											<a ng-click="showCoachDetail({{item.id}})"style="text-decoration:none;color:black">{{item.name}}</a>
 										</th>										
 									</tr>
+									
 									<tr>
 										<td class='teach_font'><a ng-click='showCoachDetail({{item.id}})' style="text-decoration:none;color:black">类型:{{item.desc}}</a></td>
 										<td class='teach_font'><a ng-click='showCoachDetail({{item.id}})' style="text-decoration:none;color:black">教龄:{{item.techage}}年</a></td>
 										<td >
-											<a class="buy" ng-click='toTimeSelect({{item.id}})'>预约</a>
+											<a class="buy" ng-click='toTimeSelect({{item.id}},$event)'>预约</a>
 										</td>										
 									</tr>	
 									<tr>										
-										<td class='teach_font'><a ng-click='showCoachDetail({{item.id}})' style="text-decoration:none;color:black">评分:5星</a></td>
-										<td class='teach_font'><a ng-click='showCoachDetail({{item.id}})' style="text-decoration:none;color:black">点击名称查看教练详情！</a></td>									
+										<td class='teach_font'><a ng-click='showCoachDetail({{item.id}})' style="text-decoration:none;color:black">评分:5星</a></td>																
 									<tr>	
 								</table>
 							</li>

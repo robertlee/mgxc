@@ -241,6 +241,28 @@ ultcrm.controller('orderListCtrl', function($scope,$location,$http,$stateParams,
 		}
 	}
 	
+	$scope.modifyTime = function(order) {
+		
+		// 跳转到时段选择页面
+		var urlStr = '/getOrderInfo/'+order.id;
+		$http.get(urlStr)
+		.success(function(data, status, headers, config) {
+			
+			//appointmentService.setCourseName(data.techCourseName);
+			//appointmentService.setSeryName(data.techSeryName);
+			//appointmentService.setModelName(data.techModelName);
+		    //appointmentService.setStoreName(data.storeName);
+			//appointmentService.setBusinessTypeId(data.businessTypeId);
+			//appointmentService.setOrderId(order.id);
+			
+			$state.go("index.timesegment",{orderInfoById:data}, {reload: true});
+			
+		})
+		.error(function(data, status, headers, config) {
+		});
+	}	
+	
+	
 	$scope.viewNewOrder = function(order) {
 		//跳转到订单详情页面
 		$state.go("index.orderInfo",{orderId:order.id}, {reload: true});
