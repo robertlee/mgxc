@@ -15,7 +15,7 @@ ultcrm.controller('appointmentOkCtrl', function($scope,$stateParams,$state,$wind
 
 	if ($scope.data != null && $scope.data.updateTimesegment != null && $scope.data.updateTimesegment == "Y") {
 		/*预约成功页面信息*/
-		$scope.titleStr = '恭喜您课程时间修改成功! ';
+		$scope.titleStr = '恭喜您学车时间修改成功! ';
 		$scope.buttonStr = '我要领券 ';
 		$scope.techlevelno = $scope.data.techlevelno;
 		
@@ -23,7 +23,7 @@ ultcrm.controller('appointmentOkCtrl', function($scope,$stateParams,$state,$wind
 		
 	}else{
 		/*修改成功页面信息*/
-		$scope.titleStr = '恭喜您课程预约成功!';
+		$scope.titleStr = '恭喜您学车预约成功!';
 		$scope.buttonStr = '订单查询 ';
 		/*后退时，没有参数，所以不覆盖原有orderId*/
 		if($stateParams.orderId !=null){

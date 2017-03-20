@@ -60,27 +60,16 @@ angular.module('ultcrm', ['ionic','ultcrm.controllers', 'ultcrm.services','ultcr
 	            }
 	          }
 	      })
-	       .state('index.activityDetail', {
-	        url: '/activityDetail/:id',
-	        cache:false, 
-	        params:{'id':null},
-	        views: {
-	          'index-home': {
-	            templateUrl: 'tpl/home/activityDetail.html',
-	            controller: 'activityDetailCtrl'
-	          }
-	        }
-	      })
-	      
+
 	      //服务首页
-	      .state('index.service', {
-	        url: '/service',
+	      .state('index.serviceList', {
+	        url: '/serviceList',
 	        cache:false, 
 	        params:{'techlevelno':null,'courseName':null},
 	        views: {
-	          'index-service': {
-	            templateUrl: 'tpl/service/service.html',
-	            controller: 'serviceCtrl'
+	          'index-serviceList': {
+	            templateUrl: 'tpl/service/serviceList.html',
+	            controller: 'serviceListCtrl'
 	          }
 	        },
 	        resolve: {
@@ -93,6 +82,7 @@ angular.module('ultcrm', ['ionic','ultcrm.controllers', 'ultcrm.services','ultcr
 	            }
 	          }
 	      })
+
 	      //课程详情展示
 	      .state('index.courseDetail', {
 	        url: '/courseDetail/:index',
@@ -106,57 +96,87 @@ angular.module('ultcrm', ['ionic','ultcrm.controllers', 'ultcrm.services','ultcr
 	        }
 	      })
 	      //教练详情展示
-	      .state('index.teacherDetail', {
-	        url: '/teacherDetail/:id',
+	      .state('index.coachDetail', {
+	        url: '/coachDetail/:id',
 	        cache:false,
 	        params:{'id':null},
 	        views: {
-	          'index-service': {
-	            templateUrl: 'tpl/service/teacherDetail.html',
-	            controller: 'teacherDetailCtrl'
+	          'index-coachlist': {
+	            templateUrl: 'tpl/coach/coachDetail.html',
+	            controller: 'coachDetailCtrl'
 	          }
 	        }
 	      })
 	       //课程安排选择
 	      .state('index.serviceStore', {
-	        url: '/serviceStore/:id/:addressId/:openId/:typeId/:status',
-	        cache:true,
-	        params:{'id':null,'addressId':null,'openId':null,'typeId':null,'status':null},
+	        url: '/serviceStore',
+	        cache:false, 
+	        params:{},
 	        views: {
-	          'index-service': {
+	          'index-serviceList': {
 	            templateUrl: 'tpl/service/serviceStore.html',
 	            controller: 'serviceStoreCtrl'
 	          }
-	        }
-	      })
-	      .state('index.serviceSeat', {
-	        url: '/serviceSeat/:scheId/:classId/:seatType/:roomName/:openId',
-	        cache:false,
-	        params:{'scheId':null,'classId':null,'seatType':null,'roomName':null,'openId':null},
-	        views: {
-	          'index-service': {
-	            templateUrl: 'tpl/service/serviceSeat.html',
-	            controller: 'serviceSeatCtrl'
+	        },
+	        resolve: {
+	            customerData: function($location,customerDataService) {
+	            	console.log("into resolve customer data.....");
+	            	var searchObject = $location.search();
+	        		var code = searchObject['code'];
+	        		var uid = searchObject['uid'];
+	            	return customerDataService.find(uid,code);
+	            }
 	          }
-	        }
 	      })
 	      .state('index.servicePay', {
 	        url: '/servicePay/:jsonStr',
 	        cache:false,
 	        params:{'jsonStr':null},
 	        	views: {
-					  'index-service':{
+					  'index-serviceList':{
 						  templateUrl: 'tpl/service/servicePay.html',
 						  controller: 'servicePayCtrl'
 					  }
+				  },	       
+				resolve: {
+	            customerData: function($location,customerDataService) {
+	            	console.log("into resolve customer data.....");
+	            	var searchObject = $location.search();
+	        		var code = searchObject['code'];
+	        		var uid = searchObject['uid'];
+	            	return customerDataService.find(uid,code);
+	            }
+	          }
+
+	      })		  	     
+
+		  .state('index.timesegment', {
+			  url: '/timesegment/:coachid',
+			  cache:false, 
+			  params: {'coachid': null},
+			  views: {
+				  'index-coachlist':{
+					  templateUrl: 'tpl/home/timesegment.html',
+					  controller: 'timesegmentCtrl'
 				  }
-	      })
+			  },
+		        resolve: {
+		            customerData: function($location,customerDataService) {
+		            	console.log("into resolve customer data.....");
+		            	var searchObject = $location.search();
+		        		var code = searchObject['code'];
+		        		var uid = searchObject['uid'];
+		            	return customerDataService.find(uid,code);
+		            }
+		          }
+		  })
+
 		  .state('index.appointmentok', {
 		        url: '/appointmentok',
 		        cache:false, 
 		        params: {'data': null, 'orderId': null,"hasCard":null},
 		        views: {
-		        	'index-service':{
+		        	'index-coachlist':{
 		        		templateUrl: 'tpl/home/appointmentok.html',
 		        		controller: 'appointmentOkCtrl'
 		        	}
@@ -192,18 +212,18 @@ angular.module('ultcrm', ['ionic','ultcrm.controllers', 'ultcrm.services','ultcr
 	            }
 	          }
 	      })  
-	      .state('index.myorderList', {
-	        url: '/myorderList/:viewType',
-	        cache:false,
-	        params: {'viewType': null},
-	        views: {
-	        	'index-my':{
-	        		templateUrl: 'tpl/my/orderList.html',
-	        		controller: 'orderListCtrl'
-	        	}
-	        }
-	      })
-		  .state('index.orderOrderList', {
+			.state('index.myorderList', {
+				url: '/myorderList/:viewType',
+				cache:false,
+				params: {'viewType': null},
+				views: {
+					'index-my':{
+						templateUrl: 'tpl/my/orderList.html',
+						controller: 'orderListCtrl'
+					}
+				}
+			})
+			.state('index.orderOrderList', {
 		        url: '/orderOrderList/:viewType',
 		        cache:false,
 		        params: {'viewType': null},
@@ -213,8 +233,8 @@ angular.module('ultcrm', ['ionic','ultcrm.controllers', 'ultcrm.services','ultcr
 		        		controller: 'orderListCtrl'
 		        	}
 		        }
-		      })
-		  .state('index.myorderComment', {
+		    })
+			.state('index.myorderComment', {
 		      url: '/myorderComment',
 		      cache:false, 
 		      params: {'orderId': null},
@@ -224,9 +244,19 @@ angular.module('ultcrm', ['ionic','ultcrm.controllers', 'ultcrm.services','ultcr
 		      		controller: 'orderCommentCtrl'
 		      	}
 		      }
-		    })
-  
-		  .state('index.myorderProcessDetail', {
+		    })			
+			.state('index.orderInfo', {
+			  url: '/orderInfo/:orderId',
+			  cache:false, 
+			  params: {'orderId': null},
+			  views: {
+				  'index-my':{
+					  templateUrl: 'tpl/my/orderInfo.html',
+					  controller: 'orderInfoCtrl'
+				  }
+			  }
+		    })					
+			.state('index.myorderProcessDetail', {
 		      url: '/myorderProcessDetail',
 		      cache:false, 
 		      params: {'orderId': null},
@@ -286,17 +316,7 @@ angular.module('ultcrm', ['ionic','ultcrm.controllers', 'ultcrm.services','ultcr
 		      	}
 		      }
 		    })
-		    .state('index.orderInfo', {
-			  url: '/orderInfo/:orderId:seatname:startClassTime',
-			  cache:false, 
-			  params: {'orderId': null,'seatname':null,'startClassTime':null},
-			  views: {
-				  'index-order':{
-					  templateUrl: 'tpl/my/orderInfo.html',
-					  controller: 'orderInfoCtrl'
-				  }
-			  }
-		    })
+
 		   .state('index.myChildren', {
 	        url: '/myChildren/:customerId',
 	        cache:false,
@@ -395,10 +415,9 @@ angular.module('ultcrm', ['ionic','ultcrm.controllers', 'ultcrm.services','ultcr
 			})
 			  .state('index.coachlist', {
 				url: '/coachlist',
-				cache:false, 
-				params:{'techlevelno':null,'courseName':null},
+				cache:false,				
 				views: {
-				  'index-coach': {
+				  'index-coachlist': {
 					templateUrl: 'tpl/coach/coachlist.html',
 					controller: 'coachlistCtrl'
 				  }
@@ -416,6 +435,6 @@ angular.module('ultcrm', ['ionic','ultcrm.controllers', 'ultcrm.services','ultcr
 
 			;
 	      // if none of the above states are matched, use this as the fallback
-	      $urlRouterProvider.otherwise('/index/home');
+	      $urlRouterProvider.otherwise('/index/home?uid=1&status=home');
 
 });

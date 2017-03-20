@@ -45,6 +45,12 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import com.aliyuncs.DefaultAcsClient;
+import com.aliyuncs.IAcsClient;
+import com.aliyuncs.profile.DefaultProfile;
+import com.aliyuncs.profile.IClientProfile;
+import com.aliyuncs.sms.model.v20160927.SingleSendSmsRequest;
+import com.aliyuncs.sms.model.v20160927.SingleSendSmsResponse;
 
 
 /**
@@ -80,8 +86,20 @@ public class SmsQueueService implements MessageListener {
 	
 	@Value("${smsUrl}")
 	private String smsUrl;//短信接口地址  修改人：RobertLee   修改时间：2016-04-24
-	
-	
+    
+    @Value("${aliyunApikey}")
+    private String aliyunApikey;
+    @Value("${aliyunApiScrete}")
+    private String aliyunApiScrete;
+    @Value("${aliyunSmsUrl}")
+    private String aliyunSmsUrl;
+    @Value("${aliyunSmsCode}")
+    private String aliyunSmsCode;
+    @Value("${aliyunSmsSign}")
+    private String aliyunSmsSign;
+    @Value("${aliyunSmsArea}")
+    private String aliyunSmsArea;
+    
 	public Result sendMessage(String phone, String content, String ipaddress, boolean isCheck){
 		/*
 			修改人：RobertLee
@@ -102,12 +120,15 @@ public class SmsQueueService implements MessageListener {
 					jmsTemplate.send(smsQueue, new SMSMessageCreator(phone, content, ipaddress));
 				}	
 			}else{
-				String httpArg = "mobile=" + phone + "&content=【芒果学车】" + content;
-				String jsonResult = smsRequest(smsUrl, httpArg);			
-				logger.info("============================================================");
-				logger.info(smsUrl+httpArg);
-				logger.info(jsonResult);
-				logger.info("============================================================");
+//				String httpArg = "mobile=" + phone + "&content=【芒果学车】" + content;
+//				String jsonResult = smsRequest(smsUrl, httpArg);
+                
+                String phoneContent = "芒果学车短信验证";
+                smsAliyunRequest(phone,phoneContent);
+//				logger.info("============================================================");
+//				logger.info(smsUrl+httpArg);
+//				logger.info(jsonResult);
+//				logger.info("============================================================");
 				result.setCode(0);
 				result.setMsg("发送成功");
 				result.setResult(true);				
@@ -128,6 +149,25 @@ public class SmsQueueService implements MessageListener {
 		}
 		return result;
 	}
+    
+    
+    public void smsAliyunRequest(String phone,String phoneContent) {
+        
+        try {
+            IClientProfile profile = DefaultProfile.getProfile(aliyunSmsArea, aliyunApikey,aliyunApiScrete);
+            DefaultProfile.addEndpoint(aliyunSmsArea, aliyunSmsArea, "Sms", aliyunSmsUrl);
+            IAcsClient client = new DefaultAcsClient(profile);
+            SingleSendSmsRequest request = new SingleSendSmsRequest();
+            request.setSignName(aliyunSmsSign);//控制台创建的签名名称
+            request.setTemplateCode(aliyunSmsCode);//控制台创建的模板CODE
+            request.setParamString("{\"customer\":" + phoneContent + "}");//短信模板中的变量；数字需要转换为字符串
+            request.setRecNum(phone);//接受号码
+            SingleSendSmsResponse httpResponse = client.getAcsResponse(request);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 	
 	/**
 		修改人：吴云

@@ -12,9 +12,9 @@ import com.uletian.ultcrm.business.entity.SmsSend;
 @RepositoryRestResource(collectionResourceRel = "smsSend", path = "smsSend")
 public interface SmsSendRepository extends PagingAndSortingRepository<SmsSend, Long>{
 	
-	@Query("from SmsSend where ipaddress = ? and createTime > ?")
+	@Query("from SmsSend where ipaddress = ?1 and createTime > ?2")
 	List<SmsSend> findIpCount(String ipaddress, Timestamp date);
 
-	@Query("from SmsSend where phone = ? and createTime > ?")
+	@Query("from SmsSend where phone = ?1 and createTime > ?2")
 	List<SmsSend> findPhoneCount(String phone, Timestamp currentDate);
 }

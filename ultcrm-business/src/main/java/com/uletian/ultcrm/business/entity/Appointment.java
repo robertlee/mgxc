@@ -42,7 +42,18 @@ public class Appointment implements Serializable {
 	
     @Transient
 	private Long timeSegmentId;
-	
+		
+		
+	@Column(name="coachid")
+	private Long coachId;
+
+	public Long getCoachId() {
+		return coachId;
+	}
+
+	public void setCoachId(Long coachId) {
+		this.coachId = coachId;
+	}
 	@Column(name="customerid")
 	private Long customerId;
 
@@ -54,6 +65,8 @@ public class Appointment implements Serializable {
 		this.customerId = customerId;
 	}
 
+	
+	
 	public Long getTimeSegmentId() {
 		return timeSegmentId;
 	}

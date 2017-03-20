@@ -12,10 +12,10 @@ import com.uletian.ultcrm.business.entity.Children;
 @RepositoryRestResource(collectionResourceRel = "children", path = "children")
 public interface ChildrenRepository extends PagingAndSortingRepository<Children,Long>{
 	
-	@Query("from Children where id in (select id from Children where customerid = ?)") 
+	@Query("from Children where id in (select id from Children where customerid = ?1)") 
     List<Children> findChildrenListByCustomer(Long customerid);
 	
-	@Query("from Children where customerid = ? and name= ?") 
+	@Query("from Children where customerid = ?1 and name= ?2") 
     List<Children> findChildrenList(Long customerid,String childName);
 }
 

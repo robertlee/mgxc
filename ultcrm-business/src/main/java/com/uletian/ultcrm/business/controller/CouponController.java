@@ -26,6 +26,8 @@ import com.uletian.ultcrm.business.entity.MessageTemplate;
 import com.uletian.ultcrm.business.entity.Order;
 import com.uletian.ultcrm.business.entity.Store;
 import com.uletian.ultcrm.business.entity.TimeSegment;
+import com.uletian.ultcrm.business.entity.Event;
+
 import com.uletian.ultcrm.business.msg.CouponMsgService;
 import com.uletian.ultcrm.business.repo.AppointmentRepository;
 import com.uletian.ultcrm.business.repo.BusinessTypeRepository;
@@ -38,6 +40,8 @@ import com.uletian.ultcrm.business.repo.MessageTemplateRepository;
 import com.uletian.ultcrm.business.repo.OrderRepository;
 import com.uletian.ultcrm.business.repo.StoreRepository;
 import com.uletian.ultcrm.business.repo.TimeSegmentRepository;
+import com.uletian.ultcrm.business.repo.EventRepository;
+
 import com.uletian.ultcrm.business.service.AppointmentService;
 import com.uletian.ultcrm.business.service.CustomerInfoSyncService;
 import com.uletian.ultcrm.business.service.EventMessageService;
@@ -110,6 +114,9 @@ public class CouponController {
 	@Autowired
 	private MessageTemplateRepository messageTemplateRepository;
 	
+	@Autowired
+	private EventRepository eventRepository;	
+	
 	private static Logger logger = Logger.getLogger(CardController.class);
 	
 	@RequestMapping(value="/getCouponByCustomerId/{customerId}", method=RequestMethod.GET)
@@ -165,20 +172,43 @@ public class CouponController {
 			String smsContent = "";
 			String first = "您好,您的预约已成功登记";
 			smsContent += first;
+			Event event = null;
 			if (hasCard) {
-				if (bt.getId() == 4) {
-					first += ",点击详情领取价值1次试听卡。";
-					smsContent += ",请在微信公众号中领取价值1次试听卡。";
-				} else if (bt.getId() == 9) {
-					first += ",点击详情领取价值100元学时券。";
-					smsContent += ",请在微信公众号中领取价值100元学时券。";
-				} else if (bt.getId() == 10) {
-					first += ",点击详情领取价值100元学时券。";
-					smsContent += ",请在微信公众号中领取价值100元学时券。";
+				if (bt.getId() == 10) {
+					event = eventRepository.findEventByCode("appointment_xcfwC1");
+					first += ",点击详情领取" + event.getDescription();
+					smsContent += ",请在微信公众号中领取" + event.getDescription();;
 				} else if (bt.getId() == 11) {
-					first += ",点击详情领取价值100元学时券。";
-					smsContent += ",请在微信公众号中领取价值100元学时券。";
-				}
+					event = eventRepository.findEventByCode("appointment_xcfwC2");
+					first += ",点击详情领取" + event.getDescription();
+					smsContent += ",请在微信公众号中领取" + event.getDescription();
+				} else if (bt.getId() == 20) {
+					event = eventRepository.findEventByCode("appointment_ksfwC1");
+					first += ",点击详情领取" + event.getDescription();
+					smsContent += ",请在微信公众号中领取" + event.getDescription();;
+				} else if (bt.getId() == 21) {
+					event = eventRepository.findEventByCode("appointment_ksfwC2");
+					first += ",点击详情领取" + event.getDescription();
+					smsContent += ",请在微信公众号中领取" + event.getDescription();;
+				}else if (bt.getId() == 30) {
+					event = eventRepository.findEventByCode("appointment_wyfwC1");
+					first += ",点击详情领取" + event.getDescription();
+					smsContent += ",请在微信公众号中领取" + event.getDescription();;
+				}else if (bt.getId() == 31) {
+					event = eventRepository.findEventByCode("appointment_wyfwC2");
+					first += ",点击详情领取" + event.getDescription();
+					smsContent += ",请在微信公众号中领取" + event.getDescription();;
+				}else if (bt.getId() == 40) {
+					event = eventRepository.findEventByCode("appointment_jsxcC1");
+					first += ",点击详情领取" + event.getDescription();
+					smsContent += ",请在微信公众号中领取" + event.getDescription();;
+				}else if (bt.getId() == 41) {
+					event = eventRepository.findEventByCode("appointment_jsxcC2");
+					first += ",点击详情领取" + event.getDescription();
+					smsContent += ",请在微信公众号中领取" + event.getDescription();;
+				}	
+				
+
 			}
 			
 

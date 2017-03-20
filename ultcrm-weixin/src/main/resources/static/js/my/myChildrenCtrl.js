@@ -14,15 +14,15 @@ ultcrm.controller('myChildrenCtrl', function($scope,$http,$location,$state,$stat
 		return true;
 	};
 	//编辑小孩信息
-	$scope.editChild = function(childId,childName,year,month){
+	$scope.editChild = function(childId,childName,mobilephone){
 		var str = "{childId:" + childId + ",childName:'" + childName 
-		+ "',year:'" + year + "',month:'" + month + "',type:'edit'}";
+		+ "',mobilephone:'" + mobilephone + "',type:'edit'}";
 		$state.go('index.newChild',{customerId:$scope.hiddenCustomerId,str:str},{reload:true});
 	};
-	$scope.deleteChild = function(childId,childName,year,month){
+	$scope.deleteChild = function(childId,childName,mobilephone){
 		var type="edit";
 		$http.get("/createChildForCustomer/1/" + childId + "/" 
-				+ childName + "/" + year + "/" + month + "/" + type).success(function(data){
+				+ childName + "/" +mobilephone+ "/" + type).success(function(data){
 			// 如果返回了空的字符串， 表示没有添加成功，有重复的添加行为
 		    if(data == "0"){
 		    		alert("编辑失败");

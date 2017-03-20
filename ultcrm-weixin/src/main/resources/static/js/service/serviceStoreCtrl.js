@@ -1,56 +1,53 @@
-ultcrm.controller('serviceStoreCtrl', function($scope,$http,$state,$stateParams) {
-	var classId = 0;//课程编号
-	$scope.searchSchedule=function(){
-		classId = $stateParams.id;
-		var typeId = $stateParams.typeId;
-		var status = $stateParams.status;
-		var addressId = $stateParams.addressId;
-		$http.get('/getBusinessBy/' + classId + '/' + addressId + '/' + typeId + '/' + status).success(function(result) {
+
+ultcrm.controller('serviceStoreCtrl', function($scope,$http,$state,$stateParams,$window,$location,$sanitize,$ionicPopup,$ionicSlideBoxDelegate,appointmentService,customerData,defaultURL) 
+{	
+	var iContent = 0;
+
+	$scope.siteDist =  ["南山区训练场", "福田区训练场", "宝安区训练场", "龙华新区训练场", "龙岗区训练场", "坪山新区训练场"];
+	$scope.defaultURL = defaultURL.url+":"+defaultURL.port+defaultURL.path;
+	
+	
+	
+	$scope.storeList = new Array();
+	$http.get('/getStoreList').success(function(result) {    
+		$scope.storeList=result;  
+		console.log(result);  	
+    }).
+    error(function() {
+    	$scope.storeList = [];//清空select
+    });	
+
+	$scope.selectSite=function(selectedSite){
+		$http.get('/getStoreAllList/'+selectedSite).success(function(result) {
         	//先清空原始数据
-        	$scope.choice_1 = "";
-        	if(result.scheList != null && result.scheList.length > 0){
-        		$scope.storeName = result.scheList[0].store;
-				switch  ($scope.storeName){
-					case "孺子路": $scope.mobile="18942231850";break;
-					case "中山路少年宫":$scope.mobile="13367006212";break;
-					case "朝阳分部":$scope.mobile="18679135437";break;
-					case "梵顿公馆":$scope.mobile="18679135437";break;
-					case "高新少年宫":$scope.mobile="18942231850";break;
-					default:$scope.mobile="18942231850";break;
+        	$scope.storeList = new Array();        	
+		    iContent = 0;	
+        	if(result != null)
+	        {
+				for (var i = 0 ; i < result.length; i ++) {
+					$scope.storeList[iContent]=result[i];
+					iContent=iContent+1;								
 				}
-        		$scope.courseName = result.scheList[0].className;
-				$scope.choice_1 = result.scheList;
-	    	}
+	        }
         }).
         error(function() {
-        	$scope.choice_1 = "";
-        });
-	};
-	$scope.choiceSeat=function(scheId,seatType,roomName,storeAddress){
-		var openId = $stateParams.openId;
-		$state.go('index.serviceSeat',{scheId:scheId,classId:classId,seatType:seatType,roomName:roomName,openId:openId},{reload:true});
-//		if(seatType == "A"){
-//			$state.go('index.serviceSeatA',{scheId:scheId,classId:classId,seatType:seatType,roomName:roomName,openId:openId},{reload:true});
-//		}
-//		else if(seatType == "B"){
-//			$state.go('index.serviceSeatB',{scheId:scheId,classId:classId,seatType:seatType,roomName:roomName,openId:openId},{reload:true});
-//		}
-//		else if(seatType == "C"){
-//			$state.go('index.serviceSeatC',{scheId:scheId,classId:classId,seatType:seatType,roomName:roomName,openId:openId},{reload:true});
-//		}
-//		else if(seatType == "D"){
-//			$state.go('index.serviceSeatD',{scheId:scheId,classId:classId,seatType:seatType,roomName:roomName,openId:openId},{reload:true});
-//		}
-//		else if(seatType == "E"){
-//			$state.go('index.serviceSeatE',{scheId:scheId,classId:classId,seatType:seatType,roomName:roomName,openId:openId},{reload:true});
-//		}
-//		else if(seatType == "F"){
-//			$state.go('index.serviceSeatF',{scheId:scheId,classId:classId,seatType:seatType,roomName:roomName,openId:openId},{reload:true});
-//		}
-//		else if(seatType == "G"){
-//			$state.go('index.serviceSeatG',{scheId:scheId,classId:classId,seatType:seatType,roomName:roomName,openId:openId},{reload:true});
-//		}
-	};
-	//查询课程安排
-	$scope.searchSchedule();
+        	$scope.storeList=null;	
+        	
+        });			
+		
+	};	
+
+	
+	$scope.selectStore = function(item){
+		// 返回到服务页面
+		appointmentStore.id = item.id;
+		appointmentStore.name = item.name;
+		$state.go('index.coachlist',{},{reload:true});
+	}
+	// 导航
+	$scope.toDirect = function(){
+		$state.go("index.direct"); 
+	}
+	
 });
+

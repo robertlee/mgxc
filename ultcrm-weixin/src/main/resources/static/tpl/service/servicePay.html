@@ -25,7 +25,10 @@
 		#payDiv td{
 			text-align:center;
 		}
-		
+		.priceName{
+			color:#000;
+			font-size:1.3em;
+		}		
 		.priceOne{
 			color:#F00;
 			font-size:1.4em;
@@ -83,7 +86,7 @@
 		
 		#infoDiv{
 			width:100%;
-			height:60%;
+			height:80px;
 		}
 		#infoDiv table{			
 			color:#666666;
@@ -91,48 +94,41 @@
 		}
 		.info{
 			padding-left:5px;
-			width:30%;
+			width:20%;
 		}
 		.info_value{
 			padding-right:5px;
 			text-align:left;
-			width:25%;
+			width:30%;
 		}
 		.payOk1{
 			text-align:center;
 			background-color:#0C0;
 			color:white;
-			height:33px;
-			line-height:33px;
+			height:10%;	
 			width:30%;
-			
 		}
 		.payOk2{
 			text-align:center;
 			background-color:gray;
 			color:white;
-			height:33px;
-			line-height:33px;
+			height:10%;			
 			width:30%;
-			
 		}		
   	</style>
  <ion-view view-title="芒果学车●支付">
   	<ion-content class="service-content">  
 	<div id="payDiv">
     	<table>
-        	<tr>
+			<tr>				
+				<td class="priceName" >{{className}}</td>	
+			</tr>	
+        	<tr>				
             	<td class="priceOne" id="priceOne">{{priceOne}}</td>
-            </tr>
-            <tr>    																																	
-            	<td class="payTime" ng-if="bTimerDo==1"><img src="../../img/course/timer.jpg">&nbsp;&nbsp;支付剩余时间：<span id="countTime">{{countTime}}</span></td>		
-            </tr> 																													 					
+            </tr>																												 					
             <tr>
-            	<td class="payTip">请先填写学员，仔细核对信息，支付后不支持退款。</td>				
+            	<td class="payTip">请学员仔细核对信息，支付后不支持退款。</td>				
             </tr>
-            <!-- <tr id="clickPay" class="payMoney1">   --> 
-            <!-- 	<td ng-click="pay();">立即付款</td> --> 
-            <!-- </tr>                                  --> 
         </table>
     </div>
     <div id="priceDiv">
@@ -151,68 +147,23 @@
         </table>
     </div>
 
-    <div id="infoDiv">
-    	
+    <div id="infoDiv">    	
 		<table>
-        	<tr>
-            	<td class="info">班级:</td>
-                <td class="info_value" >{{className}}</td>				
-            </tr>	
-			<tr>
-            	<td class="info">学员:</td>
-				
-				<td class="info_value">
-					
-					<!-- 输入框 -->
-					<!-- <select ng-init="selectedChild = childList[2]"  ng-options="a.name for a in childList" ng-model="selectedChild"  
-					 	     ng-change="changeChild(selectedChild)">	-->						
-							<!-- <option value="">--请选择--</option>-->
-					 <select ng-model="selectedChild" ng-options="a.name for a in childList"  ng-change="changeChild(selectedChild)">						
-					 <input id="hiddenChildName" type="hidden" value="{{hiddenChildName}}"/>		
-					 </select>
-					 
-					 
-				</td>	
-				
-				
-				<td class="payOk1" ng-click="toMyChild();">添加儿童</td>
-				
-            </tr>			
-        	<tr>
-            	<td class="info">教室:</td>
-                <td colspan="2" class="info_value">{{classAddress}}</td>
-            </tr>		
-        	<tr>
-            	<td class="info">座位:</td>
-                <td class="info_value" >{{classSeat}}</td>
-				<td class="payOk1" ng-click="reChoice();">重选座位</td>
-            </tr>			
-        	<tr>
-            	<td class="info">开课日期:</td>
-                <td colspan="2" class="info_value" ng-if="orderInfo.startClassTime !=null-null">{{classDetail|limitTo:10}}</td>	
-				<td colspan="2" class="info_value" ng-if="orderInfo.startClassTime ==null-null">具体时间待定</td>			
-            </tr>	
-        	<tr>
-            	<td class="info">上课时间:</td>
-                <td colspan="2" class="info_value" >{{hiddenclassTimeDetail}}</td>				
-            </tr>				
         	<tr>
             	<td class="info">手机:</td>
                 <td class="info_value" >{{contactPhone}}</td>
-				<td class="payOk1" ng-click="toMy();">修改号码</td>
+				<td class="payOk1" ng-click="toMy();">修改</td>
             </tr>
-
             <tr >            	
 				<td class="payOk2">   </td>
-				<td id="start_pay" class="payOk1" ng-click="toPay();">立即付款</td>
+				<td class="payOk1" ng-click="toPay();">付款</td>
 				<td class="payOk2">   </td>
-            </tr>
-     			
+            </tr>     			
         </table>
     </div>	
-	<div class="processTip">  支付过程有疑问，请联系客服电话18682455891！ </div>	
-	<div class="processTip">  提示：报名支付，请确认座位 、手机及其学员姓名！</div>		
+	<div class="processTip">  支付过程有疑问，请联系客服电话4008935866！ </div>	
+	<div class="processTip">  提示：报名支付，请确认业务名称、手机信息和价格正确！</div>		
 	
 	
-</ion-content>
+	</ion-content>
 </ion-view>

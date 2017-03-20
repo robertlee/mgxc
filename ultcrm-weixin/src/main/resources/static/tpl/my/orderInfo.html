@@ -1,4 +1,3 @@
-
 <ion-view view-title="预约详情" >
 	<ion-content class="aptmentDetail-content bg-blue">	
 		<style>
@@ -77,8 +76,7 @@
 				text-align: center;
 				font-size: 22px;
 				color: #35b2e3;
-			}
-			
+			}			
 		</style>
 		<div class="list aptment-detail-list">
 			<div class="item item-single flexible">
@@ -94,17 +92,7 @@
 				                                    <p class="col content" ng-if="orderInfo.startClassTime !=NULL">{{orderInfo.startClassTime|limitTo:10}}</p>
 				</div>
 			</div>			
-			<div class="item item-single">
-				<div class="row"><p class="title">时间:</p><p class="col content">{{orderInfo.classTimeDetail}}</p></div>
-			</div>
-			<div class="item item-single">				
-				<div class="row"><p class="title">教室:</p><p class="col content">{{orderInfo.roomAddress}}</p></div>
-			</div>		  
-			<div class="item item-single">
-				
-				<div class="row"><p class="title">座位:</p><p class="col content">{{orderInfo.seatname}}</p></div>
-			</div>
-		
+
 			<div class="item item-single">				
 				<div class="row"><p class="title">名称:</p><p class="col content">{{orderInfo.classname}} 课程{{orderInfo.classId}}</p></div>
 			</div>	

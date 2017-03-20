@@ -22,10 +22,10 @@ import com.uletian.ultcrm.business.entity.Event;
  */
 @RepositoryRestResource(collectionResourceRel = "card", path = "card")
 public interface CardRepository extends  PagingAndSortingRepository<Card, Long>{
-	@Query("from Card where customer = ?") 
+	@Query("from Card where customer = ?1") 
 	List<Card> findByCustomer(Customer customer);
 
-	@Query("from Card where id = ?") 
+	@Query("from Card where id = ?1") 
 	Card findCardById(String id); 
 	
 	Card findByCardNoAndCardBatch(String cardNo,CardBatch cardBatch);

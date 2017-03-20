@@ -42,6 +42,18 @@ public class StoreController {
 	private OrderRepository orderRepository;
 	@Autowired
 	private ClassTypeRepository classTypeRepository;
+
+	
+	@RequestMapping("/getStoreList")
+	public List<Store> getStoreList(){
+		List<Store> storeList = new ArrayList<Store>();
+		
+		Iterable<Store> it =  storeRepository.findAll();
+		for (Store store : it) {
+			storeList.add(store);
+		}
+		return storeList;
+	}		
   
 	@RequestMapping(value = "/getBusinessBy/{classId}/{addressId}/{typeId}/{status}", method = RequestMethod.GET)  
     public Map<String,Object> getBusinessBy(@PathVariable("classId")Long classId,@PathVariable("addressId")Long addressId,@PathVariable("typeId")String typeId,@PathVariable("status")String status){

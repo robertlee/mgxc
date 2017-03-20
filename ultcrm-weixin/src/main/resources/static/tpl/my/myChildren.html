@@ -112,20 +112,21 @@
 	color:#35b2e3;
 }
 </style>
-<ion-view view-title="芒果学车-儿童信息" >
+<ion-view view-title="芒果学车-教练信息" >
 	<ion-content class="mychildren-content bg-background-grey">	
 		<input id="hiddenCustomerId" type="hidden" value="{{hiddenCustomerId}}"/>
 		<button class="button button-full button-add-tech blue font-large" ng-click="toAddChild()">
-		  <i class="ion-ios-plus-outline"></i> 儿童信息
+		  <i class="ion-ios-plus-outline"></i> 教练信息
 		</button>
 	    <div class="list card tech-card" ng-repeat="child in childrenList">
 			 <div class="item item-single">
 			 	<div class="row">	
 			 		<div class="col">
 			 			姓名：<span class="sub-grey">{{child.name}}</span>&nbsp;&nbsp;&nbsp;
-			 			出生年月：<span class="sub-grey">{{child.year}}/{{child.month}}</span>&nbsp;&nbsp;&nbsp;
-			 			<a ng-click="editChild({{child.lastUpdateUserid}},'{{child.name}}','{{child.year}}','{{child.month}}')">编辑</a>
-						<a ng-click="deleteChild({{child.lastUpdateUserid}},'{{child.name}}','{{child.year}}','{{child.month}}')">删除</a>
+			 			电话：<span class="sub-grey" >{{child.mobilephone}}</span>&nbsp;&nbsp;&nbsp;
+						<a href="tel:{{child.mobilephone}}">联系</a>
+			 			<a ng-click="editChild({{child.lastUpdateUserid}},'{{child.name}}','{{child.mobilephone}}')">编辑</a>
+						<a ng-click="deleteChild({{child.lastUpdateUserid}},'{{child.name}}','{{child.mobilephone}}')">删除</a>
 			 		</div>
 			 	</div>
 			 </div>			 

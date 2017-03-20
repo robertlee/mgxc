@@ -9,7 +9,7 @@ import com.uletian.ultcrm.business.entity.Location;
 @RepositoryRestResource(collectionResourceRel = "location", path = "location")
 public interface LocationRepository extends PagingAndSortingRepository<Location, Long>{
  
-	@Query(value = "from Location where createUserId = ? and typeid = 2")
+	@Query(value = "from Location where createUserId = ?1 and typeid = 2")
 	Location findByCustomerid(Long id);
     
 }

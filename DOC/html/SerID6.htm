@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta name="format-detection" content="telephone=no">
+		<title>我是学员 - 芒果学车</title>
+		<link rel="stylesheet" href="./SerID6_files/style.css">
+	</head>
+	<body>
+	<div class="fixtop hasmenu tc-theme">
+		<a href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxc3ec764a012b40af&redirect_uri=http%3a%2f%2fwww.ultjjy.cn%2fget-weixin-code.html&response_type=code&scope=snsapi_userinfo&state=home#wechat_redirect" class="back"></a>
+		<div class="uc-center">考证服务</div>
+		<a href="javascript:;" class="btn">&nbsp;</a>
+	</div>
+	<div class="tc-bg tc-mt">
+		<div class="tc-le">
+			<h1>深圳学车学时购买 </h1>
+			<div class="aq">购买学时后即可在线下单约车</div>
+			<div class="gr2"><i class="price">¥<strong>120</strong>.00</i><span class="w1">小时</span></div>
+		</div>
+		<img src="./SerID6_files/gmxs.png" class="tc-lb">
+	</div>
+	<div class="tc-ltype"></div>
+	<div class="tc-intro">
+	<div class="tit">服务介绍</div>
+		<ul>
+			<li>1学时等于1小时</li>
+			<li>120元/小时</li>
+			<li>学时不区分c1/c2请按自己驾照类型预约</li>
+			<li>学时不区分科2/科3科目</li>
+			<li>1次可购买多个学时</li>
+			<li>科一/科四/长训无需购买练车学时</li>
+		</ul>
+	</div>
+	<div class="tc-intro">
+		<div class="tit">注意事项</div>
+		<ul>
+			<li>提交购买后及时联系客服完成支付</li>
+			<li>客服分配学时后才能预约练车</li>
+			<li>没有通过科目一考试不能购买学时</li><br>      
+			<br>
+			<br>
+		</ul>
+	</div>
+	<footer class="jzbox fixgrey">
+		<a href="javascript:;" class="bnt">确认购买</a>
+	</footer>
+	
+	<div id="subscribebox" class="overlay hide">
+		<div class="stlayer">
+			<div class="alic">
+				<img src="./SerID6_files/qrcode_for_gh_8b6c7c93aef8_258.jpg" width="100%">
+			</div>
+			<div class="alic">请长按关注公众号后查看</div>
+		</div>
+	</div>
+	<script src="./SerID6_files/zepto.min.js"></script>
+	<script src="./SerID6_files/underscore-min.js"></script>
+	<script src="./SerID6_files/jweixin-1.0.0.js"></script>
+	<script src="./SerID6_files/App.js"></script>
+	<script src="./SerID6_files/custom.js"></script>
+	<script>
+	var app = new App();
+	App.Storage.set('CityID', '28558');
+	var initFn = function(met) {
+	  if(navigator.userAgent.indexOf('MicroMessenger') > 0 && location.href.indexOf('juzi/custom/') > -1) {        
+		  if(App.Storage.has('Coordinate') && (+new Date) - +App.Storage.get('Coordinate_gtime') < 9e5) {
+			App.initSDK();
+			met in app && app[met]();
+			return;
+		  }
+		  App.initSDK(function() {
+			app.showTip('正在获取地理位置...');
+			app.getLocation(function(resp) {
+			  app.hideTip();
+			  var coor = resp.point.lng.toFixed(8) + ',' +resp.point.lat.toFixed(8);
+			  App.Storage.set('Coordinate', coor);
+			  App.Storage.set('Coordinate_gtime', +new Date);
+			  met in app && app[met]();
+			})
+		  });    
+	  } else {
+		App.Storage.set('Coordinate', '114.23461829,22.69288919');
+		met in app && app[met]();
+	  } 
+	};
+	</script>
+	<div class="loading"><span class="txt"></span></div>
+	<script>initFn('Cus_tcinit')</script>
+	</body>
+</html>

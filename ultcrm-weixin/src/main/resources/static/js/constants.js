@@ -7,6 +7,13 @@ angular.module('ultcrm.constants', [])
 	name:'海上田园深圳店',
 	id:'1'
 })
+
+.constant('defaultURL',{
+	url:'www.ultjjy.cn',
+	port:'8088',	
+	path:'/html/'
+})
+
 .constant('province',
 [
 {shortName:'粤',fullName:'广东'},{shortName:'港',fullName:'香港'},{shortName:'豫',fullName:'河南'},{shortName:'闽',fullName:'福建'},{shortName:'赣',fullName:'江西'},{shortName:'湘',fullName:'湖南'},{shortName:'鄂',fullName:'湖北'},{shortName:'宁',fullName:'宁夏'},

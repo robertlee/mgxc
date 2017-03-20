@@ -110,7 +110,6 @@ angular.module('ultcrm.services', [])
 
 })
 .service('commonService',function(){
-
 	
 	this.toIndexPage = function() {
 		window.location.href="http://"+window.location.host+":"+window.location.port+"/index.html#/index/home";

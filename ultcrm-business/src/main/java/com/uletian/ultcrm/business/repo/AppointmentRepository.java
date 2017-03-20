@@ -30,7 +30,7 @@ public interface AppointmentRepository extends PagingAndSortingRepository<Appoin
 	
 	List<Appointment> findByOrderIn(Collection<Order> orders);
 	
-	@Query("from Appointment a where a.order.status= 1 and a.timeSegment.dateSegment = ? and a.timeSegment.timeSegment = ?")
+	@Query("from Appointment a where a.order.status= 1 and a.timeSegment.dateSegment = ?1 and a.timeSegment.timeSegment = ?2")
 	List<Appointment> findByTimeSegment(Date date, Long time);
 	
 	Appointment findByOrder(Order order);

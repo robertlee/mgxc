@@ -243,7 +243,7 @@ ultcrm.controller('orderListCtrl', function($scope,$location,$http,$stateParams,
 	
 	$scope.viewNewOrder = function(order) {
 		//跳转到订单详情页面
-		$state.go("index.orderInfo",{orderId:order.id,seatname:order.seatname,startClassTime:order.startClassTime}, {reload: true});
+		$state.go("index.orderInfo",{orderId:order.id}, {reload: true});
 	}
 	
 	// 获取统计数据

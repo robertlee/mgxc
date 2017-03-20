@@ -1,31 +1,32 @@
-ultcrm.controller('homeCtrl', function($scope,$http,$location,$state,$stateParams,$ionicPopup) {
+ultcrm.controller('homeCtrl', function($scope,$http,$location,$state,$stateParams,$ionicPopup,defaultURL) {
 	//初始化数据
-
+	$scope.defaultURL = defaultURL.url+":"+defaultURL.port+defaultURL.path;
+	
 	//导航切换函数
-
+	$http.get('/getCoachFirst3').success(function(result) {
+        	//先清空原始数据
+        	if(result != null)
+	        {
+				$scope.coachlist=result;					
+	        }
+        }).
+        error(function() {
+        	$scope.coachlist = null;
+        });
 	$scope.click_service=function(){
 		
-		$state.go('index.service',{},{reload:true});
+		$state.go('index.serviceList',{},{reload:true});
 	};
 	//展示教练详情
-	$scope.click_teacher=function(id){
-		if(id==0)
-		{
-			$state.go('index.coachlist',{},{reload:true});
-		}
-		else
-		{
-			$state.go('index.teacherDetail',{id:id},{reload:true});
-		}
-		
-	};
-	//微信内部跳转
-	$scope.jumpToUrl = function(path) {
-		$location.path(path);
-		var curUrl = $location.absUrl();	
+	$scope.click_ShowAllCoach=function(){
+		$state.go('index.coachlist',{},{reload:true});
 	};
 	//展示课程详情
-	$scope.showCourseDetail=function(index){
-		$state.go('index.courseDetail',{index:index},{reload:true});
+	$scope.showCoachDetail=function(id){
+		$state.go('index.coachDetail',{id:id},{reload:true});
 	};	
+	$scope.click_store=function(){
+		$state.go('index.serviceStore',{},{reload:true});
+	};	
+	
 });

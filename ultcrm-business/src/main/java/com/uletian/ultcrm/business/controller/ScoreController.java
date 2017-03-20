@@ -36,25 +36,7 @@ public class ScoreController {
 	private CustomerRepository customerRepository;
 	@Autowired
 	private ScoreRepository scoreRepository;
-	/*
-	 * 返回格式：
-	 * [
-	 * 	   {	//单个Tech的积分信息
-	 * 			techlevelno:"粤B12345"，
-	 * 			totalScore:100,
-	 * 			scoreItems:[
-	 * 				{	//单个积分的信息
-	 * 					storeName:"深圳店",
-	 * 					time:"2015/10/10 7:00",
-	 * 					value: 20,
-	 * 					orderNo:"S2015070811"
-	 * 				},
-	 * 				...
-	 * 			]
-	 * 	   },
-	 * 	   ...
-	 * ]
-	 */
+
 	@RequestMapping(value="/getScoreDetail/{customerId}", method=RequestMethod.GET)
 	List<Object> getScoresByCustomerId(@PathVariable Long customerId){		
 		List<Object> list = new ArrayList<Object>();		
@@ -97,5 +79,10 @@ public class ScoreController {
 			list.add(techMap);
 		}
 		return list;
-	}
+	};
+	
+	//@RequestMapping(value="/getTotalAllScore/{customerId}", method=RequestMethod.GET)
+	//Long getTotalAllScore(@PathVariable Long customerId){	
+	//	return  ScoreRepository.getTotalAllScore(customerId);		
+	//}	
 }

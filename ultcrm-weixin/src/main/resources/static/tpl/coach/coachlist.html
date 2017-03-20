@@ -16,6 +16,7 @@ body{
 	list-style-type:none;
 /* 	border:1px solid red; */
 }
+
 .title_div li.title0{
 	margin: 0px 0px 10px 10px;
     height: 20px;
@@ -224,7 +225,6 @@ body{
 	top:78%;
 	height:5px;
 	z-index:9;
-/* 	border:1px solid red; */
 }
 .jsNav{
 	text-align:center;
@@ -239,61 +239,76 @@ body{
 }
 .jsNav a.current{background:#fc8f0f;cursor:pointer}
 </style>
-<ion-view view-title="芒果学车●教练">	
-	<img src="../../img/course/active_title.jpg" style="width:100%"/>	
-	<label class="item item-input item-select"  data-tap-disabled="true">		
-		<div class="input-label"> 学车培训门店：</div>
-		<select ng-model="selectedSite2" ng-options="a.addressId as a.address for a in addressList" ng-change="searchTrainClass(selectedSite1,selectedSite2)"></select></select>													
-		<br />	<br />
-		<input id="hiddenAddressId" type="hidden" value="{{hiddenAddressId}}"/>		
-	</label>
-	<div class="class_div">
-		<ul class="class_title">			
-			<li class="{{title1}}"><a id="navon1" ng-click="switchNav('navon1')">C1手动档</a></li>
-			<li class="{{title2}}"><a id="navon2" ng-click="switchNav('navon2')">C2自动档</a></li>
-			<div class="clear"></div>
-		</ul>
-		<div id="class_show">
-			<div id="div1" ng-show="div1" ng-repeat="item in divContent1">
-				<div class="card card-order">
-					<div class="item-single flexible order-content clearfix" ng-click="showCourseDetail('1')">									
-						<div class="order-icon iconfont icon-washing"style="color:#2fb0e3"></div>
-						<div class="order-text">						
-							<div class="techlevelno">教练姓名:胡二丁1 </div>
-							<div class="techlevelno">C1|C2  25年教龄 </div>						
-							<div class="techlevelno">评分：5星</div>	
-						</div>
-					</div>					
-					<div class="v-spacer"></div>
-				</div>
-			</div>
-			
-			<div id="div2" ng-show="div2" ng-repeat="item in divContent1">
-				<div class="card card-order">
-					<div class="item-single flexible order-content clearfix" ng-click="showCourseDetail('0')">									
-						<div class="order-icon iconfont icon-washing"style="color:#2fb0e3"></div>
-						<div class="order-text">						
-							<div class="techlevelno">教练姓名:胡小丁 </div>						
-							<div class="techlevelno">C1|C2  25年教龄 </div>						
-							<div class="techlevelno">评分：5星</div>	
-						</div>
+<ion-view view-title="芒果学车●教练">
+	<ion-content direction="y" class="service-content">
+				<nav class="nav">
+					<h2 style="text-align:center;background: #ffe33e">教练列表</h2>		
+				</nav>		    	 	
+				<div>  
+					<span>  深圳教练区域选择：</span>
+						<select ng-model="selectedSite" ng-options="siteId for siteId in siteDist" 
+														ng-change="selectSite(selectedSite)">
+														<option value="">--请选择--</option>
+						</select>
+						
+				</div> 	
+				<ul class="class_title">
+					<li class="{{title1}}"><a id="navon1" ng-click="switchNav('navon1')">C1手动档</a></li>
+					<li class="{{title2}}"><a id="navon2" ng-click="switchNav('navon2')">C2自动档</a></li>
+					<div class="clear"></div>
+				</ul>
+				<div id="class_show">
+					<div id="div1" ng-show="div1" ng-repeat="item in divContent1 | orderBy:id">
+						<ul class='show'  ng-click='showCoachDetail({{item.id}})'>
+							<li class='show_img'><img ng-src="../../img/course/coach_default.png" ng-click='showCoachDetail({{item.id}})'></li>
+							<li>
+								<table>
+									<tr>										
+										<th class='table_title'>
+											<a ng-click="showCoachDetail({{item.id}})"  style="text-decoration:none;color:black">{{item.name}}</a>
+										</th>										
+									</tr>
+									<tr>
+										<td class='teach_font'><a ng-click='showCoachDetail({{item.id}})' style="text-decoration:none;color:black">类型:{{item.desc}}</a></td>
+										<td class='teach_font'><a ng-click='showCoachDetail({{item.id}})' style="text-decoration:none;color:black">教龄:{{item.techage}}年</a></td>
+										<td >
+											<a class="buy" ng-click='toTimeSelect({{item.id}})'>预约</a>
+										</td>										
+									</tr>	
+									<tr>										
+										<td class='teach_font'><a ng-click='showCoachDetail({{item.id}})' style="text-decoration:none;color:black">评分:5星</a></td>
+										<td class='teach_font'><a ng-click='showCoachDetail({{item.id}})' style="text-decoration:none;color:black">点击名称查看教练详情！</a></td>									
+									<tr>	
+								</table>
+							</li>
+						</ul>
 					</div>
-								
-					<div class="v-spacer"></div>
 					
-					<div class="item-single flexible order-content clearfix" ng-click="showCourseDetail('1')">									
-						<div class="order-icon iconfont icon-washing"style="color:#2fb0e3"></div>
-						<div class="order-text">						
-							<div class="techlevelno">教练姓名:胡二丁 </div>
-							<div class="techlevelno">C1|C2  25年教龄 </div>						
-							<div class="techlevelno">评分：5星</div>	
-						</div>
+					<div id="div2" ng-show="div2" ng-repeat="item in divContent2 | orderBy:'id'">
+						<ul class='show'  ng-click='showCoachDetail({{item.id}})'>
+							<li class='show_img'><img ng-src="../../img/course/coach_default.png" ng-click='showCoachDetail({{item.id}})'></li>
+							<li>
+								<table>
+									<tr>										
+										<th class='table_title'>
+											<a ng-click="showCoachDetail({{item.id}})"  style="text-decoration:none;color:black">{{item.name}}</a>
+										</th>										
+									</tr>
+									<tr>
+										<td class='teach_font'><a ng-click='showCoachDetail({{item.id}})' style="text-decoration:none;color:black">类型:{{item.desc}}</a></td>
+										<td class='teach_font'><a ng-click='showCoachDetail({{item.id}})' style="text-decoration:none;color:black">教龄:{{item.techage}}年</a></td>
+										<td >
+											<a class="buy" ng-click='toTimeSelect({{item.id}})'>预约</a>
+										</td>										
+									</tr>	
+									<tr>										
+										<td class='teach_font'><a ng-click='showCoachDetail({{item.id}})' style="text-decoration:none;color:black">评分:5星</a></td>
+										<td class='teach_font'><a ng-click='showCoachDetail({{item.id}})' style="text-decoration:none;color:black">点击名称查看教练详情！</a></td>									
+									<tr>	
+								</table>
+							</li>
+						</ul>
 					</div>
-			
-					<div class="v-spacer"></div>
-
-				</div>	
-			</div>
-		</div>
-	</div>
+				</div>
+	</ion-content>	
 </ion-view>

@@ -24,12 +24,11 @@ import com.uletian.ultcrm.business.repo.ChildrenRepository;
 import com.uletian.ultcrm.business.repo.CustomerRepository;
 import com.uletian.ultcrm.business.repo.OrderRepository;
 
-import com.uletian.ultcrm.common.util.DateUtils;
 
 /**
  * 
- * @author robertxie
- * 2015年9月8日
+ * @author robertlee
+ * 2017年3月8日
  */
 @RestController
 public class ChildrenController {
@@ -64,25 +63,21 @@ public class ChildrenController {
 	}
 
 	@RequestMapping(value="/createChildrenForCustomer",method=RequestMethod.POST)
-	public Children createChildrenForCustomer(@RequestBody Children inputChildren){
-		//Customer customer = customerRepository.findOne(inputChildren.getCustomerId());		
+	public Children createChildrenForCustomer(@RequestBody Children inputChildren){		
 		Children child   = new Children();
 		child.setCustomerId(inputChildren.getCustomerId());
-		child.setName(inputChildren.getName());		
-		// 处理日期
-		if (StringUtils.isNotBlank(inputChildren.getYear()) && StringUtils.isNoneBlank(inputChildren.getMonth())) {
-			String month = StringUtils.leftPad(inputChildren.getMonth(), 2,"0");
+		child.setName(inputChildren.getName());	
+		if (StringUtils.isNotBlank(inputChildren.getMobilephone()) ) {
+			
 			try {
-				Date birthday = DateUtils.parseDate(inputChildren.getYear()+"-"+month+"-01");
-				child.setBirthday(birthday);
+				String mobile = inputChildren.getMobilephone();
+				child.setMobilephone(mobile);
 			}
 			catch(Exception e) {
-				logger.error("解析儿童出错，输入的数据是："+inputChildren.getYear()+","+inputChildren.getMonth());
+				logger.error("解析教练数据出错，输入的数据是："+inputChildren.getMobilephone());
 			}
 		}
 		childrenRepository.save(child);
-
-		
 		child.fillOtherFields();
 		return child;
 

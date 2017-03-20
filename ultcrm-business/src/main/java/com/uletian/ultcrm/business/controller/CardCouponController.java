@@ -32,6 +32,9 @@ import com.uletian.ultcrm.business.entity.Order;
 import com.uletian.ultcrm.business.entity.OrderCardCoupon;
 import com.uletian.ultcrm.business.entity.Store;
 import com.uletian.ultcrm.business.entity.TimeSegment;
+import com.uletian.ultcrm.business.entity.Event;
+
+
 import com.uletian.ultcrm.business.repo.BusinessTypeRepository;
 import com.uletian.ultcrm.business.repo.TechRepository;
 import com.uletian.ultcrm.business.repo.CardBatchRepository;
@@ -41,6 +44,8 @@ import com.uletian.ultcrm.business.repo.CouponRepository;
 import com.uletian.ultcrm.business.repo.CustomerRepository;
 import com.uletian.ultcrm.business.repo.OrderCardCouponRepository;
 import com.uletian.ultcrm.business.repo.OrderRepository;
+import com.uletian.ultcrm.business.repo.EventRepository;
+
 import com.uletian.ultcrm.business.service.AppointmentService;
 import com.uletian.ultcrm.business.service.EventMessageService;
 import com.uletian.ultcrm.business.service.SmsQueueService;
@@ -98,6 +103,9 @@ public class CardCouponController {
 	
 	@Autowired
 	private WeixinConfig weixinConfig;
+	
+	@Autowired
+	private EventRepository eventRepository;
 	
 	private static Logger logger = Logger.getLogger(CardController.class);
 	 
@@ -167,23 +175,42 @@ public class CardCouponController {
 			String smsContent = "";
 			String first = "您好,您的预约已成功登记";
 			smsContent += first;
-			if (hasCard) {
-				if (bt.getId() == 4) {
-					first += ",点击详情领取1次试听卡。";
-					smsContent += ",请在微信公众号中领取价值1次试听卡。";
-				} else if (bt.getId() == 9) {
-					first += ",点击详情领取价值100元学时券。";
-					smsContent += ",请在微信公众号中领取价值100元学时券。";
-				} else if (bt.getId() == 10) {
-					first += ",点击详情领取价值100元学时券。";
-					smsContent += ",请在微信公众号中领取价值100元学时券。";
+			Event event = null;
+			if (hasCard) {					
+				if (bt.getId() == 10) {
+					event = eventRepository.findEventByCode("appointment_xcfwC1");
+					first += ",点击详情领取" + event.getDescription();
+					smsContent += ",请在微信公众号中领取" + event.getDescription();;
 				} else if (bt.getId() == 11) {
-					first += ",点击详情领取价值100元学时券。";
-					smsContent += ",请在微信公众号中领取价值100元学时券。";
-				}
-			}
-			
-
+					event = eventRepository.findEventByCode("appointment_xcfwC2");
+					first += ",点击详情领取" + event.getDescription();
+					smsContent += ",请在微信公众号中领取" + event.getDescription();
+				} else if (bt.getId() == 20) {
+					event = eventRepository.findEventByCode("appointment_ksfwC1");
+					first += ",点击详情领取" + event.getDescription();
+					smsContent += ",请在微信公众号中领取" + event.getDescription();;
+				} else if (bt.getId() == 21) {
+					event = eventRepository.findEventByCode("appointment_ksfwC2");
+					first += ",点击详情领取" + event.getDescription();
+					smsContent += ",请在微信公众号中领取" + event.getDescription();;
+				}else if (bt.getId() == 30) {
+					event = eventRepository.findEventByCode("appointment_wyfwC1");
+					first += ",点击详情领取" + event.getDescription();
+					smsContent += ",请在微信公众号中领取" + event.getDescription();;
+				}else if (bt.getId() == 31) {
+					event = eventRepository.findEventByCode("appointment_wyfwC2");
+					first += ",点击详情领取" + event.getDescription();
+					smsContent += ",请在微信公众号中领取" + event.getDescription();;
+				}else if (bt.getId() == 40) {
+					event = eventRepository.findEventByCode("appointment_jsxcC1");
+					first += ",点击详情领取" + event.getDescription();
+					smsContent += ",请在微信公众号中领取" + event.getDescription();;
+				}else if (bt.getId() == 41) {
+					event = eventRepository.findEventByCode("appointment_jsxcC2");
+					first += ",点击详情领取" + event.getDescription();
+					smsContent += ",请在微信公众号中领取" + event.getDescription();;
+				}								
+			}			
 			//robert Lee ULeTian 2016-05-12
 			/*			
 			first += "\n服务单号：" + id;
@@ -215,11 +242,11 @@ public class CardCouponController {
 			param.put("keyword2", bt.getName());
 			param.put("keyword3", storeName);
 			param.put("keyword4", datatime);
-			param.put("remark", "\n欢迎您使用，客服电话：13367006212！" );
+			param.put("remark", "\n欢迎您使用，客服电话：186824455891！" );
 			
-			smsContent += "课程名称："+bt.getName()+"("+storeName+")"+" 开课时间："+datatime;			
+			smsContent += "业务名称："+bt.getName()+"("+storeName+")"+" 开课时间："+datatime;			
 			smsQueueService.sendMessage(customer.getPhone(), smsContent, null, false);
-			//smsQueueService.sendMessage("13367006212", smsContent, null, false);
+			smsQueueService.sendMessage("186824455891", smsContent, null, false);
 			
 			messageValue.setOpenid(customer.getOpenid());
 			messageValue.setTemplateId(messageTemplate.getTmpid());
@@ -233,28 +260,36 @@ public class CardCouponController {
 	
 	private boolean sendEvent(Long customerid,Long techid, Long businessid) {
 		String businessStr = "";
+
 		switch (businessid.intValue()) {
-		case 1:
-			businessStr = "appointment_business1";			
+		case 10:
+			businessStr = "appointment_xcfwC1";	//青春班		
 			break;
-		case 2:
-			businessStr = "appointment_business2";
+		case 11:
+			businessStr = "appointment_xcfwC2";  //学时班
 			break;
-		case 3:
-			businessStr = "appointment_business3";
+		case 20:
+			businessStr = "appointment_ksfwC1";  //标准班
 			break;
-		case 4:
-			businessStr = "appointment_business4";
+		case 21:
+			businessStr = "appointment_ksfwC2";  //技术班
 			break;
-		case 5:
-			businessStr = "appointment_business5";
+		case 30:
+			businessStr = "appointment_wyfwC1";
 			break;
-		case 6:
-			businessStr = "appointment_business6";
-			break;						
+		case 31:
+			businessStr = "appointment_wyfwC2";
+			break;			
+		case 40:
+			businessStr = "appointment_jsxcC1";
+			break;
+		case 41:
+			businessStr = "appointment_jsxcC2";
+			break;			
 		default:
+			businessStr = "appointment_dzxc";
 			break;
-		}
+		}		
 		return eventMessageService.sendEvent(businessStr, customerid, techid);
 	}
 	

@@ -1,26 +1,104 @@
 <!DOCTYPE html>
-<!-- saved from url=(0092)http://weixin.juzixueche.com/juzi/custom/zztc?ServiceID=ef008615-c541-4ef1-9fe5-11fa0ff8fad4 -->
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"><meta name="format-detection" content="telephone=no"><title>我是学员 - 桔子学车</title><link rel="stylesheet" href="./SerID3_files/style.css"></head><body><div class="fixtop hasmenu tc-theme"><a href="javascript:history.back();" class="back"></a><div class="uc-center">考证服务</div><a href="javascript:;" class="btn">&nbsp;</a></div><div class="tc-bg tc-mt"><div class="tc-le"><h1>深圳无忧至尊学车服务 </h1><div class="aq">服务特点: 无忧之选，至尊享受</div><div class="gr2"><i class="price">¥<strong>12800</strong>.00</i><span class="w1">3个月拿证</span></div><div class="gr3"><a href="http://weixin.juzixueche.com/juzi/custom/szxueche" class="btn9 btn10">查看服务介绍&gt;&gt;</a></div></div><img src="./SerID3_files/zztc.png" class="tc-lb"></div><div class="tc-ltype"><a href="javascript:;" class="active">C1手动</a><a href="javascript:;" data-id="46">C2自动 500元</a></div><div class="tc-intro"><div class="tit">深圳无忧至尊学车服务包含以下服务</div><ul><li>【金牌服务】</li><li>&nbsp;&nbsp;&nbsp;金牌客服全程服务</li><li>&nbsp;&nbsp;&nbsp;金牌教练1对1教学</li><li>&nbsp;&nbsp;&nbsp;1人1车</li><li>&nbsp;&nbsp;&nbsp;3个月拿证（超时赔）</li><li>&nbsp;</li><li>【费用全包】</li><li>&nbsp;&nbsp;&nbsp;包注册费/考试费</li><li>&nbsp;&nbsp;&nbsp;包长训费（包含吃住）</li><li>&nbsp;&nbsp;&nbsp;包补考费</li><li>&nbsp;&nbsp;&nbsp;包无限次练车（考过为止）</li><li>&nbsp;</li><li>【全程接送】</li><li>&nbsp;&nbsp;&nbsp;上门报名</li><li>&nbsp;&nbsp;&nbsp;练车免费上门接送</li><li>&nbsp;&nbsp;&nbsp;考试免费上门接送</li><li>&nbsp;</li><li>【增值服务】</li><li>&nbsp;&nbsp;&nbsp;考场免费（看场）练车/4小时</li><li>&nbsp;&nbsp;&nbsp;免费重学：五次考试不过，免费重学； </li><li>&nbsp;&nbsp;&nbsp;免费4小时陪驾</li><li>&nbsp;&nbsp;&nbsp;送意外险</li></ul></div><div class="tc-intro"><div class="tit">不包含以下服务</div><ul><li>照相及体检费</li></ul></div><div class="tc-intro"><div class="tit">报名条件</div><ul><li>深户或深圳有效居住6个月 (可找桔子学车查询)</li><li>年龄45岁以下</li><li>无色盲，色弱，身体残疾等</li></ul></div><div class="menu tc-mb"><div class="box pd1"><div class="menu-text">学车流程</div><a href="http://weixin.juzixueche.com/juzi/custom/szprogress" class="more"></a></div><div class="box pd1 bor-top"><div class="menu-text">帮助FAQ</div><a href="http://weixin.juzixueche.com/juzi/custom/servicefaq" class="more"></a></div></div><footer class="jzbox fixgrey"><a href="javascript:;" class="bnt">现在报名</a><span class="buycount"><span class="appcount">14</span>人已报名</span></footer><div id="subscribebox" class="overlay hide"><div class="stlayer"><div class="alic"><img src="./SerID3_files/qrcode_for_gh_8b6c7c93aef8_258.jpg" width="100%"></div><div class="alic">请长按关注公众号后查看</div></div></div><script src="./SerID3_files/zepto.min.js.下载"></script><script src="./SerID3_files/underscore-min.js.下载"></script><script src="./SerID3_files/jweixin-1.0.0.js.下载">   </script><script src="./SerID3_files/App.js.下载"></script><script src="./SerID3_files/custom.js.下载"></script><script>var app = new App();
-App.Storage.set('CityID', '28558');
-var initFn = function(met) {
-  if(navigator.userAgent.indexOf('MicroMessenger') > 0 && location.href.indexOf('juzi/custom/') > -1) {        
-      if(App.Storage.has('Coordinate') && (+new Date) - +App.Storage.get('Coordinate_gtime') < 9e5) {
-        App.initSDK();
-        met in app && app[met]();
-        return;
-      }
-      App.initSDK(function() {
-        app.showTip('正在获取地理位置...');
-        app.getLocation(function(resp) {
-          app.hideTip();
-          var coor = resp.point.lng.toFixed(8) + ',' +resp.point.lat.toFixed(8);
-          App.Storage.set('Coordinate', coor);
-          App.Storage.set('Coordinate_gtime', +new Date);
-          met in app && app[met]();
-        })
-      });    
-  } else {
-    App.Storage.set('Coordinate', '114.23461829,22.69288919');
-    met in app && app[met]();
-  } 
-};</script><div class="loading"><span class="txt"></span></div><script>initFn('Cus_tcinit')</script><div id="qq-sendUrl-btn"></div></body></html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta name="format-detection" content="telephone=no">
+	<title>我是学员 - 芒果学车</title>
+	<link rel="stylesheet" href="./SerID3_files/style.css">
+</head>
+<body>
+	<div class="fixtop hasmenu tc-theme">
+		<a href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxc3ec764a012b40af&redirect_uri=http%3a%2f%2fwww.ultjjy.cn%2fget-weixin-code.html&response_type=code&scope=snsapi_userinfo&state=home#wechat_redirect" class="back"></a>
+		<div class="uc-center">考证服务</div>
+		<a href="javascript:;" class="btn">&nbsp;</a>
+	</div>
+	<div class="tc-bg tc-mt">
+		<div class="tc-le">
+			<h1>深圳学车服务 C2自动</h1>
+			<div class="aq">服务特点: 价格适中，时间可控</div>
+			<div class="gr2">
+				<i class="price">¥<strong>6980</strong>.00</i>
+				<span class="w1">6个月拿证</span>
+			</div>
+		</div>
+		<img src="./SerID3_files/sztc.png" class="tc-lb">
+	</div>
+	<div class="tc-ltype"></div>
+	<div class="tc-intro">
+		<div class="tit">深圳学车服务包含以下服务</div>
+		<ul>
+		<li>1人1车，微信随时在线约车</li>
+		<li>车管所考试费</li>
+		<li>练车费 20 个小时(没用完可退)</li>
+		<li>韶关长训费（赠送）</li>
+		<li>保险费</li><li>桔子服务费(200元)</li>
+		</ul>
+	</div>
+	<div class="tc-intro">
+		<div class="tit">不包含以下服务</div>
+		<ul>
+		<li>补考费（科目一35元 / 科目二65元 / 科目三140元）</li>
+		<li>照相及体检费</li>
+		</ul>
+	</div>
+	<div class="tc-intro">
+		<div class="tit">报名条件</div>
+		<ul>
+			<li>深圳有效居住6个月 (可找芒果学车查询)</li>
+			<li>年龄45岁以下</li>
+			<li>无色盲，色弱，身体残疾等</li>
+		</ul>
+	</div>
+
+
+	<footer class="jzbox fixgrey">
+		<a href="javascript:;" class="bnt">现在报名</a>
+		<span class="buycount">
+		<span class="appcount">1223</span>人已报名</span>
+	</footer>
+	<div id="subscribebox" class="overlay hide">
+		<div class="stlayer">
+			<div class="alic">
+				<img src="./SerID3_files/qrcode_for_gh_8b6c7c93aef8_258.jpg" width="100%">
+			</div>
+			<div class="alic">请长按关注公众号后查看
+			</div>
+		</div>
+	</div>
+	<script src="./SerID3_files/zepto.min.js"></script>
+	<script src="./SerID3_files/underscore-min.js"></script>
+	<script src="./SerID3_files/jweixin-1.0.0.js">   </script>
+	<script src="./SerID3_files/App.js"></script>
+	<script src="./SerID3_files/custom.js"></script>
+	<script>
+
+	var app = new App();
+	App.Storage.set('CityID', '28558');
+	var initFn = function(met) {
+		  if(navigator.userAgent.indexOf('MicroMessenger') > 0 && location.href.indexOf('juzi/custom/') > -1) {        
+			  if(App.Storage.has('Coordinate') && (+new Date) - +App.Storage.get('Coordinate_gtime') < 9e5) {
+				App.initSDK();
+				met in app && app[met]();
+				return;
+			  }
+			  App.initSDK(function() {
+				app.showTip('正在获取地理位置...');
+				app.getLocation(function(resp) {
+				  app.hideTip();
+				  var coor = resp.point.lng.toFixed(8) + ',' +resp.point.lat.toFixed(8);
+				  App.Storage.set('Coordinate', coor);
+				  App.Storage.set('Coordinate_gtime', +new Date);
+				  met in app && app[met]();
+				})
+			  });    
+		  } else {
+			App.Storage.set('Coordinate', '114.23461829,22.69288919');
+			met in app && app[met]();
+		  } 
+	};
+	</script>
+	<div class="loading"><span class="txt"></span></div>
+	<script>initFn('Cus_tcinit')</script>
+</body>
+</html>

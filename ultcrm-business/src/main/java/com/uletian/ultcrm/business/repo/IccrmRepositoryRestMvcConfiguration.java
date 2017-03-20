@@ -18,6 +18,7 @@ import com.uletian.ultcrm.business.entity.TechModel;
 import com.uletian.ultcrm.business.entity.TechSery;
 import com.uletian.ultcrm.business.entity.City;
 import com.uletian.ultcrm.business.entity.Company;
+import com.uletian.ultcrm.business.entity.Coach;
 import com.uletian.ultcrm.business.entity.Customer;
 import com.uletian.ultcrm.business.entity.Function;
 import com.uletian.ultcrm.business.entity.Location;
@@ -54,6 +55,7 @@ public class IccrmRepositoryRestMvcConfiguration extends RepositoryRestMvcConfig
         config.exposeIdsFor(TechSery.class);
         config.exposeIdsFor(City.class);
         config.exposeIdsFor(Company.class);
+		config.exposeIdsFor(Coach.class);
         config.exposeIdsFor(Customer.class);
         config.exposeIdsFor(Function.class);
         config.exposeIdsFor(Location.class);
@@ -61,6 +63,7 @@ public class IccrmRepositoryRestMvcConfiguration extends RepositoryRestMvcConfig
         config.exposeIdsFor(SubPackage.class);
         config.exposeIdsFor(Order.class);
         config.exposeIdsFor(OrderItem.class);
+		
         config.exposeIdsFor(com.uletian.ultcrm.business.entity.Package.class);
         
         config.exposeIdsFor(PackageItem.class);

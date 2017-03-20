@@ -1,0 +1,139 @@
+<style type="text/css" rel="stylesheet">
+	.nav{
+		background: #ffda44;
+		position: relative;
+		text-align: center;
+		height: 44px;
+		line-height: 44px;
+	}
+	.nav h2{
+		font-weight: normal;
+		font-size: 20px;
+	}
+	.activity-content .list .advertise{
+		position:relative;
+		padding: 0;
+		margin: 12px 12px 0 12px;
+	    border: none;
+	    height:159px;
+	    background-size: cover;
+	}
+	.mask{
+		position: absolute;
+	    background-color: #000;
+	    opacity: 0.5;
+	    width: 100%;
+	    height: 54px;
+	    bottom: 0;
+	}
+	.text-mask{
+		position: absolute;
+	    width: 100%;
+	    height: 54px;
+	    bottom: 0;
+	}
+	.text-mask .ad-text0{
+		 padding-left:10px;
+		 font-size:16px;
+		 color:#fff;
+		 margin-top:17px;
+		 z-index:9999;
+	}
+	.text-mask .ad-text1{
+		 padding-left:10px;
+		 font-size:16px;
+		 color:#fff;
+		 margin-top:7px;
+	}
+	.buy {
+		border: 1px solid green;  
+		font-weight: bold;
+		display: block;
+		width: 35px;
+		text-align: center;
+		background-color: #0C0;
+		color: white;
+	}	
+	.teach_font{
+		font-size:0.8em;
+	}
+
+	.table_title{
+		vertical-align: bottom;
+		color:rgb(60,60,60);
+		font-weight:bolder;
+	}
+	.table_title span{
+		color:red;
+	}
+	.table_title span.title_count{
+	/* 	font-size:1.4em; */
+	}
+	.table_teach{
+		vertical-align: top;
+		color:#999999;
+		font-size:0.8em;
+	}
+	.table_teach a{
+		text-decoration:none;
+		color:green;
+	}
+	.teach_font{
+		font-size:0.8em;
+	}
+	#div1 .show .buy {
+		border: 1px solid green;  
+		font-weight: bold;
+	}
+	.show .buy {
+		display: block;
+		width: 35px;
+		text-align: center;
+		background-color: #0C0;
+		color: white;
+		margin-left: 100px;
+
+	}
+	#div2 .show .buy{
+		border:1px solid #2AA5F8;
+		color:#2AA5F8;
+		font-weight:bold;
+	/* 	font-size:2.4em; */
+	}
+	
+</style>
+<ion-view view-title="芒果学车●业务列表报名">	
+  	<ion-content direction="y" class="activity-content">
+		<nav class="nav">
+			<h2>线上报名</h2>		
+		</nav>				
+		<div class="service-info clearfix"  ng-repeat="business in businessList" >
+			<div class="avatar" style="border-color:#085E88">
+				<img ng-src="{{business.pic}}">
+			</div>
+			<div id="div1">
+				<ul class='show'>	
+					<a href="http://{{defaultURL}}SerID{{$index}}.htm" style="text-decoration:none;color:black">
+						<table>				
+							<th class='table_title'>
+								{{business.name}}
+							</th>																
+						</table>	
+						<table>
+							<tr>
+								<td class='teach_font'><a href="http://{{defaultURL}}SerID{{$index}}.htm" style="text-decoration:none;color:black">简介:{{business.introduce}}</a></td>							
+								<td >
+									<a class="buy" style="color:white" ng-click='click_buy({{$index}})'>支付</a>
+								</td>
+							</tr>	
+							<tr>																	
+								<td class='teach_font'><a href="http://{{defaultURL}}SerID{{$index}}.htm" style="text-decoration:none;color:red">报价:{{business.price}}</a></td>									
+							<tr>	
+						</table>
+					</a>
+				</ul>
+			</div>
+		</div>
+	</ion-content>
+</ion-view>
+

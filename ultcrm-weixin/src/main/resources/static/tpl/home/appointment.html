@@ -1,0 +1,101 @@
+<link href="/css/home/appointment.css" rel="stylesheet">
+
+<ion-view view-title="深圳优乐天●91金牌培训" ng-controller="appointmentCtrl" ng-init="init()">
+  <ion-content id="appointment-content">
+    <ion-list>
+      <div class="row title-box">
+	      		         
+		            <img src="/img/home/pkg/icon_{{courseId}}.png" width="45" height="45"></img>
+		          
+		           <div class="h5" style="color :white;"> {{appointmentData.courseName}} {{appointmentData.seryName}} {{appointmentData.modelName}} </div>
+		           
+	  </div> 
+	  
+	  <div class="row dark-bg dark-border" style="padding-left: 2px;padding-right:2px;">
+		          <div class="col">
+		            <div class="h4" style="color :white;font-size: 16px;"> 课程名称 </div>
+		          </div>
+	          
+		          <div class="col-20">
+		           <div class="h4" style="color :white;text-align: right;font-size: 16px;"> 市场价 </div>
+		          </div>    
+	          
+		          <div class="col-20">
+		            <div class="h4" style="color :white;text-align: right;font-size: 16px;"> 优惠价 </div>
+		          </div>   
+	  </div> 
+
+      <ion-item  class="item" ng-repeat="packageele in packages"  >
+	  <div class="row package-box">
+		          <div class="col col-60">
+		            <div style="white-space:normal" class="h5"> {{packageele.package.name}}  </div>
+		          </div>
+	          
+		          <div class="col col-20 h4 amount" >
+		            {{packageele.package.price | currency:"￥":2}} 
+		          </div>    
+	          
+		          <div class="col col-20 h4 amount" style="color: #ef473a;">
+		              <span>{{(packageele.package.price*packageele.package.discount)/100 | currency:"￥":2}}</span> 
+		          </div>
+	  </div>
+	  
+	  
+	  <ion-button ng-if="$index != 0"class="button button-full button-positive" style="margin-top: 1px;margin-bottom: 1px;" on-tap="confirmDelete(packageele)">删除此项目</ion-button>
+	  
+      <ion-item   class="item"  ng-repeat="pgitem in packageele.package.packageItems">
+        <div class="row">
+          <div class="col col-20">
+          
+              <img ng-src="{{pgitem.pic}}" width="100%" style="padding-right:5px;max-height: 80px;"></img>
+          </div>
+          <div class="col col-80">
+	           <div class="row">
+	              <div class="h4" style="margin-top:0px;margin-bottom:0px;white-space:normal;font-size: 15px;">
+	                           {{pgitem.name}}
+	              </div>
+	           </div>
+               <div class="row">
+                  <div class="col col-50 h5 ">
+                  <a ng-class="{true:'badge-origin',false:'badge-course'}[pgitem.flag=='1']" ng-show="{{pgitem.typeid}}=='1'">{{pgitem.flag | itemType}}</a>
+                  <a class="subdued">数量: 1{{pgitem.count}}</a>
+                  </div>
+	              <div class="col col-25 h5 amount" > 
+	              <a class="subdued">{{pgitem.price | currency:"￥":2}}</a>
+	              </div>
+	              <div class="col col-25 h5 amount" style="color: #ef473a;font-size: 15px;"> 
+	                 	{{(pgitem.price*pgitem.discount)/100 | currency:"￥":2}}
+	              </div>   
+              
+              </div>
+          </div>
+        </div>        
+      </ion-item>
+      
+      </ion-item>
+    </ion-list>
+    
+	<button class="button button-block button-positive" ng-click="toOk()">
+		 确认预约
+	</button>
+	<button class="button  button-block button-energized" ng-click="openModal()">
+		 添加项目
+	</button>
+	
+<br>
+<br>
+ 
+  </ion-content>
+
+ <div class="bar bar-footer bar-clear" style="padding:0px;z-index: 55;">
+    <div class="row" style="padding:0px">
+	    <div class="col dark-bg dark-border ">           
+		    <div class="h5" style="color :white;text-align: center;" > 市场总价: {{totalPrice() | currency:"￥":2}}  </div>
+		</div>
+		<div class="col assertive-bg assertive-border ">
+		    <div class="h5" style="color :white;text-align: center;"> 优惠总价： {{discountTotalPrice() | currency:"￥":2}}</div>
+		</div>  
+	</div> 
+</div>   
+	       
+</ion-vew>

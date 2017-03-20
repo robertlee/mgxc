@@ -44,13 +44,11 @@ import com.uletian.ultcrm.business.entity.Order;
 import com.uletian.ultcrm.business.repo.OrderRepository;
 import com.uletian.ultcrm.business.repo.StoreRepository;
 
-import com.uletian.ultcrm.business.entity.Schedule;
-import com.uletian.ultcrm.business.entity.ClassRoom;
-import com.uletian.ultcrm.business.entity.Schedule;
-import com.uletian.ultcrm.business.repo.ScheduleRepository;
+
+
+
+
 import com.uletian.ultcrm.business.entity.Store;
-import com.uletian.ultcrm.business.entity.Seat;
-import com.uletian.ultcrm.business.repo.SeatRepository;
 import com.uletian.ultcrm.business.entity.Customer;
 import com.uletian.ultcrm.business.repo.CustomerRepository;
 import com.uletian.ultcrm.common.util.DateUtils;
@@ -96,8 +94,7 @@ public class OrderController {
 	//@Autowired
 	//private ClassroomRepository classroomRepository;
 	
-	@Autowired
-	private SeatRepository seatRepository;
+
 	
 	@Autowired
 	private CustomerRepository customerRepository;
@@ -109,8 +106,7 @@ public class OrderController {
 	private WeixinConfig weixinConfig;
 	@Autowired
 	private OrderCommentRepository orderCommentRepository;
-	@Autowired
-	private ScheduleRepository scheduleRepository;
+
 	
 	private static Map<Long, String> imgUrlMap = new HashMap<Long,String>();
 	
@@ -135,22 +131,12 @@ public class OrderController {
 			JSONObject jsonObj = JSONObject.fromObject(jsonStr);
 			Object classId = jsonObj.get("classId");
 			Object className = jsonObj.get("className");
-			Object seatName = jsonObj.get("seatName");
-			Object choiceSeat = jsonObj.get("choiceSeat");
-			Object roomId = jsonObj.get("roomId");
-			Object roomName = jsonObj.get("roomName");
+			
 			Object price = jsonObj.get("price");
+			Object contactphone = jsonObj.get("contactphone");
 			Object totalPrice = jsonObj.get("totalPrice");
-			Object scheId = jsonObj.get("scheId");
 			Object openId= jsonObj.get("openId");//用户openID   
-			Object teachId = jsonObj.get("teachId");//教练编号
-			Object teachName = jsonObj.get("teachName");//教练名称
-			Object classTimeDetail = jsonObj.get("hiddenclassTimeDetail");//开课时间
-			Object startTime = jsonObj.get("startTime");//开课时间
-			Object endTime = jsonObj.get("endTime");//结课时间
-			Object classHour = jsonObj.get("classHour");//课程课时
-			Object childName = jsonObj.get("childName");//学生姓名
-
+			
 			boolean bl = true;
 			
 			if(openId == null){
@@ -159,7 +145,7 @@ public class OrderController {
 				logger.error("未获取到用户openId");
 				return map;
 			}
-			if(scheId == null){
+			if(classId == null){
 				bl = false;
 				logger.error("课程编号为空");
 				map.put("msg", "false");
@@ -175,18 +161,17 @@ public class OrderController {
 				return map;
 			}
 			
-			logger.info("先判断所选座位是否存在");
-			Long scheduleId = Long.parseLong(scheId.toString());
-			//处理并发性用户下单事件
+
+			//处理并发性用户下单事件(教练的时间端冲突)
 			
 			
-			Seat se = seatRepository.getSeatByName(seatName.toString(),scheduleId);
-			if(se != null){
-				bl = false;
-				logger.error("生成订单失败,该座位已被下单");
-				map.put("msg", "该座位已被下单");
-				return map;
-			}				
+			//Seat se = seatRepository.getSeatByName(seatName.toString(),scheduleId);
+			//if(se != null){
+			//	bl = false;
+			//	logger.error("生成订单失败,该座位已被下单");
+			//	map.put("msg", "该座位已被下单");
+			//	return map;
+			//}				
 
 			logger.info("生成订单编号");
 			Long tmp = System.currentTimeMillis()/1000;
@@ -196,22 +181,22 @@ public class OrderController {
 			
 			if(bl){
 				logger.info("开始保存已选座位数据");
-				Seat seat = new Seat();
-				seat.setName(seatName.toString());
-				seat.setStatus("1");
-				seat.setCreateTime(new Date());
-				seat.setLastUpdateTime(new Date());
-				if(childName != null && !"".equals(childName)){
-					seat.setChildName(childName.toString());
-				}
-				seat.setCustomerPhone(customer.getPhone());
-				Schedule cr = new Schedule();
-				cr.setId(scheduleId);
-				seat.setSchedule(cr);
-				seat.setCustomerId(customer.getId().toString());
-				seatRepository.save(seat);
-				logger.info("保存已选座位数据成功");
-				seatId = seat.getId();
+				//Seat seat = new Seat();
+				//seat.setName(seatName.toString());
+				//seat.setStatus("1");
+				//seat.setCreateTime(new Date());
+				//seat.setLastUpdateTime(new Date());
+				//if(childName != null && !"".equals(childName)){
+				//	seat.setChildName(childName.toString());
+				//}
+				//seat.setCustomerPhone(customer.getPhone());
+				//Schedule cr = new Schedule();
+				//cr.setId(scheduleId);
+				//seat.setSchedule(cr);
+				//seat.setCustomerId(customer.getId().toString());
+				//seatRepository.save(seat);
+				//logger.info("保存已选座位数据成功");
+				///seatId = seat.getId();
 				
 				logger.info("开始保存订单");
 				Order o = new Order();
@@ -222,96 +207,101 @@ public class OrderController {
 					o.setClassid(Long.parseLong(classId.toString()));
 					o.setClassname(className.toString());
 				}
-				if(classHour != null && !"".equals(classHour)){
-					o.setClassHour(Long.parseLong(classHour.toString()));					
-				}		
-				if(seat.getId() != null){
-					o.setSeatid(seat.getId());
-				}
-				if(choiceSeat != null && !"".equals(choiceSeat)){
-					o.setSeatname(choiceSeat.toString());				
-				}
-				if(roomId != null && !"".equals(roomId)){
-					o.setRoomId(Long.parseLong(roomId.toString()));
-					o.setRoomName(roomName.toString());
-				}
+				//if(classHour != null && !"".equals(classHour)){
+				//	o.setClassHour(Long.parseLong(classHour.toString()));					
+				//}		
+				//if(seat.getId() != null){
+				//	o.setSeatid(seat.getId());
+				//}
+				//if(choiceSeat != null && !"".equals(choiceSeat)){
+				//	o.setSeatname(choiceSeat.toString());				
+				//}
+				//if(roomId != null && !"".equals(roomId)){
+				//	o.setRoomId(Long.parseLong(roomId.toString()));
+				//	o.setRoomName(roomName.toString());
+				//}
 				o.setStatus(1);
 				o.setCreateTime(new Date());
 				o.setLastUpdateTime(new Date());
 				
+				if(contactphone != null && !"".equals(contactphone)){
+					o.setContactphone(contactphone.toString());
+				}
 				if(price != null && !"".equals(price)){
 					o.setPrice(new BigDecimal(price.toString()));
-				}
-				
+				}				
 				if(totalPrice != null && !"".equals(totalPrice)){
 					o.setTotalPrice(new BigDecimal(totalPrice.toString()));
 				}
-				if(scheId != null && !"".equals(scheId)){
-					Schedule s = new Schedule();
-					s.setId(Long.parseLong(scheId.toString()));
-					o.setSchedule(s);
-				}
-				if(teachId != null && !"".equals(teachId)){
-					o.setTeacherId(Long.parseLong(teachId.toString()));
-				}
-				if(teachName != null && !"".equals(teachName)){
-					o.setTeacherName(teachName.toString());
-				}
-				if(startTime != null && !"".equals(startTime)){
-					Date tmpTime = DateUtils.parseDate(startTime);
-					o.setStartTime(tmpTime);
-				}
-				if(endTime != null && !"".equals(endTime)){
-					Date tmpTime = DateUtils.parseDate(endTime);
-					o.setEndTime(tmpTime);
-				}
-				if(classTimeDetail != null && !"".equals(classTimeDetail)){
-					o.setClassTimeDetail(classTimeDetail.toString());
-				}
-				if(childName != null && !"".equals(childName)){
-					o.setChildName(childName.toString());
-				}
+				//if(scheId != null && !"".equals(scheId)){
+				//	Schedule s = new Schedule();
+				//	s.setId(Long.parseLong(scheId.toString()));
+				//	o.setSchedule(s);
+				//}
+				//if(teachId != null && !"".equals(teachId)){
+				//	o.setTeacherId(Long.parseLong(teachId.toString()));
+				//}
+				//if(teachName != null && !"".equals(teachName)){
+				//	o.setTeacherName(teachName.toString());
+				//}
+				
+				//Robert Li update 2017
+				//if(startTime != null && !"".equals(startTime)){
+				//	Date tmpTime = DateUtils.parseDate(startTime);
+				//	o.setStartTime(tmpTime);
+				//}
+				//if(endTime != null && !"".equals(endTime)){
+				//	Date tmpTime = DateUtils.parseDate(endTime);
+				//	o.setEndTime(tmpTime);
+				//}
+				//if(classTimeDetail != null && !"".equals(classTimeDetail)){
+				//	o.setClassTimeDetail(classTimeDetail.toString());
+				//}
+				//if(childName != null && !"".equals(childName)){
+				//	o.setChildName(childName.toString());
+				//}
+				
 				orderRepository.save(o);
 				logger.info("创建支付订单成功 ");
 				oid = Long.parseLong(o.getOrderId());
-				try
-				{
-					se = seatRepository.getSeatByName(seatName.toString(),scheduleId);
-					long cId0=Long.parseLong(se.getCustomerId());
-					long cId1=Long.parseLong(customer.getId().toString());
-					logger.info("创建支付订单后se信息2016-8-11:"+cId0+":"+cId1);
-					if(se != null){
-						if (cId0!=cId1)
-						{	
-							o.setStatus(0);
-							orderRepository.save(o);
-							seat.setStatus("0");
-							seatRepository.save(seat);
-							logger.error("该座位已被下单");
-							map.put("msg", "该座位已被下单");
-							return map;
-						}	
-					}					
+				//try
+				//{
+					//se = seatRepository.getSeatByName(seatName.toString(),scheduleId);
+					//long cId0=Long.parseLong(se.getCustomerId());
+					//long cId1=Long.parseLong(customer.getId().toString());
+					//logger.info("创建支付订单后se信息2016-8-11:"+cId0+":"+cId1);
+					//if(se != null){
+					//	if (cId0!=cId1)
+					//	{	
+					//		o.setStatus(0);
+					//		orderRepository.save(o);
+					//		seat.setStatus("0");
+					//		seatRepository.save(seat);
+					//		logger.error("该座位已被下单");
+					//		map.put("msg", "该座位已被下单");
+					//		return map;
+					//	}	
+					//}					
 					
-				}catch (Exception e) {							
-						o.setStatus(0);
-						orderRepository.save(o);
-						seat.setStatus("0");
-						seatRepository.save(seat);	
-						logger.error("确认座位信息：已被下单异常");
-						map.put("msg", "该座位已被下单");
-						return map;
-				}
+				//}catch (Exception e) {							
+				//		o.setStatus(0);
+				//		orderRepository.save(o);
+				//		seat.setStatus("0");
+				//		seatRepository.save(seat);	
+				//		logger.error("确认座位信息：已被下单异常");
+				//		map.put("msg", "该座位已被下单");
+				//		return map;
+				//}
 	
 
 				
 				//开始调用支付接口
 				map = startPay(oid,totalPrice.toString(),className.toString(),openId.toString());
-				map.put("seatId", seatId);
+				//map.put("seatId", seatId);
 				map.put("orderId", oid);
 				
 			
-				logger.info("返回订单号和选中座位号【orderId：" + oid + ",seatId：" + seatId + "】");  
+				logger.info("返回订单号和选中座位号【orderId：" + oid +"】");  
 				//Robert Lee 2016-07-11 	
 						
 			}
@@ -320,7 +310,7 @@ public class OrderController {
 			map.put("msg", "false");
 			logger.error("创建支付订单失败");
 			logger.error(e.getMessage());
-			delOrder(oid,seatId);
+			delOrder(oid);
 		}
 		return map;
 	}
@@ -333,13 +323,13 @@ public class OrderController {
 			JSONObject jsonObj = JSONObject.fromObject(jsonStr);
 			Object className = jsonObj.get("className");
 			//Object seatName = jsonObj.get("seatName");
-			Object choiceSeat = jsonObj.get("choiceSeat");
+			//Object choiceSeat = jsonObj.get("choiceSeat");
 			
-			Object roomName = jsonObj.get("roomName");							
+			//Object roomName = jsonObj.get("roomName");							
 			Object openId= jsonObj.get("openId");//用户openID   					
 			Object startTime = jsonObj.get("startTime");//开课时间			
 			//notifycationSuccess(orderId,openId.toString(),className.toString(),roomName.toString(),choiceSeat.toString(),startTime.toString());
-			notifycationSuccess(orderId,openId.toString(),className.toString(),roomName.toString(),choiceSeat.toString(),startTime.toString());				
+			notifycationSuccess(orderId,openId.toString(),className.toString(),startTime.toString());				
 			}
 
 		catch (Exception e) {			
@@ -349,22 +339,22 @@ public class OrderController {
 		
 	}
 	
-	@RequestMapping(value = "/delOrder/{orderId}/{seatId}", method = RequestMethod.GET)
-	public String delOrder(@PathVariable("orderId")Long orderId,@PathVariable("seatId")Long seatId){
+	@RequestMapping(value = "/delOrder/{orderId}", method = RequestMethod.GET)
+	public String delOrder(@PathVariable("orderId")Long orderId){
 		try {
 			logger.info("开始取消订单 ，参数【orderId：" + orderId + "】");
 			Order o = orderRepository.findByOrderId(orderId);			
 			if(o != null){
 				o.setStatus(0);
 				orderRepository.save(o);
-				logger.info("取消订单成功,开始删除订单中的座位信息，参数【seatId：" + seatId + "】 ");
+				logger.info("取消订单成功,开始删除订单中的座位信息，参数【orderId：" + orderId + "】 ");
 			}
-			Seat s = seatRepository.getSeatById(seatId);
-			if(s != null){
-				s.setStatus("0");
-				seatRepository.save(s);
-				logger.info("删除座位信息成功");
-			}
+			//Seat s = seatRepository.getSeatById(seatId);
+			//if(s != null){
+			//	s.setStatus("0");
+			//	seatRepository.save(s);
+			//	logger.info("删除座位信息成功");
+			//}
 		} catch (Exception e) {
 			logger.error("订单失效失败 ");
 			logger.error(e.getMessage());
@@ -384,7 +374,7 @@ public class OrderController {
 	 * 地点：{{keyword3.DATA}}
 	 * {{remark.DATA}}
 	 */
-	public void notifycationSuccess(Long id,String openId, String className,String classAddr,String seatSpec,String datatime){
+	public void notifycationSuccess(Long id,String openId, String className,String datatime){
 		
 		
 		try {
@@ -403,8 +393,8 @@ public class OrderController {
 				param.put("first", first);
 				param.put("keyword1", className);
 				param.put("keyword2", datatime);
-				param.put("keyword3", classAddr+" "+seatSpec);				
-				String csRemak= "\n欢迎您使用，客服电话：13367006212 0791-86836192 ！";
+				param.put("keyword3", "深圳芒果学车");				
+				String csRemak= "\n欢迎您使用，客服电话：4008935866 ！";
 				param.put("remark",csRemak);
 				
 				messageValue.setOpenid(openId);
@@ -447,14 +437,14 @@ public class OrderController {
 	public Charge payApp(Long orderId,String price,String className,String openId){
     	Charge charge = null;
 	    try {
-		    Pingpp.apiKey = pingApiKey;
+		    Pingpp.apiKey = pingApiKeyTest;
 		  
 		    Map<String, Object> chargeMap = new HashMap<String, Object>();  
 		    // 某些渠道需要添加extra参数，具体参数详见接口文档  
 			//Robert Lee 2016-08-01
 		    chargeMap.put("amount", Long.parseLong(price)*100);//金额，单位为分，例 100 表示 1.00 元，233 表示 2.33 元  
 		    chargeMap.put("currency", "cny");//货币类型   cny：人民币
-		    chargeMap.put("subject", "培训课程报名费用");  
+		    chargeMap.put("subject", "学车报名费用");  
 		    chargeMap.put("body", className);
 		    chargeMap.put("order_no", orderId);// 订单号
 		    chargeMap.put("channel", "wx_pub");//支付方式   wx_pub： 微信公众账号支付
@@ -646,12 +636,12 @@ public class OrderController {
 			infoMap.put("orderId", order.getOrderId());
 			infoMap.put("classId", order.getClassid()+"");
 			infoMap.put("classname", order.getClassname());
-			infoMap.put("roomName", order.getRoomName());
+			//infoMap.put("roomName", order.getRoomName());
 			infoMap.put("teachName", order.getTeacherName());
 			infoMap.put("teachId", order.getTeacherId()+"");
 			infoMap.put("classHour", order.getClassHour().toString());
 			infoMap.put("price", order.getPrice().intValue() + "");
-			infoMap.put("childName", order.getChildName());
+			//infoMap.put("childName", order.getChildName());
 			infoMap.put("classTimeDetail", order.getClassTimeDetail());
 			
 			String tmpTime = "";
@@ -669,13 +659,14 @@ public class OrderController {
 			}
 			infoMap.put("createTime", tmp);
 			
-			Schedule sche = scheduleRepository.getScheduleById(order.getSchedule().getId());
-			if(sche != null){
-				infoMap.put("roomAddress", sche.getbusinessAddress());
-			}
+			//Schedule sche = scheduleRepository.getScheduleById(order.getSchedule().getId());
+			//if(sche != null){
+			//	infoMap.put("roomAddress", sche.getbusinessAddress());
+			//}
 		} catch (Exception e) {
 			logger.error("查询订单详情失败 ");
 			logger.error(e.getMessage());
+			
 		}
 		return infoMap;
 	}
@@ -712,26 +703,7 @@ public class OrderController {
 		}
 		return orderComment;
 	}
-	//查询小孩信息
-	@RequestMapping(value="/searchChild/{openId}",method=RequestMethod.GET)
-	public Map<String, Object> searchChild(@PathVariable("openId")String openId){
-		Map<String, Object> map = new HashMap<String, Object>();
-		//根据openId获取用户信息
-		logger.info("开始根据用户openId查询用户信息，查询参数为【openId：" + openId + "】 ");
-		Customer customer = customerRepository.findByOpenid(openId.toString());
-		if(customer != null){
-			map.put("customerId", customer.getId());
-			if(customer.getChilds() != null){
-				map.put("childs", customer.getChilds());
-				logger.info("查询到用户小孩数量为为：" + customer.getChilds().size() + "】 ");
-			}
-			if(customer.getPhone() != null){
-				map.put("contactPhone", customer.getPhone());
-				logger.info("查询到用户手机号为：" + customer.getPhone() + "】 ");
-			}
-		}
-		return map;
-	}	
+
 	//查询登录人信息
 	@RequestMapping(value="/searchCutomerId/{openId}",method=RequestMethod.GET)
 	public long searchCutomerId(@PathVariable("openId")String openId){

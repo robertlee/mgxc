@@ -36,9 +36,10 @@ public class BusinessType implements Serializable {
 	private Long lastUpdateUserid;
 	
 	private String introduce;//课程说明   吴云
-	
-	@OneToMany(mappedBy="businessType")
-	private List<Schedule> schedules;
+	private String price;//课程报价   Robert 
+	private float cost;//课程报价   Robert 
+	private String pic;//课程报价   Robert 
+
 	
 	public BusinessType() {
 	}
@@ -104,11 +105,25 @@ public class BusinessType implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	public List<Schedule> getSchedules() {
-		return this.schedules;
+	public String getPic() {
+		return this.pic;
 	}
-	public void setSchedules(List<Schedule> schedules) {
-		this.schedules = schedules;
+
+	public void setPic(String pic) {
+		this.pic = pic;
 	}
+	public String getPrice() {
+		return this.price;
+	}
+
+	public void setPrice(String price) {
+		this.price = price;
+	}
+	public float getCost() {
+		return this.cost;
+	}
+	public void setCost(float cost) {
+		this.cost = cost;
+	}	
+
 }

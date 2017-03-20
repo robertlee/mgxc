@@ -35,7 +35,7 @@
 	margin-bottom: 10px;
 }
 </style>
-<ion-view view-title="芒果学车●启迪教育">
+<ion-view view-title="芒果学车●预约成功">
   <ion-content class="aptmentok-content">
     
     <div class="blue aptmentok-text"><i class="icon iconfont icon-appointmentok blue center"></i>&nbsp;{{titleStr}}</div>
@@ -44,11 +44,9 @@
    		<div class="item item-single">
 		    <p class="text" style="color:#666">服务单号:<span>{{orderId}}</span></p>
 		 </div>
-		 <div class="item item-single" ng-click="toDirect()">
-		    <p class="text"  style="color:#666">预约中心:<span>{{appointmentData.storeName}}</span><i class="iconfont icon-locate orange"></i></p>
-		 </div>
 		 <div class="item item-single">
 		    <p class="text"  style="color:#666">预约时间:<span>{{appointmentData.segmentDate}} {{appointmentData.segmentTime}}:00</span></p>
+			<p class="text"  style="color:#666">预约时长:<span>{{appointmentData.segmentDate}} {{appointmentData.segmentTime}}:00</span></p>
 		 </div>
    	</div>
  	

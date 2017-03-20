@@ -266,9 +266,8 @@ body{
 	bottom: -10px;
 }
 </style>
-  <ion-view view-title="芒果学车●报名">
-  	<ion-content class="service-content">
-	
+<ion-view view-title="芒果学车●报名">
+  	<ion-content class="service-content">	
 	    <div class="banner">
 			  <ion-slide-box active-slide="myActiveSlide" does-continue="true" auto-play="true"slide-interval="2000">
 				<ion-slide>
@@ -285,20 +284,22 @@ body{
 		
        	<div class="row services-row">
 			<div class="col shortcut shortcut-normal">
-				<a href="http://www.ultjjy.cn/process.htm" style="text-decoration:none" >
+				<a href="http://{{defaultURL}}process.htm" style="text-decoration:none" >
 					<div class="icon iconfont icon-washing service-item-icon-font" style="color:#f09ff9"></div>
 					<p  style="color:#000">学车流程</p>
 				</a>
 			</div>
+			
       		<div class="col shortcut shortcut-normal">
-				<a href="http://www.ultjjy.cn/service_site.htm" style="text-decoration:none" >
+				<a href="http://{{defaultURL}}service_site.htm" style="text-decoration:none" >
 					<div class="icon iconfont icon-washing service-item-icon-font" style="color:#fd9f19"></div>
-					<p style="color:#000">线下服务站</p>
+					<p style="color:#000">线下报名点</p>
 				</a>
 			</div>
-			<div class="col shortcut shortcut-normal">
-				<a href="http://www.ultjjy.cn/wechat_train_grounds.htm" style="text-decoration:none" >
-					<div class="icon iconfont icon-repair service-item-icon-font" style="color:#fe7c26"></div>
+			
+			<div class="col shortcut shortcut-normal">	
+				<a style="text-decoration:none" ng-click="click_store()">
+					<div class="icon iconfont icon-repair service-item-icon-font" style="color:#fe7c26"></div>					 
 					<p style="color:#000">训练场</p>
 				</a>
 			</div>			
@@ -309,7 +310,7 @@ body{
 		
 		<div class="row services-row">
 			<div class="col shortcut shortcut-normal">
-				<a href="http://www.ultjjy.cn/help.htm" style="text-decoration:none" >
+				<a href="http://{{defaultURL}}help.htm" style="text-decoration:none" >
 					<div class="icon iconfont icon-washing service-item-icon-font" style="color:#f09ff9"></div>
 					<p style="color:#000">帮助问答</p>
 				</a>				
@@ -317,29 +318,28 @@ body{
       		
 			
 			<div class="col shortcut shortcut-normal">
-				<a href="http://www.ultjjy.cn/guarantee.htm" style="text-decoration:none" >
+				<a href="http://{{defaultURL}}guarantee.htm" style="text-decoration:none" >
 					<div class="icon iconfont icon-washing service-item-icon-font" style="color:#fd9f19"></div>
 					<p style="color:#000">服务保障</p>
 				</a>				
 			</div>
 			
 			<div class="col shortcut shortcut-normal">
-				<a href="http://www.ultjjy.cn/about.htm" style="text-decoration:none" >
+				<a href="http://{{defaultURL}}about.htm" style="text-decoration:none" >
 					<div class="icon iconfont icon-repair service-item-icon-font" style="color:#fe7c26"></div>
 					<p style="color:#000">关于芒果</p>
 				</a>
 			</div>
 			
-		</div>
-		
+		</div>		
        	<div class="v-spacer"></div>       	
        	<!-- 技能页 -->
        	<div class="list1">       	 
         	<div class="item item-clickable">
-        		<div class="icon iconfont icon-mytech icon-left" style="color:#fd9f19"></div>
-        		<div class="lefttext" ng-click="click_service()">我要报名</div>  				
+        		<div class="icon iconfont icon-mytech icon-left" style="color:#fd9f19" ng-click="click_service()"></div>
+				<div class="lefttext" ng-click="click_service()">我要报名</div>  				
         		<div class="icon iconfont icon-selectstore icon-right"style="color:#fd9f19"></div>
-       			<a class="righttext" style="text-decoration:none" href="tel:18682455891">学车咨询</a>			
+       			<a class="righttext" style="text-decoration:none" href="tel:4008935866">学车咨询</a>			
         	</div>
 		</div>	
 		<div class="list">    	
@@ -349,41 +349,28 @@ body{
         		<div class="text">优秀教练展示</div>
         	</div>
 		</div>		
-		<div class="card card-order">
-			<div class="item-single flexible order-content clearfix" ng-click="click_teacher('1')">				
-				<!-- 根据不同项目替换icon-washing blue -->
-				<div class="order-icon iconfont icon-washing"style="color:#2fb0e3"></div>
-				<div class="order-text">						
-					<div class="techlevelno">课程名称:胡一丁 </div>						
-					<div class="techlevelno">C1|C2  25年教龄 </div>						
-					<div class="techlevelno">评分：5星</div>			        			
-				</div>
-			</div>
-			<div class="v-spacer"></div>	
-			
-			<div class="item-single flexible order-content clearfix" ng-click="click_teacher('2')">				
-				<!-- 根据不同项目替换icon-washing blue -->
-				<div class="order-icon iconfont icon-washing"style="color:#2fb0e3"></div>
-				<div class="order-text">						
-					<div class="techlevelno">课程名称:胡二丁 </div>						
-					<div class="techlevelno">C1|C2  25年教龄 </div>						
-					<div class="techlevelno">评分：5星</div>			        			
-				</div>
-			</div>			
-			<div class="v-spacer"></div>
-
-			<div class="item-single flexible order-content clearfix" ng-click="click_teacher('3')">				
-				<!-- 根据不同项目替换icon-washing blue -->
-				<div class="order-icon iconfont icon-washing"style="color:#2fb0e3"></div>
-				<div class="order-text">						
-					<div class="techlevelno">课程名称:胡三丁 </div>						
-					<div class="techlevelno">C1|C2  25年教龄 </div>						
-					<div class="techlevelno">评分：5星</div>			        			
-				</div>
-			</div>
-	        <div class="padding padding-normal">
-				<button class="button button-submit" style="color:black;background:white" ng-click="click_teacher('0')">查看更多</button>
-			</div>				
-		</div>		
+		<div  ng-show="true" ng-repeat="item in coachlist| orderBy:score">
+			<ul class='show' ng-click="showCoachDetail({{item.id}})">
+				<li class='show_img'><img ng-src="../../img/course/coach_default.png" ng-click='showCoachDetail({{item.id}})'></li>
+				<li>
+					<table>
+						<tr>
+							<th class='table_title'>
+								<a ng-click="showCoachDetail({{item.id}})" style="text-decoration:none;color:black">{{item.name}}</a>
+							</th>																	
+						</tr>
+						<tr>
+							<td class='teach_font'><a ng-click='showCoachDetail({{item.id}})' style="text-decoration:none;color:black">类型:{{item.desc}}  </a></td>
+							<td class='teach_font'><a ng-click='showCoachDetail({{item.id}})' style="text-decoration:none;color:black">教龄:{{item.techage}}年</a></td>
+							<td class='teach_font'><a ng-click='showCoachDetail({{item.id}})' style="text-decoration:none;color:black">评分:5星</a></td>	
+						</tr>
+					</table>
+				</li>
+			</ul>
+		</div>
+	    <div class="padding padding-normal">
+			<button class="button button-submit" style="color:black;background:white" ng-click="click_ShowAllCoach()">查看更多</button>
+		</div>				
+	</div>		
 	</ion-content>
 </ion-view>

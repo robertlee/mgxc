@@ -84,31 +84,39 @@ public class CardCouponService {
 	public void cancelOrder(Order order) {
 		Long busiTypeId = order.getAppointment().getTimeSegment().getBusiTypeId();
 		switch (busiTypeId.intValue()) {
-		case 1:
+		case 10:
 			// business1
-			cancelCard(order.getCustomer().getId(), "appointment_business1");			
+			cancelCard(order.getCustomer().getId(), "appointment_xcfwC1");			
 			break;
-		case 2:
+		case 11:
 		    //business2			
-			cancelCard(order.getCustomer().getId(), "appointment_business2");
+			cancelCard(order.getCustomer().getId(), "appointment_xcfwC2");
 			break;
-		case 3:
+		case 20:
 			//business3
-			cancelCard(order.getCustomer().getId(), "appointment_business3");
+			cancelCard(order.getCustomer().getId(), "appointment_ksfwC1");
 			break;
-		case 4:
+		case 21:
 		    // business4
-			cancelCard(order.getCustomer().getId(), "appointment_business4");			
+			cancelCard(order.getCustomer().getId(), "appointment_ksfwC2");			
 			break;
-		case 5:
+		case 30:
 			// business5
-			cancelCard(order.getCustomer().getId(), "appointment_business5");
+			cancelCard(order.getCustomer().getId(), "appointment_wyfwC1");
 			break;
-		case 6:
+		case 31:
 			// business6
-			cancelCard(order.getCustomer().getId(), "appointment_business6");			
-			break;			
-		case 7:
+			cancelCard(order.getCustomer().getId(), "appointment_wyfwC2");			
+			break;		
+		case 40:
+			// business5
+			cancelCard(order.getCustomer().getId(), "appointment_jsxcC1");
+			break;
+		case 41:
+			// business6
+			cancelCard(order.getCustomer().getId(), "appointment_jsxcC2");			
+			break;					
+		case 50:
 			// 其他
 			cancelCard(order.getCustomer().getId(), "appointment_other");
 			break;

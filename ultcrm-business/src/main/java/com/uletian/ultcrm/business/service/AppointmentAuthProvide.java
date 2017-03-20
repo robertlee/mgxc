@@ -20,16 +20,13 @@ public class AppointmentAuthProvide implements AuthProvide {
 	@Override
 	public boolean authentication(Event event, Customer customer) {
 		boolean result = true;
-		//一年级作文培训送学时
-		if ("appointment_business1".equals(event.getCode())) {
+		//学时学车送学时
+		if ("appointment_jsxcC1".equals(event.getCode())) {
 			List<Card> cards = cardRepository.findByCustomerAndStatusAndType(customer, Card.STATUS_PUBLISH, "W");
 			if (cards.size() > 0) {
 				result = false;
 			}
 		}
-
-
-
 		return result;
 	}
 

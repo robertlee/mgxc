@@ -1,15 +1,37 @@
-<style type="text/css" rel="stylesheet">
-	.activityDetail-content .ad-content{
-		width:100%;
-		height:auto;
-		background-size:cover;
-	}
+<style type="text/css">
+.serviceStore-content .list .store-info img{
+	width:100%;
+	height:100%;
+}
+.serviceStore-content .list .item.store-info .store-desc .locate-style{
+	padding-left:10px;
+	font-size:16.5px;
+	line-height:16.5px;
+}
+.serviceStore-content .list .item.store-info .store-desc .address .addr-title{
+	padding:0;
+}
+.serviceStore-content .list .item.store-info .store-desc .address .detail-addr{
+	padding:0;
+	margin-left:-5px;
+}
 </style>
-<ion-view view-title="芒果学车●教练详情">
-  	<ion-content direction="y" class="activityDetail-content">	
-		<div class="ad-content">
-			<img ng-src="/img/course/teacherDetail_{{index}}.jpg" style="width:100%">
-		</div>
+
+<ion-view view-title="芒果学车●训练点">
+	<ion-content class="serviceStore-content">	
+   	  	 	<div class="list" ng-repeat="item in storeList ">
+   	  	 		<div class="item store-info" ng-click="selectStore(item)">
+   	  	 			<div class="store-pic"><img src="/img/store_sz.jpg"></div>
+   	  	 			<div class="store-desc">
+   	  	 			
+   	  	 				<p ng-click="toDirect()" style="z-index:99"><span class="name">{{item.name}}</span><span class="icon iconfont icon-locate yellow locate-style"></span></p>
+   	  	 				<div class="row address"><div class="col col-20 addr-title">地址：</div><div class="col detail-addr">{{item.fullAddress}}</div></div>
+   	  	 				<p class="phone">电话：{{item.phone}}</p>
+   	  	 			</div>
+   	  	 		</div>
+   	  	 		
+   	  	 		<div ng-if="!$last" class="v-spacer"></div>
+
+   	  	 	</div>
 	</ion-content>
 </ion-view>
-

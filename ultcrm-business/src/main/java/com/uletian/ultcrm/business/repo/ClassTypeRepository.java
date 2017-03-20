@@ -19,14 +19,14 @@ public interface ClassTypeRepository extends PagingAndSortingRepository<ClassTyp
 	 * 根据课程批次编号查询该批次下所有的门店地址
 	 * @return
 	 */
-	@Query("from ClassType where id in (select id from ClassType where startBatch = ? group by addressId)")
+	@Query("from ClassType where id in (select id from ClassType where startBatch = ?1 group by addressId)")
 	public List<ClassType> getAddressList(String batchName);
 	
 	/**
 	 * 根据门店编号查询该门店下所有的课程
 	 * @return
 	 */
-	@Query("select DISTINCT className from ClassType where id = ? and addressId = ?")
+	@Query("select DISTINCT className from ClassType where id = ?1 and addressId = ?2")
 	public List<ClassType> getClassList(Long batchId,Long addressId);
 	
 	/**

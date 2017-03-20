@@ -18,8 +18,8 @@ import com.uletian.ultcrm.business.entity.Order;
 @RepositoryRestResource(collectionResourceRel = "order", path = "order")
 public interface OrderRepository extends PagingAndSortingRepository<Order, Long>{
 	
-	@Query("from Order where customerid = ?") 
-    List<Order> findOrderByCustomer(Long customerid); 
+	@Query("from Order where customerid = ?1") 
+        List<Order> findOrderByCustomer(Long customerid); 
 	
 	List<Order> findByCustomerAndStatusOrderByCreateTimeDesc(Customer customer, Integer status );
 	
@@ -54,14 +54,14 @@ public interface OrderRepository extends PagingAndSortingRepository<Order, Long>
 	
 	
 	Order findTopByCustomerOrderByCreateTimeDesc(Customer customer);
-	@Query("from Order where id = ?")
+	@Query("from Order where id = ?1")
 	Order findById(Long id);
-	@Query("from Order where orderid = ?")
+	@Query("from Order where orderid = ?1")
 	Order findByOrderId(Long orderid);
 	
 	@Modifying 
-	@Query("update Order set status = ? where id = ?")
+	@Query("update Order set status = ?1 where id = ?2")
 	void updateStatus(int status,Long id);
-	@Query("from Order where status = 1 and schedule.id = ?")
+	@Query("from Order where status = 1")
 	List<Order> findOrderList(Long scheId);
 }

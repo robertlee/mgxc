@@ -1,5 +1,4 @@
-<ion-view view-title="我的积分" class="score">
-	
+<ion-view view-title="我的积分" class="score">	
 		<ion-header-bar class="bar-score">
 			<div class="buttons">
 				<button ng-show="leftArrowState.show" class="button button-icon icon ion-ios-arrow-left ng-hide" 
@@ -23,7 +22,7 @@
 					<ion-item class="item no-score-hint ng-hide" ng-show="scoreDetailItem.scoreItems.length==0" 
 							style="border:none;text-align:center;">
 						<div class="row info-no-score-line">
-							<div class="col info-no-score"><p>尊敬的用户，该课程暂时没有积分！</p></div>
+							<div class="col info-no-score"><p>尊敬的用户，您暂时没有积分！</p></div>
 						</div>
 					</ion-item>
 					<ion-item class="item score-item clearfix" ng-repeat="scoreItem in scoreDetailItem.scoreItems">

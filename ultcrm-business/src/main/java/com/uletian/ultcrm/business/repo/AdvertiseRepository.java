@@ -23,6 +23,6 @@ public interface AdvertiseRepository extends  PagingAndSortingRepository<Adverti
 	@Query("from advertise")
 	public List<Advertise> getAdvertiseList();	
 
-	@Query("from advertise where id = ?")
+	@Query("from advertise where id = ?1")
 	public Advertise getAdvertiseById(Long id); 
 }

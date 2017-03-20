@@ -39,29 +39,29 @@ public class NewChildController {
 	
 	private static Logger logger = Logger.getLogger(NewChildController.class);
 	
-	@RequestMapping(value="/createChildForCustomer/{customerId}/{childId}/{childName}/{year}/{month}/{type}",method=RequestMethod.GET)
+	@RequestMapping(value="/createChildForCustomer/{customerId}/{childId}/{childName}/{mobilephone}/{type}",method=RequestMethod.GET)
 	public String createChildForCustomer(@PathVariable("customerId")Long customerId,@PathVariable("childId")Long childId,
-			@PathVariable("childName")String childName,@PathVariable("year")String year,
-			@PathVariable("month")String month,@PathVariable("type")String type){
+			@PathVariable("childName")String childName,@PathVariable("mobilephone")String mobilephone,@PathVariable("type")String type){
 		String result = "0";
 		try {
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
+			
 			boolean bl = true;
 			if("new".equals(type)){
-				logger.info("先验证该小孩是否已存在，参数为【customerId：" + customerId + ",childId:" + childId 
-						+ ",childName:" + childName);
+				logger.info("先验证该教练是否已存在，参数为【customerId：" + customerId + ",childId:" + childId + ",childName:" + childName);
+			    //Robert 2017-03-08
+				/*
 				List<Children> list = childrenRepository.findChildrenList(customerId,childName);
 				if(list != null && list.size() > 0){
 					bl = false;
-					logger.info("查询到同名小孩数量为：" + list.size());
+					logger.info("查询到同名教练数量为：" + list.size());
 					result = "";
 				}
+				*/
 			}
 			
 			if(bl){
-				logger.info("开始" + type + "小孩信息，参数为【customerId：" + customerId + ",childId:" + childId 
-						+ ",childName:" + childName + ",year:" + year + ",month:" + month 
-						+ ",type:" + type + "】 ");
+				logger.info("开始" + type + "教练信息，参数为【customerId：" + customerId + ",childId:" + childId 
+						+ ",childName:" + childName + ",mobilephone:" + mobilephone  + ",type:" + type + "】 ");
 				Children child = new Children();
 				if("edit".equals(type) && childId != null){
 					child.setId(childId);
@@ -69,14 +69,8 @@ public class NewChildController {
 				if(childName != null && !"".equals(childName)){
 					child.setName(childName);
 				}
-				if(year != null && !"".equals(year) && month != null && !"".equals(month)){
-					String tmp = year + "-" + month;
-					Date date = sdf.parse(tmp);
-			    	Calendar c = Calendar.getInstance();  
-			        c.setTime(date);  
-			        c.add(Calendar.MONTH, +1);  
-			        date = c.getTime();
-					child.setBirthday(date);
+				if(mobilephone != null && !"".equals(mobilephone) ){					
+					child.setMobilephone(mobilephone);
 				}
 				child.setCreateTime(new Date());
 				child.setLastUpdateTime(new Date());
@@ -89,11 +83,11 @@ public class NewChildController {
 				}
 				childrenRepository.save(child);
 				result = "1";
-				logger.info(type + "小孩信息成功 ");
+				logger.info(type + "教练信息成功 ");
 			}
 		} 
 	    catch (Exception e) {
-			logger.error(type + "小孩信息失败 ");
+			logger.error(type + "教练信息失败 ");
 			result = "0";
 			logger.error(e.getMessage());
 		}

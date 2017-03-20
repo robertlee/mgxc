@@ -16,7 +16,10 @@ public class Store implements Serializable {
 
 	@Id
 	private Long id;
-
+	//private Long locationid;
+	//addressid
+	//areaid
+	//companyid
 	private String code = null;
 
 	@Column(name="create_time")
@@ -37,23 +40,24 @@ public class Store implements Serializable {
 	private String name = null;
 
 	private String phone = null;
-
+	
+	private String servicestore = null;
 	//bi-directional many-to-one association to Appointment
 //	@OneToMany(mappedBy="store")
 //	private List<Appointment> appointments;
 
 	//bi-directional many-to-one association to ClassRoom
-	@OneToMany(mappedBy="store")
-	private List<ClassRoom> classRooms;
+//	@OneToMany(mappedBy="store")
+//	private List<ClassRoom> classRooms;
 
 	//bi-directional many-to-one association to Package
 //	@OneToMany(mappedBy="store")
 //	private List<Package> packages;
 
 	//bi-directional many-to-one association to Location
-//	@ManyToOne
-//	@JoinColumn(name="locationid")
-//	private Location location;
+	@ManyToOne
+	@JoinColumn(name="locationid")
+	private Location location;
 
 	//bi-directional many-to-one association to Address
 //	@ManyToOne
@@ -88,7 +92,13 @@ public class Store implements Serializable {
 	public void setCode(String code) {
 		this.code = code;
 	}
+	public String getServicestore() {
+		return servicestore;
+	}
 
+	public void setServicestore(String servicestore) {
+		this.servicestore = servicestore;
+	}
 	public Timestamp getCreateTime() {
 		return this.createTime;
 	}
@@ -145,6 +155,7 @@ public class Store implements Serializable {
 		this.phone = phone;
 	}
 
+	
 //	public List<Appointment> getAppointments() {
 //		return this.appointments;
 //	}
@@ -153,13 +164,13 @@ public class Store implements Serializable {
 //		this.appointments = appointments;
 //	}
  
-	public List<ClassRoom> getClassRooms() {
-		return this.classRooms;
-	}
+//	public List<ClassRoom> getClassRooms() {
+//		return this.classRooms;
+//	}
 
-	public void setClassRooms(List<ClassRoom> classRooms) {
-		this.classRooms = classRooms;
-	}
+//	public void setClassRooms(List<ClassRoom> classRooms) {
+//		this.classRooms = classRooms;
+//	}
  
 //	public List<Package> getPackages() {
 //		return this.packages;
@@ -170,13 +181,13 @@ public class Store implements Serializable {
 //	}
 // 
 //
-//	public Location getLocation() {
-//		return this.location;
-//	}
-//
-//	public void setLocation(Location location) {
-//		this.location = location;
-//	}
+	public Location getLocation() {
+		return this.location;
+	}
+
+	public void setLocation(Location location) {
+		this.location = location;
+	}
 //
 //	public Address getAddress() {
 //		return this.address;

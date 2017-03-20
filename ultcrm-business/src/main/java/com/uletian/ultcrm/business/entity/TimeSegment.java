@@ -68,6 +68,7 @@ public class TimeSegment implements Serializable {
 	
 	@Transient
 	private Long storeId;
+	
 
 	@Column(name="busitypeid")
 	private Long busiTypeId;

@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>芒果学车</title>
+</head>
+<body>
+	<h1>深圳市优乐天信息咨询有限公司开发</h1>
+	<h2>联系电话：18682455891</h2>
+    <script>
+        var GWC = {
+            urlParams: {},
+            getUrlParams: function () {
+                var pairs = location.search.substring(1).split('&');
+                for (var i = 0; i < pairs.length; i++) {
+                    var pos = pairs[i].indexOf('=');
+                    if (pos === -1) {
+                        continue;
+                    }
+                    GWC.urlParams[pairs[i].substring(0, pos)] = decodeURIComponent(pairs[i].substring(pos + 1));
+                }
+            },
+            doRedirect: function () {
+                var code = GWC.urlParams['code'];
+                var appId = GWC.urlParams['appid'];
+                var scope = GWC.urlParams['scope'] || 'snsapi_base';
+                var state = GWC.urlParams['state'];
+                var redirectUri;
+				//Robert Lee 2016
+				if(state=="myindex")
+				{location.href = 'http://www.ultjjy.cn/#/index/myindex?code='+code+'&state='+state;}
+				else if (state=="service")
+				{location.href = 'http://www.ultjjy.cn/#/index/servicelist?code='+code+'&state='+state;}
+				else
+				{location.href = 'http://www.ultjjy.cn/#/index/home?code='+code+'&state=home';}
+            }
+        };
+        GWC.getUrlParams();
+        GWC.doRedirect();
+    </script>
+</body>
+
+</html>

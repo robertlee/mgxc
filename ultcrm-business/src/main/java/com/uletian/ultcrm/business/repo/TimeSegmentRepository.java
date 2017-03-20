@@ -22,10 +22,12 @@ public interface TimeSegmentRepository extends PagingAndSortingRepository<TimeSe
 	 * @param enddate 结束日期
 	 * @return 已经预约过的数据
 	 */
-	 @Query("from TimeSegment where storeid = ? and dateSegment between ? and ?") 
+	 @Query("from TimeSegment where storeid = ?1 and dateSegment between ?2 and ?3") 
 	 public List<TimeSegment> queryTimeSegmentInPeriodByStoreId(Long storeId, Date startdate, Date enddate);
 	
 	 public List<TimeSegment> findByStoreAndBusiTypeId(Store store,Long busiTypeId);
+	 
+	 //public List<TimeSegment> findByCoachId(Long coachId);	 
 	 
 	 public TimeSegment findByStoreAndBusiTypeIdAndDateSegmentAndTimeSegment(Store store,Long busiTypeId, Date dateSegment,Long timeSegment);
 	 

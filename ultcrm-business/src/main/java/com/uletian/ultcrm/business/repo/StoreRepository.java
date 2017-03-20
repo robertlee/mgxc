@@ -15,10 +15,12 @@ public interface StoreRepository extends PagingAndSortingRepository<Store, Long>
 	@Query("from Store")
 	public List<Store> getStoreList();
 	
+	@Query("from Store where servicestore = ?1")	
+	public List<Store> getStoreListByServiceStore(String serviceStore);		
 	/**
 	 * 根据编号查询门店数据
 	 * @return
 	 */
-	@Query("from Store where id = ?")
+	@Query("from Store where id = ?1")
 	public Store getStoreById(Long id); 
 }

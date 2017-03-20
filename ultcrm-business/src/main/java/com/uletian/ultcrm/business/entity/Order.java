@@ -101,6 +101,9 @@ public class Order implements Serializable {
 	@Column(name="price")
 	private BigDecimal price;
 	
+	@Column(name="contactphone")
+	private String contactphone;
+	
 	@Column(name="total_price")
 	private BigDecimal totalPrice;
 
@@ -137,9 +140,6 @@ public class Order implements Serializable {
 	@Column(name="room_id")
 	private Long roomId;
 	
-	@Column(name="room_name")
-	private String roomName;
-
 	@Column(name="teacherid")
 	private Long teacherId;
 	
@@ -181,8 +181,8 @@ public class Order implements Serializable {
 
 	private Long typeid;
 	
-	@Column(name="child_name")
-	private String childName = null;
+	//@Column(name="child_name")
+	//private String childName = null;
 
 	//bi-directional many-to-one association to Appointment
 	@OneToOne(mappedBy="order")
@@ -206,9 +206,9 @@ public class Order implements Serializable {
 	@OneToMany(mappedBy="order")
 	private List<OrderComment> orderComments;
 
-	@ManyToOne
-	@JoinColumn(name="scheduleid")
-	private Schedule schedule;
+//	@ManyToOne
+//	@JoinColumn(name="scheduleid")
+//	private Schedule schedule;
 	
 	@Transient
 	private String statusDesc;
@@ -535,7 +535,13 @@ public class Order implements Serializable {
 		this.lastUpdateTime = lastUpdateTime;
 	}
 
+	public String getContactphone() {
+		return this.contactphone;
+	}
 
+	public void setContactphone(String contactphone) {
+		this.contactphone = contactphone;
+	}
 
 	public BigDecimal getPrice() {
 		return this.price;
@@ -633,14 +639,6 @@ public class Order implements Serializable {
 		this.roomId = roomId;
 	}
 	
-	public String getRoomName() {
-		return roomName;
-	}
-
-	public void setRoomName(String roomName) {
-		this.roomName = roomName;
-	}
-
 	public Long getTeacherId() {
 		return teacherId;
 	}
@@ -826,12 +824,12 @@ public class Order implements Serializable {
 	public void setCrmSaName(String crmSaName) {
 		this.crmSaName = crmSaName;
 	}
-	public Schedule getSchedule() {
-		return this.schedule;
-	}
-	public void setSchedule(Schedule schedule) {
-		this.schedule = schedule;
-	}
+//	public Schedule getSchedule() {
+//		return this.schedule;
+//	}
+//	public void setSchedule(Schedule schedule) {
+//		this.schedule = schedule;
+//	}
 	public String getStartClassTime() {
 		return startClassTime;
 	}
@@ -844,16 +842,17 @@ public class Order implements Serializable {
 	public void setRoomAddress(String roomAddress) {
 		this.roomAddress = roomAddress;
 	}
+	
 	public String getOrderId() {
 		return orderId;
 	}
 	public void setOrderId(String orderId) {
 		this.orderId = orderId;
 	}
-	public String getChildName() {
-		return this.childName;
-	}
-	public void setChildName(String childName) {
-		this.childName = childName;
-	}
+	//public String getChildName() {
+	//	return this.childName;
+	//}
+	//public void setChildName(String childName) {
+	//	this.childName = childName;
+	//}
 }

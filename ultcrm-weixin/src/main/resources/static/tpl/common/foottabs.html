@@ -3,7 +3,7 @@
 .footbar.tabs-icon-top a.tab-item.tab-item-active,
 .footbar.tabs-icon-top a.tab-item.activated
 {
- 	color: #35b2e3;
+ 	color: #FFE33E;
  	border-color: transparent !important;
  }
  .footbar.tabs-icon-top .tab-item .icon {
@@ -24,13 +24,13 @@
     <ion-nav-view name="index-home"></ion-nav-view>
   </ion-tab>
 
-  <ion-tab title="报名" icon-off="iconfont icon-service-off" icon-on="iconfont icon-service-on" ui-sref='index.service' on-deselect="clearTabsHistory()">
-    <ion-nav-view name="index-service"></ion-nav-view>
+  <ion-tab title="报名" icon-off="iconfont icon-service-off" icon-on="iconfont icon-service-on" ui-sref='index.serviceList' on-deselect="clearTabsHistory()">
+    <ion-nav-view name="index-serviceList"></ion-nav-view>
   </ion-tab>
 
   <!-- Account Tab -->
   <ion-tab title="教练" icon-off="iconfont icon-order-off" icon-on="iconfont icon-order-on" ui-sref='index.coachlist' on-deselect="clearTabsHistory()">
-    <ion-nav-view name="index-coach"></ion-nav-view>
+    <ion-nav-view name="index-coachlist"></ion-nav-view>
   </ion-tab>
 
   <!-- Account Tab -->

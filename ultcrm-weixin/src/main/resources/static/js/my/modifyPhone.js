@@ -9,7 +9,7 @@ ultcrm.controller('modifyPhoneCtrl', function($scope,$stateParams,$ionicPopup,$l
 	if(customer == null || customer.id == null || customer.id == '0')
 		{
 		    customer={};
-		    customer.id = 16;
+		    customer.id = 10000;
 		}
 	console.log(customer.id + " &" + customer.phone);
 

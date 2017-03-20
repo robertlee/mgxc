@@ -32,8 +32,8 @@ public class Children implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;//主键
 	private String name = null;//姓名
-	@Column(name="birthday")
-	private Date birthday = null;//出生年月
+	@Column(name="mobilephone")
+	private String mobilephone = null;//手机号码
 	@Column(name="create_time")
 	private Date createTime;
 	@Column(name="create_user_id")
@@ -48,10 +48,8 @@ public class Children implements Serializable {
 	
 	@Transient
 	private Long customerId;
-	@Transient
-	private String year;
-	@Transient
-	private String month;
+
+
 
 	public Children() {
 	}
@@ -97,11 +95,11 @@ public class Children implements Serializable {
 	public void setLastUpdateUserid(Long lastUpdateUserid) {
 		this.lastUpdateUserid = lastUpdateUserid;
 	}
-	public Date getBirthday() {
-		return this.birthday;
+	public String getMobilephone() {
+		return this.mobilephone;
 	}
-	public void setBirthday(Date birthday) {
-		this.birthday = birthday;
+	public void setMobilephone(String mobilephone) {
+		this.mobilephone = mobilephone;
 	}
 	public Customer getCustomer() {
 		return this.customer;
@@ -116,41 +114,13 @@ public class Children implements Serializable {
 	public void setCustomerId(Long customerId) {
 		this.customerId = customerId;
 	}
-	/**
-	 * @return the year
-	 */
-	public String getYear() {
-		return year;
-	}
 
-	/**
-	 * @param year the year to set
-	 */
-	public void setYear(String year) {
-		this.year = year;
-	}
 
-	/**
-	 * @return the month
-	 */
-	public String getMonth() {
-		return month;
-	}
-
-	/**
-	 * @param month the month to set
-	 */
-	public void setMonth(String month) {
-		this.month = month;
-	}	
 	public void fillOtherFields() {
 
 		if (this.getCreateUserId() == null) {
 			this.createUserId =1L ;			
 		}
-		if (this.getBirthday()!=null){
-			this.year = DateUtils.formatDate(this.getBirthday(), "yyyy");
-			this.month = DateUtils.formatDate(this.getBirthday(), "MM");
-		}
+
 	}
 }

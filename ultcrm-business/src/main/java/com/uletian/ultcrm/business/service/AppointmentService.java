@@ -34,13 +34,16 @@ public class AppointmentService {
 	
 	@PostConstruct
 	public void setMap() {
-		busiEventMap.put(1l, "appointment_business1");
-		busiEventMap.put(2l, "appointment_business2");
-		busiEventMap.put(3l, "appointment_business3");
-		busiEventMap.put(4l, "appointment_business4");
-		busiEventMap.put(5L, "appointment_business5");
-		busiEventMap.put(6L, "appointment_business6");
-		busiEventMap.put(7L, "appointment_other");
+		busiEventMap.put(1l, "appointment_firstjoin");
+		busiEventMap.put(2l, "appointment_xcfwC1");
+		busiEventMap.put(3l, "appointment_xcfwC2");
+		busiEventMap.put(4l, "appointment_ksfwC1");
+		busiEventMap.put(5L, "appointment_ksfwC2");
+		busiEventMap.put(6L, "appointment_wyfwC1");
+		busiEventMap.put(7l, "appointment_wyfwC2");
+		busiEventMap.put(8l, "appointment_jsxcC1");
+		busiEventMap.put(9l, "appointment_jsxcC2");
+		busiEventMap.put(10L, "appointment_other");
 		
 	}
 	

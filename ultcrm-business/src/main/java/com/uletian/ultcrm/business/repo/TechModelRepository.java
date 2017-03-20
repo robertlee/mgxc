@@ -14,7 +14,7 @@ public interface TechModelRepository extends PagingAndSortingRepository<TechMode
 	 @Query("select a from TechModel a where a.techSery.techCourse.id = ?1 order by  a.techSery.id") 
 	 public List<TechModel> queryModelListByCourseId(Long courseId);
 
-	 @Query("from TechModel where code = ?")
+	 @Query("from TechModel where code = ?1")
 	 public TechModel findModelByCode(String code); 
 	 
 }

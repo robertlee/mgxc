@@ -1,0 +1,78 @@
+﻿<link rel="stylesheet" href="/css/coach/coachDetail.css">
+<style type="text/css" rel="stylesheet">
+	.activityDetail-content .ad-content{
+		width:100%;
+		height:auto;
+		background-size:cover;
+	}
+</style>
+<ion-view view-title="教练详情">
+	<div class="fixtop hasmenu">
+		<a ng-click="goBack()" class="back"></a>
+		<div class="uc-center">{{coachDetail.name}}({{coachDetail.desc}})</div>
+			
+		</div>
+  	<ion-content>	
+		<div class="stbanner" style="width:100%;height:180px" data-temp="temp-header">
+			<img src="/img/coach/coach_752x500.png">
+			<div class="stbannerlayer"></div>			
+			<div class="stitem ststar">
+				<span class="s1"></span><span class="s1"></span><span class="s1"></span><span class="s1"></span><span class="s2"></span>
+			</div>
+		</div>
+		<ul class="stlist" data-temp="temp-header2">
+			<li><strong>100%</strong>满意度</li><li><strong>14次</strong>服务</li><li><strong>{{coachDetail.techage}}年</strong>教龄</li>
+		</ul>
+		<div class="perlistItem" data-temp="temp-header3" id="PlaceCont"> 
+		
+			<h2><img class="pIco1" src="/img/coach/perIco1.png">练车场地</h2>
+			<div class="peraddress">
+				<a href="http://{{defaultURL}}local/local{{coachDetail.storeid}}.html" style="text-decoration:none;color:red">{{store.name}}:{{store.fullAddress}}</a>				
+				<span class="Icospan"></span>
+			</div>
+		</div>
+		<div class="perlistItem" id="authro">
+			<h2><img class="pIco2" src="/img/coach/perIco2.png">认证资料(已认证)</h2>
+			<div class="prz">
+				<img src="/img/coach/perjz1.png">
+				<img src="/img/coach/perjz2.png">
+				<img src="/img/coach/perjz3.png">
+				<img src="/img/coach/perjz4.png">
+			</div>
+		</div>
+		<div class="perlistItem perlistLast">
+			<h2><img class="pIco3" src="/img/coach/perIco4.png">印象与评价</h2>
+			<div class="yxbox">
+				<p>细心</p><p>耐心</p><p>认真</p><p>整洁</p>
+				<p>准时</p><p>周到</p><p>沟通良好</p><p>服务主动</p>
+			</div>
+			<ul class="yxinfo">
+				<li>
+					<div class="dinfo">
+						<div class="ststar">
+							<span class="s1"></span><span class="s1"></span><span class="s1"></span><span class="s1"></span><span class="s1"></span>
+						</div>
+						2017/3/19 11:30:58
+					</div>
+					<p>认真负责！尊重学员！</p>
+				</li>
+				<li>
+					<div class="dinfo">
+						<div class="ststar">
+							<span class="s1"></span><span class="s1"></span><span class="s1"></span><span class="s1"></span><span class="s1"></span>
+						</div>
+						2017/3/23 20:13:46
+					</div>
+					<p>真的是给了我最大的我耐心，感谢！</p>
+				</li>
+			</ul>
+		
+		</div>
+		
+	</ion-content>
+	<div class="jzbox">
+		<a ng-click="toServicePage({{coachDetail.id}})" class="bnt disable">现在预约</a>
+		<span class="spant2">¥</span>
+		<span class="spant1">119.</span>.00元/小时
+	</div>
+</ion-view>

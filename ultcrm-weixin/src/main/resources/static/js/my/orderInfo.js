@@ -1,6 +1,3 @@
-/**
- * 
- */
 ultcrm.controller('orderInfoCtrl', function($scope, $http, $interval, $state, $stateParams, $window, orderDataService) {
 	$scope.orderInfo = {};
 	
@@ -39,8 +36,8 @@ ultcrm.controller('orderInfoCtrl', function($scope, $http, $interval, $state, $s
 		$state.go("index.myorderList",{'viewType':'new'}, {reload: true}); 
 	});
 	//跳转到教练详情页面
-	$scope.click_teacher=function(){
-		var id = parseInt($scope.orderInfo.teachId);
-		$state.go('index.teacherDetail',{id:id},{reload:true});
-	}
+	//$scope.click_teacher=function(){
+	//	var id = parseInt($scope.orderInfo.teachId);
+	//	$state.go('index.teacherDetail',{id:id},{reload:true});
+	//}
 });

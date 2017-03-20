@@ -20,8 +20,10 @@ import com.uletian.ultcrm.business.entity.Score;
 @RepositoryRestResource(collectionResourceRel = "score", path = "score")
 public interface ScoreRepository extends  PagingAndSortingRepository<Score, Long>{
 	
-	 //public List<Advertise> queryAdvertiseListByCourseId(Long courseId); 
+	@Query(value="SELECT SUM(total_price) FROM orders where customerid = ?1;",nativeQuery=true)
+    public Long getTotalAllScore(Long customerId);	 
 	
+ 	
 	//根据车牌号查积分
 	List<Score> findByTech(Tech tech);
 	

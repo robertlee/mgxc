@@ -150,8 +150,7 @@ public class AppointmentController {
 		String storeId = appointmentData.get("storeId");
 		
 		// 进行数据校验
-		if(storeId == null || busiTypeId == null || modelId == null || customerId == null || 
-				segmentDate == null || segmentTime == null || techId == null)
+		if(storeId == null || busiTypeId == null || modelId == null || customerId == null || segmentDate == null || segmentTime == null || techId == null)
 		{
 			result.put("msg", "提供的信息不全，无法创建课程的预约单!");
 			logger.error("创建课程的预约单的信息不全： " + "storeId = " + storeId + " ,busitypeid = " + busiTypeId + 
@@ -180,6 +179,7 @@ public class AppointmentController {
 			tech = new Tech();
 			tech.setTechModel(techModel);
 			tech.setCustomer(customer);
+			tech.setTotalScore(Integer.valueOf(totalPrice));
 			techRepository.save(tech);
 		}
 		
@@ -190,20 +190,23 @@ public class AppointmentController {
 		//创建order
 		Order order = new Order();
 		order.setCustomer(customer);
-		order.setPrice(new BigDecimal(StringUtils.isEmpty(totalPrice)?"0":totalPrice));
-		order.setDiscountprice(new BigDecimal(StringUtils.isEmpty(discountTotalPrice)?"0":discountTotalPrice));
+		order.setPrice(new BigDecimal(StringUtils.isEmpty(totalPrice)?"119":totalPrice));
+		order.setDiscountprice(new BigDecimal(StringUtils.isEmpty(discountTotalPrice)?"119":discountTotalPrice));
 		order.setTypeid(Long.valueOf(typeId));
+		order.setClassid(1L);
 		order.setStatus(1);
 		order.setTech(tech);
+		order.setContactphone(customer.getPhone());
+		order.setCustomername(customer.getName());
+		order.setOrderId("1");
 		orderRepository.save(order);
 		
-		BusinessType bt = businessTypeRepository.findOne(Long.decode(busiTypeId));		
-		order.setDescription(bt.getName()); //订单的描述是业务类型名称				
-		Appointment appointment = new Appointment();
-		
+		BusinessType bt = businessTypeRepository.findOne(Long.valueOf(busiTypeId));		
+		order.setDescription("芒果学车"); //订单的描述是业务类型名称				
+		Appointment appointment = new Appointment();		
 		Store store = null;
 		store = storeRepository.findOne(Long.valueOf(storeId));
-		
+		appointment.setCoachId(Long.valueOf(storeId));
 		appointment.setStore(store);
 		appointment.setTimeSegment(timeSegm);
 		appointment.setOrder(order);
@@ -226,27 +229,28 @@ public class AppointmentController {
 		}
 		
 		tech.fillOtherFields();
-		String content = "预约单创建成功,课程名称:"+ tech.getCourseName()+ "；课程等级：" + bt.getName()+ ";预约时间：" + segmentDate + " " + segmentTime + ":00";			
+		String content = "预约单创建成功,业务名称:芒果学车；"+ "；学车名称：" + bt.getName()+";预约时间：" + segmentDate + " " + segmentTime + ":00";			
 		smsQueueService.sendMessage(customer.getPhone(), content, null, false);
+		
 
 		
 		// 判断预约初级服务是否需要送卡
 		Boolean hasCard = hasCard(bt.getId(), tech, customer);
 
-		notifycationSuccess(order.getId(), customer, tech.getTechlevelno(), bt, store.getName(), segmentDate + " " +segmentTime + ":00", hasCard);
+		notifycationSuccess(order.getId(), customer, tech.getTechlevelno(), bt, "芒果学车场", segmentDate + " " +segmentTime + ":00", true);
 		
 		result.put("msg", "createorderok"); //关键信息
 		result.put("code", "appook");   //关键信息
 		
 		result.put("orderId", order.getId().toString());
-		result.put("hasCard",hasCard);
+		result.put("hasCard",true);
 		
 		//logger.info("【芒果学车】预约单创建成功：课程编码 " + tech.getTechlevelno() + " 业务类型: " + bt.getName() + " 客户名称： " + customer.getName() + " 时间: " + segmentDate +  segmentTime);
 		return result;
 	}
 	
 	private boolean hasCard(Long businessid, Tech tech, Customer customer) {
-		if (businessid == 4) {
+		if (businessid >0) {
 			// 先判断这个技能有没有卡
 			Long count = cardRepository.countByCustomerAndTechAndStatusAndType(customer, tech, "002", "W");
 			if (count > 0) {
@@ -265,32 +269,39 @@ public class AppointmentController {
 	private boolean sendEvent(Long customerid,Long techid, Long businessid) {
 		String businessStr = "";
 		switch (businessid.intValue()) {
-		case 1:
-			businessStr = "appointment_business1";			
+		case 10:
+			businessStr = "appointment_xcfwC1";	//青春班		
 			break;
-		case 2:
-			businessStr = "appointment_business2";
+		case 11:
+			businessStr = "appointment_xcfwC2";  //学时班
 			break;
-		case 3:
-			businessStr = "appointment_business3";
+		case 20:
+			businessStr = "appointment_ksfwC1";  //标准班
 			break;
-		case 4:
-			businessStr = "appointment_business4";
+		case 21:
+			businessStr = "appointment_ksfwC2";  //技术班
 			break;
-		case 5:
-			businessStr = "appointment_business5";
+		case 30:
+			businessStr = "appointment_wyfwC1";
 			break;
-		case 6:
-			businessStr = "appointment_business6";
+		case 31:
+			businessStr = "appointment_wyfwC2";
+			break;			
+		case 40:
+			businessStr = "appointment_jsxcC1";
+			break;
+		case 41:
+			businessStr = "appointment_jsxcC2";
 			break;			
 		default:
+			businessStr = "appointment_dzxc";
 			break;
 		}
 		return eventMessageService.sendEvent(businessStr, customerid, techid);
 	}
 
-	private void notifycationSuccess(Long id, Customer customer, String techlevelno, BusinessType bt, String storeName,
-			String datatime, boolean hasCard) {
+	private void notifycationSuccess(Long id, Customer customer, String techlevelno, BusinessType bt, String storeName,String datatime, boolean hasCard) 
+{
 		TemplateMessage messageValue = new TemplateMessage();
 		MessageTemplate messageTemplate = templateQueueService.getMessageTemplate("appointment_success");
 		
@@ -305,31 +316,39 @@ public class AppointmentController {
 			Event event = null;
 			if (hasCard) {
 				//业务类型·
-				if (bt.getId() == 1) {
-					event = eventRepository.findEventByCode("appointment_business1");
+				if (bt.getId() == 10) {
+					event = eventRepository.findEventByCode("appointment_xcfwC1");
 					first += ",点击详情领取" + event.getDescription();
 					smsContent += ",请在微信公众号中领取" + event.getDescription();;
-				} else if (bt.getId() == 2) {
-					event = eventRepository.findEventByCode("appointment_business2");
+				} else if (bt.getId() == 11) {
+					event = eventRepository.findEventByCode("appointment_xcfwC2");
 					first += ",点击详情领取" + event.getDescription();
 					smsContent += ",请在微信公众号中领取" + event.getDescription();
-				} else if (bt.getId() == 3) {
-					event = eventRepository.findEventByCode("appointment_business3");
+				} else if (bt.getId() == 20) {
+					event = eventRepository.findEventByCode("appointment_ksfwC1");
 					first += ",点击详情领取" + event.getDescription();
 					smsContent += ",请在微信公众号中领取" + event.getDescription();;
-				} else if (bt.getId() == 4) {
-					event = eventRepository.findEventByCode("appointment_business4");
+				} else if (bt.getId() == 21) {
+					event = eventRepository.findEventByCode("appointment_ksfwC2");
 					first += ",点击详情领取" + event.getDescription();
 					smsContent += ",请在微信公众号中领取" + event.getDescription();;
-				}else if (bt.getId() == 5) {
-					event = eventRepository.findEventByCode("appointment_business5");
+				}else if (bt.getId() == 30) {
+					event = eventRepository.findEventByCode("appointment_wyfwC1");
 					first += ",点击详情领取" + event.getDescription();
 					smsContent += ",请在微信公众号中领取" + event.getDescription();;
-				}else if (bt.getId() == 6) {
-					event = eventRepository.findEventByCode("appointment_business6");
+				}else if (bt.getId() == 31) {
+					event = eventRepository.findEventByCode("appointment_wyfwC2");
 					first += ",点击详情领取" + event.getDescription();
 					smsContent += ",请在微信公众号中领取" + event.getDescription();;
-				}				
+				}else if (bt.getId() == 40) {
+					event = eventRepository.findEventByCode("appointment_jsxcC1");
+					first += ",点击详情领取" + event.getDescription();
+					smsContent += ",请在微信公众号中领取" + event.getDescription();;
+				}else if (bt.getId() == 41) {
+					event = eventRepository.findEventByCode("appointment_jsxcC2");
+					first += ",点击详情领取" + event.getDescription();
+					smsContent += ",请在微信公众号中领取" + event.getDescription();;
+				}		
 			}
 			//robert Lee ULeTian 2016-05-12
 
@@ -343,15 +362,15 @@ public class AppointmentController {
 			*/
 			first += "\n服务单号："+id;
 			param.put("first", first);
-			param.put("keyword1", techlevelno);
+			param.put("keyword1", "芒果学车");
 			param.put("keyword2", bt.getName());
 			param.put("keyword3", storeName);
 			param.put("keyword4", datatime);
 			param.put("remark", "\n欢迎您使用，客服电话：13367006212！" );
 			
-			smsContent += "课程名称："+bt.getName()+"("+storeName+")"+"开课时间："+datatime;		
+			smsContent += "业务名称："+bt.getName()+"("+storeName+")"+"开课时间："+datatime;		
 			smsQueueService.sendMessage(customer.getPhone(), smsContent, null, false);
-			//smsQueueService.sendMessage("13367006212", smsContent, null, false);
+			smsQueueService.sendMessage("186824555891", smsContent, null, false);
 			messageValue.setOpenid(customer.getOpenid());
 			messageValue.setTemplateId(messageTemplate.getTmpid());
 			messageValue.setParam(param);
@@ -419,8 +438,7 @@ public class AppointmentController {
 		if(appointments == null || appointments.isEmpty())
 		{
 			return false;  //不存在预约，可以预约
-		}
-	
+		}	
 		return true;   //  此客户已经存在预约了。
 		
 	 }

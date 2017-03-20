@@ -13,12 +13,12 @@ import com.uletian.ultcrm.business.entity.Score;
 @RepositoryRestResource(collectionResourceRel = "tech", path = "tech")
 public interface TechRepository extends PagingAndSortingRepository<Tech, Long>{
 	
-	@Query("from Tech where customerid = ?") 
+	@Query("from Tech where customerid = ?1") 
     List<Tech> findTechByCustomer(Long customerid);
 	
 	List<Tech> findByCustomerOrderByCreateTimeDesc(Customer customer);
 
-	@Query("from Tech where techlevelno = ?") 
+	@Query("from Tech where techlevelno = ?1") 
 	Tech findTechByTechlevelno(String techlevelno);
 	
 	List<Tech> findByTechlevelno(String techlevelno);

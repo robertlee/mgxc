@@ -20,8 +20,7 @@ import weixin.popular.support.TokenManager;
  */
 @Component
 public class WeixinManager {
-	private static Logger logger = Logger.getLogger(WeixinManager.class);
-	
+	private static Logger logger = Logger.getLogger(WeixinManager.class);	
 	@Autowired
 	private WeixinConfig weixinConfig;
 	
