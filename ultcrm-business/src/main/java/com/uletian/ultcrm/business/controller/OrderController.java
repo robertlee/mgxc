@@ -61,6 +61,7 @@ import com.uletian.ultcrm.business.entity.MessageTemplate;
 import com.uletian.ultcrm.business.service.WeixinConfig;
 import com.uletian.ultcrm.business.entity.OrderComment;
 import com.uletian.ultcrm.business.repo.OrderCommentRepository;
+import com.uletian.ultcrm.business.service.SmsQueueService;
 
 
 
@@ -106,6 +107,8 @@ public class OrderController {
 	private WeixinConfig weixinConfig;
 	@Autowired
 	private OrderCommentRepository orderCommentRepository;
+    @Autowired
+    private SmsQueueService smsQueueService;
 
 	
 	private static Map<Long, String> imgUrlMap = new HashMap<Long,String>();
@@ -300,7 +303,10 @@ public class OrderController {
 				//map.put("seatId", seatId);
 				map.put("orderId", oid);
 				
-			
+                //发送短信通知
+                String content = "\"name\":\"" + contactphone.toString() + "\",\"servicename\":\"" + className + "\"";
+                smsQueueService.sendMessage(contactphone.toString(), content, "", false,"pay");
+                
 				logger.info("返回订单号和选中座位号【orderId：" + oid +"】");  
 				//Robert Lee 2016-07-11 	
 						

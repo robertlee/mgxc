@@ -229,8 +229,11 @@ public class AppointmentController {
 		}
 		
 		tech.fillOtherFields();
-		String content = "预约单创建成功,业务名称:芒果学车；"+ "；学车名称：" + bt.getName()+";预约时间：" + segmentDate + " " + segmentTime + ":00";			
-		smsQueueService.sendMessage(customer.getPhone(), content, null, false);
+		//String content = "预约单创建成功,业务名称:芒果学车；"+ "；学车名称：" + bt.getName()+";预约时间：" + segmentDate + " " + segmentTime + ":00";
+        String content = "\"name\":\"" + bt.getName() + "\",\"coach\":\"教练\",\"time\":\"" + segmentDate + " " + segmentTime + ":00" + "\",\"store\":\"" + store.getFullAddress() +  "\"";
+        logger.info("预约时间开始发短信");
+		smsQueueService.sendMessage(customer.getPhone(), content, null, false,"appointment");
+        logger.info("预约时间发短信结束");
 		
 
 		
@@ -368,9 +371,10 @@ public class AppointmentController {
 			param.put("keyword4", datatime);
 			param.put("remark", "\n欢迎您使用，客服电话：13367006212！" );
 			
-			smsContent += "业务名称："+bt.getName()+"("+storeName+")"+"开课时间："+datatime;		
-			smsQueueService.sendMessage(customer.getPhone(), smsContent, null, false);
-			smsQueueService.sendMessage("186824555891", smsContent, null, false);
+    //smsContent += "业务名称："+bt.getName()+"("+storeName+")"+"开课时间："+datatime;
+            String content = "\"name\":\"" + bt.getName() + "\",\"coach\":\"教练\",\"time\":\"" + datatime + "\",\"store\":\"" + storeName + "\"";
+			smsQueueService.sendMessage(customer.getPhone(), content, null, false,"appointment");
+			smsQueueService.sendMessage("186824555891", content, null, false,"appointment");
 			messageValue.setOpenid(customer.getOpenid());
 			messageValue.setTemplateId(messageTemplate.getTmpid());
 			messageValue.setParam(param);

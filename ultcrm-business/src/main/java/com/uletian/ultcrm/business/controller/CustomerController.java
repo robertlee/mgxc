@@ -256,8 +256,9 @@ public class CustomerController {
 
 		logger.info("用户获取验证码"+ code.getCode());
 
-		String content = "尊敬的用户，您的短信验证码是："+code.getCode()+"，如非本人操作请您忽略。";
-		result = smsQueueService.sendMessage(phone, content, smsQueueService.getIpAddr(request), false);
+		//String content = "尊敬的用户，您的短信验证码是："+code.getCode()+"，如非本人操作请您忽略。";
+        String content = "\"code\":\"" + code.getCode() + "\",\"product\":\"芒果学车\"";
+		result = smsQueueService.sendMessage(phone, content, smsQueueService.getIpAddr(request), false,"regist");
 		return result;
 	}
 

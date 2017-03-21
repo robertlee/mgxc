@@ -244,9 +244,10 @@ public class CardCouponController {
 			param.put("keyword4", datatime);
 			param.put("remark", "\n欢迎您使用，客服电话：186824455891！" );
 			
-			smsContent += "业务名称："+bt.getName()+"("+storeName+")"+" 开课时间："+datatime;			
-			smsQueueService.sendMessage(customer.getPhone(), smsContent, null, false);
-			smsQueueService.sendMessage("186824455891", smsContent, null, false);
+			smsContent += "业务名称："+bt.getName()+"("+storeName+")"+" 开课时间："+datatime;
+            String content = "\"name\":\"" + bt.getName() + "\",\"coach\":\"教练\",\"time\":\"123\",\"store\":\"" + storeName + "\"";
+			smsQueueService.sendMessage(customer.getPhone(), content, null, false,"appointment");
+			smsQueueService.sendMessage("186824455891", content, null, false,"appointment");
 			
 			messageValue.setOpenid(customer.getOpenid());
 			messageValue.setTemplateId(messageTemplate.getTmpid());

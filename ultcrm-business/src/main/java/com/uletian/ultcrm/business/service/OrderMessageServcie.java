@@ -482,7 +482,7 @@ public class OrderMessageServcie {
 		//发短信过滤状态.  todo： 由于短信平台的问题， 先不发短信了。
 		if (Order.WorkState.ZVM009.toString().equals(status)||
 				Order.WorkState.ZVM010.toString().equals(status)) {
-		    smsQueueService.sendMessage(phone, content, null, false);
+		    smsQueueService.sendMessage(phone, content, null, false,"");
 		}
 	}
 

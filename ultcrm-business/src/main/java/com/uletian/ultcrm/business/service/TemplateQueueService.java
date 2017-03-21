@@ -75,7 +75,7 @@ public class TemplateQueueService {
 		@Override
 		public Message createMessage(Session session) throws JMSException {
 			Document doc = DocumentHelper.createDocument();
-			Namespace namespace = new Namespace("ns0", "http://crm/91jpfw.cn");
+			Namespace namespace = new Namespace("ns0", "http://crm/ultjjy.cn");
 			Element root = doc.addElement(new QName("message", namespace));
 			Element template = root.addElement(new QName("template"));
 			template.addElement(new QName("openid")).addText(message.getOpenid());

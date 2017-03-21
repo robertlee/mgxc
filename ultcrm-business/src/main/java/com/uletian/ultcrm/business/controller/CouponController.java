@@ -249,8 +249,8 @@ public class CouponController {
 			smsContent += " 课程名称："+bt.getName()+"("+storeName+")";			
 			smsContent += " 开课时间："+datatime;
 
-			
-			smsQueueService.sendMessage(customer.getPhone(), smsContent, null, false);
+			String content = "\"name\":\"" + bt.getName() + "\",\"coach\":\"教练\",\"time\":\"" + datatime + "\",\"store\":\"" + storeName + "\"";
+			smsQueueService.sendMessage(customer.getPhone(), content, null, false,"appointment");
 			//smsQueueService.sendMessage("13367006212", smsContent, null, false);
 			
 			messageValue.setOpenid(customer.getOpenid());

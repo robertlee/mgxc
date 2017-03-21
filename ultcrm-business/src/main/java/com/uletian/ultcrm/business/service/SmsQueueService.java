@@ -93,14 +93,18 @@ public class SmsQueueService implements MessageListener {
     private String aliyunApiScrete;
     @Value("${aliyunSmsUrl}")
     private String aliyunSmsUrl;
-    @Value("${aliyunSmsCode}")
-    private String aliyunSmsCode;
+    @Value("${aliyunSmsCodeRegist}")
+    private String aliyunSmsCodeRegist;
+    @Value("${aliyunSmsCodePay}")
+    private String aliyunSmsCodePay;
+    @Value("${aliyunSmsCodeAppointment}")
+    private String aliyunSmsCodeAppointment;
     @Value("${aliyunSmsSign}")
     private String aliyunSmsSign;
     @Value("${aliyunSmsArea}")
     private String aliyunSmsArea;
     
-	public Result sendMessage(String phone, String content, String ipaddress, boolean isCheck){
+	public Result sendMessage(String phone, String content, String ipaddress, boolean isCheck,String codeType){
 		/*
 			修改人：RobertLee
 			修改时间：2016-04-24
@@ -123,8 +127,7 @@ public class SmsQueueService implements MessageListener {
 //				String httpArg = "mobile=" + phone + "&content=【芒果学车】" + content;
 //				String jsonResult = smsRequest(smsUrl, httpArg);
                 
-                String phoneContent = "芒果学车短信验证";
-                smsAliyunRequest(phone,phoneContent);
+                smsAliyunRequest(phone,content,codeType);
 //				logger.info("============================================================");
 //				logger.info(smsUrl+httpArg);
 //				logger.info(jsonResult);
@@ -151,16 +154,27 @@ public class SmsQueueService implements MessageListener {
 	}
     
     
-    public void smsAliyunRequest(String phone,String phoneContent) {
+    public void smsAliyunRequest(String phone,String phoneContent,String codeType) {
         
         try {
             IClientProfile profile = DefaultProfile.getProfile(aliyunSmsArea, aliyunApikey,aliyunApiScrete);
             DefaultProfile.addEndpoint(aliyunSmsArea, aliyunSmsArea, "Sms", aliyunSmsUrl);
             IAcsClient client = new DefaultAcsClient(profile);
             SingleSendSmsRequest request = new SingleSendSmsRequest();
-            request.setSignName(aliyunSmsSign);//控制台创建的签名名称
-            request.setTemplateCode(aliyunSmsCode);//控制台创建的模板CODE
-            request.setParamString("{\"customer\":" + phoneContent + "}");//短信模板中的变量；数字需要转换为字符串
+            request.setSignName("优乐天");//控制台创建的签名名称
+            
+            String smsCode = "";
+            if(codeType == "appointment"){
+                smsCode = aliyunSmsCodeAppointment;
+            }
+            else if(codeType == "pay"){
+                smsCode = aliyunSmsCodePay;
+            }
+            else if(codeType == "regist"){
+                smsCode = aliyunSmsCodeRegist;
+            }
+            request.setTemplateCode(smsCode);//控制台创建的模板CODE
+            request.setParamString("{" + phoneContent + "}");//短信模板中的变量；数字需要转换为字符串
             request.setRecNum(phone);//接受号码
             SingleSendSmsResponse httpResponse = client.getAcsResponse(request);
         }

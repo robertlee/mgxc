@@ -96,7 +96,7 @@ public class IndexController {
 		try {
 			logger.debug("开始获取教练业务数据");
 			if((null==serviceStore || "".equals(serviceStore))||( "null".equals(serviceStore)) ){
-			if(null==serviceStore || "".equals(serviceStore)){
+			//if(null==serviceStore || "".equals(serviceStore)){
 				list = coachRepository.getCoachAllList();
 			} else {
 				list = coachRepository.getCoachAllListByServiceStore(serviceStore);
