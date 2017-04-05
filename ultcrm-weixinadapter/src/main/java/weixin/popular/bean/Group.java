@@ -3,7 +3,7 @@ package weixin.popular.bean;
 import java.util.List;
 
 
-public class Group extends BaseResult{
+public class Group extends BaseResult<Object>{
 	
 	private GroupData group;
 	

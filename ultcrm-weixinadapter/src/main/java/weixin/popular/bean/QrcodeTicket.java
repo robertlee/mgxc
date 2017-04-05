@@ -5,7 +5,7 @@ package weixin.popular.bean;
  * @author LiYi
  *
  */
-public class QrcodeTicket extends BaseResult{
+public class QrcodeTicket extends BaseResult<Object>{
 	
 	private String ticket;
 	

@@ -20,17 +20,17 @@ import org.apache.log4j.Logger;
 public abstract class AbstractMsgHandler extends MessageService implements MessageListener{
 	private static Logger logger = Logger.getLogger(AbstractMsgHandler.class);
 	
-	protected Class clazz;
+	protected Class<?> clazz;
 	protected String name;
 	protected String topicName;
 	
 	protected Map<String,MsgActionHandler> handlerMap = new HashMap<String,MsgActionHandler>();
 	
-	public AbstractMsgHandler(Class clazz, String name){
+	public AbstractMsgHandler(Class<?> clazz, String name){
 		this(clazz,name,name);
 	}
 	
-	public AbstractMsgHandler(Class clazz, String name,String topicName){
+	public AbstractMsgHandler(Class<?> clazz, String name,String topicName){
 		this.clazz = clazz;
 		this.name = name;
 		this.topicName = topicName;
@@ -51,7 +51,7 @@ public abstract class AbstractMsgHandler extends MessageService implements Messa
 		TextMessage textMessage = (TextMessage) message;
 		try {
 			logger.info("receive a msg :"+textMessage.getText());
-			MsgObject msgObject= this.convertMsgStringToObject(textMessage.getText(), clazz, name);
+			MsgObject<?> msgObject= this.convertMsgStringToObject(textMessage.getText(), clazz, name);
 			// 获取action
 			String action = msgObject.getAction();
 			MsgActionHandler  handler = handlerMap.get(action);

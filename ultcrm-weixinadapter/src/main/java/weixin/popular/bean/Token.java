@@ -1,6 +1,6 @@
 package weixin.popular.bean;
 
-public class Token extends BaseResult {
+public class Token extends BaseResult<Object> {
 
 	private String access_token;
 	private int expires_in;

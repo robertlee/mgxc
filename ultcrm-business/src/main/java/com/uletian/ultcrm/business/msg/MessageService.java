@@ -14,12 +14,12 @@ public class MessageService {
 	 * 将一个对象转换成符合jms消息格式的字符串
 	 * @return
 	 */
-	public String convertObjectToMsgString(XmlConvertable object, String name) {
+	public String convertObjectToMsgString(XmlConvertable<?> object, String name) {
 		StringBuffer xmlstrbuf = new StringBuffer();
 
         xmlstrbuf.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
         xmlstrbuf.append("\r\n");
-        xmlstrbuf.append("<ns0:"+name+" xmlns:ns0=\"http://crm/91jpfw.cn\">");
+        xmlstrbuf.append("<ns0:"+name+" xmlns:ns0=\"http://crm/ultjjy.cn\">");
         xmlstrbuf.append("\r\n");
         
         String toxml = object.toXML();
@@ -41,14 +41,14 @@ public class MessageService {
 	 * @throws IllegalAccessException 
 	 * @throws InstantiationException 
 	 */
-	public MsgObject convertMsgStringToObject(String msgContent, Class clazz,String name) throws InstantiationException, IllegalAccessException {
-		MsgObject result  = (MsgObject)clazz.newInstance();
+	public MsgObject<?> convertMsgStringToObject(String msgContent, Class<?> clazz,String name) throws InstantiationException, IllegalAccessException {
+		MsgObject<?> result  = (MsgObject<?>)clazz.newInstance();
 		
 		int startIndex = msgContent.indexOf("<action>");
         int endIndex = msgContent.indexOf("</ns0");    
         String innerMsg = msgContent.substring(startIndex, endIndex);   
         innerMsg = "<"+name+">" + innerMsg +"</"+name+">";
-        result = (MsgObject)result.toObject(innerMsg);
+        result = (MsgObject<?>)result.toObject(innerMsg);
 		return result;		
 	}	
 }

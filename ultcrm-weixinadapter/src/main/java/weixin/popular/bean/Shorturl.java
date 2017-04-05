@@ -1,6 +1,6 @@
 package weixin.popular.bean;
 
-public class Shorturl extends BaseResult{
+public class Shorturl extends BaseResult<Object>{
 
 	private String short_url;
 

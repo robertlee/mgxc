@@ -44,7 +44,7 @@ public class ScoreMsgService extends AbstractMsgHandler {
 	public void addHandlers() {
 		MsgActionHandler fullHandler = new MsgActionHandler(){
 			@Override
-			public void handleMsg(MsgObject msgObject) {
+			public void handleMsg(MsgObject<?> msgObject) {
 				List<Score> scoreList = convertToScoreList((ScoreMessage)msgObject);
 				if (CollectionUtils.isEmpty(scoreList)) {
 					logger.error("There is a empty score msg , it has not any items.");
@@ -55,7 +55,7 @@ public class ScoreMsgService extends AbstractMsgHandler {
 		
 		MsgActionHandler newHandler = new MsgActionHandler(){
 			@Override
-			public void handleMsg(MsgObject msgObject) {
+			public void handleMsg(MsgObject<?> msgObject) {
 				List<Score> scoreList = convertToScoreList((ScoreMessage)msgObject);
 				if (CollectionUtils.isEmpty(scoreList)) {
 					logger.error("There is a empty score msg , it has not any items.");

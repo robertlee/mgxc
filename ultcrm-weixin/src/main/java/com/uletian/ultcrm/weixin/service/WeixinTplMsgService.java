@@ -57,7 +57,15 @@ public class WeixinTplMsgService {
 		}
 		
 		tplMsg.setData(data);
-		TemplateMessageResult result = MessageAPI.messageTemplateSend(TokenManager.getToken(weixinConfig.getAppId()), tplMsg);
+		String csAppId=weixinConfig.getAppId();
+		logger.info("current AppId:"+csAppId);
+		String csToken=TokenManager.getToken(csAppId,customer.getOpenid());
+		//String csToken = TokenManager.setToken(weixinConfig.getAppId(), weixinConfig.getAppSecret());
+		logger.info("current token:"+csToken);
+		//csToken="mHJXCzeVoL_H87u0uI85RjfC2r5oczpN_2SAHibmVKS4S1teTEYGpCOKTvDAMFK_SbEDpKTRbuAWP6PblP8eUirmGKkvY4hafi-KYzEXPuffioMHudUCaoGMDpQenr_sKSYhAGAUCI";
+        
+        
+        TemplateMessageResult result = MessageAPI.messageTemplateSend(csToken,tplMsg);
 		logger.info("Send tpl msg result is "+result.toString());
 		
 		// 将发送结果保留起来

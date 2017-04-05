@@ -4,7 +4,7 @@ import java.util.List;
 
 import weixin.popular.bean.BaseResult;
 
-public class MaterialBatchgetResult extends BaseResult{
+public class MaterialBatchgetResult extends BaseResult<Object>{
 
 	private String total_count;
 

@@ -184,10 +184,7 @@ public class WeixinCheckController {
          
     }
 	
-	@RequestMapping(value="/weixintest",method=RequestMethod.GET)
-    protected void weixintest(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
-		response.sendRedirect(weixinConfig.getHostPath()+"/auth.html");
-	}
+
 	
 	
 	

@@ -1,6 +1,6 @@
 package weixin.popular.bean;
 
-public class SnsToken extends BaseResult{
+public class SnsToken extends BaseResult<Object>{
 	
 	private String access_token;
 	

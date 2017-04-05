@@ -59,7 +59,7 @@ public class CardMsgService extends AbstractMsgHandler {
 		
 		MsgActionHandler publishHandler = new MsgActionHandler(){
 			@Override
-			public void handleMsg(MsgObject msgObject) {
+			public void handleMsg(MsgObject<?> msgObject) {
 				List<Card> cardList = convertToCardList((CardMessage)msgObject);
 				for (Card card : cardList) {
 					cardService.crmPublishCard(card);
@@ -69,7 +69,7 @@ public class CardMsgService extends AbstractMsgHandler {
 		
 		MsgActionHandler useHandler = new MsgActionHandler(){
 			@Override
-			public void handleMsg(MsgObject msgObject) {
+			public void handleMsg(MsgObject<?> msgObject) {
 				List<Card> cardList = convertToCardList((CardMessage)msgObject);
 				for (Card card : cardList) {
 					cardService.useCard(card);
@@ -79,7 +79,7 @@ public class CardMsgService extends AbstractMsgHandler {
 		
 		MsgActionHandler cancelHandler = new MsgActionHandler(){
 			@Override
-			public void handleMsg(MsgObject msgObject) {
+			public void handleMsg(MsgObject<?> msgObject) {
 				List<Card> cardList = convertToCardList((CardMessage)msgObject);
 				for (Card card : cardList) {
 					cardService.crmCancelCard(card);
@@ -89,7 +89,7 @@ public class CardMsgService extends AbstractMsgHandler {
 		
 		MsgActionHandler expireHandler = new MsgActionHandler(){
 			@Override
-			public void handleMsg(MsgObject msgObject) {
+			public void handleMsg(MsgObject<?> msgObject) {
 				List<Card> cardList = convertToCardList((CardMessage)msgObject);
 				for (Card card : cardList) {
 					cardService.expireCard(card);
@@ -99,7 +99,7 @@ public class CardMsgService extends AbstractMsgHandler {
 		
 		MsgActionHandler adjustHandler = new MsgActionHandler(){
 			@Override
-			public void handleMsg(MsgObject msgObject) {
+			public void handleMsg(MsgObject<?> msgObject) {
 				List<Card> cardList = convertToCardList((CardMessage)msgObject);
 				for (Card card : cardList) {
 					cardService.adjustCard(card);
@@ -109,7 +109,7 @@ public class CardMsgService extends AbstractMsgHandler {
 		
 		MsgActionHandler writeoffHandler = new MsgActionHandler(){
 			@Override
-			public void handleMsg(MsgObject msgObject) {
+			public void handleMsg(MsgObject<?> msgObject) {
 				List<Card> cardList = convertToCardList((CardMessage)msgObject);
 				for (Card card : cardList) {
 					cardService.writeoffCard(card);

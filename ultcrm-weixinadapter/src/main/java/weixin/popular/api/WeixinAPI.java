@@ -26,7 +26,7 @@ public class WeixinAPI extends BaseAPI {
 	 * @param redirectUrl
 	 * @return
 	 */
-	public static Map GetWeiXinCodeURL(String appId, String appSecret,
+	public static Map<?, ?> GetWeiXinCodeURL(String appId, String appSecret,
 			String scope,
 			String redirectUrl) {
 		/*
@@ -76,7 +76,7 @@ public class WeixinAPI extends BaseAPI {
 	 * @param openid
 	 * @return
 	 */
-	public static Map getOpenId(String code,String appId,String secret,String  grant_type) {
+	public static Map<?, ?> getOpenId(String code,String appId,String secret,String  grant_type) {
 		logger.info("start get openid with code "+code);
 		HttpUriRequest httpUriRequest = RequestBuilder.post()
 				.setUri(BASE_URI + "/sns/oauth2/access_token")
@@ -187,7 +187,7 @@ public class WeixinAPI extends BaseAPI {
 	 *            分组名
 	 * @return
 	 */
-	public static BaseResult groupsUpdate(String access_token, String id,
+	public static BaseResult<?> groupsUpdate(String access_token, String id,
 			String name) {
 		String groupJson = "{\"group\":{\"id\":" + id + ",\"name\":\"" + name
 				+ "\"}}";
@@ -211,7 +211,7 @@ public class WeixinAPI extends BaseAPI {
 	 * @param to_groupid
 	 * @return
 	 */
-	public static BaseResult groupsMembersUpdate(String access_token,
+	public static BaseResult<?> groupsMembersUpdate(String access_token,
 			String openid, String to_groupid) {
 		String groupJson = "{\"openid\":\"" + openid + "\",\"to_groupid\":"
 				+ to_groupid + "}";

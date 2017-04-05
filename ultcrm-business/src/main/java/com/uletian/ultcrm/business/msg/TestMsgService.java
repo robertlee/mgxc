@@ -23,13 +23,13 @@ public class TestMsgService {
 	
 	public void test() {
 		String msg = ""
-				+ "<ns0:score xmlns:ns0=\"http://crm/91jpfw.cn\">"
+				+ "<ns0:score xmlns:ns0=\"http://crm/ultjjy.cn\">"
 				+"<action>FULL</action>"
 				+"<sourceSys>CRM</sourceSys>"
 				+"<ultcrmcustid>1</ultcrmcustid>"
 				+"<phone>18675515034</phone>"
 				+"<techerno>LFV2B28U6E3031564</techerno>"
-				+"<techlevelno>作文培训</techlevelno>"
+				+"<techlevelno> 芒果学车</techlevelno>"
 				+"<crmtechid>1000000397</crmtechid>"
 				+"<totalscore>68 </totalscore>"
 				+"<items>"

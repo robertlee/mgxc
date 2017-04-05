@@ -116,7 +116,7 @@ public class CouponMsgService extends AbstractMsgHandler {
 	public void addHandlers() {
 		MsgActionHandler publishHandler = new MsgActionHandler(){
 			@Override
-			public void handleMsg(MsgObject msgObject) {
+			public void handleMsg(MsgObject<?> msgObject) {
 				List<Coupon> couponList = convertToCouponList((CouponMessage)msgObject);
 				for (Coupon coupon : couponList) {
 					couponService.crmPublish(coupon);
@@ -125,7 +125,7 @@ public class CouponMsgService extends AbstractMsgHandler {
 		};
 		MsgActionHandler useHandler = new MsgActionHandler(){
 			@Override
-			public void handleMsg(MsgObject msgObject) {
+			public void handleMsg(MsgObject<?> msgObject) {
 				List<Coupon> couponList = convertToCouponList((CouponMessage)msgObject);
 				for (Coupon coupon : couponList) {
 					couponService.use(coupon);
@@ -134,7 +134,7 @@ public class CouponMsgService extends AbstractMsgHandler {
 		};
 		MsgActionHandler expireHandler = new MsgActionHandler(){
 			@Override
-			public void handleMsg(MsgObject msgObject) {
+			public void handleMsg(MsgObject<?> msgObject) {
 				List<Coupon> couponList = convertToCouponList((CouponMessage)msgObject);
 				for (Coupon coupon : couponList) {
 					couponService.expire(coupon);
@@ -143,7 +143,7 @@ public class CouponMsgService extends AbstractMsgHandler {
 		};
 		MsgActionHandler cancelHandler = new MsgActionHandler(){
 			@Override
-			public void handleMsg(MsgObject msgObject) {
+			public void handleMsg(MsgObject<?> msgObject) {
 				List<Coupon> couponList = convertToCouponList((CouponMessage)msgObject);
 				for (Coupon coupon : couponList) {
 					couponService.crmCancel(coupon);
@@ -152,7 +152,7 @@ public class CouponMsgService extends AbstractMsgHandler {
 		};
 		MsgActionHandler adjustHandler = new MsgActionHandler(){
 			@Override
-			public void handleMsg(MsgObject msgObject) {
+			public void handleMsg(MsgObject<?> msgObject) {
 				List<Coupon> couponList = convertToCouponList((CouponMessage)msgObject);
 				for (Coupon coupon : couponList) {
 					couponService.adjust(coupon);
@@ -161,7 +161,7 @@ public class CouponMsgService extends AbstractMsgHandler {
 		};
 		MsgActionHandler writeoffHandler = new MsgActionHandler(){
 			@Override
-			public void handleMsg(MsgObject msgObject) {
+			public void handleMsg(MsgObject<?> msgObject) {
 				List<Coupon> couponList = convertToCouponList((CouponMessage)msgObject);
 				for (Coupon coupon : couponList) {
 					couponService.writeoff(coupon);

@@ -172,7 +172,7 @@ public class MessageTemplate implements Serializable{
 			//		"#wechat_redirect";
 			url = "https://open.weixin.qq.com/connect/oauth2/authorize?" +			  
 				  "appid=" + weixinConfig.getAppId() +
-				  "&redirect_uri="+"http%3a%2f%2fwww.91jpfw.cn%2f%23%2findex%2fmyindex"+
+				  "&redirect_uri="+"http%3a%2f%2fwww.ultjjy.cn%2f%23%2findex%2fmyindex"+
 				  "&response_type=code&scope=snsapi_userinfo" +
 				  "&state=my" +
 				  "#wechat_redirect";

@@ -31,7 +31,7 @@ public class ULeTianCrmWeixinApplication {
 		logger.info("|         ULETIAN shenzhen information company copyright 2016         |\n");
 		logger.info("|                                                                     |\n");
 		logger.info("|                                 Author: xubin li                    |\n");
-		logger.info("|                                 Date  : 2016 02 01                  |\n");
+		logger.info("|                                 Date  : 2017 03 21                  |\n");
 		logger.info("|                                 WEB   : www.uletian.cn              |\n");
 		logger.info("=======================================================================");
 

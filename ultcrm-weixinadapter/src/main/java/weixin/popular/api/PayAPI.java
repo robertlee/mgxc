@@ -26,7 +26,7 @@ public class PayAPI extends BaseAPI{
 	 * @param delivernotifyJson
 	 * @return
 	 */
-	private static BaseResult payDelivernotify(String access_token,String delivernotifyJson){
+	private static BaseResult<?> payDelivernotify(String access_token,String delivernotifyJson){
 		HttpUriRequest httpUriRequest = RequestBuilder.post()
 										.setHeader(jsonHeader)
 										.setUri(BASE_URI + "/pay/delivernotify")
@@ -45,7 +45,7 @@ public class PayAPI extends BaseAPI{
 	 * @param feedbackid
 	 * @return
 	 */
-	public static BaseResult payfeedbackUpdate(String access_token,String openid,String feedbackid){
+	public static BaseResult<?> payfeedbackUpdate(String access_token,String openid,String feedbackid){
 		HttpUriRequest httpUriRequest = RequestBuilder.post()
 									.setUri(BASE_URI + "/payfeedback/update")
 									.addParameter("access_token", access_token)
@@ -80,7 +80,7 @@ public class PayAPI extends BaseAPI{
 	 * @param paySignKey
 	 * @return
 	 */
-	public static BaseResult payDelivernotify(String access_token,Delivernotify delivernotify,String paySignKey){
+	public static BaseResult<?> payDelivernotify(String access_token,Delivernotify delivernotify,String paySignKey){
 		Map<String, String> map = MapUtil.objectToMap(delivernotify);
 		String app_signature = SignatureUtil.generatePaySign(map, paySignKey);
 		map.put("app_signature",app_signature);

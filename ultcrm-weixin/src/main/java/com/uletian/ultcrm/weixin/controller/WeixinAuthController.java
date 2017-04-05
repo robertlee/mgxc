@@ -75,7 +75,7 @@ public class WeixinAuthController {
 		}
 		Customer customer = null;
 		if (type.equalsIgnoreCase("snsapi_base")) {
-			Map map = WeixinAPI.getOpenId(weixinCode, weixinConfig.getAppId(), weixinConfig.getAppSecret(), Global.grantType);
+			Map<?, ?> map = WeixinAPI.getOpenId(weixinCode, weixinConfig.getAppId(), weixinConfig.getAppSecret(), Global.grantType);
 			logger.info("type is snsapi_base, and  weixinCode is " + weixinCode + " json:\n"+gson.toJson(map));
 			if (map.get("openid") != null) {
 				customer = customerService.getCustomerByOpenId(map.get("openid").toString());

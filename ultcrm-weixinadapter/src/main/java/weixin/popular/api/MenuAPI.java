@@ -21,7 +21,7 @@ public class MenuAPI extends BaseAPI{
 	 * @param menuJson 菜单json 数据 例如{\"button\":[{\"type\":\"click\",\"name\":\"今日歌曲\",\"key\":\"V1001_TODAY_MUSIC\"},{\"type\":\"click\",\"name\":\"歌手简介\",\"key\":\"V1001_TODAY_SINGER\"},{\"name\":\"菜单\",\"sub_button\":[{\"type\":\"view\",\"name\":\"搜索\",\"url\":\"http://www.soso.com/\"},{\"type\":\"view\",\"name\":\"视频\",\"url\":\"http://v.qq.com/\"},{\"type\":\"click\",\"name\":\"赞一下我们\",\"key\":\"V1001_GOOD\"}]}]}
 	 * @return
 	 */
-	public static BaseResult menuCreate(String access_token,String menuJson){
+	public static BaseResult<?> menuCreate(String access_token,String menuJson){
 		HttpUriRequest httpUriRequest = RequestBuilder.post()
 										.setHeader(jsonHeader)
 										.setUri(BASE_URI+"/cgi-bin/menu/create")
@@ -37,7 +37,7 @@ public class MenuAPI extends BaseAPI{
 	 * @param menuButtons
 	 * @return
 	 */
-	public static BaseResult menuCreate(String access_token,MenuButtons menuButtons){
+	public static BaseResult<?> menuCreate(String access_token,MenuButtons menuButtons){
 		String str = JsonUtil.toJSONString(menuButtons);
 		return menuCreate(access_token,str);
 	}
@@ -60,7 +60,7 @@ public class MenuAPI extends BaseAPI{
 	 * @param access_token
 	 * @return
 	 */
-	public static BaseResult menuDelete(String access_token){
+	public static BaseResult<?> menuDelete(String access_token){
 		HttpUriRequest httpUriRequest = RequestBuilder.post()
 				.setUri(BASE_URI+"/cgi-bin/menu/delete")
 				.addParameter("access_token", access_token)

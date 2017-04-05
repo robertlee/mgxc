@@ -1,6 +1,6 @@
 package weixin.popular.bean;
 
-public class Media extends BaseResult{
+public class Media extends BaseResult<Object>{
 
 	private String type;
 	

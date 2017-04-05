@@ -204,7 +204,7 @@ public class MaterialAPI extends BaseAPI{
 	 * @param media_id
 	 * @return
 	 */
-	public static BaseResult materialDel_material(String access_token,String media_id){
+	public static BaseResult<?> materialDel_material(String access_token,String media_id){
 		HttpUriRequest httpUriRequest = RequestBuilder.post()
 					.setUri(BASE_URI+"/cgi-bin/material/del_material")
 					.addParameter("access_token", access_token)
@@ -221,7 +221,7 @@ public class MaterialAPI extends BaseAPI{
 	 * @param articles
 	 * @return
 	 */
-	public static BaseResult materialUpdate_news(String access_token,String media_id,int index,List<Article> articles){
+	public static BaseResult<?> materialUpdate_news(String access_token,String media_id,int index,List<Article> articles){
 		String str = JsonUtil.toJSONString(articles);
 		String messageJson = "{\"media_id\":\""+media_id+"\",\"index\":"+index+",\"articles\":"+str+"}";
 		HttpUriRequest httpUriRequest = RequestBuilder.post()

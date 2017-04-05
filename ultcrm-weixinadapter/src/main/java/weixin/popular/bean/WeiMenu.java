@@ -1,6 +1,6 @@
 package weixin.popular.bean;
 
-public class WeiMenu extends BaseResult{
+public class WeiMenu extends BaseResult<Object>{
 	
 	private MenuButtons menu;
 

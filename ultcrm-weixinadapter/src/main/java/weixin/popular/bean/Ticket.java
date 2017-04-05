@@ -1,6 +1,6 @@
 package weixin.popular.bean;
 
-public class Ticket extends BaseResult{
+public class Ticket extends BaseResult<Object>{
 
 	private String ticket;
 

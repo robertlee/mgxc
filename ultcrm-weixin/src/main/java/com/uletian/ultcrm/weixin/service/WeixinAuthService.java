@@ -46,7 +46,7 @@ public class WeixinAuthService {
 		Customer result = null;
 		logger.info("getWeixinUserInfo code is "+weixinCode);
 		//通过code换取网页授权access_token
-		Map tokenMap = WeixinAPI.getOpenId(weixinCode, weixinConfig.getAppId(), weixinConfig.getAppSecret(), Global.grantType);
+		Map<?, ?> tokenMap = WeixinAPI.getOpenId(weixinCode, weixinConfig.getAppId(), weixinConfig.getAppSecret(), Global.grantType);
 		//获取到access_token, openId, refresh_token, 暂时不刷新access_token
 		//第三步：刷新access_token（如果需要）
 		//暂时不需要处理

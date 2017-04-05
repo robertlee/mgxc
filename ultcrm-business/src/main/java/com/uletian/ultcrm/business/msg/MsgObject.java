@@ -10,7 +10,7 @@ import com.uletian.ultcrm.common.util.XmlConvertable;
  * @author robertxie
  * 2015年10月23日
  */
-public interface MsgObject<T> extends XmlConvertable{
+public interface MsgObject<T> extends XmlConvertable<Object>{
 	
 	public String getAction();
 	

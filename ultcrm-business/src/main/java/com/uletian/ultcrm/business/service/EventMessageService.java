@@ -289,7 +289,7 @@ public class EventMessageService implements MessageListener {
 	
 	private String encode(Event event, Customer customer, Tech tech){
 		Document doc = DocumentHelper.createDocument();
-		Namespace namespace = new Namespace("ns0", "http://ultcrm/91jpfw.cn");
+		Namespace namespace = new Namespace("ns0", "http://ultcrm/ultjjy.cn");
 		Element root = doc.addElement(new QName("event", namespace));
 		
 		root.addElement(new QName("id")).addText(event.getId().toString());

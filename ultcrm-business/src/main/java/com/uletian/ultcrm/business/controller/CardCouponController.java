@@ -317,8 +317,8 @@ public class CardCouponController {
 	
 	// 获取指定的卡券相关信息
 	@RequestMapping(value="/getCardCouponDetail/{type}/{id}", method=RequestMethod.GET)
-	public Map getCardCouponDetail(@PathVariable("type")String type,@PathVariable("id")Long id) {
-		Map result = new HashMap();
+	public Map<String, Object> getCardCouponDetail(@PathVariable("type")String type,@PathVariable("id")Long id) {
+		Map<String, Object> result = new HashMap<String, Object>();
 		CardCoupon cardCoupon = getCardCouponBatch(type,id);
 		List<CardConsume> consumeList = getCardCouponRecord(type,id);
 		result.put("batch", cardCoupon);

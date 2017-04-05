@@ -1,6 +1,6 @@
 package weixin.popular.bean;
 
-public class MessageSendResult extends BaseResult{
+public class MessageSendResult extends BaseResult<Object>{
 
 	private String type;
 

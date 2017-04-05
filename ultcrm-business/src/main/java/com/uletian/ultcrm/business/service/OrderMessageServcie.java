@@ -192,7 +192,7 @@ public class OrderMessageServcie {
 
         xmlstrbuf.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
         xmlstrbuf.append("\r\n");
-        xmlstrbuf.append("<ns0:MT_ICCRM_Reservation_Order xmlns:ns0=\"http://crm/91jpfw.cn\">");
+        xmlstrbuf.append("<ns0:MT_ICCRM_Reservation_Order xmlns:ns0=\"http://crm/ultjjy.cn\">");
         xmlstrbuf.append("\r\n");
         
         String toxml = xStream.toXML(orderMsg);

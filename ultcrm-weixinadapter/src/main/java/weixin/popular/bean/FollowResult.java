@@ -6,7 +6,7 @@ package weixin.popular.bean;
  * @author LiYi
  * 
  */
-public class FollowResult extends BaseResult {
+public class FollowResult extends BaseResult<Object> {
 
 	private Integer total;
 

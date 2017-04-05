@@ -22,6 +22,6 @@ public class TokenAPI extends BaseAPI{
 				.addParameter("secret", secret)
 				.build();
 		return LocalHttpClient.executeJsonResult(httpUriRequest,Token.class);
-	}
+    }
 
 }

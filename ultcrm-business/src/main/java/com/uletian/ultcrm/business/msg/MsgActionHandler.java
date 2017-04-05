@@ -10,6 +10,6 @@ package com.uletian.ultcrm.business.msg;
  */
 public interface MsgActionHandler {
 	
-	public void handleMsg(MsgObject  msgObject);
+	public void handleMsg(MsgObject<?>  msgObject);
 	
 }

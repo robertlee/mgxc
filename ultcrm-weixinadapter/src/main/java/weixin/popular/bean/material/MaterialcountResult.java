@@ -2,7 +2,7 @@ package weixin.popular.bean.material;
 
 import weixin.popular.bean.BaseResult;
 
-public class MaterialcountResult extends BaseResult{
+public class MaterialcountResult extends BaseResult<Object>{
 
 	private Integer voice_count;
 

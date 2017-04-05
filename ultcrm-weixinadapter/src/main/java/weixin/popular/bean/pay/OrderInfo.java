@@ -4,7 +4,7 @@ import java.util.Map;
 
 import weixin.popular.bean.BaseResult;
 
-public class OrderInfo extends BaseResult{
+public class OrderInfo extends BaseResult<Object>{
 	
 	private Map<String,String> order_info;
 

@@ -59,7 +59,7 @@ public class CustomerInfoSyncService {
 		format.setEncoding("UTF-8");
 		Document doc = DocumentHelper.createDocument();
 		
-		Namespace namespace = new Namespace("ns0", "http://crm/91jpfw.cn");
+		Namespace namespace = new Namespace("ns0", "http://crm/ultjjy.cn");
 		Element root = doc.addElement(new QName("customer", namespace));
 		root.addElement(new QName("action")).addText(action.BINDING_TEL.toString());
 		root.addElement(new QName("sourceSys")).addText("ULTCRM");

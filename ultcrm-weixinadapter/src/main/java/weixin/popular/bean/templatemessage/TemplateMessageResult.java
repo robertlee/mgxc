@@ -2,7 +2,7 @@ package weixin.popular.bean.templatemessage;
 
 import weixin.popular.bean.BaseResult;
 
-public class TemplateMessageResult extends BaseResult{
+public class TemplateMessageResult extends BaseResult<Object>{
 
 	private Long msgid;
 	

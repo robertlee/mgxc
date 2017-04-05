@@ -329,13 +329,12 @@ public class OrderController {
 			JSONObject jsonObj = JSONObject.fromObject(jsonStr);
 			Object className = jsonObj.get("className");
 			//Object seatName = jsonObj.get("seatName");
-			//Object choiceSeat = jsonObj.get("choiceSeat");
-			
+			//Object choiceSeat = jsonObj.get("choiceSeat");			
 			//Object roomName = jsonObj.get("roomName");							
 			Object openId= jsonObj.get("openId");//用户openID   					
-			Object startTime = jsonObj.get("startTime");//开课时间			
-			//notifycationSuccess(orderId,openId.toString(),className.toString(),roomName.toString(),choiceSeat.toString(),startTime.toString());
-			notifycationSuccess(orderId,openId.toString(),className.toString(),startTime.toString());				
+			Object startTime = jsonObj.get("startTime");//开课时间						
+			notifycationSuccess(orderId,openId.toString(),className.toString(),startTime.toString());	
+			
 			}
 
 		catch (Exception e) {			
@@ -379,12 +378,19 @@ public class OrderController {
 	 * 时间：{{keyword2.DATA}}
 	 * 地点：{{keyword3.DATA}}
 	 * {{remark.DATA}}
+	 
+	 
+		{{first.DATA}}
+		服务人员：{{keyword1.DATA}}
+		联系方式：{{keyword2.DATA}}
+		服务类型：{{keyword3.DATA}}
+		服务时间：{{keyword4.DATA}}
+		{{remark.DATA}}
 	 */
-	public void notifycationSuccess(Long id,String openId, String className,String datatime){
-		
-		
+	public void notifycationSuccess(Long id,String openId, String className,String datatime)
+	{
 		try {
-			TemplateMessage messageValue = new TemplateMessage();
+			TemplateMessage messageValue    = new TemplateMessage();
 			MessageTemplate messageTemplate = templateQueueService.getMessageTemplate("order_success");
 			
 			if (messageTemplate == null) {
@@ -398,8 +404,9 @@ public class OrderController {
 				first += "\n报名编号："+id;
 				param.put("first", first);
 				param.put("keyword1", className);
-				param.put("keyword2", datatime);
-				param.put("keyword3", "深圳芒果学车");				
+				param.put("keyword2", "18675515034");				
+				param.put("keyword3", "深圳芒果学车");
+				param.put("keyword4", datatime);
 				String csRemak= "\n欢迎您使用，客服电话：4008935866 ！";
 				param.put("remark",csRemak);
 				
@@ -469,7 +476,8 @@ public class OrderController {
 	        //发起交易请求
 	        charge = Charge.create(chargeMap);  
 	        System.out.println(charge);
-			//notifycationSuccess(orderId,openId,className,SeatSpec,startTime);
+			notifycationSuccess(orderId,openId,className,"2017-3-21");
+			
 	    } 
 	    catch (Exception e) {
 			e.printStackTrace();
@@ -639,31 +647,44 @@ public class OrderController {
 		try {
 			logger.info("开始查询订单详情，参数为【orderid：" + orderid + "】 ");
 			Order order = orderRepository.findOne(orderid);
+			
 			infoMap.put("orderId", order.getOrderId());
+			
 			infoMap.put("classId", order.getClassid()+"");
+			
 			infoMap.put("classname", order.getClassname());
+			
 			//infoMap.put("roomName", order.getRoomName());
 			infoMap.put("teachName", order.getTeacherName());
+			
 			infoMap.put("teachId", order.getTeacherId()+"");
-			infoMap.put("classHour", order.getClassHour().toString());
+			
+			//infoMap.put("classHour", order.getClassHour().toString());
+			
 			infoMap.put("price", order.getPrice().intValue() + "");
+			
 			//infoMap.put("childName", order.getChildName());
 			infoMap.put("classTimeDetail", order.getClassTimeDetail());
 			
 			String tmpTime = "";
 			if(order.getStartTime() != null){
 				tmpTime = DateUtils.formatDate(order.getStartTime(),"yyyy/MM/dd");
+				
 			}
 			if(order.getEndTime() != null){
 				tmpTime += "--" + DateUtils.formatDate(order.getEndTime(),"yyyy/MM/dd");
+				
 			}
 			infoMap.put("classTime",tmpTime);
+			
 			String tmp = "";
 			
 			if(order.getCreateTime() != null){
 				tmp = DateUtils.formatDate(order.getCreateTime(),"yyyy/MM/dd HH:mm:ss");
+				
 			}
 			infoMap.put("createTime", tmp);
+			
 			
 			//Schedule sche = scheduleRepository.getScheduleById(order.getSchedule().getId());
 			//if(sche != null){

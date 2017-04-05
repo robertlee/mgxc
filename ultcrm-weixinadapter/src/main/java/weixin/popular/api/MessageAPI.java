@@ -40,7 +40,7 @@ public class MessageAPI extends BaseAPI{
 	 * @param messageJson
 	 * @return
 	 */
-	public static BaseResult messageCustomSend(String access_token,String messageJson){
+	public static BaseResult<?> messageCustomSend(String access_token,String messageJson){
 		HttpUriRequest httpUriRequest = RequestBuilder.post()
 										.setHeader(jsonHeader)
 										.setUri(BASE_URI+"/cgi-bin/message/custom/send")
@@ -56,7 +56,7 @@ public class MessageAPI extends BaseAPI{
 	 * @param message
 	 * @return
 	 */
-	public static BaseResult messageCustomSend(String access_token,Message message){
+	public static BaseResult<?> messageCustomSend(String access_token,Message message){
 		String str = JsonUtil.toJSONString(message);
 		return messageCustomSend(access_token,str);
 	}
@@ -162,7 +162,7 @@ public class MessageAPI extends BaseAPI{
 	 * @param msgid
 	 * @return
 	 */
-	public static BaseResult messageMassDelete(String access_token,String msgid){
+	public static BaseResult<?> messageMassDelete(String access_token,String msgid){
 		String messageJson = "{\"msgid\":" + msgid + "}";
 		HttpUriRequest httpUriRequest = RequestBuilder.post()
 										.setHeader(jsonHeader)

@@ -349,7 +349,7 @@ public class SmsQueueService implements MessageListener {
 		@Override
 		public Message createMessage(Session session) throws JMSException {
 			Document doc = DocumentHelper.createDocument();
-			Namespace namespace = new Namespace("ns0", "http://crm/91jpfw.cn");
+			Namespace namespace = new Namespace("ns0", "http://crm/ultjjy.cn");
 			Element root = doc.addElement(new QName("message", namespace));
 
 			Element sms = root.addElement(new QName("sms"));
