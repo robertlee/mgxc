@@ -3,6 +3,7 @@
 angular.module('ultcrm.values', [])
 .value('appointmentTech',{})
 .value('appointmentStore',{})
+.value('appointmentCoach',{})
 .value('appointmentBusinessType',{})
 .value('newTech',{})
 .value('classTypeData',{});

@@ -48,20 +48,21 @@
 
 <ion-view view-title="芒果学车●我的">
 	<ion-content class="bg-background-grey my-content">		
-		<div class="customer-info clearfix" ng-click="toProfileList()">
-			<div class="avatar" style="border-color:#ffe33e">
+		<div class="customer-info clearfix" style="background:#ffe33e;color:#000;" ng-click="toProfileList()">
+			<div class="avatar">
 				<img ng-src="{{customer.headimgurl}}">
 			</div>
 			
-			<div class="detail">
-				<p ng-class="{name:customer.phone,nickname:!customer.phone}">{{customer.name?customer.name:customer.nickname}}&nbsp;&nbsp;&nbsp; {{ convertSex(customer.sex) }}</p>
-				<p ng-if="customer.phone" class="phone">{{customer.phone}}</p>
+			<div class="detail" >
+				<p ng-class="{name:customer.phone,nickname:!customer.phone}" style="color:#000;">{{customer.name?customer.name:customer.nickname}}&nbsp;&nbsp;&nbsp; {{ convertSex(customer.sex) }}</p>
+				<p ng-if="customer.phone" class="phone" style="color:#000;">{{customer.phone}}</p>
 			</div>
-			<i class="icon icon-right ion-ios-arrow-right"></i>
+			<i class="icon icon-right ion-ios-arrow-right" style="color:#000;"></i>
 		</div>	
 		
 		<div class="v-spacer"></div>
 		<div class="list">
+		
 	    	 <div class="item item-clickable">
 			    <div class="icon iconfont icon-myorder icon-left"></div>
 			    <div class="text">订单状态</div>
@@ -76,6 +77,7 @@
 						<p style="color: #999">待培训</p>
 					</div>
 				</div>
+				
 				<div class="col">
 					<div class="shortcut shortcut-small" ng-click="toOrderList('working')" style="position:relative">
 						<div class="icon iconfont icon-working">
@@ -84,6 +86,7 @@
 						<p style="color: #999">培训中</p>
 					</div>
 				</div>
+				
 				<div class="col">
 					<div class="shortcut shortcut-small" ng-click="toOrderList('complete')" style="position:relative">
 						<div class="icon iconfont icon-done">
@@ -109,7 +112,8 @@
 			    <div class="icon iconfont icon-mytech icon-left"></div>
 			    <div class="text">我的教练</div>			    
 			 </div>
-	    </div>	    
+	    </div>	   
+		
 	    <div class="v-spacer"></div>
 	    <div class="list">
 	    	 <div class="item item-clickable" ng-click="toWallet()">

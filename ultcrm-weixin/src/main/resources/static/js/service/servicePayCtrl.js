@@ -16,6 +16,9 @@ ultcrm.controller('servicePayCtrl', function($scope,$http,$state,$stateParams,$w
 			var price = (jsonObj["price"]);
 			var phone = (jsonObj["phone"]);
 			openId = jsonObj["openId"];
+            if(phone == null){
+                phone = "";
+            }
 			if(className != null && className != "undefined"){
 				$scope.className = className;
 			}
@@ -32,7 +35,7 @@ ultcrm.controller('servicePayCtrl', function($scope,$http,$state,$stateParams,$w
 	$scope.FailedOrder=function(orderId){
 		if (orderId!=null)
 		{
-			$http.get('/delOrder/' + orderId + '/' + seatId).success(function(result) {
+			$http.get('/delOrder/' + orderId).success(function(result) {
 			});		      
 		};
 	};
@@ -65,40 +68,48 @@ ultcrm.controller('servicePayCtrl', function($scope,$http,$state,$stateParams,$w
 		var classId = jsonObj["classId"];//课程编号
 		var className = jsonObj["className"];//课程名称
 		var price = jsonObj["price"];//单价
+		var payType = jsonObj["payType"];//支付类型
 		var contactphone = $scope.contactPhone
 		var str = "{classId:" + classId 
 				   + ",className:'" + className 
 		           + "',price:" + price
 				   + ",contactphone:'"  +contactphone 
-				   + "',totalPrice:" + price + ",openId:'" + openId + "'}";
+				   + "',totalPrice:" + price + ",openId:'" + openId + "',payType:'" + payType + "'}";
 		$http.get('/createPayOrder/' + str).success(function(data) {
-			var orderId = data.orderId;		
+			var orderId = data.orderId;	
 			if(data.charge != null){
 				pingpp.createPayment(data.charge, function(result, err) {
 		    	    if (result=="success") {
 		    	    	//发送通知						
 						$scope.SendOrderMessage(orderId,str);
-		    	    	$state.go('index.myorderList',{'viewType':'new'},{reload:true});												
-		    	    } else {						
+						if (classId==1 || classId==2)
+						{
+							$state.go('index.coachlist',{},{reload:true});	
+						}
+						else
+						{							
+							$state.go('index.myorderList',{'viewType':'new'},{reload:true});	
+						}													
+		    	    } else {	
+		    	    	alert(className + "支付失败");
+		    	    	clickNum = 0;
 		    	    	$scope.FailedOrder(orderId);
-		    	        alert(className+"支付失败");
 		    	        //发送通知
 						//$scope.sendMsg(orderId,openId,className,roomName,'2016-7-1');
                         //Robert Lee  Debug Basic Information
-						clickNum = 0;						
 		    	    }
 				}, data.signature, false);
 			}
 			else{
-				$scope.FailedOrder(orderId);				
-				alert("支付结果：" + data.msg);
+				alert(className + "支付失败");
+				$scope.FailedOrder(orderId);
 				//Robert Lee  Debug Basic Information 
 			}
         }).
         error(function() {
-			$scope.FailedOrder(orderId);
         	alert("下单失败");
-			clickNum = 0;
+        	clickNum = 0;
+			$scope.FailedOrder(orderId);
 			//Robert Lee  Debug Basic Information         	
         });
 	};
@@ -118,9 +129,7 @@ ultcrm.controller('servicePayCtrl', function($scope,$http,$state,$stateParams,$w
 		else{		
 			//若手机号为空或者未选择学院信息，停止定时器
 			if($scope.contactPhone == null || $scope.contactPhone == ""){
-				if($scope.contactPhone == null || $scope.contactPhone == ""){
-					alert("请绑定联系电话");
-				}								
+				alert("请绑定联系电话");								
 				clickNum = 0;				
 			}
 			else{

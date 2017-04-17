@@ -151,9 +151,9 @@ angular.module('ultcrm', ['ionic','ultcrm.controllers', 'ultcrm.services','ultcr
 	      })		  	     
 
 		  .state('index.timesegment', {
-			  url: '/timesegment/:coachid',
+			  url: '/timesegment/:coachid/:busiTypeId',
 			  cache:false, 
-			  params: {'coachid': null},
+			  params: {'coachid': null,'busiTypeId':null},
 			  views: {
 				  'index-coachlist':{
 					  templateUrl: 'tpl/home/timesegment.html',
@@ -413,7 +413,7 @@ angular.module('ultcrm', ['ionic','ultcrm.controllers', 'ultcrm.services','ultcr
 					  }
 				  }
 			})
-			  .state('index.coachlist', {
+			.state('index.coachlist', {
 				url: '/coachlist',
 				cache:false,				
 				views: {
@@ -431,7 +431,132 @@ angular.module('ultcrm', ['ionic','ultcrm.controllers', 'ultcrm.services','ultcr
 						return customerDataService.find(uid,code);
 					}
 				  }
-			  })
+			})
+			.state('index.process', {
+				url: '/process',
+				cache:false, 
+				views: {
+					'index-home': {
+						templateUrl: 'tpl/home/process.html',
+						controller: 'processCtrl'
+					}
+				}
+			})
+			.state('index.serviceSite', {
+				url: '/serviceSite',
+				cache:false, 
+				views: {
+					'index-home': {
+						templateUrl: 'tpl/home/serviceSite.html',
+						controller: 'serviceSiteCtrl'
+					}
+				}
+			})
+			.state('index.about', {
+				url: '/about',
+				cache:false, 
+				views: {
+					'index-home': {
+						templateUrl: 'tpl/home/about.html',
+						controller: 'aboutCtrl'
+					}
+				}
+			})
+			.state('index.help', {
+				url: '/help',
+				cache:false, 
+				views: {
+					'index-home': {
+						templateUrl: 'tpl/home/help.html',
+						controller: 'helpCtrl'
+					}
+				}
+			})
+			.state('index.guarantee', {
+				url: '/guarantee',
+				cache:false, 
+				views: {
+					'index-home': {
+						templateUrl: 'tpl/home/guarantee.html',
+						controller: 'guaranteeCtrl'
+					}
+				}
+			})
+			.state('index.location', {
+				url: '/location/:itemType/:id',
+				cache:false, 
+				param: {itemType:null,'id':null},
+				views: {
+					'index-serviceList': {
+						templateUrl: 'tpl/service/location.html',
+						controller: 'locationCtrl'
+					}
+				}
+			})
+			.state('index.paperService01', {
+				url: '/paperService/:id',
+				cache:false, 
+				param: {'id':null},
+				views: {
+					'index-serviceList': {
+						templateUrl: 'tpl/service/service.0.1.html',
+						controller: 'service01Ctrl'
+					}
+				}
+			})
+			.state('index.paperService23', {
+				url: '/paperService/:id',
+				cache:false, 
+				param: {'id':null},
+				views: {
+					'index-serviceList': {
+						templateUrl: 'tpl/service/service.2.3.html',
+						controller: 'service23Ctrl'
+					}
+				}
+			})
+			.state('index.paperService45', {
+				url: '/paperService/:id',
+				cache:false, 
+				param: {'id':null},
+				views: {
+					'index-serviceList': {
+						templateUrl: 'tpl/service/service.4.5.html',
+						controller: 'service45Ctrl'
+					}
+				}
+			})
+			.state('index.paperService67', {
+				url: '/paperService/:id',
+				cache:false, 
+				param: {'id':null},
+				views: {
+					'index-serviceList': {
+						templateUrl: 'tpl/service/service.6.7.html',
+						controller: 'service67Ctrl'
+					}
+				}
+			})
+			.state('index.updatetimesegment', {
+				url: '/updatetimesegment/:orderId',
+				cache:false, 
+				params: {'orderId': null},
+				views: {
+					'index-coachlist':{
+						templateUrl: 'tpl/home/updatetimesegment.html',
+						controller: 'updateTimesegmentCtrl'
+					}
+				},
+				resolve: {
+					customerData: function($location,customerDataService) {
+						console.log("into resolve customer data.....");
+						var searchObject = $location.search();
+						var code = searchObject['code'];
+						var uid = searchObject['uid'];
+		            	return customerDataService.find(uid,code);
+		            }
+		          }
+		  })
 
 			;
 	      // if none of the above states are matched, use this as the fallback

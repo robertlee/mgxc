@@ -7,12 +7,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import javax.jms.JMSException;
-import javax.jms.Message;
-import javax.jms.MessageListener;
-import javax.jms.TextMessage;
-
-import org.apache.activemq.command.ActiveMQTopic;
 import org.apache.log4j.Logger;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
@@ -21,8 +15,6 @@ import org.dom4j.Element;
 import org.dom4j.io.OutputFormat;
 import org.dom4j.io.XMLWriter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jms.core.JmsTemplate;
-import org.springframework.jms.core.MessagePostProcessor;
 import org.springframework.stereotype.Component;
 import org.xml.sax.SAXException;
 
@@ -35,18 +27,23 @@ import com.uletian.ultcrm.business.repo.CustomerRepository;
 
 
 @Component
-public class CustomerInfoMessageService implements MessageListener {
+//wangyunjian 2017-04-08 for delete JMS
+public class CustomerInfoMessageService //implements MessageListener 
+{
 	
 	private static Logger logger = Logger.getLogger(CustomerInfoMessageService.class);
 	
-	@Autowired
-	private JmsTemplate topicJmsTemplate;
+	//wangyunjian 2017-04-08 to delete JMS
+//	@Autowired
+//	private JmsTemplate topicJmsTemplate;
 	
-	@Autowired
-	private ActiveMQTopic customerTopic;
+	//wangyunjian 2017-04-08 to delete JMS
+//	@Autowired
+//	private ActiveMQTopic customerTopic;
 	
-	@Autowired
-	private CustomerInfoSyncService customerInfoSyncService;
+	//wangyunjian 2017-04-08 to delete JMS
+//	@Autowired
+//	private CustomerInfoSyncService customerInfoSyncService;
 	
 	@Autowired
 	private CustomerRepository customerRepository;
@@ -59,30 +56,32 @@ public class CustomerInfoMessageService implements MessageListener {
 	
 	private SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 	
-	@Override
-	public void onMessage(Message message) {
-
-
-		TextMessage textMessage = (TextMessage) message;
-		try {
-			handlerCustomerInfo(textMessage.getText());
-		} catch (JMSException | SAXException | DocumentException | IOException e) {
-
-			logger.error("处理客户同步数据出错", e);
-		}
-	}
+	// wangyunjian 2017-04-08 for delete JMS
+//	@Override
+//	public void onMessage(Message message) {
+//
+//
+//		TextMessage textMessage = (TextMessage) message;
+//		try {
+//			handlerCustomerInfo(textMessage.getText());
+//		} catch (JMSException | SAXException | DocumentException | IOException e) {
+//
+//			logger.error("处理客户同步数据出错", e);
+//		}
+//	}
 
 	public void sendMessage(String message){
 		logger.info("发送客户同步数据\n" + message);
-		topicJmsTemplate.convertAndSend(customerTopic, message,
-				new MessagePostProcessor() {
-					public Message postProcessMessage(Message message)
-							throws JMSException {
-						message.setStringProperty("SENDER", "ULTCRM");
-						message.setStringProperty("ACTION", "BINDING_TEL");
-						return message;
-					}
-				});
+		//wangyunjian 2017-04-08 to delete JMS
+//		topicJmsTemplate.convertAndSend(customerTopic, message,
+//				new MessagePostProcessor() {
+//					public Message postProcessMessage(Message message)
+//							throws JMSException {
+//						message.setStringProperty("SENDER", "ULTCRM");
+//						message.setStringProperty("ACTION", "BINDING_TEL");
+//						return message;
+//					}
+//				});
 	}
 	
 	public void handlerCustomerInfo(String message) throws SAXException, DocumentException, IOException {

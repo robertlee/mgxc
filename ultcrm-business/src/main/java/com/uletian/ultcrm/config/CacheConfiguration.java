@@ -22,11 +22,7 @@ import org.springframework.core.io.ClassPathResource;
 public class CacheConfiguration {
 	
     
-    @Bean
-    public CacheManager cacheManager() {
-        return new ConcurrentMapCacheManager("tech");
-    }
-    
+
     
     
 }

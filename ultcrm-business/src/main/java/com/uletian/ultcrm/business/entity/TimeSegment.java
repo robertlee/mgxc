@@ -33,7 +33,10 @@ public class TimeSegment implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
-
+	
+	@Column(name="coachid")
+	private Long coachid;
+	
 	private Long capacity;
 
 	private Long count;
@@ -87,6 +90,15 @@ public class TimeSegment implements Serializable {
 	}
 
 
+	public Long getCoachid() {
+		return coachid;
+	}
+
+
+
+	public void setCoachid(Long coachid) {
+		this.coachid = coachid;
+	}
 
 	/**
 	 * @return the storeId

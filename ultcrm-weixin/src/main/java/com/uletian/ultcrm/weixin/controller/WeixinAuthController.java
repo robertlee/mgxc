@@ -10,19 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import weixin.popular.api.Global;
 import weixin.popular.api.WeixinAPI;
 
 import com.uletian.ultcrm.business.entity.Customer;
-import com.uletian.ultcrm.business.entity.Event;
-import com.uletian.ultcrm.business.repo.CustomerRepository;
-import com.uletian.ultcrm.business.repo.EventRepository;
-import com.uletian.ultcrm.business.service.CustomerInfoSyncService;
 import com.uletian.ultcrm.business.service.CustomerService;
-import com.uletian.ultcrm.business.service.EventMessageService;
 import com.uletian.ultcrm.business.service.WeixinConfig;
 import com.uletian.ultcrm.weixin.service.WeixinAuthService;
 import com.google.gson.Gson;
@@ -44,22 +38,26 @@ public class WeixinAuthController {
 	@Autowired
 	private CustomerService customerService;
 	
-	@Autowired
-	private CustomerRepository customerRepository;
+	// wangyunjian 2017-04-08 for delete JMS
+//	@Autowired
+//	private CustomerRepository customerRepository;
 	
 	@Autowired
 	private WeixinAuthService weixinAuthService;
 	
-	@Autowired
-	private CustomerInfoSyncService customerInfoSyncService;
+	// wangyunjian 2017-04-08 for delete JMS
+//	@Autowired
+//	private CustomerInfoSyncService customerInfoSyncService;
 	
-	@Autowired
-	private EventRepository eventRepository;
+	// wangyunjian 2017-04-08 for delete JMS
+//	@Autowired
+//	private EventRepository eventRepository;
 	
 	private Gson gson = new Gson();
 
-	@Autowired
-	private EventMessageService eventMessageService;
+	// wangyunjian 2017-04-08 for delete JMS
+//	@Autowired
+//	private EventMessageService eventMessageService;
 	
 	/**
 	 * 根据code获取customer，如果没有查询到就新建一个customer。

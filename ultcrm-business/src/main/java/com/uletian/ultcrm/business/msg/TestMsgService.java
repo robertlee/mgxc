@@ -3,12 +3,6 @@
  */
 package com.uletian.ultcrm.business.msg;
 
-import javax.jms.JMSException;
-import javax.jms.Message;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jms.core.JmsTemplate;
-import org.springframework.jms.core.MessagePostProcessor;
 import org.springframework.stereotype.Component;
 
 /**
@@ -18,8 +12,9 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class TestMsgService {	
-	@Autowired
-	private JmsTemplate topicJmsTemplate;
+	//wangyunjian 2017-04-08 to delete JMS
+//	@Autowired
+//	private JmsTemplate topicJmsTemplate;
 	
 	public void test() {
 		String msg = ""
@@ -38,14 +33,15 @@ public class TestMsgService {
 					+"<item><desc>test add 3</desc><time>20150917200957</time><orderid></orderid><value>3 </value><storecode></storecode></item>"
 					+"</items>"
 				+"</ns0:score>";
-		topicJmsTemplate.convertAndSend("SCORE", msg, new MessagePostProcessor() {
-			public Message postProcessMessage(Message message)
-					throws JMSException {
-				message.setStringProperty("SENDER", "CRM");
-				message.setStringProperty("ACTION", "CREATE_ORDER");
-				return message;
-			}
-		});
+		//wangyunjian 2017-04-08 to delete JMS
+//		topicJmsTemplate.convertAndSend("SCORE", msg, new MessagePostProcessor() {
+//			public Message postProcessMessage(Message message)
+//					throws JMSException {
+//				message.setStringProperty("SENDER", "CRM");
+//				message.setStringProperty("ACTION", "CREATE_ORDER");
+//				return message;
+//			}
+//		});
 		
 	}
 }

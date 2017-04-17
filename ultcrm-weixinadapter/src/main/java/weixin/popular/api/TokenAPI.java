@@ -9,7 +9,7 @@ import weixin.popular.client.LocalHttpClient;
 public class TokenAPI extends BaseAPI{
 
 	/**
-	 * 获取access_token
+	 * èŽ·å–access_token
 	 * @param appid
 	 * @param secret
 	 * @return
@@ -21,7 +21,8 @@ public class TokenAPI extends BaseAPI{
 				.addParameter("appid", appid)
 				.addParameter("secret", secret)
 				.build();
-		return LocalHttpClient.executeJsonResult(httpUriRequest,Token.class);
+//		return LocalHttpClient.executeJsonResult(httpUriRequest,Token.class);
+		return null;
     }
 
 }

@@ -35,4 +35,6 @@ public interface AppointmentRepository extends PagingAndSortingRepository<Appoin
 	
 	Appointment findByOrder(Order order);
 	
+	@Query("select count(*) from Appointment a where a.customerId = ?1 and date_format(a.createTime,'%Y-%m-%d') = date_format(now(),'%Y-%m-%d')")
+	int findTodayAppointByCustomerId(Long customerId);
 }

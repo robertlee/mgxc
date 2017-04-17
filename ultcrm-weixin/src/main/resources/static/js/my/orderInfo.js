@@ -29,7 +29,13 @@ ultcrm.controller('orderInfoCtrl', function($scope, $http, $interval, $state, $s
 		$scope.orderInfo.teachId = data.teachId;
 		$scope.orderInfo.price = data.price;
 		$scope.orderInfo.classHour = data.classHour;
-		$scope.orderInfo.childName = data.childName;	
+		$scope.orderInfo.childName = data.childName;
+		
+		// writen by wangyunjian
+		$scope.orderInfo.startClassTime = data.create_Date;
+		$scope.orderInfo.classname = data.businessName;
+		// end
+		
 		}).error(function(data, status, headers, config) {
 		//发生错误，返回订单列表
 		//alert("获取课程订单信息失败");

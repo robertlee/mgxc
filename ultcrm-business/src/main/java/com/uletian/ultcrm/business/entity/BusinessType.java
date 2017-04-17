@@ -38,7 +38,7 @@ public class BusinessType implements Serializable {
 	private String introduce;//课程说明   吴云
 	private String price;//课程报价   Robert 
 	private float cost;//课程报价   Robert 
-	private String pic;//课程报价   Robert 
+	private String pic;//图片   Robert 
 
 	
 	public BusinessType() {

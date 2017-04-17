@@ -87,7 +87,8 @@ table {
 
 .fixtop .uc-center {
 	font-size: 2rem;
-	text-align: center
+	text-align: center;
+	width: 90%
 }
 
 .fixtop .btn {

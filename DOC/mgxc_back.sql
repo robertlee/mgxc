@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2017-03-20 09:01:46
+-- 生成日期: 2017-04-17 11:25:19
 -- 服务器版本: 5.5.54-0ubuntu0.14.04.1
 -- PHP 版本: 5.5.9-1ubuntu4.21
 
@@ -31,8 +31,10 @@ USE `mgxc_back`;
 DROP TABLE IF EXISTS `address`;
 CREATE TABLE IF NOT EXISTS `address` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(40) NOT NULL,
+  `phone` varchar(40) NOT NULL,
   `areaid` int(11) NOT NULL,
-  `localtionid` int(11) DEFAULT NULL,
+  `locationid` int(11) DEFAULT NULL,
   `content` varchar(255) NOT NULL,
   `create_user_id` int(11) DEFAULT NULL,
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -46,9 +48,9 @@ CREATE TABLE IF NOT EXISTS `address` (
 -- 转存表中的数据 `address`
 --
 
-INSERT INTO `address` (`id`, `areaid`, `localtionid`, `content`, `create_user_id`, `create_time`, `last_update_userid`, `last_update_time`) VALUES
-(1, 1957, 1, '南山科技园总部', 1, '2017-03-01 03:44:57', 1, '2017-03-01 08:16:06'),
-(2, 1958, 2, '宝安沙井书城', 1, '2017-03-01 03:44:57', 1, '2017-03-01 08:16:06');
+INSERT INTO `address` (`id`, `name`, `phone`, `areaid`, `locationid`, `content`, `create_user_id`, `create_time`, `last_update_userid`, `last_update_time`) VALUES
+(1, '深圳 南山服务站', '4008371112', 1957, 1, '南山科技园总部', 1, '2017-04-11 12:44:17', 1, '2017-03-01 08:16:06'),
+(2, '深圳 宝安服务站', '4008371112', 1958, 2, '宝安新桥书城', 1, '2017-04-11 12:44:21', 1, '2017-03-01 08:16:06');
 
 -- --------------------------------------------------------
 
@@ -98,40 +100,22 @@ CREATE TABLE IF NOT EXISTS `appointment` (
   `storeid` int(11) DEFAULT NULL,
   `segmentid` int(11) DEFAULT NULL,
   `create_user_id` int(11) DEFAULT NULL,
-  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `create_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `last_update_userid` int(11) DEFAULT NULL,
-  `last_update_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `last_update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `fk_appointment_order_orderid` (`orderid`),
   KEY `fk_appointment_store_storeid` (`storeid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=22 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- 转存表中的数据 `appointment`
 --
 
 INSERT INTO `appointment` (`id`, `customerid`, `coachid`, `orderid`, `storeid`, `segmentid`, `create_user_id`, `create_time`, `last_update_userid`, `last_update_time`) VALUES
-(1, 1, 1, 26, 1, 14, 0, '2017-03-14 17:46:16', 0, '2017-03-14 17:46:16'),
-(2, 1, 1, 27, 1, 15, 0, '2017-03-14 17:58:39', 0, '2017-03-14 17:58:39'),
-(3, 1, 1, 28, 1, 16, 0, '2017-03-15 00:51:17', 0, '2017-03-15 00:51:17'),
-(4, 1, 1, 29, 1, 17, 0, '2017-03-15 03:00:22', 0, '2017-03-15 03:00:22'),
-(5, 1, 1, 30, 1, 18, 0, '2017-03-15 03:54:03', 0, '2017-03-15 03:54:03'),
-(6, 1, 1, 32, 1, 17, 0, '2017-03-15 03:57:12', 0, '2017-03-15 03:57:12'),
-(7, 1, 1, 33, 1, 19, 0, '2017-03-15 05:07:47', 0, '2017-03-15 05:07:47'),
-(8, 1, 1, 34, 1, 17, 0, '2017-03-15 05:08:03', 0, '2017-03-15 05:08:03'),
-(9, 1, 1, 35, 1, 17, 0, '2017-03-15 05:08:26', 0, '2017-03-15 05:08:26'),
-(10, 1, 1, 36, 1, 20, 0, '2017-03-15 05:09:09', 0, '2017-03-15 05:09:09'),
-(11, 1, 1, 37, 1, 20, 0, '2017-03-15 05:09:24', 0, '2017-03-15 05:09:24'),
-(12, 1, 1, 38, 1, 17, 0, '2017-03-15 05:10:13', 0, '2017-03-15 05:10:13'),
-(13, 1, 1, 39, 1, 17, 0, '2017-03-15 07:03:54', 0, '2017-03-15 07:03:54'),
-(14, 1, 1, 40, 1, 21, 0, '2017-03-15 08:52:39', 0, '2017-03-15 08:52:39'),
-(15, 1, 1, 41, 1, 22, 0, '2017-03-15 08:53:15', 0, '2017-03-15 08:53:15'),
-(16, 1, 1, 45, 1, 19, 0, '2017-03-15 11:54:55', 0, '2017-03-15 11:54:55'),
-(17, 2, 1, 47, 1, 24, 0, '2017-03-15 16:40:52', 0, '2017-03-15 16:40:52'),
-(18, 2, 1, 48, 1, 25, 0, '2017-03-16 16:56:57', 0, '2017-03-16 16:56:57'),
-(19, 2, 1, 50, 1, 26, 0, '2017-03-17 08:47:25', 0, '2017-03-17 08:47:25'),
-(20, 2, 1, 51, 1, 27, 0, '2017-03-17 09:17:51', 0, '2017-03-17 09:17:51'),
-(21, 2, 1, 53, 1, 25, 0, '2017-03-17 10:26:20', 0, '2017-03-17 10:26:20');
+(1, 1, 1, NULL, NULL, 1, 0, '2017-04-14 16:44:01', 0, '2017-04-14 16:44:01'),
+(2, 1, 1, NULL, NULL, 2, 0, '2017-04-17 01:58:38', 0, '2017-04-17 01:58:38'),
+(3, 5, 1, NULL, NULL, 3, 0, '2017-04-17 02:05:34', 0, '2017-04-17 02:05:34');
 
 -- --------------------------------------------------------
 
@@ -3334,15 +3318,16 @@ CREATE TABLE IF NOT EXISTS `business_type` (
 --
 
 INSERT INTO `business_type` (`id`, `name`, `price`, `cost`, `pic`, `create_user_id`, `create_time`, `last_update_userid`, `last_update_time`, `introduce`) VALUES
-(10, '深圳计时学车服务C1', '¥2980.00元', 2980, '/img/activity/service0.jpg', 1, '2017-03-08 18:22:37', NULL, '2016-04-26 13:11:13', '自主自由，计时付费'),
-(11, '深圳计时学车服务C2', '¥3480.00元', 3480, '/img/activity/service0.jpg', 1, '2017-03-08 18:22:46', NULL, '2016-04-26 13:11:13', '自主自由，计时付费'),
-(20, '深圳快速学车服务C1', '¥6480.00元', 6480, '/img/activity/service1.jpg', 1, '2017-03-08 18:22:55', NULL, '2016-04-26 13:11:13', '6个月拿证/平衡之选'),
-(21, '深圳快速学车服务C2', '¥6980.00元', 6980, '/img/activity/service1.jpg', 1, '2017-03-08 18:23:02', NULL, '2016-04-26 13:11:13', '6个月拿证/平衡之选'),
-(30, '深圳无忧至尊学车服务C1', '¥12800.00元', 12800, '/img/activity/service2.jpg', 1, '2017-03-08 18:23:07', NULL, '2016-04-26 13:11:13', '3个月拿证 / 无忧至尊'),
-(31, '深圳无忧至尊学车服务C2', '¥13300.00元', 13300, '/img/activity/service2.jpg', 1, '2017-03-08 18:23:14', NULL, '2016-04-26 13:11:13', '3个月拿证 / 无忧至尊'),
-(40, '深圳学车学时 C1', '¥120.00元/小时', 120, '/img/activity/service3.jpg', 1, '2017-03-15 01:45:23', NULL, '2016-04-26 13:11:13', '购买学时来获得练车时间'),
-(41, '深圳学车学时C2', '¥140.00元/小时', 140, '/img/activity/service3.jpg', 1, '2017-03-08 18:23:19', NULL, '2017-03-15 13:11:13', '购买学时来获得练车时间'),
-(50, '深圳定制学车', '你选的价格', 0, '/img/activity/service4.jpg', 1, '2017-03-06 12:05:13', NULL, '2016-04-26 13:11:13', '以上不满意，欢迎定制学车');
+(1, '深圳学车学时C1手动', '¥120.00元/小时', 120, '/img/activity/service3.jpg', 1, '2017-04-14 13:12:54', NULL, '2016-04-26 05:11:13', '直接购买学时练车时间'),
+(2, '深圳学车学时C2自动', '¥140.00元/小时', 140, '/img/activity/service3.jpg', 1, '2017-04-14 13:12:45', NULL, '2017-03-15 05:11:13', '直接购买学时练车'),
+(10, '深圳计时学车服务C1手动', '¥2980.00元', 2980, '/img/activity/service0.jpg', 1, '2017-03-25 14:15:48', NULL, '2016-04-26 13:11:13', '自主自由，计时付费'),
+(11, '深圳计时学车服务C2自动', '¥3480.00元', 3480, '/img/activity/service0.jpg', 1, '2017-03-25 14:16:14', NULL, '2016-04-26 13:11:13', '自主自由，计时付费'),
+(20, '深圳快速学车服务C1手动', '¥6480.00元', 6480, '/img/activity/service1.jpg', 1, '2017-03-25 14:15:52', NULL, '2016-04-26 13:11:13', '6个月拿证/平衡之选'),
+(21, '深圳快速学车服务C2自动', '¥6980.00元', 6980, '/img/activity/service1.jpg', 1, '2017-03-25 14:16:18', NULL, '2016-04-26 13:11:13', '6个月拿证/平衡之选'),
+(30, '深圳无忧至尊学车服务C1手动', '¥12800.00元', 12800, '/img/activity/service2.jpg', 1, '2017-03-25 14:15:55', NULL, '2016-04-26 13:11:13', '3个月拿证 / 无忧至尊'),
+(31, '深圳无忧至尊学车服务C2自动', '¥13300.00元', 13300, '/img/activity/service2.jpg', 1, '2017-03-25 14:16:21', NULL, '2016-04-26 13:11:13', '3个月拿证 / 无忧至尊'),
+(40, '深圳学车学时C1手动', '¥120.00元/小时', 120, '/img/activity/service3.jpg', 1, '2017-04-14 13:12:54', NULL, '2016-04-26 05:11:13', '直接购买学时练车时间'),
+(41, '深圳学车学时C2自动', '¥140.00元/小时', 140, '/img/activity/service3.jpg', 1, '2017-04-14 13:12:45', NULL, '2017-03-15 05:11:13', '直接购买学时练车');
 
 -- --------------------------------------------------------
 
@@ -3378,7 +3363,72 @@ CREATE TABLE IF NOT EXISTS `card` (
   PRIMARY KEY (`id`),
   KEY `fk_card_customer` (`customer_id`),
   KEY `fk_card_card_batch` (`batch_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=81 ;
+
+--
+-- 转存表中的数据 `card`
+--
+
+INSERT INTO `card` (`id`, `card_no`, `batch_id`, `event_id`, `period_type`, `period`, `customer_id`, `tech_id`, `name`, `description`, `type`, `start_date`, `end_date`, `total_count`, `used_count`, `amount`, `status`, `publish_time`, `create_user_id`, `create_time`, `last_update_userid`, `last_update_time`, `order_id`) VALUES
+(22, '6Y41UXGMKVM', 1, 1, 'DELAY', NULL, 2, NULL, '课时卡', '价值120元1次学车卡一张，微信到期自动系统抵扣', 'C', '2017-04-07 03:12:15', '2017-04-07 03:12:15', 1, 0, NULL, '005', '2017-04-07 03:12:15', NULL, '2017-04-11 13:19:34', NULL, '2017-04-06 19:12:15', NULL),
+(23, '9KD8OOH8FP0', 1, 1, 'DELAY', NULL, 2, NULL, '课时卡', '价值120元1次学车卡一张，微信到期自动系统抵扣', 'C', '2017-04-07 03:12:15', '2017-04-07 03:12:15', 1, 0, NULL, '005', '2017-04-07 03:12:15', NULL, '2017-04-11 13:19:37', NULL, '2017-04-06 19:12:15', NULL),
+(24, 'RMWGXRNXZ5R', 1, 1, 'DELAY', NULL, 1, NULL, '课时卡', '价值120元1次学车卡一张，微信到期自动系统抵扣', 'C', '2017-04-07 07:15:52', '2017-04-07 07:15:52', 1, 0, NULL, '002', '2017-04-07 07:15:52', NULL, '2017-04-11 13:19:42', NULL, '2017-04-06 23:15:52', NULL),
+(25, 'TQX447RDMMZ', 1, 1, 'DELAY', NULL, 8, NULL, '课时卡', '价值120元1次学车卡一张，微信到期自动系统抵扣', 'C', '2017-04-07 07:15:52', '2017-04-07 07:15:52', 1, 0, NULL, '002', '2017-04-07 07:15:52', NULL, '2017-04-06 23:15:52', NULL, '2017-04-06 23:15:52', NULL),
+(26, 'VIZ6THLXBRR', 1, 1, 'DELAY', NULL, 8, NULL, '课时卡', '价值120元1次学车卡一张，微信到期自动系统抵扣', 'C', '2017-04-07 08:11:23', '2017-04-07 08:11:23', 1, 0, NULL, '002', '2017-04-07 08:11:23', NULL, '2017-04-07 00:11:23', NULL, '2017-04-07 00:11:23', NULL),
+(27, 'BDVJ3DSL9IK', 1, 1, 'DELAY', NULL, 8, NULL, '课时卡', '价值120元1次学车卡一张，微信到期自动系统抵扣', 'C', '2017-04-07 08:11:23', '2017-04-07 08:11:23', 1, 0, NULL, '002', '2017-04-07 08:11:23', NULL, '2017-04-07 00:11:23', NULL, '2017-04-07 00:11:23', NULL),
+(28, '3JA1GLSZR1P', 1, 1, 'DELAY', NULL, 9, NULL, '课时卡', '价值120元1次学车卡一张，微信到期自动系统抵扣', 'C', '2017-04-08 17:15:09', '2017-04-08 17:15:09', 1, 0, NULL, '002', '2017-04-08 17:15:09', NULL, '2017-04-08 09:15:09', NULL, '2017-04-08 09:15:09', NULL),
+(29, 'JKMN9TXP417', 1, 1, 'DELAY', NULL, 10, NULL, '课时卡', '价值120元1次学车卡一张，微信到期自动系统抵扣', 'C', '2017-04-08 23:41:48', '2017-04-08 23:41:48', 1, 0, NULL, '002', '2017-04-08 23:41:48', NULL, '2017-04-08 15:41:48', NULL, '2017-04-08 15:41:48', NULL),
+(30, 'GX7S16M5TBM', 4, 2, 'DELAY', NULL, 10, NULL, '200元优惠券', '芒果学车价值200元优惠券一张，微信报名支付使用', 'W', '2017-04-09 00:07:08', '2017-04-09 00:07:08', 1, 0, NULL, '002', '2017-04-09 00:07:08', NULL, '2017-04-08 16:07:08', NULL, '2017-04-08 16:07:08', NULL),
+(31, 'FDMYHUYGO2I', 4, 2, 'DELAY', NULL, 10, NULL, '200元优惠券', '芒果学车价值200元优惠券一张，微信报名支付使用', 'W', '2017-04-09 00:21:13', '2017-04-09 00:21:13', 1, 0, NULL, '002', '2017-04-09 00:21:13', NULL, '2017-04-08 16:21:13', NULL, '2017-04-08 16:21:13', NULL),
+(32, 'A1TDUXVJ9ZD', 1, 1, 'DELAY', NULL, 16, NULL, '课时卡', '价值120元1次学车卡一张，微信到期自动系统抵扣', 'C', '2017-04-09 21:50:05', '2017-04-09 21:50:05', 1, 0, NULL, '002', '2017-04-09 21:50:05', NULL, '2017-04-09 13:50:05', NULL, '2017-04-09 13:50:05', NULL),
+(33, 'PG28XTQMYC9', 4, 2, 'DELAY', NULL, 16, NULL, '200元优惠券', '芒果学车价值200元优惠券一张，微信报名支付使用', 'W', '2017-04-09 23:02:03', '2017-04-09 23:02:03', 1, 0, NULL, '002', '2017-04-09 23:02:03', NULL, '2017-04-09 15:02:03', NULL, '2017-04-09 15:02:03', NULL),
+(34, 'EJO1MMCICOG', 4, 2, 'DELAY', NULL, 16, NULL, '200元优惠券', '芒果学车价值200元优惠券一张，微信报名支付使用', 'W', '2017-04-09 23:44:28', '2017-04-09 23:44:28', 1, 0, NULL, '002', '2017-04-09 23:44:28', NULL, '2017-04-09 15:44:28', NULL, '2017-04-09 15:44:28', NULL),
+(35, 'LBOK68OZ1HL', 4, 2, 'DELAY', NULL, 1, NULL, '120元优惠券', '芒果学车价值120元优惠券一张，微信报名支付使用', 'W', '2017-04-09 23:46:09', '2017-04-20 23:46:09', 1, 0, NULL, '002', '2017-04-09 23:46:09', NULL, '2017-04-11 13:18:12', NULL, '2017-04-09 15:46:09', NULL),
+(36, 'LXLTUVUIQ2N', 4, 2, 'DELAY', NULL, 1, NULL, '200元优惠券', '芒果学车价值200元优惠券一张，微信报名支付使用', 'W', '2017-04-10 09:44:43', '2017-04-10 09:44:43', 1, 0, NULL, '002', '2017-04-10 09:44:43', NULL, '2017-04-10 01:44:43', NULL, '2017-04-10 01:44:43', NULL),
+(37, 'FD7T4FBKE8F', 4, 2, 'DELAY', NULL, 1, NULL, '200元优惠券', '芒果学车价值200元优惠券一张，微信报名支付使用', 'W', '2017-04-10 10:21:19', '2017-04-10 10:21:19', 1, 0, NULL, '002', '2017-04-10 10:21:19', NULL, '2017-04-10 02:21:19', NULL, '2017-04-10 02:21:19', NULL),
+(38, '9OVVKLKD6H3', 4, 2, 'DELAY', NULL, 1, NULL, '200元优惠券', '芒果学车价值200元优惠券一张，微信报名支付使用', 'W', '2017-04-10 15:45:12', '2017-04-10 15:45:12', 1, 0, NULL, '002', '2017-04-10 15:45:12', NULL, '2017-04-10 07:45:12', NULL, '2017-04-10 07:45:12', NULL),
+(39, 'NFGPXVDZA9B', 4, 2, 'DELAY', NULL, 1, NULL, '200元优惠券', '芒果学车价值200元优惠券一张，微信报名支付使用', 'W', '2017-04-10 16:31:20', '2017-04-10 16:31:20', 1, 0, NULL, '002', '2017-04-10 16:31:20', NULL, '2017-04-10 08:31:20', NULL, '2017-04-10 08:31:20', NULL),
+(40, '4GF0X2XBVLI', 1, 1, 'DELAY', NULL, 17, NULL, '课时卡', '价值120元1次学车卡一张，微信到期自动系统抵扣', 'C', '2017-04-10 22:24:37', '2017-04-10 22:24:37', 1, 0, NULL, '002', '2017-04-10 22:24:37', NULL, '2017-04-10 14:24:37', NULL, '2017-04-10 14:24:37', NULL),
+(41, '3N0TO24ZJ6V', 4, 2, 'DELAY', NULL, 17, NULL, '200元优惠券', '芒果学车价值200元优惠券一张，微信报名支付使用', 'W', '2017-04-10 22:27:40', '2017-04-10 22:27:40', 1, 0, NULL, '002', '2017-04-10 22:27:40', NULL, '2017-04-10 14:27:40', NULL, '2017-04-10 14:27:40', NULL),
+(42, '7UI42BLS5EG', 4, 2, 'DELAY', NULL, 17, NULL, '200元优惠券', '芒果学车价值200元优惠券一张，微信报名支付使用', 'W', '2017-04-10 22:31:28', '2017-04-10 22:31:28', 1, 0, NULL, '002', '2017-04-10 22:31:28', NULL, '2017-04-10 14:31:28', NULL, '2017-04-10 14:31:28', NULL),
+(43, '4QAQXGEPFHD', 4, 2, 'DELAY', NULL, 17, NULL, '200元优惠券', '芒果学车价值200元优惠券一张，微信报名支付使用', 'W', '2017-04-10 23:45:45', '2017-04-10 23:45:45', 1, 0, NULL, '002', '2017-04-10 23:45:45', NULL, '2017-04-10 15:45:45', NULL, '2017-04-10 15:45:45', NULL),
+(44, '20UZPEXKDCW', 4, 2, 'DELAY', NULL, 17, NULL, '200元优惠券', '芒果学车价值200元优惠券一张，微信报名支付使用', 'W', '2017-04-11 00:58:22', '2017-04-11 00:58:22', 1, 0, NULL, '002', '2017-04-11 00:58:22', NULL, '2017-04-10 16:58:22', NULL, '2017-04-10 16:58:22', NULL),
+(45, 'JFOEHGHR3YR', 4, 2, 'DELAY', NULL, 17, NULL, '200元优惠券', '芒果学车价值200元优惠券一张，微信报名支付使用', 'W', '2017-04-11 01:13:47', '2017-04-11 01:13:47', 1, 0, NULL, '002', '2017-04-11 01:13:47', NULL, '2017-04-10 17:13:47', NULL, '2017-04-10 17:13:47', NULL),
+(46, '1C0OTOJJEEN', 1, 1, 'DELAY', NULL, 18, NULL, '课时卡', '价值120元1次学车卡一张，微信到期自动系统抵扣', 'C', '2017-04-11 06:52:21', '2017-04-11 06:52:21', 1, 0, NULL, '002', '2017-04-11 06:52:21', NULL, '2017-04-10 22:52:21', NULL, '2017-04-10 22:52:21', NULL),
+(47, 'D8XJ8Z6PE9G', 4, 2, 'DELAY', NULL, 18, NULL, '200元优惠券', '芒果学车价值200元优惠券一张，微信报名支付使用', 'W', '2017-04-11 06:58:00', '2017-04-11 06:58:00', 1, 0, NULL, '002', '2017-04-11 06:58:00', NULL, '2017-04-10 22:58:00', NULL, '2017-04-10 22:58:00', NULL),
+(48, 'PT8EA5PECT2', 1, 1, 'DELAY', NULL, 1, NULL, '课时卡', '价值120元1次学车卡一张，微信到期自动系统抵扣', 'C', '2017-04-11 07:44:08', '2017-04-11 07:44:08', 1, 0, NULL, '002', '2017-04-11 07:44:08', NULL, '2017-04-10 23:44:08', NULL, '2017-04-10 23:44:08', NULL),
+(49, 'FAYC7QQHIQ0', 4, 2, 'DELAY', NULL, 1, NULL, '200元优惠券', '芒果学车价值200元优惠券一张，微信报名支付使用', 'W', '2017-04-11 08:13:11', '2017-04-11 08:13:11', 1, 0, NULL, '002', '2017-04-11 08:13:11', NULL, '2017-04-11 00:13:11', NULL, '2017-04-11 00:13:11', NULL),
+(50, 'XZW2S1OGB8C', 1, 1, 'DELAY', NULL, 2, NULL, '课时卡', '价值120元1次学车卡一张，微信到期自动系统抵扣', 'C', '2017-04-11 19:53:38', '2017-04-11 19:53:38', 1, 0, NULL, '002', '2017-04-11 19:53:38', NULL, '2017-04-11 11:53:38', NULL, '2017-04-11 11:53:38', NULL),
+(51, 'UZG1IUPXX0A', 4, 2, 'DELAY', NULL, 2, NULL, '200元优惠券', '芒果学车价值200元优惠券一张，微信报名支付使用', 'W', '2017-04-11 19:55:00', '2017-04-11 19:55:00', 1, 0, NULL, '002', '2017-04-11 19:55:00', NULL, '2017-04-11 11:55:00', NULL, '2017-04-11 11:55:00', NULL),
+(52, 'T9Y27I4CKTR', 1, 1, 'DELAY', NULL, 3, NULL, '课时卡', '价值120元1次学车卡一张，微信到期自动系统抵扣', 'C', '2017-04-11 20:29:21', '2017-04-11 20:29:21', 1, 0, NULL, '002', '2017-04-11 20:29:21', NULL, '2017-04-11 12:29:21', NULL, '2017-04-11 12:29:21', NULL),
+(53, 'XG59GTZI0Z7', 1, 1, 'DELAY', NULL, 4, NULL, '课时卡', '价值120元1次学车卡一张，微信到期自动系统抵扣', 'C', '2017-04-11 22:42:15', '2017-04-11 22:42:15', 1, 0, NULL, '002', '2017-04-11 22:42:15', NULL, '2017-04-11 14:42:15', NULL, '2017-04-11 14:42:15', NULL),
+(54, '4BNGL2309SR', 4, 2, 'DELAY', NULL, 4, NULL, '200元优惠券', '芒果学车价值200元优惠券一张，微信报名支付使用', 'W', '2017-04-11 22:56:54', '2017-04-11 22:56:54', 1, 0, NULL, '002', '2017-04-11 22:56:54', NULL, '2017-04-11 14:56:54', NULL, '2017-04-11 14:56:54', NULL),
+(55, 'IUN2K1X5COA', 4, 2, 'DELAY', NULL, 4, NULL, '200元优惠券', '芒果学车价值200元优惠券一张，微信报名支付使用', 'W', '2017-04-12 00:34:55', '2017-04-12 00:34:55', 1, 0, NULL, '002', '2017-04-12 00:34:55', NULL, '2017-04-11 16:34:55', NULL, '2017-04-11 16:34:55', NULL),
+(56, 'E5MA26ZXPJ5', 4, 2, 'DELAY', NULL, 4, NULL, '200元优惠券', '芒果学车价值200元优惠券一张，微信报名支付使用', 'W', '2017-04-12 00:36:17', '2017-04-12 00:36:17', 1, 0, NULL, '002', '2017-04-12 00:36:17', NULL, '2017-04-11 16:36:17', NULL, '2017-04-11 16:36:17', NULL),
+(57, 'OQWU99Y5K5Z', 4, 2, 'DELAY', NULL, 4, NULL, '200元优惠券', '芒果学车价值200元优惠券一张，微信报名支付使用', 'W', '2017-04-12 01:11:42', '2017-04-12 01:11:42', 1, 0, NULL, '002', '2017-04-12 01:11:42', NULL, '2017-04-11 17:11:42', NULL, '2017-04-11 17:11:42', NULL),
+(58, 'X3GWO773SN8', 4, 2, 'DELAY', NULL, 4, NULL, '200元优惠券', '芒果学车价值200元优惠券一张，微信报名支付使用', 'W', '2017-04-12 01:33:21', '2017-04-12 01:33:21', 1, 0, NULL, '002', '2017-04-12 01:33:21', NULL, '2017-04-11 17:33:21', NULL, '2017-04-11 17:33:21', NULL),
+(59, 'K8WJAUIKKLP', 4, 2, 'DELAY', NULL, 4, NULL, '200元优惠券', '芒果学车价值200元优惠券一张，微信报名支付使用', 'W', '2017-04-12 01:33:53', '2017-04-12 01:33:53', 1, 0, NULL, '002', '2017-04-12 01:33:53', NULL, '2017-04-11 17:33:53', NULL, '2017-04-11 17:33:53', NULL),
+(60, 'XIIYQ8Q9P3T', 4, 2, 'DELAY', NULL, 4, NULL, '200元优惠券', '芒果学车价值200元优惠券一张，微信报名支付使用', 'W', '2017-04-12 01:45:34', '2017-04-12 01:45:34', 1, 0, NULL, '002', '2017-04-12 01:45:34', NULL, '2017-04-11 17:45:34', NULL, '2017-04-11 17:45:34', NULL),
+(61, 'BDWEEMIJI59', 1, 1, 'DELAY', NULL, 1, NULL, '课时卡', '价值120元1次学车卡一张，微信到期自动系统抵扣', 'C', '2017-04-12 10:56:49', '2017-04-12 10:56:49', 1, 0, NULL, '002', '2017-04-12 10:56:49', NULL, '2017-04-12 02:56:49', NULL, '2017-04-12 02:56:49', NULL),
+(62, 'ZNC32M8CX2M', 4, 2, 'DELAY', NULL, 1, NULL, '200元优惠券', '芒果学车价值200元优惠券一张，微信报名支付使用', 'W', '2017-04-12 10:58:23', '2017-04-12 10:58:23', 1, 0, NULL, '002', '2017-04-12 10:58:23', NULL, '2017-04-12 02:58:23', NULL, '2017-04-12 02:58:23', NULL),
+(63, 'YEF6OT1VW48', 4, 2, 'DELAY', NULL, 1, NULL, '200元优惠券', '芒果学车价值200元优惠券一张，微信报名支付使用', 'W', '2017-04-12 11:53:24', '2017-04-12 11:53:24', 1, 0, NULL, '002', '2017-04-12 11:53:24', NULL, '2017-04-12 03:53:24', NULL, '2017-04-12 03:53:24', NULL),
+(64, 'M29BY7ZEBJV', 4, 2, 'DELAY', NULL, 1, NULL, '200元优惠券', '芒果学车价值200元优惠券一张，微信报名支付使用', 'W', '2017-04-12 11:54:27', '2017-04-12 11:54:27', 1, 0, NULL, '002', '2017-04-12 11:54:27', NULL, '2017-04-12 03:54:27', NULL, '2017-04-12 03:54:27', NULL),
+(65, '4I3AT2Z7WN3', 1, 1, 'DELAY', NULL, 2, NULL, '课时卡', '价值120元1次学车卡一张，微信到期自动系统抵扣', 'C', '2017-04-12 12:17:46', '2017-04-12 12:17:46', 1, 0, NULL, '002', '2017-04-12 12:17:46', NULL, '2017-04-12 04:17:46', NULL, '2017-04-12 04:17:46', NULL),
+(66, 'HFVP1HINSGT', 4, 2, 'DELAY', NULL, 2, NULL, '200元优惠券', '芒果学车价值200元优惠券一张，微信报名支付使用', 'W', '2017-04-12 12:21:35', '2017-04-12 12:21:35', 1, 0, NULL, '002', '2017-04-12 12:21:35', NULL, '2017-04-12 04:21:35', NULL, '2017-04-12 04:21:35', NULL),
+(67, '8QI3418CR70', 1, 1, 'DELAY', NULL, 3, NULL, '课时卡', '价值120元1次学车卡一张，微信到期自动系统抵扣', 'C', '2017-04-13 09:58:06', '2017-04-13 09:58:06', 1, 0, NULL, '002', '2017-04-13 09:58:06', NULL, '2017-04-13 01:58:06', NULL, '2017-04-13 01:58:06', NULL),
+(68, 'Y8VLOXHK2V4', 1, 1, 'DELAY', NULL, 4, NULL, '课时卡', '价值120元1次学车卡一张，微信到期自动系统抵扣', 'C', '2017-04-14 15:58:05', '2017-04-14 15:58:05', 1, 0, NULL, '002', '2017-04-14 15:58:05', NULL, '2017-04-14 07:58:05', NULL, '2017-04-14 07:58:05', NULL),
+(69, 'L6V8KHWEFD9', 1, 1, 'DELAY', NULL, 5, NULL, '课时卡', '价值120元1次学车卡一张，微信到期自动系统抵扣', 'C', '2017-04-14 17:35:54', '2017-04-14 17:35:54', 1, 0, NULL, '002', '2017-04-14 17:35:54', NULL, '2017-04-14 09:35:54', NULL, '2017-04-14 09:35:54', NULL),
+(70, 'EVOZ1SPD3RS', 1, 1, 'DELAY', NULL, 5, NULL, '课时卡', '价值120元1次学车卡一张，微信到期自动系统抵扣', 'C', '2017-04-14 20:49:19', '2017-04-14 20:49:19', 1, 0, NULL, '002', '2017-04-14 20:49:19', NULL, '2017-04-14 12:49:19', NULL, '2017-04-14 12:49:19', NULL),
+(71, 'V0J8ZRS51MK', 4, 2, 'DELAY', NULL, 5, NULL, '200元优惠券', '芒果学车价值200元优惠券一张，微信报名支付使用', 'W', '2017-04-14 21:16:10', '2017-04-14 21:16:10', 1, 0, NULL, '002', '2017-04-14 21:16:10', NULL, '2017-04-14 13:16:10', NULL, '2017-04-14 13:16:10', NULL),
+(72, 'PSXXLXXIZ58', 1, 1, 'DELAY', NULL, 5, NULL, '课时卡', '价值120元1次学车卡一张，微信到期自动系统抵扣', 'C', '2017-04-14 22:09:23', '2017-04-14 22:09:23', 1, 0, NULL, '002', '2017-04-14 22:09:23', NULL, '2017-04-14 14:09:23', NULL, '2017-04-14 14:09:23', NULL),
+(73, '9SVLT1P61LJ', 4, 2, 'DELAY', NULL, 5, NULL, '200元优惠券', '芒果学车价值200元优惠券一张，微信报名支付使用', 'W', '2017-04-14 22:20:29', '2017-04-14 22:20:29', 1, 0, NULL, '002', '2017-04-14 22:20:29', NULL, '2017-04-14 14:20:29', NULL, '2017-04-14 14:20:29', NULL),
+(74, 'Q56X0D5YZBA', 4, 2, 'DELAY', NULL, 5, NULL, '200元优惠券', '芒果学车价值200元优惠券一张，微信报名支付使用', 'W', '2017-04-14 22:22:18', '2017-04-14 22:22:18', 1, 0, NULL, '002', '2017-04-14 22:22:18', NULL, '2017-04-14 14:22:18', NULL, '2017-04-14 14:22:18', NULL),
+(75, 'CN38HRJ4QBY', 4, 2, 'DELAY', NULL, 1, NULL, '200元优惠券', '芒果学车价值200元优惠券一张，微信报名支付使用', 'W', '2017-04-14 22:26:32', '2017-04-14 22:26:32', 1, 0, NULL, '002', '2017-04-14 22:26:32', NULL, '2017-04-14 14:26:32', NULL, '2017-04-14 14:26:32', NULL),
+(76, 'QSES5MZ48AU', 4, 2, 'DELAY', NULL, 1, NULL, '200元优惠券', '芒果学车价值200元优惠券一张，微信报名支付使用', 'W', '2017-04-15 00:22:23', '2017-04-15 00:22:23', 1, 0, NULL, '002', '2017-04-15 00:22:23', NULL, '2017-04-14 16:22:19', NULL, '2017-04-14 16:22:19', NULL),
+(77, 'CO5OCUWVWMS', 1, 1, 'DELAY', NULL, 6, NULL, '课时卡', '价值120元1次学车卡一张，微信到期自动系统抵扣', 'C', '2017-04-16 12:02:20', '2017-04-16 12:02:20', 1, 0, NULL, '002', '2017-04-16 12:02:20', NULL, '2017-04-16 04:02:20', NULL, '2017-04-16 04:02:20', NULL),
+(78, 'KGJQWUBPG6F', 4, 2, 'DELAY', NULL, 1, NULL, '200元优惠券', '芒果学车价值200元优惠券一张，微信报名支付使用', 'W', '2017-04-16 16:07:09', '2017-04-16 16:07:09', 1, 0, NULL, '002', '2017-04-16 16:07:09', NULL, '2017-04-16 08:07:12', NULL, '2017-04-16 08:07:12', NULL),
+(79, '5MP3O6GXVVZ', 4, 2, 'DELAY', NULL, 5, NULL, '200元优惠券', '芒果学车价值200元优惠券一张，微信报名支付使用', 'W', '2017-04-17 10:05:10', '2017-04-17 10:05:10', 1, 0, NULL, '002', '2017-04-17 10:05:10', NULL, '2017-04-17 02:05:10', NULL, '2017-04-17 02:05:10', NULL),
+(80, 'E2QP1Q4NQIX', 4, 2, 'DELAY', NULL, 5, NULL, '200元优惠券', '芒果学车价值200元优惠券一张，微信报名支付使用', 'W', '2017-04-17 10:05:12', '2017-04-17 10:05:12', 1, 0, NULL, '002', '2017-04-17 10:05:12', NULL, '2017-04-17 02:05:12', NULL, '2017-04-17 02:05:12', NULL);
 
 -- --------------------------------------------------------
 
@@ -3409,7 +3459,17 @@ CREATE TABLE IF NOT EXISTS `card_batch` (
   `remark` varchar(500) DEFAULT NULL,
   `apply_store` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+
+--
+-- 转存表中的数据 `card_batch`
+--
+
+INSERT INTO `card_batch` (`id`, `batch_no`, `name`, `description`, `is_ultcrm_batch`, `type`, `period_type`, `period`, `start_date`, `end_date`, `total_count`, `status`, `amount`, `create_user_id`, `create_time`, `last_update_userid`, `last_update_time`, `term`, `remark`, `apply_store`) VALUES
+(1, 'C11110', '课时卡', '价值300元3次课时卡一张，微信预约到店出示即可抵扣', 'Y', 'W', 'DELAY', 180, '2015-11-01 00:00:00', '2016-02-01 00:00:00', 6, '1', 0.0000, 0, '2016-03-05 15:57:58', 0, '2015-10-31 16:00:00', NULL, NULL, NULL),
+(2, 'C11130', '免费试听卡', '抵用1次课时所需费用', 'Y', 'A', 'DELAY', 7, '2015-11-01 00:00:00', '2016-02-01 00:00:00', 6, '1', 0.0000, 0, '2016-03-05 15:58:41', 0, '2015-10-31 16:00:00', NULL, NULL, NULL),
+(3, 'C11140', '单次试听卡', '价值50元单次试听卡一张，微信预约到店出示即可抵扣', 'Y', 'W', 'DELAY', 1, '2015-11-01 00:00:00', '2016-02-01 00:00:00', 1, '1', 0.0000, 0, '2016-03-05 15:59:36', 0, '2015-10-31 16:00:00', NULL, NULL, NULL),
+(4, 'C11141', '200元优惠券', '芒果学车价值200元优惠券一张，微信报名支付使用', 'Y', 'W', 'DELAY', 1, '2015-11-01 00:00:00', '2016-02-01 00:00:00', 1, '1', 0.0000, 0, '2016-03-05 15:59:36', 0, '2015-10-31 16:00:00', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -3447,6 +3507,7 @@ CREATE TABLE IF NOT EXISTS `children` (
   `name` varchar(20) DEFAULT NULL COMMENT '姓名',
   `mobilephone` varchar(16) DEFAULT NULL COMMENT '手机号码',
   `customerid` int(11) DEFAULT NULL COMMENT '客户编号，关联customer表',
+  `coachid` int(11) NOT NULL,
   `create_user_id` int(11) DEFAULT NULL COMMENT '创建人编号',
   `create_time` timestamp NULL DEFAULT NULL COMMENT '创建时间',
   `last_update_userid` int(11) DEFAULT NULL COMMENT '最后更新人编号',
@@ -3454,15 +3515,16 @@ CREATE TABLE IF NOT EXISTS `children` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`),
   KEY `fk_children_customerid` (`customerid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='培训人表' AUTO_INCREMENT=53 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='培训人表' AUTO_INCREMENT=4 ;
 
 --
 -- 转存表中的数据 `children`
 --
 
-INSERT INTO `children` (`id`, `name`, `mobilephone`, `customerid`, `create_user_id`, `create_time`, `last_update_userid`, `last_update_time`) VALUES
-(21, '张淑芬', '18682455891', 1, NULL, '2017-03-15 12:26:51', NULL, '2017-03-15 12:26:51'),
-(52, '曾总', '12333333333', 1, NULL, '2017-03-15 12:27:25', NULL, '2017-03-15 12:27:25');
+INSERT INTO `children` (`id`, `name`, `mobilephone`, `customerid`, `coachid`, `create_user_id`, `create_time`, `last_update_userid`, `last_update_time`) VALUES
+(1, '张教练', '18682455891', 1, 1, NULL, '2017-03-15 12:26:51', NULL, '2017-03-15 12:26:51'),
+(2, '曾教练', '12333333333', 1, 2, NULL, '2017-03-15 12:27:25', NULL, '2017-03-15 12:27:25'),
+(3, '吴教练', '13569248856', 8, 3, NULL, '2017-03-29 09:05:15', NULL, '2017-03-29 09:05:15');
 
 -- --------------------------------------------------------
 
@@ -3497,7 +3559,7 @@ CREATE TABLE IF NOT EXISTS `coach` (
 --
 
 INSERT INTO `coach` (`id`, `desc`, `name`, `sex`, `card_id`, `passbook`, `mobilephone`, `qq_id`, `address`, `storeid`, `servicestore`, `techage`, `score`, `create_user_id`, `create_time`, `last_update_userid`, `last_update_time`) VALUES
-(1, 'C1', '范教练', '1', '362524198108010017', 'NULL', '12345678909', 121213, '深圳市中山路万科1', 1, '宝安区训练场', 7, 10000, NULL, '2017-03-19 08:13:29', NULL, '2016-04-26 05:45:14'),
+(1, 'C1', '范教练', '1', '362524198108010017', 'NULL', '12345678909', 121213, '深圳市中山路万科1', 1, '宝安区训练场', 7, 38580, NULL, '2017-04-17 02:05:34', NULL, '2016-04-26 05:45:14'),
 (2, 'C1', '彭教练', '0', '362524198108010018', 'NULL', '12345678909', 121213, '深圳市青山湖万科2', 1, '宝安区训练场', 7, 50000, NULL, '2017-03-19 08:13:36', NULL, '2016-04-26 05:45:14'),
 (3, 'C1', '李教练', '0', '362524198108010019', 'NULL', '12345678909', 1234567, '深圳市青山湖万科3', 1, '龙华新区训练场', 8, 2000, NULL, '2017-03-19 08:13:52', NULL, '2016-04-26 05:45:14'),
 (4, 'C2', '胡教练', '1', '362524198108010119', 'NULL', '12345678909', 1234567, '深圳市青山湖万科4', 1, '龙华新区训练场', 4, 0, NULL, '2017-03-19 08:14:02', NULL, '2016-04-26 05:45:14'),
@@ -3568,7 +3630,7 @@ INSERT INTO `config` (`id`, `code`, `value`) VALUES
 (4, 'WEIXIN_COMPANY_DESC', '芒果学车是深圳芒果车生活科技有限公司旗下的移动互联网O2O学车平台。'),
 (5, 'WEIXIN_COMPANY_TITLE', '芒果学车'),
 (6, 'WEIXIN_COMPANY_PICURL', 'http://www.mgxueche.com/wp-content/uploads/2016/05/209908339505363641.jpg'),
-(15, 'TEMPLATE_APPOINTMENT_SUCCESS', '5-ACx2NHW-m_Y14Vza1UJHfA-84h2mOeUacvwX3VaK4'),
+(15, 'TEMPLATE_APPOINTMENT_SUCCESS', '0nOZVGBrLr5xo1b7G8lCkPOD4JLrA1TvCEpO_NhEHFY'),
 (16, 'TEMPLATE_APPOINTMENT_SUCCESS_URL', 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxc3ec764a012b40af&redirect_uri=http%3A%2F%2Fwww.ultjjy.cn%2F%23%2Fweixin&response_type=code&scope=snsapi_base&state=orderlist#wechat_redirect'),
 (17, 'WEIXIN_BACK', '您好！欢迎您回到Uber、滴滴改变年轻人的出行方式，芒果学车致力于改变年轻人的学车方式,感谢您的参与与支持！'),
 (18, 'APPOINTMENT_EVENT_1', 'appointment_firstjoin'),
@@ -3679,20 +3741,18 @@ CREATE TABLE IF NOT EXISTS `customer` (
   `unionid` varchar(66) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
 -- 转存表中的数据 `customer`
 --
 
 INSERT INTO `customer` (`id`, `name`, `phone`, `city`, `province`, `country`, `sex`, `headimgurl`, `nickname`, `address`, `postcode`, `rank`, `syncid`, `openid`, `crm_customer_id`, `status`, `last_weixin_check_time`, `create_user_id`, `create_time`, `last_update_userid`, `last_update_time`, `unionid`) VALUES
-(1, '乐天2', '18682455891', '深圳', '广东', '中国', '男', 'http://wx.qlogo.cn/mmopen/PiajxSqBRaEJw11ZicVU5icHntV4a8asX6iaFOVC1Mcib9eKJ4oOFAia06suhFnZ3Rkx8fO3GTm6WNYwgwsfve0IVnNQ/64', '优乐天 李旭斌', NULL, NULL, '3', NULL, 'onWmmvwyoKgfOPFdxs55kHUywKNA', NULL, 0, '2016-08-10 03:17:30', NULL, '2016-06-14 03:21:47', NULL, '2016-06-14 03:21:47', NULL),
-(2, '李旭斌', '18675515034', '深圳', '广东', '中国', '男', 'http://wx.qlogo.cn/mmopen/PiajxSqBRaEIWZbcTnMsEbs7OV2t1QCAGmVic4XoWx0ztmYibwDrPVFwicvicR51ZdCCOwnhFCAF5fEXhl5JiarxjVmA/64', '优乐天 李旭斌', NULL, NULL, '3', NULL, 'ok4ttv2cbxgsS8_C_6gkVUVSL8Tc', NULL, 1, '2017-03-15 08:45:49', NULL, '2017-03-15 08:45:49', NULL, '2017-03-15 08:45:49', NULL),
-(3, NULL, '13670293309', '深圳', '广东', '中国', '男', 'http://wx.qlogo.cn/mmopen/6O2jeJT6sHVcdhFK1KK0ic1fZqpW4TmYBAHqqIXpsra5H2ADJTwSaE2HMiahqbPgbv6ovtpvfRfzicD21q6jhq7ibdUGtX0a46Eh/64', '华·品牌设计', NULL, NULL, '3', NULL, 'ok4ttv0bli8DHXs-sNfnByHpqnYg', NULL, 1, '2017-03-17 08:56:06', NULL, '2017-03-17 08:56:06', NULL, '2017-03-17 08:56:06', NULL),
-(4, NULL, NULL, '深圳', '广东', '中国', NULL, 'http://wx.qlogo.cn/mmopen/Q3auHgzwzM5N25BK1pObSVQvbvEpm35V2mxacs30PtErYVyKEc26NNQNA1FB0yzBPgNLRibSvdicyEUB6JeSvXyuxJa4sRr6rMSRoCzsXm6Zk/64', '机智猫', NULL, NULL, '3', NULL, 'ok4ttvxzgHlgUkQGA9llh_OKgY0g', NULL, 1, '2017-03-17 09:09:35', NULL, '2017-03-17 09:09:35', NULL, '2017-03-17 09:09:35', NULL),
-(5, NULL, NULL, '', '', '中国', '女', 'http://wx.qlogo.cn/mmopen/CNmlVBtTO6CSplfktGUvMcJXshDSOtE7tsF8HXp7pYVmlpicMC5blUQTVkqJ3W9HpZhR1H0ruSqelLicVpCMRyMmzsKNAN89Mv/64', 'yarda', NULL, NULL, '3', NULL, 'ok4ttvx8dUQm69y18oITKTomKGpc', NULL, 1, '2017-03-17 14:33:41', NULL, '2017-03-17 14:33:41', NULL, '2017-03-17 14:33:41', NULL),
-(6, NULL, NULL, '深圳', '广东', '中国', '男', 'http://wx.qlogo.cn/mmopen/1zoL3GAfj1hDgmibK8smEhscydDxA8JLChXN7NATWMrNqf7Kd7wR1WwkATHT9ku9N4GQD1LBDXHwO9nia0MA4yvw61QukdLUFE/64', '王云剑', NULL, NULL, '3', NULL, 'ok4ttvyzCwEOpODfyNPv2aOcqC58', NULL, 1, '2017-03-19 07:23:31', NULL, '2017-03-19 07:23:31', NULL, '2017-03-19 07:23:31', NULL),
-(7, NULL, NULL, '深圳', '广东', '中国', NULL, 'http://wx.qlogo.cn/mmopen/CNmlVBtTO6CPLEh3PjF4H1LyKJMMrzt4h4IQfOWZPzKuq1BtiatxH0CKw2lfseL1yZLnys8BuOv4Tk7OpEVrINpv7flbSLsnz/64', 'Chris', NULL, NULL, '3', NULL, 'ok4ttv_7I6fEfn5uQjSFbKEEGzvw', NULL, 1, '2017-03-19 11:17:56', NULL, '2017-03-19 11:17:56', NULL, '2017-03-19 11:17:56', NULL);
+(1, '李旭斌', '18682455891', '深圳', '广东', '中国', '男', 'http://wx.qlogo.cn/mmopen/PiajxSqBRaEIWZbcTnMsEbs7OV2t1QCAGmVic4XoWx0ztmYibwDrPVFwicvicR51ZdCCOwnhFCAF5fEXhl5JiarxjVmA/64', '优乐天 李旭斌', NULL, NULL, '3', NULL, 'ok4ttv2cbxgsS8_C_6gkVUVSL8Tc', NULL, 0, '2017-04-12 02:56:49', NULL, '2017-04-12 02:56:49', NULL, '2017-04-12 02:56:49', NULL),
+(2, NULL, '15818641648', '深圳', '广东', '中国', '男', 'http://wx.qlogo.cn/mmopen/Q3auHgzwzM5N25BK1pObSVQvbvEpm35V2mxacs30PtErYVyKEc26NNQNA1FB0yzBPgNLRibSvdicyEUB6JeSvXyuxJa4sRr6rMSRoCzsXm6Zk/64', '机智猫', NULL, NULL, '3', NULL, 'ok4ttvxzgHlgUkQGA9llh_OKgY0g', NULL, 1, '2017-04-12 04:17:46', NULL, '2017-04-12 04:17:46', NULL, '2017-04-12 04:17:46', NULL),
+(3, ' 陈锋', '13823326035', '深圳', '广东', '中国', '男', 'http://wx.qlogo.cn/mmopen/Q3auHgzwzM5VC7uHF8orKiaMpTu2mNgn7TflUkhxtv7JSsrptKVUoicDC024nalJFXDF75phkJz1ibibfws4wUK8SGeMF0cP2ZMicZ4VrCWEPymE/64', '明昊服务商', NULL, NULL, '3', NULL, 'ok4ttv_8QrkODChuv60m7N4QGQ0Y', NULL, 1, '2017-04-13 01:58:06', NULL, '2017-04-13 01:58:06', NULL, '2017-04-13 01:58:06', NULL),
+(4, NULL, '13670293309', '深圳', '广东', '中国', '男', 'http://wx.qlogo.cn/mmopen/6O2jeJT6sHVcdhFK1KK0ic1fZqpW4TmYBAHqqIXpsra5H2ADJTwSaE2HMiahqbPgbv6ovtpvfRfzicD21q6jhq7ibdUGtX0a46Eh/64', '华·品牌设计', NULL, NULL, '3', NULL, 'ok4ttv0bli8DHXs-sNfnByHpqnYg', NULL, 1, '2017-04-14 07:58:05', NULL, '2017-04-14 07:58:05', NULL, '2017-04-14 07:58:05', NULL),
+(5, NULL, '18938674082', '深圳', '广东', '中国', '男', 'http://wx.qlogo.cn/mmopen/k6hSoDb9ETMaDjAreIxG2box86hfiaNmINTxybkZR5PxxfFzY80AjgGojgkLPaLVFcPU0iaQDY6mibiaUPhe83tnOCtvud4HGpr3/64', '优乐天 微信开发', NULL, NULL, '3', NULL, 'ok4ttv3-34TwpUVFgzkXd3AW9j6E', NULL, 1, '2017-04-16 04:02:20', NULL, '2017-04-16 04:02:20', NULL, '2017-04-16 04:02:20', NULL);
 
 -- --------------------------------------------------------
 
@@ -3715,15 +3775,19 @@ CREATE TABLE IF NOT EXISTS `customer_code` (
   `customerid` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_customer_code` (`customerid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=59 ;
 
 --
 -- 转存表中的数据 `customer_code`
 --
 
 INSERT INTO `customer_code` (`id`, `code`, `image_code`, `phone`, `typeid`, `invalid_time`, `create_user_id`, `create_time`, `last_update_userid`, `last_update_time`, `customerid`) VALUES
-(2, '8313', NULL, '15989376240', 1, '2017-03-19 11:59:24', NULL, '2017-03-19 10:59:24', NULL, '2017-03-19 10:59:24', 1),
-(3, '7859', NULL, '15989376240', 1, '2017-03-19 12:18:09', NULL, '2017-03-19 11:18:09', NULL, '2017-03-19 11:18:09', 7);
+(16, '4813', NULL, '15989376240', 1, '2017-03-25 08:49:47', NULL, '2017-03-25 07:49:47', NULL, '2017-03-25 07:49:47', NULL),
+(17, '0869', NULL, '15989376240', 1, '2017-03-25 08:51:08', NULL, '2017-03-25 07:51:08', NULL, '2017-03-25 07:51:08', NULL),
+(18, '3680', NULL, '15989376240', 1, '2017-03-25 09:10:23', NULL, '2017-03-25 08:10:23', NULL, '2017-03-25 08:10:23', NULL),
+(30, '0632', NULL, '18270715353', 1, '2017-04-02 07:27:17', NULL, '2017-04-02 06:27:16', NULL, '2017-04-02 06:27:17', 7),
+(31, '9037', NULL, '18270715353', 1, '2017-04-02 13:55:01', NULL, '2017-04-02 12:55:02', NULL, '2017-04-02 12:55:01', NULL),
+(32, '2128', NULL, '18270715353', 1, '2017-04-02 14:03:11', NULL, '2017-04-02 13:03:11', NULL, '2017-04-02 13:03:11', NULL);
 
 -- --------------------------------------------------------
 
@@ -4339,29 +4403,75 @@ CREATE TABLE IF NOT EXISTS `infoGrid` (
   `mainkey` int(11) DEFAULT NULL COMMENT '是否主键，1是主键，0不是主键',
   `isinput` int(11) DEFAULT NULL COMMENT '是否输入 1需要输入,0不需要输入 ',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=63 ;
 
 --
 -- 转存表中的数据 `infoGrid`
 --
 
 INSERT INTO `infoGrid` (`id`, `name`, `chinese`, `length`, `tablename`, `type`, `mainkey`, `isinput`) VALUES
-(1, 'id', '序号', 20, 'coach', 1, NULL, NULL),
-(2, 'desc', '描述', 200, 'coach', 2, NULL, NULL),
+(1, 'id', '编号', 20, 'coach', 1, 0, NULL),
+(2, 'desc', '简介', 200, 'coach', 2, 0, NULL),
 (3, 'name', '姓名', 20, 'coach', 2, 0, 1),
 (4, 'sex', '性别', 2, 'coach', 1, 0, 3),
-(5, 'card_id', '身份证号', 20, 'coach', 2, 1, 1),
+(5, 'card_id', '身份证号', 20, 'coach', 2, 0, 1),
 (6, 'passbook', '护照', 20, 'coach', 2, 0, 1),
-(7, 'mobilephone', '联系方式', 20, 'coach', 2, 1, 1),
+(7, 'mobilephone', '手机号码', 20, 'coach', 2, 1, 1),
 (8, 'qq_id', 'QQ号', 20, 'coach', 2, 0, 1),
-(9, 'address', '地址', 250, 'coach', 2, 0, 1),
-(10, 'storeid', '门店id', 20, 'coach', 2, 0, 1),
-(11, 'techage', '不明白', 20, 'coach', 2, 0, 1),
-(12, 'score', '分数', 5, 'coach', 1, 0, 1),
-(13, 'create_user_id', '创建人', 20, 'coach', 2, 1, 1),
-(14, 'create_time', '创建时间', 20, 'coach', 2, 1, 1),
-(15, 'last_update_userid', '更新人', 20, 'coach', 2, 1, 1),
-(16, 'last_update_time', '更新时间', 20, 'coach', 2, 1, 1);
+(9, 'address', '住址', 250, 'coach', 2, 0, 1),
+(10, 'storeid', '门店编号', 20, 'coach', 2, 0, 1),
+(11, 'servicestore', '服务描述', 33, 'coach', 2, 0, 1),
+(12, 'techage', '教龄', 20, 'coach', 2, 0, 1),
+(13, 'score', '分数', 5, 'coach', 1, 0, 1),
+(14, 'create_user_id', '创建人', 20, 'coach', 2, 1, 1),
+(15, 'create_time', '创建时间', 20, 'coach', 2, 1, 1),
+(16, 'last_update_userid', '更新人', 20, 'coach', 2, 1, 1),
+(17, 'last_update_time', '更新时间', 20, 'coach', 2, 1, 1),
+(18, 'id', '编号', 20, 'customer', 1, 1, 1),
+(19, 'name', '姓名', 20, 'customer', 2, 1, 1),
+(20, 'phone', '手机号码', 20, 'customer', 2, 1, 1),
+(21, 'city', '城市', 20, 'customer', 2, 1, 1),
+(22, 'province', '省份', 20, 'customer', 2, 1, 1),
+(23, 'country', '国家', 20, 'customer', 2, 1, 1),
+(24, 'sex', '性别', 20, 'customer', 2, 1, 1),
+(25, 'headimgurl', '头像路径', 20, 'customer', 2, 1, 1),
+(26, 'nickname', '昵称', 20, 'customer', 2, 1, 1),
+(27, 'address', '住址', 20, 'customer', 2, 1, 1),
+(28, 'postcode', '邮政编码', 20, 'customer', 2, 1, 1),
+(29, 'rank', '等级', 20, 'customer', 2, 1, 1),
+(30, 'syncid', 'syncid', 20, 'customer', 2, 1, 1),
+(31, 'openid', 'openid', 20, 'customer', 2, 1, 1),
+(32, 'crm_customer_id', 'crm_id', 20, 'customer', 2, 1, 1),
+(33, 'staus', '状态', 20, 'customer', 2, 1, 1),
+(34, 'last_weixin_check_time', '微信访问时间', 20, 'customer', 2, 1, 1),
+(35, 'create_user_id', '创建人', 20, 'customer', 2, 1, 1),
+(36, 'create_time', '创建时间', 20, 'customer', 2, 1, 1),
+(37, 'last_update_userid', '更新人', 20, 'customer', 2, 1, 1),
+(38, 'last_update_time', '更新日期', 20, 'customer', 2, 1, 1),
+(39, 'unionid', 'unionid', 20, 'customer', 2, 1, 1),
+(40, 'id', '编号', 20, 'store', 1, 1, 1),
+(41, 'name', '名称', 20, 'store', 2, 1, 1),
+(42, 'locationid', '导航ID', 20, 'store', 1, 1, 1),
+(43, 'addressid', '门店编号', 20, 'store', 1, 1, 1),
+(44, 'areaid', '区域ID', 20, 'store', 2, 1, 1),
+(45, 'servicestore', '服务描述', 33, 'store', 2, 1, 1),
+(46, 'code', '编码', 20, 'store', 2, 1, 1),
+(47, 'companyid', '公司编号', 20, 'store', 1, 1, 1),
+(48, 'create_user_id', '创建人', 20, 'store', 2, 1, 1),
+(49, 'create_time', '创建时间', 20, 'store', 2, 1, 1),
+(50, 'last_update_userid', '更新人', 20, 'store', 2, 1, 1),
+(51, 'last_update_time', '更新时间', 20, 'store', 2, 1, 1),
+(52, 'full_address', '完整地址', 20, 'store', 2, 1, 1),
+(53, 'phone', '手机号码', 20, 'store', 2, 1, 1),
+(54, 'id', '编号', 20, 'children', 1, 1, 1),
+(55, 'name', '姓名', 20, 'children', 2, 1, 1),
+(56, 'mobilephone', '手机号码', 20, 'children', 2, 1, 1),
+(57, 'customerid', '客户编号', 20, 'children', 1, 1, 1),
+(58, 'coachid', '教练编号', 20, 'children', 1, 1, 1),
+(59, 'create_user_id', '创建人', 20, 'children', 1, 1, 1),
+(60, 'create_time', '创建时间', 20, 'children', 2, 1, 1),
+(61, 'last_update_userid', '创建人', 20, 'children', 2, 1, 1),
+(62, 'last_update_time', '更新时间', 20, 'children', 2, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -4381,34 +4491,42 @@ CREATE TABLE IF NOT EXISTS `location` (
   `typeid` int(11) NOT NULL,
   `precision_` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=22 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1025 ;
 
 --
 -- 转存表中的数据 `location`
 --
 
 INSERT INTO `location` (`id`, `longitude`, `latitude`, `create_user_id`, `create_time`, `last_update_userid`, `last_update_time`, `typeid`, `precision_`) VALUES
-(1, '113.982932', '22.547443', 1, '2017-03-10 13:21:36', NULL, '2017-02-06 08:43:13', 2, '40.000000'),
-(2, '113.919574', '22.548224', 9, '2017-03-10 13:21:59', NULL, '2016-09-09 04:03:25', 2, '30.000000'),
-(3, '113.993788', '22.61265', 1, '2017-03-10 13:32:37', NULL, '2016-07-02 04:22:23', 2, '30.000000'),
-(4, '113.981256', '22.561528', 2, '2017-03-10 13:22:50', NULL, '2016-12-01 00:03:58', 2, '40.000000'),
-(5, '113.892614', '22.518163', 2, '2017-03-10 13:22:50', NULL, '2016-12-01 00:03:58', 2, '40.000000'),
-(6, '114.027562', '22.536218', 2, '2017-03-10 13:22:50', NULL, '2016-12-01 00:03:58', 2, '40.000000'),
-(7, '114.044986', '22.545237', 2, '2017-03-10 13:22:50', NULL, '2016-12-01 00:03:58', 2, '40.000000'),
-(8, '114.068178', '22.574419', 2, '2017-03-10 13:22:50', NULL, '2016-12-01 00:03:58', 2, '40.000000'),
-(9, '113.858025', '22.577581', 2, '2017-03-10 13:22:50', NULL, '2016-12-01 00:03:58', 2, '40.000000'),
-(10, '113.81836', '22.691907', 2, '2017-03-10 13:22:50', NULL, '2016-12-01 00:03:58', 2, '40.000000'),
-(11, '113.863756', '22.788126', 2, '2017-03-10 13:22:50', NULL, '2016-12-01 00:03:58', 2, '40.000000'),
-(12, '114.057706', '22.648395', 2, '2017-03-10 13:22:50', NULL, '2016-12-01 00:03:58', 2, '40.000000'),
-(13, '114.067258', '22.634122', 2, '2017-03-10 13:22:50', NULL, '2016-12-01 00:03:58', 2, '40.000000'),
-(14, '114.04648', '22.673235', 2, '2017-03-10 13:22:50', NULL, '2016-12-01 00:03:58', 2, '40.000000'),
-(15, '114.059725', '22.672171', 2, '2017-03-10 13:22:50', NULL, '2016-12-01 00:03:58', 2, '40.000000'),
-(16, '114.037149', '22.680294', 2, '2017-03-10 13:22:50', NULL, '2016-12-01 00:03:58', 2, '40.000000'),
-(17, '114.074788', '22.659394', 2, '2017-03-10 13:22:50', NULL, '2016-12-01 00:03:58', 2, '40.000000'),
-(18, '114.137892', '22.615161', 2, '2017-03-10 13:22:50', NULL, '2016-12-01 00:03:58', 2, '40.000000'),
-(19, '114.192241', '22.633607', 2, '2017-03-10 13:22:50', NULL, '2016-12-01 00:03:58', 2, '40.000000'),
-(20, '114.280026', '22.705047', 2, '2017-03-10 13:22:50', NULL, '2016-12-01 00:03:58', 2, '40.000000'),
-(21, '114.407261', '22.716869', 2, '2017-03-10 13:22:50', NULL, '2016-12-01 00:03:58', 2, '40.000000');
+(1, '113.982932', '22.547443', 1, '2017-03-10 05:21:36', NULL, '2017-02-06 00:43:13', 2, '40.000000'),
+(2, '113.830574', '22.594650', 1, '2017-03-10 05:21:59', NULL, '2017-03-30 01:40:13', 2, '70.000000'),
+(3, '113.993788', '22.61265', 1, '2017-03-10 05:32:37', NULL, '2016-07-01 20:22:23', 2, '30.000000'),
+(4, '113.981256', '22.561528', 1, '2017-03-10 05:22:50', NULL, '2016-11-30 16:03:58', 2, '40.000000'),
+(5, '113.892614', '22.518163', 1, '2017-03-10 05:22:50', NULL, '2016-11-30 16:03:58', 2, '40.000000'),
+(6, '114.027562', '22.536218', 1, '2017-03-10 05:22:50', NULL, '2016-11-30 16:03:58', 2, '40.000000'),
+(7, '114.044986', '22.545237', 1, '2017-03-10 05:22:50', NULL, '2016-11-30 16:03:58', 2, '40.000000'),
+(8, '114.068178', '22.574419', 1, '2017-03-10 05:22:50', NULL, '2016-11-30 16:03:58', 2, '40.000000'),
+(9, '113.858025', '22.577581', 1, '2017-03-10 05:22:50', NULL, '2016-11-30 16:03:58', 2, '40.000000'),
+(10, '113.81836', '22.691907', 1, '2017-03-10 05:22:50', NULL, '2016-11-30 16:03:58', 2, '40.000000'),
+(11, '113.863756', '22.788126', 1, '2017-03-10 05:22:50', NULL, '2016-11-30 16:03:58', 2, '40.000000'),
+(12, '114.057706', '22.648395', 1, '2017-03-10 05:22:50', NULL, '2016-11-30 16:03:58', 2, '40.000000'),
+(13, '114.067258', '22.634122', 1, '2017-03-10 05:22:50', NULL, '2016-11-30 16:03:58', 2, '40.000000'),
+(14, '114.04648', '22.673235', 1, '2017-03-10 05:22:50', NULL, '2016-11-30 16:03:58', 2, '40.000000'),
+(15, '114.059725', '22.672171', 1, '2017-03-10 05:22:50', NULL, '2016-11-30 16:03:58', 2, '40.000000'),
+(16, '114.037149', '22.680294', 1, '2017-03-10 05:22:50', NULL, '2016-11-30 16:03:58', 2, '40.000000'),
+(17, '114.074788', '22.659394', 1, '2017-03-10 05:22:50', NULL, '2016-11-30 16:03:58', 2, '40.000000'),
+(18, '114.137892', '22.615161', 1, '2017-03-10 05:22:50', NULL, '2016-11-30 16:03:58', 2, '40.000000'),
+(19, '114.192241', '22.633607', 1, '2017-03-10 05:22:50', NULL, '2016-11-30 16:03:58', 2, '40.000000'),
+(20, '114.280026', '22.705047', 1, '2017-03-10 05:22:50', NULL, '2016-11-30 16:03:58', 2, '40.000000'),
+(21, '114.407261', '22.716869', 1, '2017-03-10 05:22:50', NULL, '2016-11-30 16:03:58', 2, '40.000000'),
+(22, '113.823761', '22.733706', 1, '2017-03-26 18:54:45', NULL, '2017-03-26 19:25:37', 2, '65.000000'),
+(23, '113.823624', '22.733824', 1, '2017-04-02 02:04:17', NULL, '2017-04-02 02:04:17', 2, '40.000000'),
+(1019, '113.823723', '22.733541', 1, '2017-04-10 23:49:29', NULL, '2017-04-11 11:59:32', 2, '40.000000'),
+(1020, '113.948730', '22.541847', 2, '2017-04-11 11:53:44', NULL, '2017-04-12 06:23:02', 2, '65.000000'),
+(1021, '113.823708', '22.733852', 3, '2017-04-11 12:29:30', NULL, '2017-04-11 12:29:30', 2, '65.000000'),
+(1022, '114.019257', '22.653795', 4, '2017-04-11 14:42:15', NULL, '2017-04-11 18:25:34', 2, '10.000000'),
+(1023, '113.822433', '22.732880', 5, '2017-04-14 09:35:57', NULL, '2017-04-17 02:06:35', 2, '40.000000'),
+(1024, '113.823723', '22.733801', 6, '2017-04-16 04:02:21', NULL, '2017-04-16 08:50:21', 2, '40.000000');
 
 -- --------------------------------------------------------
 
@@ -4456,9 +4574,9 @@ CREATE TABLE IF NOT EXISTS `message_template` (
 --
 
 INSERT INTO `message_template` (`id`, `code`, `name`, `tmpid`, `description`, `state`, `scope`, `url`, `create_user_id`, `create_time`, `last_update_userid`, `last_update_time`) VALUES
-(1, 'order_change', '订单状态变更通知', 'pw7CRBuv1d2Qo7xejr_OBI0_oUYYjwYD7WL7hqbmSa4 ', '订单状态变更通知', 'orderlist', 'snsapi_base', '/#/index/myorderList', NULL, '2016-07-11 02:59:26', 1, '0000-00-00 00:00:00'),
-(2, 'appointment_success', '预约成功通知', 'k4Rbx2-pUvOwfgWn_WQOJExeXwwo7DRzaboqoLinQn0', '预约成功通知', 'receiveCard', 'snsapi_base', '/#/index/cardCouponBatch', NULL, '2016-07-11 02:59:23', 1, '0000-00-00 00:00:00'),
-(3, 'order_success', '预约成功通知', '5-ACx2NHW-m_Y14Vza1UJHfA-84h2mOeUacvwX3VaK4', '报名订单成功通知', 'orderlist', 'snsapi_base', '/#/index/orderOrderList', NULL, '2016-07-12 19:44:57', 1, '0000-00-00 00:00:00');
+(1, 'order_change', '订单状态变更通知', '5lcqTMT0_5EIJBHsx1z6mx_Usr1HJLU4qggo8czDcCA', '订单状态变更通知', 'orderlist', 'snsapi_base', '/#/index/myorderList', NULL, '2017-03-21 03:45:04', 1, '0000-00-00 00:00:00'),
+(2, 'appointment_success', '预约成功通知', '0nOZVGBrLr5xo1b7G8lCkPOD4JLrA1TvCEpO_NhEHFY', '预约成功通知', 'receiveCard', 'snsapi_base', '/#/index/cardCouponBatch', NULL, '2017-03-21 03:44:48', 1, '0000-00-00 00:00:00'),
+(3, 'order_success', '订单成功通知', 'GxUk-JgNlPpgb6_uec6XfWKRyrVVsdYvHvjQv0NnH1g', '报名订单成功通知', 'orderlist', 'snsapi_base', '/#/index/orderOrderList', NULL, '2017-03-21 03:47:59', 1, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -4473,7 +4591,7 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `charge` text,
   `customerid` int(11) DEFAULT NULL,
   `customername` varchar(20) NOT NULL COMMENT '客户名称',
-  `typeid` int(11) DEFAULT NULL,
+  `busitypeid` int(11) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   `techid` int(11) DEFAULT NULL,
   `classid` int(11) NOT NULL,
@@ -4514,27 +4632,20 @@ CREATE TABLE IF NOT EXISTS `orders` (
   PRIMARY KEY (`id`),
   KEY `fk_orders_customer_customerid` (`customerid`),
   KEY `fk_orders_tech_techid` (`techid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=56 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 --
 -- 转存表中的数据 `orders`
 --
 
-INSERT INTO `orders` (`id`, `orderid`, `charge`, `customerid`, `customername`, `typeid`, `status`, `techid`, `classid`, `room_id`, `seatid`, `seatname`, `classname`, `erp_no`, `crm_work_orderid`, `crm_customerid`, `crm_total_card`, `crm_total_credit`, `status_relation_info`, `description`, `create_user_id`, `create_time`, `last_update_userid`, `last_update_time`, `price`, `contactphone`, `total_price`, `discountprice`, `crm_created_flag`, `crm_created_errormeg`, `crm_work_orderstatus`, `crm_totalamount`, `crm_discounttotalamount`, `crm_planfinishedtime`, `crm_orderinfo`, `crm_sa_name`, `sent_cardcoupon`, `teacherid`, `teachername`, `start_time`, `class_hour`, `class_time_detail`, `end_time`) VALUES
-(42, '14895682345787', NULL, 1, '优乐天 李旭斌', NULL, 3, NULL, 11, NULL, NULL, NULL, '深圳计时学车服务C2', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-03-15 12:09:44', NULL, '2017-03-15 08:57:14', 3480.0000, '18682455891', 3480.0000, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(43, '14895699405570', NULL, 1, '优乐天 李旭斌', NULL, 3, NULL, 10, NULL, NULL, NULL, '深圳计时学车服务C1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-03-15 12:07:10', NULL, '2017-03-15 09:25:40', 2980.0000, '18682455891', 2980.0000, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(44, '14895772495980', NULL, 1, '优乐天 李旭斌', NULL, 5, NULL, 20, NULL, NULL, NULL, '深圳快速学车服务C1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-03-15 12:08:59', NULL, '2017-03-15 11:27:29', 6480.0000, '18682455891', 6480.0000, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(45, '1', NULL, 1, '乐天2', 1, 5, 30, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '芒果学车', NULL, '2017-03-15 11:54:55', NULL, '2017-03-15 11:54:55', 120.0000, '18682455891', NULL, 120.0000, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(46, '14895958498802', NULL, 2, '优乐天 李旭斌', NULL, 1, NULL, 10, NULL, NULL, NULL, '深圳计时学车服务C1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-03-15 16:37:29', NULL, '2017-03-15 16:37:29', 2980.0000, 'null', 2980.0000, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(47, '1', NULL, 2, '李旭斌', 1, 5, 30, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '芒果学车', NULL, '2017-03-15 16:40:52', NULL, '2017-03-15 16:40:52', 120.0000, '18675515034', NULL, 120.0000, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(48, '1', NULL, 2, '李旭斌', 1, 5, 30, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '芒果学车', NULL, '2017-03-16 16:56:57', NULL, '2017-03-16 16:56:57', 120.0000, '18675515034', NULL, 120.0000, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(49, '14896834489347', NULL, 2, '优乐天 李旭斌', NULL, 1, NULL, 10, NULL, NULL, NULL, '深圳计时学车服务C1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-03-16 16:57:28', NULL, '2017-03-16 16:57:28', 2980.0000, '18675515034', 2980.0000, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(50, '1', NULL, 2, '李旭斌', 1, 1, 30, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '芒果学车', NULL, '2017-03-17 08:47:25', NULL, '2017-03-17 08:47:25', 120.0000, '18675515034', NULL, 120.0000, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(51, '1', NULL, 2, '李旭斌', 1, 1, 30, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '芒果学车', NULL, '2017-03-17 09:17:51', NULL, '2017-03-17 09:17:51', 120.0000, '18675515034', NULL, 120.0000, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(52, '14897429104352', NULL, 3, '华·品牌设计', NULL, 1, NULL, 10, NULL, NULL, NULL, '深圳计时学车服务C1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-03-17 09:28:30', NULL, '2017-03-17 09:28:30', 2980.0000, '13670293309', 2980.0000, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(53, '1', NULL, 2, '李旭斌', 1, 5, 30, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '芒果学车', NULL, '2017-03-17 10:26:20', NULL, '2017-03-17 10:26:20', 120.0000, '18675515034', NULL, 120.0000, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(54, '14898348748591', NULL, 5, 'yarda', NULL, 1, NULL, 10, NULL, NULL, NULL, '深圳计时学车服务C1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-03-18 11:01:14', NULL, '2017-03-18 11:01:14', 2980.0000, 'null', 2980.0000, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(55, '14899218763628', NULL, 1, '优乐天 李旭斌', NULL, 1, NULL, 10, NULL, NULL, NULL, '深圳计时学车服务C1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-03-19 11:11:16', NULL, '2017-03-19 11:11:16', 2980.0000, '18682455891', 2980.0000, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `orders` (`id`, `orderid`, `charge`, `customerid`, `customername`, `busitypeid`, `status`, `techid`, `classid`, `room_id`, `seatid`, `seatname`, `classname`, `erp_no`, `crm_work_orderid`, `crm_customerid`, `crm_total_card`, `crm_total_credit`, `status_relation_info`, `description`, `create_user_id`, `create_time`, `last_update_userid`, `last_update_time`, `price`, `contactphone`, `total_price`, `discountprice`, `crm_created_flag`, `crm_created_errormeg`, `crm_work_orderstatus`, `crm_totalamount`, `crm_discounttotalamount`, `crm_planfinishedtime`, `crm_orderinfo`, `crm_sa_name`, `sent_cardcoupon`, `teacherid`, `teachername`, `start_time`, `class_hour`, `class_time_detail`, `end_time`) VALUES
+(1, '14921869389302', NULL, 1, '优乐天 李旭斌', 1, 1, NULL, 1, NULL, NULL, NULL, '深圳学车学时C1手动', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-04-14 16:22:18', NULL, '2017-04-14 16:22:18', 120.0000, '18682455891', 120.0000, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(2, '14921882413123', NULL, 1, '优乐天 李旭斌', NULL, 1, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-04-14 16:44:01', NULL, '2017-04-14 16:44:01', 0.0000, '18682455891', 0.0000, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3, '14923300234978', NULL, 1, '优乐天 李旭斌', 1, 1, NULL, 1, NULL, NULL, NULL, '深圳学车学时C1手动', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-04-16 08:07:03', NULL, '2017-04-16 08:07:03', 120.0000, '18682455891', 120.0000, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(4, '14923943187211', NULL, 1, '优乐天 李旭斌', NULL, 1, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-04-17 01:58:38', NULL, '2017-04-17 01:58:38', 0.0000, '18682455891', 0.0000, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(5, '14923947021699', NULL, 5, '优乐天 微信开发', 20, 1, NULL, 20, NULL, NULL, NULL, '深圳快速学车服务C1手动', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-04-17 02:05:02', NULL, '2017-04-17 02:05:02', 6480.0000, '18938674082', 6480.0000, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(6, '14923947054402', NULL, 5, '优乐天 微信开发', 20, 1, NULL, 20, NULL, NULL, NULL, '深圳快速学车服务C1手动', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-04-17 02:05:05', NULL, '2017-04-17 02:05:05', 6480.0000, '18938674082', 6480.0000, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(7, '14923947346119', NULL, 5, '优乐天 微信开发', NULL, 1, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-04-17 02:05:34', NULL, '2017-04-17 02:05:34', 0.0000, '18938674082', 0.0000, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -4570,14 +4681,15 @@ CREATE TABLE IF NOT EXISTS `order_comment` (
   PRIMARY KEY (`id`),
   KEY `fk_order_comment_customer_id` (`customer_id`),
   KEY `fk_order_comment_order_id` (`order_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- 转存表中的数据 `order_comment`
 --
 
 INSERT INTO `order_comment` (`id`, `customer_id`, `order_id`, `sa_star`, `plant_star`, `lobby_star`, `comment`) VALUES
-(1, 1, 43, 3, 5, 5, '不错');
+(1, 1, 43, 3, 5, 5, '不错'),
+(2, 1, 42, 5, 5, 5, 'g');
 
 -- --------------------------------------------------------
 
@@ -4840,7 +4952,7 @@ CREATE TABLE IF NOT EXISTS `tech` (
   KEY `fk_tech_course_courseid` (`courseid`),
   KEY `fk_tech_series_seriesid` (`seriesid`),
   KEY `fk_tech_mode_modeid` (`modelid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=31 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=40 ;
 
 --
 -- 转存表中的数据 `tech`
@@ -4876,7 +4988,16 @@ INSERT INTO `tech` (`id`, `customerid`, `courseid`, `seriesid`, `modelid`, `tech
 (27, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-03-15 05:10:13', NULL, '2017-03-15 05:10:13', 120, NULL, NULL, NULL, NULL, NULL, NULL),
 (28, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-03-15 07:03:54', NULL, '2017-03-15 07:03:54', 120, NULL, NULL, NULL, NULL, NULL, NULL),
 (29, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-03-15 08:52:39', NULL, '2017-03-15 08:52:39', 120, NULL, NULL, NULL, NULL, NULL, NULL),
-(30, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-03-15 08:53:15', NULL, '2017-03-15 08:53:15', 120, NULL, NULL, NULL, NULL, NULL, NULL);
+(30, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-03-15 08:53:15', NULL, '2017-03-15 08:53:15', 120, NULL, NULL, NULL, NULL, NULL, NULL),
+(31, 7, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-03-25 08:19:10', NULL, '2017-03-25 08:19:10', 120, NULL, NULL, NULL, NULL, NULL, NULL),
+(32, 7, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-03-25 08:19:49', NULL, '2017-03-25 08:19:49', 120, NULL, NULL, NULL, NULL, NULL, NULL),
+(33, 7, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-03-25 08:27:04', NULL, '2017-03-25 08:27:04', 120, NULL, NULL, NULL, NULL, NULL, NULL),
+(34, 7, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-03-25 08:36:01', NULL, '2017-03-25 08:36:01', 120, NULL, NULL, NULL, NULL, NULL, NULL),
+(35, 6, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-04-02 13:07:08', NULL, '2017-04-02 13:07:08', 120, NULL, NULL, NULL, NULL, NULL, NULL),
+(36, 6, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-04-02 13:13:25', NULL, '2017-04-02 13:13:25', 120, NULL, NULL, NULL, NULL, NULL, NULL),
+(37, 6, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-04-02 13:17:48', NULL, '2017-04-02 13:17:48', 120, NULL, NULL, NULL, NULL, NULL, NULL),
+(38, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-04-06 18:03:42', NULL, '2017-04-06 18:03:42', 120, NULL, NULL, NULL, NULL, NULL, NULL),
+(39, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-04-06 18:04:04', NULL, '2017-04-06 18:04:04', 120, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -4950,51 +5071,28 @@ CREATE TABLE IF NOT EXISTS `tech_series` (
 DROP TABLE IF EXISTS `time_segment`;
 CREATE TABLE IF NOT EXISTS `time_segment` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `coachid` int(11) DEFAULT NULL,
   `storeid` int(11) DEFAULT NULL,
   `busitypeid` int(11) DEFAULT NULL,
-  `date_segment` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `date_segment` date NOT NULL,
   `time_segment` int(11) DEFAULT NULL,
   `count` int(11) DEFAULT '0',
   `capacity` int(11) DEFAULT '1',
   `create_user_id` int(11) DEFAULT NULL,
-  `create_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `create_time` timestamp NULL DEFAULT NULL,
   `last_update_userid` int(11) DEFAULT NULL,
-  `last_update_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `last_update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=28 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- 转存表中的数据 `time_segment`
 --
 
-INSERT INTO `time_segment` (`id`, `storeid`, `busitypeid`, `date_segment`, `time_segment`, `count`, `capacity`, `create_user_id`, `create_time`, `last_update_userid`, `last_update_time`) VALUES
-(1, 1, 1, '2017-03-15 16:00:00', 6, 2, NULL, NULL, '2017-03-14 14:33:48', NULL, '2017-03-14 14:33:48'),
-(2, 1, 1, '2017-03-15 16:00:00', 7, 1, NULL, NULL, '2017-03-14 15:06:26', NULL, '2017-03-14 15:06:26'),
-(3, 1, 1, '2017-03-15 16:00:00', 8, 2, NULL, NULL, '2017-03-14 15:06:52', NULL, '2017-03-14 15:06:52'),
-(4, 1, 1, '2017-03-15 16:00:00', 9, 1, NULL, NULL, '2017-03-14 15:12:33', NULL, '2017-03-14 15:12:33'),
-(5, 1, 1, '2017-03-15 16:00:00', 10, 1, NULL, NULL, '2017-03-14 15:41:17', NULL, '2017-03-14 15:41:17'),
-(6, 1, 1, '2017-03-15 16:00:00', 11, 1, NULL, NULL, '2017-03-14 15:49:18', NULL, '2017-03-14 15:49:18'),
-(7, 1, 1, '2017-03-15 16:00:00', 12, 1, NULL, NULL, '2017-03-14 15:58:16', NULL, '2017-03-14 15:58:16'),
-(8, 1, 1, '2017-03-16 16:00:00', 6, 1, NULL, NULL, '2017-03-14 16:16:24', NULL, '2017-03-14 16:16:24'),
-(9, 1, 1, '2017-03-16 16:00:00', 7, 1, NULL, NULL, '2017-03-14 16:46:09', NULL, '2017-03-14 16:46:09'),
-(10, 1, 1, '2017-03-16 16:00:00', 8, 1, NULL, NULL, '2017-03-14 16:56:31', NULL, '2017-03-14 16:56:31'),
-(11, 1, 1, '2017-03-16 16:00:00', 9, 1, NULL, NULL, '2017-03-14 16:59:57', NULL, '2017-03-14 16:59:57'),
-(12, 1, 1, '2017-03-16 16:00:00', 10, 1, NULL, NULL, '2017-03-14 17:10:17', NULL, '2017-03-14 17:10:17'),
-(13, 1, 1, '2017-03-16 16:00:00', 11, 1, NULL, NULL, '2017-03-14 17:25:26', NULL, '2017-03-14 17:25:26'),
-(14, 1, 1, '2017-03-16 16:00:00', 12, 1, NULL, NULL, '2017-03-14 17:46:16', NULL, '2017-03-14 17:46:16'),
-(15, 1, 1, '2017-03-16 16:00:00', 13, 1, NULL, NULL, '2017-03-14 17:58:39', NULL, '2017-03-14 17:58:39'),
-(16, 1, 1, '2017-03-16 16:00:00', 14, 1, NULL, NULL, '2017-03-15 00:51:17', NULL, '2017-03-15 00:51:17'),
-(17, 1, 40, '2017-03-16 16:00:00', 15, 6, NULL, NULL, '2017-03-15 03:00:22', NULL, '2017-03-15 03:00:22'),
-(18, 1, 40, '2017-03-16 16:00:00', 19, 1, NULL, NULL, '2017-03-15 03:54:03', NULL, '2017-03-15 03:54:03'),
-(19, 1, 40, '2017-03-16 16:00:00', 16, 2, NULL, NULL, '2017-03-15 05:07:47', NULL, '2017-03-15 05:07:47'),
-(20, 1, 40, '2017-03-16 16:00:00', 6, 2, NULL, NULL, '2017-03-15 05:09:09', NULL, '2017-03-15 05:09:09'),
-(21, 1, 40, '2017-03-16 16:00:00', 20, 1, NULL, NULL, '2017-03-15 08:52:39', NULL, '2017-03-15 08:52:39'),
-(22, 1, 40, '2017-03-17 16:00:00', 13, 1, NULL, NULL, '2017-03-15 08:53:15', NULL, '2017-03-15 08:53:15'),
-(23, 1, 40, '2017-03-17 16:00:00', 7, 1, NULL, NULL, '2017-03-15 16:39:12', NULL, '2017-03-15 16:39:12'),
-(24, 1, 40, '2017-03-17 16:00:00', 6, 2, NULL, NULL, '2017-03-15 16:40:16', NULL, '2017-03-15 16:40:16'),
-(25, 1, 40, '2017-03-18 16:00:00', 10, 2, NULL, NULL, '2017-03-16 16:56:57', NULL, '2017-03-16 16:56:57'),
-(26, 1, 40, '2017-03-19 16:00:00', 20, 1, NULL, NULL, '2017-03-17 08:47:25', NULL, '2017-03-17 08:47:25'),
-(27, 1, 40, '2017-03-19 16:00:00', 8, 1, NULL, NULL, '2017-03-17 09:17:51', NULL, '2017-03-17 09:17:51');
+INSERT INTO `time_segment` (`id`, `coachid`, `storeid`, `busitypeid`, `date_segment`, `time_segment`, `count`, `capacity`, `create_user_id`, `create_time`, `last_update_userid`, `last_update_time`) VALUES
+(1, 1, NULL, 1, '2017-04-17', 7, 2, NULL, 0, '2017-04-14 16:44:01', 0, '2017-04-14 16:44:01'),
+(2, 1, NULL, 1, '2017-04-19', 7, 2, NULL, 0, '2017-04-17 01:58:38', 0, '2017-04-17 01:58:38'),
+(3, 1, NULL, 20, '2017-04-19', 9, 2, NULL, 0, '2017-04-17 02:05:34', 0, '2017-04-17 02:05:34');
 
 -- --------------------------------------------------------
 
@@ -5015,7 +5113,24 @@ CREATE TABLE IF NOT EXISTS `tpl_msg_result_count` (
   `last_update_userid` int(11) DEFAULT NULL,
   `last_update_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
+
+--
+-- 转存表中的数据 `tpl_msg_result_count`
+--
+
+INSERT INTO `tpl_msg_result_count` (`id`, `msg_id`, `result`, `send_time`, `finish_time`, `customer_id`, `create_user_id`, `create_time`, `last_update_userid`, `last_update_time`) VALUES
+(1, NULL, NULL, NULL, '2017-04-08 20:20:56', 9, NULL, '2017-04-04 14:21:00', NULL, '2017-04-04 14:21:00'),
+(2, NULL, NULL, NULL, '2017-04-12 12:21:35', 2, NULL, '2017-04-04 15:11:36', NULL, '2017-04-04 15:11:36'),
+(3, NULL, NULL, NULL, '2017-04-05 13:51:38', 101, NULL, '2017-04-05 05:51:38', NULL, '2017-04-05 05:51:38'),
+(4, NULL, NULL, NULL, '2017-04-17 10:05:12', 1, NULL, '2017-04-07 08:48:16', NULL, '2017-04-07 08:48:16'),
+(5, NULL, NULL, NULL, '2017-04-08 16:13:12', 7, NULL, '2017-04-08 08:12:26', NULL, '2017-04-08 08:12:26'),
+(6, NULL, NULL, NULL, '2017-04-09 00:21:13', 10, NULL, '2017-04-08 16:21:13', NULL, '2017-04-08 16:21:13'),
+(7, NULL, NULL, NULL, '2017-04-09 23:44:28', 16, NULL, '2017-04-09 13:52:12', NULL, '2017-04-09 13:52:12'),
+(8, NULL, NULL, NULL, '2017-04-11 01:13:47', 17, NULL, '2017-04-10 14:27:40', NULL, '2017-04-10 14:27:40'),
+(9, NULL, NULL, NULL, '2017-04-11 06:58:00', 18, NULL, '2017-04-10 22:58:00', NULL, '2017-04-10 22:58:00'),
+(10, NULL, NULL, NULL, '2017-04-12 01:45:34', 4, NULL, '2017-04-11 14:56:54', NULL, '2017-04-11 14:56:54'),
+(11, NULL, NULL, NULL, '2017-04-17 10:05:12', 5, NULL, '2017-04-14 13:16:10', NULL, '2017-04-14 13:16:10');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

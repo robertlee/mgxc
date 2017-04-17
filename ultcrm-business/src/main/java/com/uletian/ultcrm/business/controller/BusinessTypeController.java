@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import com.uletian.ultcrm.business.entity.BusinessType;
 import com.uletian.ultcrm.business.repo.BusinessTypeRepository;
 import com.uletian.ultcrm.business.entity.Store;
 import com.uletian.ultcrm.business.repo.StoreRepository;
+import com.uletian.ultcrm.business.service.BusinessTypeService;
 
 
 @RestController
@@ -29,6 +31,8 @@ public class BusinessTypeController {
 	private BusinessTypeRepository businessTypeRepository;
 	@Autowired
 	private StoreRepository storeRepository;
+	@Autowired
+	private BusinessTypeService businessTypeService;
 
 
     @RequestMapping(value = "/getStoreListToHome", method = RequestMethod.GET)
@@ -43,5 +47,21 @@ public class BusinessTypeController {
 			logger.error(e.getMessage());
 		}
     	return list;
+    }
+    
+    /**
+     * 获取报名服务信息
+     */
+    @RequestMapping(value = "/getBusinessById/{id}", method = RequestMethod.GET)
+    public BusinessType getBusinessById(@PathVariable("id")Long id){ 
+    	BusinessType businessType = null;
+    	try {
+    		logger.debug("开始获取获取报名服务信息");
+    		businessType = businessTypeService.getBusinessById(id);
+    		
+		} catch (Exception e) {
+			logger.error("获取获取报名服务信息失败",e);
+		}
+    	return businessType;
     }
 }

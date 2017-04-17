@@ -115,9 +115,6 @@
 <ion-view view-title="芒果学车-教练信息" >
 	<ion-content class="mychildren-content bg-background-grey">	
 		<input id="hiddenCustomerId" type="hidden" value="{{hiddenCustomerId}}"/>
-		<button class="button button-full button-add-tech blue font-large" ng-click="toAddChild()">
-		  <i class="ion-ios-plus-outline"></i> 教练信息
-		</button>
 	    <div class="list card tech-card" ng-repeat="child in childrenList">
 			 <div class="item item-single">
 			 	<div class="row">	
@@ -125,8 +122,6 @@
 			 			姓名：<span class="sub-grey">{{child.name}}</span>&nbsp;&nbsp;&nbsp;
 			 			电话：<span class="sub-grey" >{{child.mobilephone}}</span>&nbsp;&nbsp;&nbsp;
 						<a href="tel:{{child.mobilephone}}">联系</a>
-			 			<a ng-click="editChild({{child.lastUpdateUserid}},'{{child.name}}','{{child.mobilephone}}')">编辑</a>
-						<a ng-click="deleteChild({{child.lastUpdateUserid}},'{{child.name}}','{{child.mobilephone}}')">删除</a>
 			 		</div>
 			 	</div>
 			 </div>			 

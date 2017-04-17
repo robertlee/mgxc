@@ -10,15 +10,12 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Component;
 
 import com.uletian.ultcrm.business.entity.Score;
 import com.uletian.ultcrm.business.service.ScoreService;
 import com.uletian.ultcrm.business.value.ScoreMessage;
-
-import reactor.util.CollectionUtils;
-
+import com.uletian.ultcrm.common.util.Collections3;
 
 /**
  * 
@@ -46,7 +43,7 @@ public class ScoreMsgService extends AbstractMsgHandler {
 			@Override
 			public void handleMsg(MsgObject<?> msgObject) {
 				List<Score> scoreList = convertToScoreList((ScoreMessage)msgObject);
-				if (CollectionUtils.isEmpty(scoreList)) {
+				if (Collections3.isEmpty(scoreList)) {
 					logger.error("There is a empty score msg , it has not any items.");
 				}
 				scoreService.fullSyncScoreList(scoreList);
@@ -57,7 +54,7 @@ public class ScoreMsgService extends AbstractMsgHandler {
 			@Override
 			public void handleMsg(MsgObject<?> msgObject) {
 				List<Score> scoreList = convertToScoreList((ScoreMessage)msgObject);
-				if (CollectionUtils.isEmpty(scoreList)) {
+				if (Collections3.isEmpty(scoreList)) {
 					logger.error("There is a empty score msg , it has not any items.");
 				}
 				scoreService.updateScoreList(scoreList);

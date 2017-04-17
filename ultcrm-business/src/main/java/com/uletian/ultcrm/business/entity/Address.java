@@ -1,7 +1,9 @@
 package com.uletian.ultcrm.business.entity;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -16,8 +18,15 @@ public class Address implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
-
+	
+	@Column(name="content")
 	private String content;
+	
+	@Column(name="name")
+	private String name;
+	
+	@Column(name="phone")
+	private String phone;
 
 	@Column(name="create_time")
 	private Timestamp createTime;
@@ -30,6 +39,10 @@ public class Address implements Serializable {
 
 	@Column(name="last_update_userid")
 	private Long lastUpdateUserid;
+	
+	@OneToOne
+	@JoinColumn(name="locationid")
+	private Location location;
 
 	//bi-directional many-to-one association to Area
 //	@ManyToOne
@@ -103,6 +116,26 @@ public class Address implements Serializable {
 	public void setLastUpdateUserid(Long lastUpdateUserid) {
 		this.lastUpdateUserid = lastUpdateUserid;
 	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public Location getLocation() {
+		return location;
+	}
+	public void setLocation(Location location) {
+		this.location = location;
+	}
+	
+	
 //	public Area getArea() {
 //		return this.area;
 //	}

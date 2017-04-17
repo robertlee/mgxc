@@ -23,16 +23,27 @@ public class JsonResponseHandler{
 		if(map.containsKey(clazz.getName())){
 			return (ResponseHandler<T>)map.get(clazz.getName());
 		}else{
-			ResponseHandler<T> responseHandler = new ResponseHandler<T>() {
+				ResponseHandler<T> responseHandler = new ResponseHandler<T>() {
 				@Override
 				public T handleResponse(HttpResponse response)
 						throws ClientProtocolException, IOException {
 					int status = response.getStatusLine().getStatusCode();
 	                if (status >= 200 && status < 300) {
 	                    HttpEntity entity = response.getEntity();
-	                    String str = EntityUtils.toString(entity);
-	                    logger.info("response str is "+str);
-	                    return JsonUtil.parseObject(new String(str.getBytes("iso-8859-1"),"utf-8"), clazz);
+						if (entity!=null)
+						{
+							String str = EntityUtils.toString(entity);
+							//String str = JsonUtil.toJSONString(entity);
+							logger.info("response str is "+str);
+							//logger.info("response data is "+str);
+							return JsonUtil.parseObject(new String(str.getBytes("iso-8859-1"),"utf-8"), clazz);		
+						}
+						else
+						{
+							logger.error("response data is null");	
+							return null;
+						}				
+	                    
 	                } else {
 	                    throw new ClientProtocolException("Unexpected response status: " + status);
 	                }

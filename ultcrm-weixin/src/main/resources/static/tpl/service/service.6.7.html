@@ -1,0 +1,42 @@
+<link rel="stylesheet" href="/css/service/style.css"> 
+
+<ion-view view-title="芒果学车●业务详情页">
+	<ion-content direction="y" class="activityDetail-content">		     		
+		<div class="fixtop hasmenu tc-theme">
+		<a ng-click="goHomePage()"></a>
+		<div class="uc-center">考证服务</div>
+		<a href="javascript:;" class="btn">&nbsp;</a>
+	</div>
+	<div class="tc-bg tc-mt">
+		<div class="tc-le">
+			<h1>{{business.name}}</h1>
+			<div class="aq">购买学时后即可在线下单约车</div>
+			<div class="gr2"><i class="price">¥<strong>{{business.cost}}</strong>.00</i><span class="w1">小时</span></div>
+		</div>
+		<img src="{{business.pic}}" class="tc-lb">
+	</div>
+	<div class="tc-ltype"></div>
+	<div class="tc-intro">
+	<div class="tit">服务介绍</div>
+		<ul>
+			<li>1学时等于1小时</li>
+			<li>120元/小时</li>
+			<li>学时不区分c1/c2请按自己驾照类型预约</li>
+			<li>学时不区分科2/科3科目</li>
+			<li>1次可购买多个学时</li>
+			<li>科一/科四/长训无需购买练车学时</li>
+		</ul>
+	</div>
+	<div class="tc-intro">
+		<div class="tit">注意事项</div>
+		<ul>
+			<li>提交购买后及时联系客服完成支付</li>
+			<li>客服分配学时后才能预约练车</li>
+			<li>没有通过科目一考试不能购买学时</li><br>      
+			<br>
+			<br>
+		</ul>
+	</div>
+	</ion-content>
+</ion-view>
+

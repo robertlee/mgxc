@@ -5,6 +5,7 @@ package com.uletian.ultcrm.business.repo;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
@@ -28,4 +29,13 @@ public interface CoachRepository extends  PagingAndSortingRepository<Coach, Long
 	
 	@Query(value="SELECT * FROM coach order by score desc LIMIT 0,3;",nativeQuery=true)
     public List<Coach> getCoachFirst3();
+    /**
+     * 修改人：吴云
+     * 修改时间：2017-04-12
+     * 修改内容：更新积分
+     * @return
+     */
+    @Modifying
+    @Query("update Coach set score = score + ?1 where id = ?2")
+    public int updateCoachScore(int score,Long id);
 }

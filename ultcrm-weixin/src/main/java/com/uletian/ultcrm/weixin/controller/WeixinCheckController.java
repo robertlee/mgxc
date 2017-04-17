@@ -54,8 +54,9 @@ public class WeixinCheckController {
     private Map<String,EventHandler> eventMap = new HashMap<String,EventHandler>();
 
 	
-	@Autowired
-	private WeixinConfig weixinConfig;
+ // wangyunjian 2017-04-08 for delete JMS
+//	@Autowired
+//	private WeixinConfig weixinConfig;
 	
 	@Autowired
 	private SubscribeEventHandler subscribeEventHandler;

@@ -1,4 +1,4 @@
-ultcrm.controller('coachlistCtrl', function($scope,$http,$location,$state,$timeout,$ionicPopup,customerData) {
+ultcrm.controller('coachlistCtrl', function($scope,$http,$location,$state,$timeout,$ionicPopup,customerData,customerDataService) {
 		//初始化数据
 		var count = 1;
 		var iContent1 = 0;
@@ -80,14 +80,24 @@ ultcrm.controller('coachlistCtrl', function($scope,$http,$location,$state,$timeo
 		$scope.toTimeSelect=function(coachId,$event){			
 			$event.stopPropagation();
 			var openId = customerData.openid;
-			 $http.get("/getCoachById/"+coachId).success(function(data){
-				 if(data.code == 'existorder') {
-	                 //如果存在相似的预约单
-			  } else {
-				  //如果不存在相似预约单，则创建
-				  $state.go('index.timesegment',{coachid:coachId},{reload:true});
-			  }	 
-			 });			
+			$http.get("/getCoachById/"+coachId).success(function(data){
+				if(data.code == 'existorder') {
+					//如果存在相似的预约单
+				} else {
+					$http.get("/findExistOrder/"+customerDataService.getCustomerId())
+						.success(function(result){
+							console.log(result);
+							if(result == ''){
+								alert("您还没有报名,请先报名后再预约");
+								//如果没有报名,跳转至报名页面
+								$state.go('index.serviceList',{},{reload:true});
+							}else{
+								//如果不存在相似预约单，则创建
+								$state.go('index.timesegment',{coachid:coachId,busiTypeId:result.busitypeid},{reload:true});
+							}
+						});
+				}
+			});			
 		};
 		//展示教练详情
 		$scope.showCoachDetail=function(id){

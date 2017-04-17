@@ -16,8 +16,7 @@ import com.uletian.ultcrm.business.entity.Appointment;
 import com.uletian.ultcrm.business.entity.Order;
 import com.uletian.ultcrm.business.repo.AppointmentRepository;
 import com.uletian.ultcrm.business.repo.OrderRepository;
-
-import reactor.util.CollectionUtils;
+import com.uletian.ultcrm.common.util.Collections3;
 
 /**
  * 妫�鏌ラ绾︽暟鎹殑鐘舵�侊紝灏嗚繃鏈熸病澶勭悊鐨勯绾﹀崟鐨勭姸鎬佷慨鏀逛竴涓嬨��
@@ -52,7 +51,7 @@ public class AppointmentDataCheckSchedule {
 	    	logger.info("Scheduling Tasks running: The time is now " + dateFormat().format (new Date ()));
 	    	// 鎶撳彇棰勭害鍗曟暟鎹�
 	    	List<Appointment> expireDataList = appointmentRepository.findExpireData(new Date());
-	    	if (!CollectionUtils.isEmpty(expireDataList)){
+	    	if (!Collections3.isEmpty(expireDataList)){
 	    		for (Appointment appoint : expireDataList) {
 	    			logger.info("Change status to expire of order "+appoint.getOrder().getId());
 	    			Order order = appoint.getOrder();

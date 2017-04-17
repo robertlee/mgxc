@@ -32,7 +32,8 @@ public class TicketManager {
 			timer.schedule(new TimerTask() {
 				@Override
 				public void run() {
-					String access_token = TokenManager.getToken(appid,"");
+					//String access_token = TokenManager.getToken(appid,"");
+					String access_token = TokenManager.getToken(appid);
 					Ticket ticket = TicketAPI.ticketGetticket(access_token);
 					ticketMap.put(appid,ticket.getTicket());
 				}

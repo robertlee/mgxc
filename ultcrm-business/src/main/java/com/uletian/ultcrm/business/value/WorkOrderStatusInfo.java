@@ -31,19 +31,19 @@ public class WorkOrderStatusInfo implements Comparable<WorkOrderStatusInfo>{
     
     // 关键状态点
     public static List<String> SPECIAL_STATUS_LIST = new ArrayList<String>();
-    public static String STATUS_ENTER = "ZVM002";
-    public static String STATUS_PRINTBILL = "ZVM003";
-    public static String STATUS_PLANTWORKING = "ZVM007";
-    public static String STATUS_QUALITYCHECK = "ZVM008";
-    public static String STATUS_CUSTOMERPAY = "ZVM009";
+    public static String STATUS_ENTER = "MGXC02";
+    public static String STATUS_PRINTBILL = "MGXC03";
+    public static String STATUS_PLANTWORKING = "MGXC07";
+    public static String STATUS_QUALITYCHECK = "MGXC08";
+    public static String STATUS_CUSTOMERPAY = "MGXC09";
     
     
     static {
-    	SPECIAL_STATUS_LIST.add(STATUS_ENTER); //环车检查
+    	SPECIAL_STATUS_LIST.add(STATUS_ENTER); //学车报名
     	SPECIAL_STATUS_LIST.add(STATUS_PRINTBILL); //方案确认
     	SPECIAL_STATUS_LIST.add(STATUS_PLANTWORKING); //车间作业 
     	SPECIAL_STATUS_LIST.add(STATUS_QUALITYCHECK); //质检
-    	SPECIAL_STATUS_LIST.add(STATUS_CUSTOMERPAY);  //结算
+    	SPECIAL_STATUS_LIST.add(STATUS_CUSTOMERPAY);  //评价
     }
     
     public static List<String> subList(Integer size) {

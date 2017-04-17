@@ -29,8 +29,8 @@ import com.uletian.ultcrm.business.value.WorkOrderInfoItem;
 import com.uletian.ultcrm.business.value.WorkOrderInfoItemList;
 import com.uletian.ultcrm.business.value.WorkOrderStatusInfo;
 import com.uletian.ultcrm.business.value.WorkOrderStatusInfoList;
+import com.uletian.ultcrm.common.util.Collections3;
 import com.thoughtworks.xstream.XStream;
-import reactor.util.CollectionUtils;
 
 /**
  * 
@@ -162,7 +162,7 @@ public class OrderService {
 	
 
 	/**
-	 * 环车检查前台数据处理
+	 * 学车报名前台数据处理
 	 * @param currentStatus
 	 * @param statusInfo
 	 */
@@ -174,7 +174,7 @@ public class OrderService {
     	node.setCurrentStatus(currentStatus);
     	node.setStatus(statusInfo.getStatusInt());
     	
-    	node.setName("环车检查已经完成");	
+    	node.setName("学车报名已经完成");	
 
     	node.setStartTime(statusInfo.getErdat() + statusInfo.getErzet());;
 	    node.setSaName(statusInfo.getSname());
@@ -459,7 +459,7 @@ public class OrderService {
 		
 		@Override
 		public Object arrangeData(List<WorkOrderStatusInfo> statusInfoData) {
-			if (!CollectionUtils.isEmpty(statusInfoData)) {
+			if (!Collections3.isEmpty(statusInfoData)) {
 				return statusInfoData.get(0);
 			}
 			else {
@@ -545,7 +545,7 @@ public class OrderService {
 		
 		@Override
 		public Object arrangeData(List<WorkOrderStatusInfo> statusInfoData) {
-			if (!CollectionUtils.isEmpty(statusInfoData)) {
+			if (!Collections3.isEmpty(statusInfoData)) {
 				return statusInfoData.get(0);
 			}
 			else {

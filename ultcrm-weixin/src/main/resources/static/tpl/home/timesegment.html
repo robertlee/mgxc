@@ -93,7 +93,7 @@
    <div class="v-spacer"></div>
 		   <div class="row">
 				<div class="col " >
-					<div class="h4" style="text-align:center;margin:0px" >&nbsp;&nbsp;选择预约时段</div>
+					<div class="h5" style="text-align:center;margin:0px" >&nbsp;&nbsp;选择预约时段</div>
 				</div>
 			</div>
 			<div class="v-spacer"></div>
@@ -101,29 +101,29 @@
 				<div class="col" style="padding-top:1px;padding-bottom:1px">
 				
 					<div class="row">
-						<div class="col " style="padding:1px">							
-							<div ng-class="getTimeClass(segmenttime,$index,'6')" ng-disabled="isDisable($index,'6')" ng-click="selectSegment($index,'6');" style="margin-top:1px;margin-bottom:1px">
+						<div class="col" style="padding:1px">							
+							<div id="{{$index}}6" ng-class="'button button-block button-light'" ng-disabled="isDisable($index,'6')" ng-click="selectSegment($index,'6');" style="margin-top:1px;margin-bottom:1px">
 								<span> 6:00 </span>
 							    <div ng-if="isUsedAll($index,'6')" class="red-flag"></div>	
 								<div ng-if="isUsedAll($index,'6')" class="text-tag">满 </div>
 							</div>
 						</div>
 						<div class="col" style="padding:1px">
-							<div ng-class="getTimeClass(segmenttime,$index,'7')" ng-disabled="isDisable($index,'7')" ng-click="selectSegment($index,'7');" style="margin-top:1px;margin-bottom:1px">
+							<div id="{{$index}}7" ng-class="'button button-block button-light'" ng-disabled="isDisable($index,'7')" ng-click="selectSegment($index,'7');" style="margin-top:1px;margin-bottom:1px">
 								<span> 7:00 </span>
 							    <div ng-if="isUsedAll($index,'7')" class="red-flag"></div>
 							    <div ng-if="isUsedAll($index,'7')" class="text-tag">满 </div>
 							</div>
 						</div>
 						<div class="col" style="padding:1px">
-							<div ng-class="getTimeClass(segmenttime,$index,'8')" ng-disabled="isDisable($index,'8')" ng-click="selectSegment($index,'8');" style="margin-top:1px;margin-bottom:1px">
+							<div id="{{$index}}8" ng-class="'button button-block button-light'" ng-disabled="isDisable($index,'8')" ng-click="selectSegment($index,'8');" style="margin-top:1px;margin-bottom:1px">
 								<span> 8:00 </span>
 							    <div ng-if="isUsedAll($index,'8')" class="red-flag"></div>							  
 							    <div ng-if="isUsedAll($index,'8')" class="text-tag">满 </div>
 							</div>
 						</div>
 						<div class="col" style="padding:1px">
-							<div ng-class="getTimeClass(segmenttime,$index,'9')" ng-disabled="isDisable($index,'9')" ng-click="selectSegment($index,'9');" style="margin-top:1px;margin-bottom:1px">
+							<div id="{{$index}}9" ng-class="'button button-block button-light'" ng-disabled="isDisable($index,'9')" ng-click="selectSegment($index,'9');" style="margin-top:1px;margin-bottom:1px">
 								<span> 9:00 </span>
 							    <div ng-if="isUsedAll($index,'9')" class="red-flag"></div>							  
 							    <div ng-if="isUsedAll($index,'9')" class="text-tag">满 </div>
@@ -133,14 +133,14 @@
 					
 					<div class="row">
 						<div class="col" style="padding:1px">
-							<div ng-class="getTimeClass(segmenttime,$index,'10')" ng-disabled="isDisable($index,'10')" ng-click="selectSegment($index,'10');" style="margin-top:1px;margin-bottom:1px">
+							<div id="{{$index}}10" ng-class="'button button-block button-light'" ng-disabled="isDisable($index,'10')" ng-click="selectSegment($index,'10');" style="margin-top:1px;margin-bottom:1px">
 							  <span> 10:00 </span>
 							  <div ng-if="isUsedAll($index,'10')" class="red-flag"></div>				  
 							  <div ng-if="isUsedAll($index,'10')" class="text-tag">满 </div>
 							</div>						
 						</div>
 						<div class="col" style="padding:1px">
-							<div ng-class="getTimeClass(segmenttime,$index,'11')" ng-disabled="isDisable($index,'11')" ng-click="selectSegment($index,'11');" style="margin-top:1px;margin-bottom:1px">
+							<div id="{{$index}}11" ng-class="'button button-block button-light'" ng-disabled="isDisable($index,'11')" ng-click="selectSegment($index,'11');" style="margin-top:1px;margin-bottom:1px">
 							  <span> 11:00 </span>
 							  <div ng-if="isUsedAll($index,'11')" class="red-flag"></div>				  
 							  <div ng-if="isUsedAll($index,'11')" class="text-tag">满 </div>
@@ -148,7 +148,7 @@
 							</div>
 						</div>
 						<div class="col" style="padding:1px">
-							<div ng-class="getTimeClass(segmenttime,$index,'12')" ng-disabled="isDisable($index,'12')" ng-click="selectSegment($index,'12');" style="margin-top:1px;margin-bottom:1px">
+							<div id="{{$index}}12" ng-class="'button button-block button-light'" ng-disabled="isDisable($index,'12')" ng-click="selectSegment($index,'12');" style="margin-top:1px;margin-bottom:1px">
 							  <span> 12:00 </span>
 							  <div ng-if="isUsedAll($index,'12')" class="red-flag"></div>				  
 							  <div ng-if="isUsedAll($index,'12')" class="text-tag">满 </div>
@@ -156,7 +156,7 @@
 							</div>
 						</div>
 						<div class="col" style="padding:1px">
-							<div ng-class="getTimeClass(segmenttime,$index,'13')" ng-disabled="isDisable($index,'13')" ng-click="selectSegment($index,'13');" style="margin-top:1px;margin-bottom:1px">
+							<div id="{{$index}}13" ng-class="'button button-block button-light'" ng-disabled="isDisable($index,'13')" ng-click="selectSegment($index,'13');" style="margin-top:1px;margin-bottom:1px">
 							  <span> 13:00 </span>
 							  <div ng-if="isUsedAll($index,'13')" class="red-flag"></div>				  
 							  <div ng-if="isUsedAll($index,'13')" class="text-tag">满 </div>							
@@ -166,21 +166,21 @@
 					
 					<div class="row">
 						<div class="col" style="padding:1px">							
-							<div ng-class="getTimeClass(segmenttime,$index,'14')" ng-disabled="isDisable($index,'14')" ng-click="selectSegment($index,'14');" style="margin-top:1px;margin-bottom:1px">
+							<div id="{{$index}}14" ng-class="'button button-block button-light'" ng-disabled="isDisable($index,'14')" ng-click="selectSegment($index,'14');" style="margin-top:1px;margin-bottom:1px">
 							  <span> 14:00 </span>
 							  <div ng-if="isUsedAll($index,'14')" class="red-flag"></div>				  
 							  <div ng-if="isUsedAll($index,'14')" class="text-tag">满 </div>
 							</div>
 						</div>
 						<div class="col" style="padding:1px">
-							<div ng-class="getTimeClass(segmenttime,$index,'15')" ng-disabled="isDisable($index,'15')" ng-click="selectSegment($index,'15');" style="margin-top:1px;margin-bottom:1px">
+							<div id="{{$index}}15" ng-class="'button button-block button-light'" ng-disabled="isDisable($index,'15')" ng-click="selectSegment($index,'15');" style="margin-top:1px;margin-bottom:1px">
 							  <span> 15:00 </span>
 							  <div ng-if="isUsedAll($index,'15')" class="red-flag"></div>				  
 							  <div ng-if="isUsedAll($index,'15')" class="text-tag">满 </div>
 							</div>						
 						</div>
 						<div class="col" style="padding:1px">
-							<div ng-class="getTimeClass(segmenttime,$index,'16')" ng-disabled="isDisable($index,'16')" ng-click="selectSegment($index,'16');" style="margin-top:1px;margin-bottom:1px">
+							<div id="{{$index}}16" ng-class="'button button-block button-light'" ng-disabled="isDisable($index,'16')" ng-click="selectSegment($index,'16');" style="margin-top:1px;margin-bottom:1px">
 							  <span> 16:00 </span>
 							   <div ng-if="isUsedAll($index,'16')" class="red-flag"></div>				  
 							  <div ng-if="isUsedAll($index,'16')" class="text-tag">满 </div>
@@ -188,7 +188,7 @@
 							</div>						
 						</div>
 						<div class="col" style="padding:1px">
-							<div ng-class="getTimeClass(segmenttime,$index,'17')" ng-disabled="isDisable($index,'17')" ng-click="selectSegment($index,'17');" style="margin-top:1px;margin-bottom:1px">
+							<div id="{{$index}}17" ng-class="'button button-block button-light'" ng-disabled="isDisable($index,'17')" ng-click="selectSegment($index,'17');" style="margin-top:1px;margin-bottom:1px">
 							  <span> 17:00 </span>
 							   <div ng-if="isUsedAll($index,'17')" class="red-flag"></div>				  
 							  <div ng-if="isUsedAll($index,'17')" class="text-tag">满 </div>							  
@@ -198,28 +198,28 @@
 				
 					<div class="row">
 						<div class="col" style="padding:1px">
-							<div ng-class="getTimeClass(segmenttime,$index,'18')" ng-disabled="isDisable($index,'18')" ng-click="selectSegment($index,'18');" style="margin-top:1px;margin-bottom:1px">
+							<div id="{{$index}}18" ng-class="'button button-block button-light'" ng-disabled="isDisable($index,'18')" ng-click="selectSegment($index,'18');" style="margin-top:1px;margin-bottom:1px">
 							  <span> 18:00 </span>
 							  <div ng-if="isUsedAll($index,'18')" class="red-flag"></div>				  
 							  <div ng-if="isUsedAll($index,'18')" class="text-tag">满 </div>				
 							</div>
 						</div>
 						<div class="col" style="padding:1px">
-							<div ng-class="getTimeClass(segmenttime,$index,'19')" ng-disabled="isDisable($index,'19')" ng-click="selectSegment($index,'19');" style="margin-top:1px;margin-bottom:1px">
+							<div id="{{$index}}19" ng-class="'button button-block button-light'" ng-disabled="isDisable($index,'19')" ng-click="selectSegment($index,'19');" style="margin-top:1px;margin-bottom:1px">
 							  <span> 19:00 </span>
 							  <div ng-if="isUsedAll($index,'19')" class="red-flag"></div>				  
 							  <div ng-if="isUsedAll($index,'19')" class="text-tag">满 </div>
 							</div>						
 						</div>
 						<div class="col" style="padding:1px">
-							<div ng-class="getTimeClass(segmenttime,$index,'20')" ng-disabled="isDisable($index,'20')" ng-click="selectSegment($index,'20');" style="margin-top:1px;margin-bottom:1px">
+							<div id="{{$index}}20" ng-class="'button button-block button-light'" ng-disabled="isDisable($index,'20')" ng-click="selectSegment($index,'20');" style="margin-top:1px;margin-bottom:1px">
 							  <span> 20:00 </span>
 							  <div ng-if="isUsedAll($index,'20')" class="red-flag"></div>				  
 							  <div ng-if="isUsedAll($index,'20')" class="text-tag">满 </div>
 							</div>
 						</div>
 						<div class="col" style="padding:1px">
-							<div ng-class="getTimeClass(segmenttime,$index,'21')" ng-disabled="isDisable($index,'21')" ng-click="selectSegment($index,'21');" style="margin-top:1px;margin-bottom:1px">
+							<div id="{{$index}}21" ng-class="'button button-block button-light'" ng-disabled="isDisable($index,'21')" ng-click="selectSegment($index,'21');" style="margin-top:1px;margin-bottom:1px">
 							  <span> 21:00 </span>
 							  <div ng-if="isUsedAll($index,'21')" class="red-flag"></div>				  
 							  <div ng-if="isUsedAll($index,'21')" class="text-tag">满 </div>
@@ -232,14 +232,36 @@
 			<div class="row annotation orange">
 				<div class="col col-20 anno-title">注：</div>
 				<div class="col anno-content">					
-					<p>欢迎选择您两天后可以预约的时间（连续时间段）！</p>
+					<p>1.欢迎选择您两天后可以预约的时间（连续时间段）！</p>
+					<p>2.选择的时间段必须在同一天！</p>
 				</div>
 			</div>			
 		</ion-slide>
 	    </ion-slide-box>
-       <br>
-           <div class="row row-center padding padding-normal">	
-		    <button class="button button-submit button-block " style="margin-top:1px;margin-bottom:1px" ng-disabled="isBtnDisable()" on-touch="submitSegment()"> 确认预约 </button>	
+		
+		<div ng-if="showPayAndAppoint">
+			<table>
+        		<tr>
+        			<td style="width:40%;word-break:keep-all">单价:</td>
+            		<td><input style="width:10%" type="text" ng-model="cost" ng-disabled="true"/></td>
+            		<td style="width:40%;word-break:keep-all">时长:</td>
+            		<td><input style="width:10%" type="text" ng-model="selectedTimesegmentlist.length" ng-disabled="true"/></td>
+        		</tr>
+        		<tr>
+        			<td style="width:40%;word-break:keep-all">总价:</td>
+            		<td><input style="width:10%" type="text" ng-model="needPay" ng-disabled="true"/></td>
+            		<td style="width:40%;word-break:keep-all">付款:</td>
+            		<td><input style="width:10%" type="text" ng-model="needPay" ng-disabled="true"/></td>
+        		</tr>
+       		</table>
+        	<button class="button button-submit button-block " style="margin-top:1px;margin-bottom:1px" ng-disabled="isBtnDisable()" on-touch="submitSegment()"> 支付预约 </button>	
+        </div>
+        <div class="row row-center padding padding-normal">	
+			<div ng-if="showAppoint" style="width:100%">
+				<button class="button button-submit button-block " style="margin-top:1px;margin-bottom:1px" ng-disabled="isBtnDisable()" on-touch="submitSegment()"> 确认预约 </button>	
 			</div>
+		</div>	
+			
+		
 	</ion-content>
 </ion-view>

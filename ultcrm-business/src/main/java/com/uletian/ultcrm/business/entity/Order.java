@@ -2,7 +2,6 @@ package com.uletian.ultcrm.business.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -21,8 +20,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import reactor.util.StringUtils;
-
+import com.uletian.ultcrm.common.util.StringUtils;
 
 /**
  * The persistent class for the orders database table.
@@ -30,7 +28,7 @@ import reactor.util.StringUtils;
  */
 @Entity
 @Table(name="orders")
-@NamedQuery(name="Order.findAll", query="SELECT o FROM Order o where id = 1")
+@NamedQuery(name="Order.findAll", query="SELECT o FROM Order o")
 public class Order implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
@@ -63,12 +61,12 @@ public class Order implements Serializable {
 	}
 	
 	public enum WorkState{
-		ZVM002,// 环车检查
-		ZVM003,// 方案确认
-		ZVM007,// 作业开始
-		ZVM008,// 作业完成
-		ZVM009, // 结算
-		ZVM010 // 付款
+		MGXC02,// 学车报名
+		MGXC03,// 方案确认
+		MGXC07,// 学车开始
+		MGXC08,// 学车完成
+		MGXC09, // 评价
+		MGXC10  // 发放证书
 	}
 	
 	@Id
@@ -178,8 +176,8 @@ public class Order implements Serializable {
 	private String crmSaName;
 	
 	private Integer status;
-
-	private Long typeid;
+	@Column(name="busitypeid")
+	private Long busitypeid;
 	
 	//@Column(name="child_name")
 	//private String childName = null;
@@ -219,8 +217,8 @@ public class Order implements Serializable {
 	@Transient
 	private String appointTimeStr;
 	
-	@Transient
-	private Long busiTypeId;
+	//@Transient
+	//private Long busiTypeId;
 	
 	@Transient
 	private String crmPlanFinishedtimeStr;
@@ -277,16 +275,16 @@ public class Order implements Serializable {
 	/**
 	 * @return the busiTypeId
 	 */
-	public Long getBusiTypeId() {
-		return busiTypeId;
-	}
+	//public Long getBusiTypeId() {
+		//return busiTypeId;
+	//}
 
 	/**
 	 * @param busiTypeId the busiTypeId to set
 	 */
-	public void setBusiTypeId(Long busiTypeId) {
-		this.busiTypeId = busiTypeId;
-	}
+	//public void setBusiTypeId(Long busiTypeId) {
+		//this.busiTypeId = busiTypeId;
+	//}
 
 	/**
 	 * @return the crmPlanFinishedtimeStr
@@ -746,21 +744,21 @@ public class Order implements Serializable {
 
 
 
-	/**
-	 * @return the typeid
-	 */
-	public Long getTypeid() {
-		return typeid;
-	}
-
-
-
-	/**
-	 * @param typeid the typeid to set
-	 */
-	public void setTypeid(Long typeid) {
-		this.typeid = typeid;
-	}
+    /**
+     * @return the typeid
+     */
+    public Long getBusitypeid() {
+        return busitypeid;
+    }
+    
+    
+    
+    /**
+     * @param typeid the typeid to set
+     */
+    public void setBusitypeid(Long busitypeid) {
+        this.busitypeid = busitypeid;
+    }
 
 
 	/**

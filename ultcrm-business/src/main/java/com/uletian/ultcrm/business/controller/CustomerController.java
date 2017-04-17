@@ -289,7 +289,7 @@ public class CustomerController {
 							customer.setPhone(phone);
 							customerRepository.save(customer);
 							customerCodeRepository.delete(codes);
-							customerInfoSyncService.notifycationDataChange(customer);
+							//customerInfoSyncService.notifycationDataChange(customer);
 						}
 						break;
 					} else {
@@ -299,7 +299,7 @@ public class CustomerController {
 						customer.setPhone(phone);
 						customerRepository.save(customer);
 						customerCodeRepository.delete(codes);
-						customerInfoSyncService.notifycationDataChange(customer);
+						//customerInfoSyncService.notifycationDataChange(customer);
 						break;
 					}
 				} else {
@@ -360,7 +360,7 @@ public class CustomerController {
 		//卡券总数
 		Long publishCardCount =  cardRepository.countByCustomerAndStatus(customer, "002");  //发布
 		Long writeoffCardCount =  cardRepository.countByCustomerAndStatus(customer, "003");     //核销
-		Long cancelCardCount =  cardRepository.countByCustomerAndStatus(customer, "005");  //过期
+		Long cancelCardCount =  cardRepository.countByCustomerAndStatus(customer, "005");       //过期
 		
 		if(publishCardCount == null)
 		{
@@ -378,7 +378,7 @@ public class CustomerController {
 		
 		
 		Long publishCouponCount =  couponRepository.countByCustomerAndStatus(customer, "003");  //发布
-		Long writeoffCouponCount =  couponRepository.countByCustomerAndStatus(customer, "004");        //核销
+		Long writeoffCouponCount =  couponRepository.countByCustomerAndStatus(customer, "004"); //核销
 		Long cancelCouponCount =  couponRepository.countByCustomerAndStatus(customer, "006");  //过期
 		
 		

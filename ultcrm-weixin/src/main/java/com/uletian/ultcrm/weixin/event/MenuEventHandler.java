@@ -1,6 +1,7 @@
 /**
- * Copyright &copy; 2014 uletian All rights reserved
+ * Copyright &copy; 2014 uletian All rights reserved`
  */
+
 package com.uletian.ultcrm.weixin.event;
 
 import java.util.ArrayList;
@@ -21,12 +22,11 @@ import weixin.popular.event.EventHandler;
 /**
  * 
  * @author robertxie
- * 2015年9月16日
+ * 2016年9月16日
  */
 @Component
 public class MenuEventHandler implements EventHandler{
-	private static final String WEIXIN_TELEPHONE="WEIXIN_TELEPHONE";
-	
+	private static final String WEIXIN_TELEPHONE="WEIXIN_TELEPHONE";	
 	private static final String WEIXIN_COMPANY_URL="WEIXIN_COMPANY_URL";
 	private static final String WEIXIN_COMPANY_DESC="WEIXIN_COMPANY_DESC";
 	private static final String WEIXIN_COMPANY_TITLE="WEIXIN_COMPANY_TITLE";
@@ -42,8 +42,7 @@ public class MenuEventHandler implements EventHandler{
 		switch(eventMessage.getEventKey()) {
 			case "telephone":return  new  XMLTextMessage(eventMessage,configService.getValue(WEIXIN_TELEPHONE)); 
 			case "companyInfo":return handleCompanyInfo(eventMessage);
-		}
-		
+		}		
 		return null;
 	}
 	

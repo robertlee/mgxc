@@ -7,15 +7,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.jms.JMSException;
-import javax.jms.Message;
-
-import org.apache.activemq.command.ActiveMQTopic;
 import org.apache.log4j.Logger;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jms.core.JmsTemplate;
-import org.springframework.jms.core.MessagePostProcessor;
 import org.springframework.stereotype.Component;
 
 import com.uletian.ultcrm.business.entity.Card;
@@ -33,9 +26,10 @@ import com.uletian.ultcrm.common.util.StringUtils;
 public class CardMsgService extends AbstractMsgHandler {
 	private static Logger logger = Logger.getLogger(CardMsgService.class);
 	public static String CARD_TOPIC = "CARD";
-	
-	@Autowired
-	private JmsTemplate topicJmsTemplate;
+
+	// wangyunjian 2017-04-08 for delete JMS
+//	@Autowired
+//	private JmsTemplate topicJmsTemplate;
 	
 	@Autowired
 	private CardService cardService;
@@ -136,14 +130,15 @@ public class CardMsgService extends AbstractMsgHandler {
 		
 		String xmlString = this.convertObjectToMsgString(cardMessage, "cards");
 		logger.info("ultcrm publish a card msg , msg is "+xmlString);
-		topicJmsTemplate.convertAndSend(CARD_TOPIC, xmlString, new MessagePostProcessor() {
-			public Message postProcessMessage(Message message)
-					throws JMSException {
-				message.setStringProperty("SENDER", "ICCRM");
-				message.setStringProperty("ACTION", "PUBLISH");
-				return message;
-			}
-		});
+		// wangyunjian 2017-04-08 for delete JMS
+//		topicJmsTemplate.convertAndSend(CARD_TOPIC, xmlString, new MessagePostProcessor() {
+//			public Message postProcessMessage(Message message)
+//					throws JMSException {
+//				message.setStringProperty("SENDER", "ICCRM");
+//				message.setStringProperty("ACTION", "PUBLISH");
+//				return message;
+//			}
+//		});
 	}
 	
 	/**
@@ -155,15 +150,16 @@ public class CardMsgService extends AbstractMsgHandler {
 		CardMessage cardMessage = convertToCardMessage(card,"CANCEL");
 		
 		String xmlString = this.convertObjectToMsgString(cardMessage, "card");
+		// wangyunjian 2017-04-08 for delete JMS
 		//topicJmsTemplate.send(destinationName, messageCreator);
-		topicJmsTemplate.convertAndSend(CARD_TOPIC, msg, new MessagePostProcessor() {
-			public Message postProcessMessage(Message message)
-					throws JMSException {
-				message.setStringProperty("SENDER", "ICCRM");
-				message.setStringProperty("ACTION", "CANCEL");
-				return message;
-			}
-		});
+//		topicJmsTemplate.convertAndSend(CARD_TOPIC, msg, new MessagePostProcessor() {
+//			public Message postProcessMessage(Message message)
+//					throws JMSException {
+//				message.setStringProperty("SENDER", "ICCRM");
+//				message.setStringProperty("ACTION", "CANCEL");
+//				return message;
+//			}
+//		});
 	}
 	
 	public CardMessage convertToCardMessage(Card card,String action) {

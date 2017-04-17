@@ -39,7 +39,7 @@ public class CustomerService {
 	 */
 	public Customer checkWeixinUpdateTime(String openId) {
 		Customer customer = customerRepository.findByOpenid(openId);
-		if (customer != null) {
+		if (customer != null ) {
 			Date lastCheckTime = customer.getLastWeixinCheckTime();
 			Date now = new Date();
 			Calendar cl = Calendar.getInstance();
@@ -75,8 +75,11 @@ public class CustomerService {
 		try {
 			// 整理用户头像的大小
 			String headimg = customer.getHeadimgurl();
-			int index = headimg.lastIndexOf("/");
-			customer.setHeadimgurl(customer.getHeadimgurl().substring(0, index)+"/64");
+			if (headimg!=null && headimg!="")
+			{	
+				int index = headimg.lastIndexOf("/");			
+				customer.setHeadimgurl(customer.getHeadimgurl().substring(0, index)+"/64");			
+			}
 			customerRepository.save(customer);
 		} catch (Exception e) {
 			logger.info("save customer error.", e);

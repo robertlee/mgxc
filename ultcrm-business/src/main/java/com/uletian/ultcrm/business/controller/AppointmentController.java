@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -52,12 +53,23 @@ import com.uletian.ultcrm.business.service.OrderMessageServcie;
 import com.uletian.ultcrm.business.service.SmsQueueService;
 import com.uletian.ultcrm.business.service.TemplateQueueService;
 import com.uletian.ultcrm.business.service.WeixinConfig;
+import com.uletian.ultcrm.business.service.WeixinServletUtil;
 import com.uletian.ultcrm.business.value.TemplateMessage;
 
 @RestController
 public class AppointmentController {
 	
 	private static Logger logger = Logger.getLogger(AppointmentController.class);
+    @Value("${appId}")
+    private String appId;
+    @Value("${pingSecKey}")
+    private String pingSecKey;
+    @Value("${appSecret}")
+    private String appSecret;
+    @Value("${assetTokenUrl}")
+    private String assetTokenUrl;
+    @Value("${weixinMsgUrl}")
+    private String weixinMsgUrl;
 	
 	@Autowired
 	private TechModelRepository techModelRepository;
@@ -113,6 +125,9 @@ public class AppointmentController {
 	
 	@Autowired
 	private EventRepository eventRepository;
+    
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    
 	
 	/*data:{"customerId":customer.id,	"techId":"",	"courseId":appointData.courseId,
 	"modelId":appointData.modelId,	"discountPrice":"100",
@@ -192,7 +207,7 @@ public class AppointmentController {
 		order.setCustomer(customer);
 		order.setPrice(new BigDecimal(StringUtils.isEmpty(totalPrice)?"119":totalPrice));
 		order.setDiscountprice(new BigDecimal(StringUtils.isEmpty(discountTotalPrice)?"119":discountTotalPrice));
-		order.setTypeid(Long.valueOf(typeId));
+		order.setBusitypeid(Long.valueOf(typeId));
 		order.setClassid(1L);
 		order.setStatus(1);
 		order.setTech(tech);
@@ -236,11 +251,32 @@ public class AppointmentController {
         logger.info("预约时间发短信结束");
 		
 
+        /**
+         * 修改人：吴云
+         * 修改时间：2017-04-04
+         * 修改内容：下单成功微信通知用户
+         */
+        //消息通知用户下单成功
+        String token = WeixinServletUtil.getAssetToken(assetTokenUrl,appId,appSecret);
+        String msgUrl = weixinMsgUrl + "?access_token=" + token;
+        String templateId= "0nOZVGBrLr5xo1b7G8lCkPOD4JLrA1TvCEpO_NhEHFY";
+        Map<String,Object> msgMap = new HashMap<String,Object>();
+        msgMap.put("first", "您好，您已成功学车服务，请确认您的预约信息");
+        msgMap.put("keyword1", "芒果学车");
+        msgMap.put("keyword2", customer.getPhone());
+        msgMap.put("keyword3", "芒果学车");
+        msgMap.put("keyword4", sdf.format(new Date()));
+        msgMap.put("remark", "感谢您的使用，您可以与教练进一步联系");
+        boolean msgBl = WeixinServletUtil.sendMsg(msgUrl,customer.getOpenid(),templateId,msgMap);
+        if(msgBl){
+            logger.info("发送消息成功");
+        }
+        
 		
 		// 判断预约初级服务是否需要送卡
 		Boolean hasCard = hasCard(bt.getId(), tech, customer);
 
-		notifycationSuccess(order.getId(), customer, tech.getTechlevelno(), bt, "芒果学车场", segmentDate + " " +segmentTime + ":00", true);
+		//notifycationSuccess(order.getId(), customer, tech.getTechlevelno(), bt, "芒果学车场", segmentDate + " " +segmentTime + ":00", true);
 		
 		result.put("msg", "createorderok"); //关键信息
 		result.put("code", "appook");   //关键信息

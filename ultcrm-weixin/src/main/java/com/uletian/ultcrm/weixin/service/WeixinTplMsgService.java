@@ -59,7 +59,8 @@ public class WeixinTplMsgService {
 		tplMsg.setData(data);
 		String csAppId=weixinConfig.getAppId();
 		logger.info("current AppId:"+csAppId);
-		String csToken=TokenManager.getToken(csAppId,customer.getOpenid());
+		String csToken=TokenManager.getToken(csAppId);
+		//String csToken=TokenManager.getToken(csAppId,customer.getOpenid());
 		//String csToken = TokenManager.setToken(weixinConfig.getAppId(), weixinConfig.getAppSecret());
 		logger.info("current token:"+csToken);
 		//csToken="mHJXCzeVoL_H87u0uI85RjfC2r5oczpN_2SAHibmVKS4S1teTEYGpCOKTvDAMFK_SbEDpKTRbuAWP6PblP8eUirmGKkvY4hafi-KYzEXPuffioMHudUCaoGMDpQenr_sKSYhAGAUCI";

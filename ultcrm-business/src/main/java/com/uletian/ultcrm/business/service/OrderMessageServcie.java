@@ -4,13 +4,8 @@ package com.uletian.ultcrm.business.service;
 
 import java.util.HashMap;
 
-import javax.jms.JMSException;
-import javax.jms.Message;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jms.core.JmsTemplate;
-import org.springframework.jms.core.MessagePostProcessor;
 import org.springframework.stereotype.Component;
 
 
@@ -18,7 +13,6 @@ import com.uletian.ultcrm.business.entity.Tech;
 import com.uletian.ultcrm.business.entity.Customer;
 import com.uletian.ultcrm.business.entity.MessageTemplate;
 import com.uletian.ultcrm.business.entity.Order;
-import com.uletian.ultcrm.business.entity.Store;
 import com.uletian.ultcrm.business.repo.TechRepository;
 import com.uletian.ultcrm.business.repo.CustomerRepository;
 import com.uletian.ultcrm.business.repo.MessageTemplateRepository;
@@ -48,8 +42,9 @@ public class OrderMessageServcie {
 	@Autowired
 	private TechRepository techRepository;
 	
-	@Autowired
-	private  JmsTemplate topicJmsTemplate;
+	// wangyunjian 2017-04-08 for delete JMS
+//	@Autowired
+//	private  JmsTemplate topicJmsTemplate;
 	
 	@Autowired
 	private MessageTemplateRepository messageTemplateRepository;
@@ -79,14 +74,15 @@ public class OrderMessageServcie {
 			 
 		//topicJmsTemplate.convertAndSend("ICCRMORDER", msg);
 		logger.info("Send a order message to crm system, msg is "+msg);
-		topicJmsTemplate.convertAndSend("ICCRMORDER", msg, new MessagePostProcessor() {
-			public Message postProcessMessage(Message message)
-					throws JMSException {
-				message.setStringProperty("SENDER", "ULTCRM");
-				message.setStringProperty("ACTION", "CREATE_ORDER");
-				return message;
-			}
-		});
+		// wangyunjian 2017-04-08 for delete JMS
+//		topicJmsTemplate.convertAndSend("ICCRMORDER", msg, new MessagePostProcessor() {
+//			public Message postProcessMessage(Message message)
+//					throws JMSException {
+//				message.setStringProperty("SENDER", "ULTCRM");
+//				message.setStringProperty("ACTION", "CREATE_ORDER");
+//				return message;
+//			}
+//		});
 
 	}
 	
@@ -301,12 +297,12 @@ public class OrderMessageServcie {
 		}
 		/*		
 		create(1), working(2), complete(3), cancel(4), expire(5);
-		ZVM002,// 培训报名
-		ZVM003,// 培训确认
-		ZVM007,// 培训开始
-		ZVM008,// 培训完成
-		ZVM009,// 培训结算
-		ZVM010 // 付款	
+		MGXC02,// 培训报名
+		MGXC03,// 培训确认
+		MGXC07,// 培训开始
+		MGXC08,// 培训完成
+		MGXC09,// 培训评价
+		MGXC10 // 付款	
 		*/	
 	   //线上订单
 	   if(appointStatus != null  && (appointStatus.equals("1") || appointStatus.equals("2")))
@@ -318,7 +314,7 @@ public class OrderMessageServcie {
 		   
 		   order.setStatus(Integer.valueOf(appointStatus));
 		   
-	   }else if("ZVM008".equals(workOrderStatus) || "ZVM009".equals(workOrderStatus) || "ZVM010".equals(workOrderStatus))
+	   }else if("MGXC08".equals(workOrderStatus) || "MGXC09".equals(workOrderStatus) || "MGXC10".equals(workOrderStatus))
 		{
 		   
 			order.setStatus(3);
@@ -375,16 +371,16 @@ public class OrderMessageServcie {
 	   if(isSendSMS)
 	   {
 		   boolean isFirst007 = false;
-			////zvm007会有多次，我们只发一次
-			if(workOrderStatus.equals(Order.WorkState.ZVM007.toString()))
+			////MGXC07会有多次，我们只发一次
+			if(workOrderStatus.equals(Order.WorkState.MGXC07.toString()))
 			{
-				if(!preWorkOrderStatu.equals(Order.WorkState.ZVM007.toString()))
+				if(!preWorkOrderStatu.equals(Order.WorkState.MGXC07.toString()))
 				{
 					isFirst007 = true;	
 				}else{
 					isFirst007 = false;
 				}
-				logger.info("ZVM007: crm order status = " +workOrderStatus +" , crm order prestatus " + preWorkOrderStatu + (isFirst007? " IS first" : ""));
+				logger.info("MGXC07: crm order status = " +workOrderStatus +" , crm order prestatus " + preWorkOrderStatu + (isFirst007? " IS first" : ""));
 				
 			}
 		   
@@ -445,18 +441,18 @@ public class OrderMessageServcie {
 			
 				
 				//发送微信模板消息
-				if (Order.WorkState.ZVM002.toString().equals(status)||Order.WorkState.ZVM003.toString().equals(status)||
-						Order.WorkState.ZVM008.toString().equals(status)||
-						Order.WorkState.ZVM009.toString().equals(status) ||
-						Order.WorkState.ZVM007.toString().equals(status)||
-						Order.WorkState.ZVM010.toString().equals(status)) {
+				if (Order.WorkState.MGXC02.toString().equals(status)||Order.WorkState.MGXC03.toString().equals(status)||
+						Order.WorkState.MGXC08.toString().equals(status)||
+						Order.WorkState.MGXC09.toString().equals(status) ||
+						Order.WorkState.MGXC07.toString().equals(status)||
+						Order.WorkState.MGXC10.toString().equals(status)) {
 					
-						//zvm007会有多次，我们只发一次
-					if(Order.WorkState.ZVM007.toString().equals(status))
+						//MGXC07会有多次，我们只发一次
+					if(Order.WorkState.MGXC07.toString().equals(status))
 					{
 						    if(isFirst007)
 						    {
-						    	//logger.info("Order Status First Send ZVM007 WEIXIN MESSAGE");
+						    	//logger.info("Order Status First Send MGXC07 WEIXIN MESSAGE");
 						    	
 						    	templateQueueService.sendTemplateMessage(messageValue);
 						    }
@@ -480,8 +476,8 @@ public class OrderMessageServcie {
 	private void sendSMSMessage(String phone, String content, Long busiType, String status) {
 		status = status.replaceAll("\\n", "");
 		//发短信过滤状态.  todo： 由于短信平台的问题， 先不发短信了。
-		if (Order.WorkState.ZVM009.toString().equals(status)||
-				Order.WorkState.ZVM010.toString().equals(status)) {
+		if (Order.WorkState.MGXC09.toString().equals(status)||
+				Order.WorkState.MGXC10.toString().equals(status)) {
 		    smsQueueService.sendMessage(phone, content, null, false,"");
 		}
 	}
@@ -490,15 +486,15 @@ public class OrderMessageServcie {
 	private String parseDesc(String crmOrderstatus) {
 		String desc = "";
 		crmOrderstatus = crmOrderstatus.replaceAll("\\n", "");
-		if (Order.WorkState.ZVM002.toString().equals(crmOrderstatus)) {
+		if (Order.WorkState.MGXC02.toString().equals(crmOrderstatus)) {
 			desc = "\n尊敬的用户，您的服务已完成报名确认，点击详情可查看具体内容。";
-		} else if (Order.WorkState.ZVM003.toString().equals(crmOrderstatus)) {
+		} else if (Order.WorkState.MGXC03.toString().equals(crmOrderstatus)) {
 			desc = "\n尊敬的用户，您的服务方案已确认，点击详情可查看具体内容。";
-		} else if (Order.WorkState.ZVM007.toString().equals(crmOrderstatus)) {
+		} else if (Order.WorkState.MGXC07.toString().equals(crmOrderstatus)) {
 			desc = "\n尊敬的用户，您的服务业务已开始，点击详情可查看服务环节。";
-		} else if (Order.WorkState.ZVM008.toString().equals(crmOrderstatus)) {
+		} else if (Order.WorkState.MGXC08.toString().equals(crmOrderstatus)) {
 			desc = "\n尊敬的用户，您的服务已完成，点击详情可查看服务环节。";
-		} else if (Order.WorkState.ZVM009.toString().equals(crmOrderstatus)) {
+		} else if (Order.WorkState.MGXC09.toString().equals(crmOrderstatus)) {
 			desc = "\n尊敬的用户，您有如上消费信息，如需了解请点击详情查看。";
 		} else {			
 			desc += "\n点击详情查看详细信息";
@@ -509,7 +505,7 @@ public class OrderMessageServcie {
 
 	private String parseAmount(Order order) {
 		String amountStr = "";
-		if (Order.WorkState.ZVM009.toString().equals(order.getCrmOrderstatus())) {
+		if (Order.WorkState.MGXC09.toString().equals(order.getCrmOrderstatus())) {
 			amountStr = "\n消费金额：" + order.getCrmTotalAmount();
 		}
 		return amountStr;
@@ -520,16 +516,16 @@ public class OrderMessageServcie {
 		String workState = "";
 		logger.debug("当前订单状态为：" + crmOrderstatus.trim());
 		crmOrderstatus = crmOrderstatus.replaceAll("\\n", "");
-		if (Order.WorkState.ZVM002.toString().equals(crmOrderstatus.trim())) {
+		if (Order.WorkState.MGXC02.toString().equals(crmOrderstatus.trim())) {
 			workState = "到店报名";
-		} else if (Order.WorkState.ZVM003.toString().equals(crmOrderstatus)) {
+		} else if (Order.WorkState.MGXC03.toString().equals(crmOrderstatus)) {
 			workState = "报名确认";
-		} else if (Order.WorkState.ZVM007.toString().equals(crmOrderstatus)) {
+		} else if (Order.WorkState.MGXC07.toString().equals(crmOrderstatus)) {
 			workState = "开始培训";
-		} else if (Order.WorkState.ZVM008.toString().equals(crmOrderstatus)) {
+		} else if (Order.WorkState.MGXC08.toString().equals(crmOrderstatus)) {
 			workState = "培训完成";
-		} else if (Order.WorkState.ZVM009.toString().equals(crmOrderstatus)) {
-			workState = "结算";
+		} else if (Order.WorkState.MGXC09.toString().equals(crmOrderstatus)) {
+			workState = "评价";
 		} else {			
 		}
 		return workState;

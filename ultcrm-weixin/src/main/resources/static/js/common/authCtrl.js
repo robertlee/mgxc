@@ -6,7 +6,8 @@ app.controller('authCtrl', function($scope,$location) {
 	
 	var appid = searchObject['appid'];
 	var returnUrl = searchObject['returnUrl'];
-	
-	window.location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid="+appid+"&redirect_uri="+returnUrl+"&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
+	//robert lee
+	//2017-4-6
+	window.location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid="+appid+"&redirect_uri="+returnUrl+"&response_type=code&scope=snsapi_userinfo&state=home#wechat_redirect";
 	
 });

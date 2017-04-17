@@ -1,6 +1,6 @@
 //home页面的控制器
 ultcrm.controller('coachDetailCtrl', function($scope,$http,$state,$stateParams,$window,$location,$sanitize,$ionicPopup,$ionicSlideBoxDelegate,appointmentStore,customerDataService,defaultURL) {
-	$scope.defaultURL = defaultURL.url+":"+defaultURL.port+defaultURL.path;
+	
 	$scope.id=$stateParams.id;
 	console.log($scope.id);
 	
@@ -32,6 +32,10 @@ ultcrm.controller('coachDetailCtrl', function($scope,$http,$state,$stateParams,$
 	$scope.toServicePage = function(id){
 		$state.go("index.timesegment",{id:id},{reload:true}); 
 	}	
-	
+	$scope.toLocation = function(id){
+		//$state.go('index.coachlist',{},{reload:true});
+		//itemType为2表示训练场跳至导航页面
+		$state.go("index.location",{itemType:2,id:id},{reload:true}); 
+	}	
 });
 

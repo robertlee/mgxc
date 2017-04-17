@@ -8,6 +8,7 @@ import org.apache.http.client.methods.RequestBuilder;
 import org.apache.http.entity.StringEntity;
 import org.apache.log4j.Logger;
 
+import weixin.popular.bean.Token;
 import weixin.popular.bean.BaseResult;
 import weixin.popular.bean.FollowResult;
 import weixin.popular.bean.Group;
@@ -26,7 +27,7 @@ public class WeixinAPI extends BaseAPI {
 	 * @param redirectUrl
 	 * @return
 	 */
-	public static Map<?, ?> GetWeiXinCodeURL(String appId, String appSecret,
+	public static Map GetWeiXinCodeURL(String appId, String appSecret,
 			String scope,
 			String redirectUrl) {
 		/*
@@ -41,8 +42,8 @@ public class WeixinAPI extends BaseAPI {
 					.addParameter("appId", appId)
 					.addParameter("secret", appSecret).addParameter("redirectUrl", redirectUrl)
 					.build();
-		*/
-		
+		*/		
+
 		
 		 /*
 		 // 微信OpenId授权
@@ -76,7 +77,9 @@ public class WeixinAPI extends BaseAPI {
 	 * @param openid
 	 * @return
 	 */
-	public static Map<?, ?> getOpenId(String code,String appId,String secret,String  grant_type) {
+	public static Map getOpenId(String code,String appId,String secret,String  grant_type) {
+		
+		
 		logger.info("start get openid with code "+code);
 		HttpUriRequest httpUriRequest = RequestBuilder.post()
 				.setUri(BASE_URI + "/sns/oauth2/access_token")
@@ -95,12 +98,31 @@ public class WeixinAPI extends BaseAPI {
 	 * @param openid
 	 * @return
 	 */
-	public static UserInfo userInfo(String access_token, String openid) {
-		logger.info("start get userInfo with access_token "+access_token+" and openid "+openid);
+		/**
+	 * 获取access_token
+	 * @param appid
+	 * @param secret
+	 * @return
+	 */
+	public static Token getToken(String appId,String secret){
 		HttpUriRequest httpUriRequest = RequestBuilder.post()
-				.setUri(BASE_URI + "/sns/userinfo")
+				.setUri(BASE_URI + "/cgi-bin/token")
+				.addParameter("grant_type","client_credential")
+				.addParameter("appid", appId)
+				.addParameter("secret", secret)
+				.build();
+		return LocalHttpClient.executeJsonResult(httpUriRequest,Token.class);
+	} 
+	
+	public static UserInfo userInfo(String access_token, String openid) {
+		
+		logger.info("start get userInfo with access_token:["+access_token+"]openid:[ "+openid+"]");
+		logger.info("cmd:["+BASE_URI+"/cgi-bin/user/info&access_token="+access_token+"&openid="+openid+"]");
+		
+		HttpUriRequest httpUriRequest = RequestBuilder.post()			      
+		         	.setUri(BASE_URI+"/cgi-bin/user/info")
 				.addParameter("access_token", access_token)
-				.addParameter("openid", openid).addParameter("lang", "zh_CN")
+				.addParameter("openid", openid)		
 				.build();
 		return LocalHttpClient.executeJsonResult(httpUriRequest, UserInfo.class);
 	}
@@ -187,8 +209,7 @@ public class WeixinAPI extends BaseAPI {
 	 *            分组名
 	 * @return
 	 */
-	public static BaseResult<?> groupsUpdate(String access_token, String id,
-			String name) {
+	public static BaseResult groupsUpdate(String access_token, String id,String name) {
 		String groupJson = "{\"group\":{\"id\":" + id + ",\"name\":\"" + name
 				+ "\"}}";
 		HttpUriRequest httpUriRequest = RequestBuilder
@@ -211,7 +232,7 @@ public class WeixinAPI extends BaseAPI {
 	 * @param to_groupid
 	 * @return
 	 */
-	public static BaseResult<?> groupsMembersUpdate(String access_token,
+	public static BaseResult groupsMembersUpdate(String access_token,
 			String openid, String to_groupid) {
 		String groupJson = "{\"openid\":\"" + openid + "\",\"to_groupid\":"
 				+ to_groupid + "}";

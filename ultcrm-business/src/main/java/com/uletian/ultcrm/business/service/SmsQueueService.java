@@ -1,7 +1,5 @@
 package com.uletian.ultcrm.business.service;
 
-import java.io.IOException;
-import java.io.StringWriter;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.sql.Timestamp;
@@ -10,33 +8,15 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
-import javax.jms.Destination;
-import javax.jms.JMSException;
-import javax.jms.Message;
-import javax.jms.MessageListener;
-import javax.jms.Session;
-import javax.jms.TextMessage;
 import javax.servlet.http.HttpServletRequest;
 
-import org.dom4j.Document;
-import org.dom4j.DocumentException;
-import org.dom4j.DocumentHelper;
-import org.dom4j.Element;
-import org.dom4j.Namespace;
-import org.dom4j.QName;
-import org.dom4j.io.OutputFormat;
-import org.dom4j.io.XMLWriter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.jms.JmsException;
-import org.springframework.jms.core.JmsTemplate;
-import org.springframework.jms.core.MessageCreator;
+//import org.springframework.jms.JmsException;
 import org.springframework.stereotype.Component;
 
-import com.uletian.ultcrm.business.entity.SmsMessage;
 import com.uletian.ultcrm.business.entity.SmsSend;
 import com.uletian.ultcrm.business.repo.SmsSendRepository;
 import com.uletian.ultcrm.business.value.Result;
@@ -60,24 +40,28 @@ import com.aliyuncs.sms.model.v20160927.SingleSendSmsResponse;
  *
  */
 @Component
-public class SmsQueueService implements MessageListener {
+//wangyunjian 2017-04-08 for delete JMS
+public class SmsQueueService //implements MessageListener 
+{
 
 	private static final Logger logger = LoggerFactory.getLogger(SmsQueueService.class);
 
-	@Autowired
-	private JmsTemplate jmsTemplate; 
+	// wangyunjian 2017-04-08 for delete JMS
+//	@Autowired
+//	private JmsTemplate jmsTemplate; 
 	 
 	@Autowired
 	private SmsSendRepository smsSendRepository;
 
 	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	
-	@Qualifier("smsQueue")
-	@Autowired
-	private Destination smsQueue;
-
-	@Autowired
-	private SMSSender sender;
+	// wangyunjian 2017-04-08 for delete JMS
+//	@Qualifier("smsQueue")
+//	@Autowired
+//	private Destination smsQueue;
+//
+//	@Autowired
+//	private SMSSender sender;
 
 	@Value("${smsservice}")
 	private String smsService;
@@ -121,7 +105,8 @@ public class SmsQueueService implements MessageListener {
 					logger.warn("recevice report msg is failed");
 					result.setMsg("ip send ok");
 				} else {
-					jmsTemplate.send(smsQueue, new SMSMessageCreator(phone, content, ipaddress));
+					// wangyunjian 2017-04-08 for delete JMS
+//					jmsTemplate.send(smsQueue, new SMSMessageCreator(phone, content, ipaddress));
 				}	
 			}else{
 //				String httpArg = "mobile=" + phone + "&content=【芒果学车】" + content;
@@ -143,9 +128,9 @@ public class SmsQueueService implements MessageListener {
 				result.setMsg("sendMessage is pass");
 				result.setResult(true);
 			}
-		} catch (JmsException e) {
-			result.setMsg("发送短信出错");
-			logger.error("发送短信出错", e);
+//		} catch (JmsException e) {
+//			result.setMsg("发送短信出错");
+//			logger.error("发送短信出错", e);
 		} catch (ParseException e) {
 			result.setMsg("发送短信出错");
 			logger.error("发送短信出错", e);
@@ -220,52 +205,53 @@ public class SmsQueueService implements MessageListener {
         return result;
     }
 
-	@Override
-	public void onMessage(Message message) {
-		TextMessage textMsg = (TextMessage) message;
-		
-		StringWriter writer = new StringWriter();
-		OutputFormat format = OutputFormat.createPrettyPrint();
-		format.setEncoding("UTF-8");
-		XMLWriter xmlwriter = new XMLWriter(writer, format);
-		Document doc;
-		try {
-			doc = DocumentHelper.parseText(textMsg.getText());
-			xmlwriter.write(doc);
-			logger.info("收到报文 ：\n" + writer.toString() + "");
-			Element element = doc.getRootElement();
-			xmlwriter.write(doc);
-			
-			Element sms = element.element("sms");
-			String phone = sms.elementText("phone");
-			String content = sms.elementText("content");
-			String ipaddress = sms.elementText("ipaddress");
-			String from = sms.elementText("from");
-			
-			//String httpArg = "mobile=" + phone + "&content=【芒果学车】" + content;
-			//String jsonResult = smsRequest(smsUrl, httpArg);			
-
-			SmsSend smsSend = new SmsSend();
-			smsSend.setContent("【芒果学车】"+content);
-			smsSend.setPhone(phone);
-			smsSend.setIpaddress(ipaddress);
-			if ("CRM".equals(from)) {
-				smsSend.setTypeid(2L);
-			} else {
-				smsSend.setTypeid(1L);
-			}
-			// 测试环境发送的短信内容前增加标注
-			if (!Boolean.parseBoolean(smsService)) {
-				smsSend.setContent("(测试短信)" + smsSend.getContent());
-			}
-			String responseStr = sender.send(new SmsMessage(smsSend.getPhone(), smsSend.getContent()));
-			smsSend.setResultPackage(responseStr);
-			logger.debug("短信发送结果：\n"+responseStr);
-			smsSendRepository.save(smsSend);
-		} catch (JMSException | IOException | DocumentException  e) {
-			logger.warn("发送短信出错", e);
-		}
-	}
+    // wangyunjian 2017-04-08 for delete JMS
+//	@Override
+//	public void onMessage(Message message) {
+//		TextMessage textMsg = (TextMessage) message;
+//		
+//		StringWriter writer = new StringWriter();
+//		OutputFormat format = OutputFormat.createPrettyPrint();
+//		format.setEncoding("UTF-8");
+//		XMLWriter xmlwriter = new XMLWriter(writer, format);
+//		Document doc;
+//		try {
+//			doc = DocumentHelper.parseText(textMsg.getText());
+//			xmlwriter.write(doc);
+//			logger.info("收到报文 ：\n" + writer.toString() + "");
+//			Element element = doc.getRootElement();
+//			xmlwriter.write(doc);
+//			
+//			Element sms = element.element("sms");
+//			String phone = sms.elementText("phone");
+//			String content = sms.elementText("content");
+//			String ipaddress = sms.elementText("ipaddress");
+//			String from = sms.elementText("from");
+//			
+//			//String httpArg = "mobile=" + phone + "&content=【芒果学车】" + content;
+//			//String jsonResult = smsRequest(smsUrl, httpArg);			
+//
+//			SmsSend smsSend = new SmsSend();
+//			smsSend.setContent("【芒果学车】"+content);
+//			smsSend.setPhone(phone);
+//			smsSend.setIpaddress(ipaddress);
+//			if ("CRM".equals(from)) {
+//				smsSend.setTypeid(2L);
+//			} else {
+//				smsSend.setTypeid(1L);
+//			}
+//			// 测试环境发送的短信内容前增加标注
+//			if (!Boolean.parseBoolean(smsService)) {
+//				smsSend.setContent("(测试短信)" + smsSend.getContent());
+//			}
+//			String responseStr = sender.send(new SmsMessage(smsSend.getPhone(), smsSend.getContent()));
+//			smsSend.setResultPackage(responseStr);
+//			logger.debug("短信发送结果：\n"+responseStr);
+//			smsSendRepository.save(smsSend);
+//		} catch (JMSException | IOException | DocumentException  e) {
+//			logger.warn("发送短信出错", e);
+//		}
+//	}
 
 	private boolean checkipaddress(String ipaddress) throws ParseException {
 		boolean result = false;
@@ -334,30 +320,31 @@ public class SmsQueueService implements MessageListener {
 		}
 		return ipAddress;
 	}
-	
-	private class SMSMessageCreator implements MessageCreator{
-		private String phone;
-		private String content;
-		private String ipaddress;
-
-		public SMSMessageCreator(String phone,String content,String ipaddress){
-			this.phone = phone;
-			this.content = content;
-			this.ipaddress = ipaddress;
-		}
-
-		@Override
-		public Message createMessage(Session session) throws JMSException {
-			Document doc = DocumentHelper.createDocument();
-			Namespace namespace = new Namespace("ns0", "http://crm/ultjjy.cn");
-			Element root = doc.addElement(new QName("message", namespace));
-
-			Element sms = root.addElement(new QName("sms"));
-			sms.addElement(new QName("phone")).addText(phone);
-			sms.addElement(new QName("content")).addCDATA(content);
-			sms.addElement(new QName("from")).addText("ULTCRM");
-			sms.addElement(new QName("ipaddress")).addText(ipaddress == null ? "" : ipaddress);
-			return session.createTextMessage(doc.asXML());
-		}
-	}
+	//wangyunjian 2017-04-08 to delete JMS
+//	private class SMSMessageCreator implements MessageCreator{
+//		private String phone;
+//		private String content;
+//		private String ipaddress;
+//
+//		public SMSMessageCreator(String phone,String content,String ipaddress){
+//			this.phone = phone;
+//			this.content = content;
+//			this.ipaddress = ipaddress;
+//		}
+//
+//		//wangyunjian 2017-04-08 to delete JMS
+////		@Override
+////		public Message createMessage(Session session) throws JMSException {
+////			Document doc = DocumentHelper.createDocument();
+////			Namespace namespace = new Namespace("ns0", "http://crm/ultjjy.cn");
+////			Element root = doc.addElement(new QName("message", namespace));
+////
+////			Element sms = root.addElement(new QName("sms"));
+////			sms.addElement(new QName("phone")).addText(phone);
+////			sms.addElement(new QName("content")).addCDATA(content);
+////			sms.addElement(new QName("from")).addText("ULTCRM");
+////			sms.addElement(new QName("ipaddress")).addText(ipaddress == null ? "" : ipaddress);
+////			return session.createTextMessage(doc.asXML());
+////		}
+//	}
 }

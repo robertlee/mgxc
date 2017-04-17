@@ -3,9 +3,10 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans 
-	   					   http://www.springframework.org/schema/beans/spring-beans.xsd">
+                 http://www.springframework.org/schema/beans/spring-beans.xsd">
 
    <!-- 定义主题 -->  
+   <!-- //wangyunjian 2017-04-08 to delete JMS
     <bean id="myTopic"  class="org.apache.activemq.command.ActiveMQTopic">  
       <constructor-arg value="ULTCRMORDER"/>  
     </bean>
@@ -25,9 +26,10 @@
     <bean id="scoreTopic"  class="org.apache.activemq.command.ActiveMQTopic">  
       <constructor-arg value="SCORE"/>  
     </bean>
-
+-->
  
    <!-- Spring JMS Template -->
+   <!-- // wangyunjian 2017-04-08 for delete JMS
    <bean id="topicJmsTemplate" class="org.springframework.jms.core.JmsTemplate">
       <property name="connectionFactory">
         <ref bean="jmsFactory"/>
@@ -35,24 +37,32 @@
       <property name="pubSubDomain" value="true" />
       <property name="receiveTimeout" value="30000" /> 
    </bean>
-   
+   -->
     
-	<bean id="orderStatustopicMsgReceiver" class="com.uletian.ultcrm.business.service.OrderStatusMessageListener">  
+    <!-- // wangyunjian 2017-04-08 for delete JMS
+  <bean id="orderStatustopicMsgReceiver" class="com.uletian.ultcrm.business.service.OrderStatusMessageListener">  
     </bean> 
-           
-	<bean id="scoreMsgService" class="com.uletian.ultcrm.business.msg.ScoreMsgService">  
-    </bean>
+    -->
     
+    <!-- // wangyunjian 2017-04-08 for delete JMS
+  <bean id="scoreMsgService" class="com.uletian.ultcrm.business.msg.ScoreMsgService">  
+    </bean>
+    -->
+    <!-- // wangyunjian 2017-04-08 for delete JMS
     <bean id="couponMsgService" class="com.uletian.ultcrm.business.msg.CouponMsgService">  
     </bean>
-    
+    -->
+    <!-- // wangyunjian 2017-04-08 for delete JMS
     <bean id="cardMsgService" class="com.uletian.ultcrm.business.msg.CardMsgService">  
     </bean>
+     -->
     
     <!-- 客户数据同步 -->
-	<bean id="customerInfoService" class="com.uletian.ultcrm.business.service.CustomerInfoMessageService">  
+    <!-- // wangyunjian 2017-04-08 for delete JMS
+  <bean id="customerInfoService" class="com.uletian.ultcrm.business.service.CustomerInfoMessageService">  
     </bean>
-   
+   -->
+   <!-- // wangyunjian 2017-04-08 for delete JMS
     <bean id="orderStatuslistenerContainer"    
         class="org.springframework.jms.listener.DefaultMessageListenerContainer">    
         <property name="connectionFactory" ref="jmsFactory" />    
@@ -63,9 +73,9 @@
         <property name="messageSelector" value="SENDER = 'CRM'"/> 
         <property name="messageListener" ref="orderStatustopicMsgReceiver" />
     </bean>
-       
+       -->
+    <!-- // wangyunjian 2017-04-08 for delete JMS
     <bean id="customerInfolistenerContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">    
-
         <property name="connectionFactory" ref="jmsFactory" />
         <property name="pubSubDomain" value="true"/>
         <property name="destination" ref="customerTopic" />
@@ -74,7 +84,8 @@
         <property name="messageSelector" value="SENDER = 'CRM'"/>
         <property name="messageListener" ref="customerInfoService" />
     </bean>
-    
+    -->
+    <!-- // wangyunjian 2017-04-08 for delete JMS
     <bean id="scoreMsgServiceContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">    
         <property name="connectionFactory" ref="jmsFactory" />    
         <property name="pubSubDomain" value="true"/>
@@ -104,41 +115,45 @@
          <property name="messageSelector" value="SENDER = 'CRM'"/>
         <property name="messageListener" ref="cardMsgService" />
     </bean>
-     
-	<bean id="smsQueue" class="org.apache.activemq.command.ActiveMQQueue">
-		<constructor-arg>
-			<value>smsQueue</value>
-		</constructor-arg>
-	</bean>
-	
- 	<!-- 短信发送队列  -->
-	<bean id="smsQueueListener" class="com.uletian.ultcrm.business.service.SmsQueueService" />
-	<bean id="responseQueueMessageListenerContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
-		<property name="connectionFactory" ref="jmsFactory" />
-		<property name="destination" ref="smsQueue" />
-		<property name="messageListener" ref="smsQueueListener" />
-	</bean>
-	<bean id="templateMessageQueue" class="org.apache.activemq.command.ActiveMQQueue">
-		<constructor-arg>
-			<value>templateMessageQueue</value>
-		</constructor-arg>
-	</bean>
-	<bean id="templateMessageQueueListener" class="com.uletian.ultcrm.weixin.service.TemplateMessageQueueListener" />
-	<bean id="templateQueueMessageListenerContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
-		<property name="connectionFactory" ref="jmsFactory" />
-		<property name="destination" ref="templateMessageQueue" />
-		<property name="messageListener" ref="templateMessageQueueListener" />
-	</bean>
-	 
-	 <bean id="eventMessageQueue" class="org.apache.activemq.command.ActiveMQQueue">
-		<constructor-arg>
-			<value>eventMessageQueue</value>
-		</constructor-arg>
-	</bean>
-	<bean id="eventMessageQueueListener" class="com.uletian.ultcrm.business.service.EventMessageService" />
-	<bean id="eventQueueMessageListenerContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
-		<property name="connectionFactory" ref="jmsFactory" />
-		<property name="destination" ref="eventMessageQueue" />
-		<property name="messageListener" ref="eventMessageQueueListener" />
-	</bean>
+     -->
+     <!-- // wangyunjian 2017-04-08 for delete JMS
+  <bean id="smsQueue" class="org.apache.activemq.command.ActiveMQQueue">
+    <constructor-arg>
+      <value>smsQueue</value>
+    </constructor-arg>
+  </bean>
+  -->
+  <!-- 短信发送队列  -->
+  <!-- // wangyunjian 2017-04-08 for delete JMS
+  <bean id="smsQueueListener" class="com.uletian.ultcrm.business.service.SmsQueueService" />
+  <bean id="responseQueueMessageListenerContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+    <property name="connectionFactory" ref="jmsFactory" />
+    <property name="destination" ref="smsQueue" />
+    <property name="messageListener" ref="smsQueueListener" />
+  </bean>
+  <bean id="templateMessageQueue" class="org.apache.activemq.command.ActiveMQQueue">
+    <constructor-arg>
+      <value>templateMessageQueue</value>
+    </constructor-arg>
+  </bean>
+  <bean id="templateMessageQueueListener" class="com.uletian.ultcrm.weixin.service.TemplateMessageQueueListener" />
+  <bean id="templateQueueMessageListenerContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+    <property name="connectionFactory" ref="jmsFactory" />
+    <property name="destination" ref="templateMessageQueue" />
+    <property name="messageListener" ref="templateMessageQueueListener" />
+  </bean>
+   
+   <bean id="eventMessageQueue" class="org.apache.activemq.command.ActiveMQQueue">
+    <constructor-arg>
+      <value>eventMessageQueue</value>
+    </constructor-arg>
+  </bean>
+  
+  <bean id="eventMessageQueueListener" class="com.uletian.ultcrm.business.service.EventMessageService" />
+  <bean id="eventQueueMessageListenerContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+    <property name="connectionFactory" ref="jmsFactory" />
+    <property name="destination" ref="eventMessageQueue" />
+    <property name="messageListener" ref="eventMessageQueueListener" />
+  </bean>
+  -->
 </beans>

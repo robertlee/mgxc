@@ -53,7 +53,7 @@
 					<div class="order-text">						
 						<div class="techlevelno">业务名称:{{order.classname}}</div>						
 						<div class="techlevelno">费用:{{order.price| currency:"￥"}}</div>						
-						<div class="time" ng-if="newActive">学车时间:{{order.classTimeDetail}}</div>
+						<div class="time" ng-if="newActive && (order.busitypeid==null || order.busitypeid>=40)">预约时间:{{order.classTimeDetail}}</div>
 	        			<div class="time" ng-if="workingActive">结课时间:{{order.sapPlanFinishedtimeStr||formatTime(order.sapPlanFinishedtime)}}</div>
 	        			<div class="time" ng-if="completeActive">结课时间:{{order.sapPlanFinishedtimeStr||formatTime(order.sapPlanFinishedtime)}}</div>	
 	        			<div class="time" ng-if="commentActive">结课时间:{{order.sapPlanFinishedtimeStr||formatTime(order.sapPlanFinishedtime)}}</div>	
@@ -63,7 +63,7 @@
 				<div class="item-single flexible button-group" ng-if="newActive" > 
 		        	<div class="row">
 		        		<div class="col"></div>
-						<button class="button button-outline-custom" ng-click="modifyTime(order)">修改时间</button>
+						<button class="button button-outline-custom" ng-if="order.busitypeid==null || order.busitypeid>=40" ng-click="modifyTime(order)">修改时间</button>
 						<button class="button button-outline-custom"  ng-click="viewNewOrder(order)">查看详情</button>
 		        	</div>
 			  	</div>

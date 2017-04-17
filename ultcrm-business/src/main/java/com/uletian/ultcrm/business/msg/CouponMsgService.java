@@ -7,20 +7,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.jms.JMSException;
-import javax.jms.Message;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jms.core.JmsTemplate;
-import org.springframework.jms.core.MessagePostProcessor;
 import org.springframework.stereotype.Component;
 
 import com.uletian.ultcrm.business.entity.Coupon;
-import com.uletian.ultcrm.business.entity.Coupon;
 import com.uletian.ultcrm.business.service.CouponService;
-import com.uletian.ultcrm.business.value.CouponMessage;
 import com.uletian.ultcrm.business.value.CouponMessage;
 import com.uletian.ultcrm.business.value.MsgConstants;
 import com.uletian.ultcrm.business.value.CouponMessage.CouponContent;
@@ -35,8 +29,9 @@ public class CouponMsgService extends AbstractMsgHandler {
 	private static Logger logger = Logger.getLogger(CouponMsgService.class);
 	public static String COUPON_TOPIC = "COUPON";
 	
-	@Autowired
-	private JmsTemplate topicJmsTemplate;
+	// wangyunjian 2017-04-08 for delete JMS
+//	@Autowired
+//	private JmsTemplate topicJmsTemplate;
 	
 	@Autowired
 	private CouponService couponService;
@@ -53,14 +48,15 @@ public class CouponMsgService extends AbstractMsgHandler {
 		
 		String xmlString = this.convertObjectToMsgString(CouponMessage, "coupons");
 		logger.info("ultcrm publish a coupon msg, msg is "+xmlString);
-		topicJmsTemplate.convertAndSend(COUPON_TOPIC, xmlString, new MessagePostProcessor() {
-			public Message postProcessMessage(Message message)
-					throws JMSException {
-				message.setStringProperty("SENDER", "ICCRM");
-				message.setStringProperty("ACTION", "PUBLISH");
-				return message;
-			}
-		});
+		// wangyunjian 2017-04-08 for delete JMS
+//		topicJmsTemplate.convertAndSend(COUPON_TOPIC, xmlString, new MessagePostProcessor() {
+//			public Message postProcessMessage(Message message)
+//					throws JMSException {
+//				message.setStringProperty("SENDER", "ICCRM");
+//				message.setStringProperty("ACTION", "PUBLISH");
+//				return message;
+//			}
+//		});
 	}
 	
 	// 下发次卡
@@ -70,14 +66,15 @@ public class CouponMsgService extends AbstractMsgHandler {
 		
 		String xmlString = this.convertObjectToMsgString(CouponMessage, "coupons");
 		logger.info("ultcrm publish a coupon msg, msg is "+xmlString);
-		topicJmsTemplate.convertAndSend(COUPON_TOPIC, xmlString, new MessagePostProcessor() {
-			public Message postProcessMessage(Message message)
-					throws JMSException {
-				message.setStringProperty("SENDER", "ICCRM");
-				message.setStringProperty("ACTION", "CANCEL");
-				return message;
-			}
-		});
+		// wangyunjian 2017-04-08 for delete JMS
+//		topicJmsTemplate.convertAndSend(COUPON_TOPIC, xmlString, new MessagePostProcessor() {
+//			public Message postProcessMessage(Message message)
+//					throws JMSException {
+//				message.setStringProperty("SENDER", "ICCRM");
+//				message.setStringProperty("ACTION", "CANCEL");
+//				return message;
+//			}
+//		});
 	}
 	
 	public CouponMessage convertToCouponMessage(Coupon coupon,String action) {

@@ -1,0 +1,50 @@
+<link rel="stylesheet" href="/css/service/style.css"> 
+
+<ion-view view-title="芒果学车●业务详情页">
+	<ion-content direction="y" class="activityDetail-content">		     		
+		<div class="fixtop hasmenu tc-theme">
+		<a ng-click="goHomePage()"></a>
+		<div class="uc-center">考证服务</div>
+		<a href="javascript:;" class="btn">&nbsp;</a>
+	</div>
+	<div class="tc-bg tc-mt">
+		<div class="tc-le">
+			<h1>{{business.name}}</h1>
+			<div class="aq">服务特点: 价格适中，时间可控</div>
+			<div class="gr2">
+				<i class="price">¥<strong>{{business.cost}}</strong>.00</i>
+				<span class="w1">6个月拿证</span>
+			</div>
+		</div>
+		<img src="{{business.pic}}" class="tc-lb">
+	</div>
+	<div class="tc-ltype"></div>
+	<div class="tc-intro">
+		<div class="tit">深圳学车服务包含以下服务</div>
+		<ul>
+		<li>1人1车，微信随时在线约车</li>
+		<li>车管所考试费</li>
+		<li>练车费 20 个小时(没用完可退)</li>
+		<li>韶关长训费（赠送）</li>
+		<li>保险费</li><li>桔子服务费(200元)</li>
+		</ul>
+	</div>
+	<div class="tc-intro">
+		<div class="tit">不包含以下服务</div>
+		<ul>
+			<li>补考费（科目一35元 / 科目二65元 / 科目三140元）</li>
+			<li>照相及体检费</li>
+		</ul>
+	</div>
+	<div class="tc-intro">
+		<div class="tit">报名条件</div>
+		<ul>
+			<li>深圳有效居住6个月 (可找芒果学车查询)</li>
+			<li>年龄45岁以下</li>
+			<li>无色盲，色弱，身体残疾等</li>
+		</ul>
+	</div>
+
+	</ion-content>
+</ion-view>
+

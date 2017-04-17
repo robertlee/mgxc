@@ -1,5 +1,5 @@
 
-ultcrm.controller('serviceStoreCtrl', function($scope,$http,$state,$stateParams,$window,$location,$sanitize,$ionicPopup,$ionicSlideBoxDelegate,appointmentService,customerData,defaultURL) 
+ultcrm.controller('serviceStoreCtrl', function($scope,$http,$state,$stateParams,$window,$location,$sanitize,$ionicPopup,$ionicSlideBoxDelegate,appointmentService,appointmentStore,customerData,defaultURL) 
 {	
 	var iContent = 0;
 
@@ -19,6 +19,7 @@ ultcrm.controller('serviceStoreCtrl', function($scope,$http,$state,$stateParams,
 
 	$scope.selectSite=function(selectedSite){
 		$http.get('/getStoreAllList/'+selectedSite).success(function(result) {
+			console.log(result);
         	//先清空原始数据
         	$scope.storeList = new Array();        	
 		    iContent = 0;	
@@ -36,7 +37,10 @@ ultcrm.controller('serviceStoreCtrl', function($scope,$http,$state,$stateParams,
         });			
 		
 	};	
-
+	//前往首页页面
+	$scope.goHomePage = function(){
+		$state.go('index.home',{},{reload:true});
+	}
 	
 	$scope.selectStore = function(item){
 		// 返回到服务页面
@@ -45,8 +49,10 @@ ultcrm.controller('serviceStoreCtrl', function($scope,$http,$state,$stateParams,
 		$state.go('index.coachlist',{},{reload:true});
 	}
 	// 导航
-	$scope.toDirect = function(){
-		$state.go("index.direct"); 
+	$scope.toLocation = function(id){
+		//$state.go('index.coachlist',{},{reload:true});
+		//itemType为2表示训练场跳至导航页面
+		$state.go("index.location",{itemType:2,id:id},{reload:true}); 
 	}
 	
 });

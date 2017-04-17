@@ -24,6 +24,7 @@ import com.uletian.ultcrm.business.service.CustomerService;
 import com.uletian.ultcrm.business.service.EventMessageService;
 
 import com.uletian.ultcrm.business.service.WeixinConfig;
+import com.uletian.ultcrm.weixin.service.WeixinAuthService;
 
 
 /**
@@ -54,6 +55,8 @@ public class SubscribeEventHandler implements EventHandler{
 	@Autowired
 	private EventMessageService eventMessageService;
 	
+	@Autowired
+	private WeixinAuthService weixinAuthService;	
 	/**
 	 * 关注的时候，创建客户信息
 	 * @throws UnsupportedEncodingException 
@@ -61,29 +64,25 @@ public class SubscribeEventHandler implements EventHandler{
 	@Override
 	public XMLMessage handleEvent(EventMessage eventMessage)  {
 		// 获取用户的授权，获取用户的详细信息，然后通过openId创建用户
-		// 第一步获取code
-		
-		logger.debug("eventMessage is "+eventMessage.toString());
-		String returnUrl = "";
-		
-		try {
-
-			returnUrl = URLEncoder.encode(weixinConfig.getHostPath() + "/getWeixinUserInfo", "UTF-8");
-
-		} catch (UnsupportedEncodingException e) {
-			logger.error("encode url error.",e);
-		}
-		
-		Config config = null;
-		
-		
-		Customer customer = customerService.getCustomerByOpenId(eventMessage.getFromUserName());
+		// 第一步获取code		
+		logger.debug("eventMessage is "+eventMessage.toString());		
+		Config config = null;		
+		String csOpenid=eventMessage.getFromUserName();
+		Customer customer = customerService.getCustomerByOpenId(csOpenid);
 		// 首次关注
 		if (customer == null) {
-			config = configRepository.findByCode(WEIXIN_WELCOME);
+			//Author:robert Lee
+			//Date: 2017-04-06				
+			logger.info("首次关注生成用户并赠送10元 openid =>" +csOpenid );	
+			config = configRepository.findByCode(WEIXIN_WELCOME);	
+
+				
 			customer = new Customer();
-			logger.info("首次关注生成用户并赠送 openid =>" + eventMessage.getFromUserName());
-			customer.setOpenid(eventMessage.getFromUserName());
+			//customer = weixinAuthService.getWeixinUserInfo(csOpenid);			
+			customer = weixinAuthService.getUserInfo(csOpenid);
+			
+			
+			customer.setOpenid(csOpenid);		
 			customerService.createCustomer(customer);
 			
 			Event event = eventRepository.findEventByCode("firstjoin");

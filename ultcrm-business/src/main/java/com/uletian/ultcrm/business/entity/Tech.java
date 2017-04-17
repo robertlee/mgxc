@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
-import org.apache.http.client.utils.DateUtils;
+import com.uletian.ultcrm.common.util.DateUtils;
 
 import java.sql.Timestamp;
 import java.util.Date;

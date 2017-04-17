@@ -1,14 +1,13 @@
 <style type="text/css" rel="stylesheet">
-	.nav{
-		background: #ffda44;
+	.nav{		
 		position: relative;
 		text-align: center;
 		height: 44px;
-		line-height: 44px;
+		
 	}
 	.nav h2{
 		font-weight: normal;
-		font-size: 20px;
+		font-size: 30px;
 	}
 	.activity-content .list .advertise{
 		position:relative;
@@ -87,54 +86,57 @@
 	}
 	.show .buy {
 		display: block;
-		width: 35px;
-		height: 30px;
+		width: 45px;
+		height: 21px;
 		text-align: center;
 		background-color: #0C0;
 		color: white;
 		margin-left: 100px;
-
+		border-radius: 20%;
 	}
 	#div2 .show .buy{
 		border:1px solid #2AA5F8;
 		color:#2AA5F8;
 		font-weight:bold;
 	
-	}
-	
+	}	
 </style>
-<ion-view view-title="芒果学车●业务列表报名">	
-  	<ion-content direction="y" class="activity-content">
+
+<ion-view view-title="芒果学车●业务报名列表">	
+  	<ion-content direction="y" class="activity-content">	
 		<nav class="nav">
-			<h2>线上报名</h2>		
-		</nav>				
-		<div class="service-info clearfix"  ng-repeat="business in businessList" >
-			<div class="avatar" style="border-color:#085E88">
-				<img ng-src="{{business.pic}}">
+			<h2 style="text-align:center;background: #ffe33e">线上报名</h2>		
+		</nav>	
+	
+			<div class="service-info clearfix" ng-repeat="business in businessList"  ng-if="business.id<40">
+				<div class="avatar" ng-if="business.id<40" style="border-color:#085E88">
+					<img ng-src="{{business.pic}}" ng-click="goPaperService(business.id)" >
+				</div>
+				<div id="div1" ng-if="business.id<40">
+					<ul class='show'>	
+						
+						<table>				
+							<th class='table_title'>
+								&nbsp;&nbsp;{{business.name}}
+							</th>																
+						</table>
+						<table>
+							<tr>
+								<td class='teach_font'><a ng-click="goPaperService(business.id)" style="text-decoration:none;color:black">&nbsp;&nbsp;{{business.introduce}}</a></td>							
+								<td >
+									<a class="buy" style="color:white"  ng-click='click_buy({{$index}},$event)'>报名</a>																
+								</td>
+							</tr>
+							<tr>							
+		
+								<td class='teach_font'><a ng-click="goPaperService(business.id)" style="text-decoration:none;color:red">&nbsp;&nbsp;报价:{{business.price}}</a></td>		
+							<tr>	
+						</table>
+						
+					</ul>
+				</div>
 			</div>
-			<div id="div1">
-				<ul class='show'>	
-					
-					<table>				
-						<th class='table_title'>
-							{{business.name}}
-						</th>																
-					</table>
-					<table>
-						<tr>
-							<td class='teach_font'><a href="http://{{defaultURL}}SerID{{$index}}.htm" style="text-decoration:none;color:black">简介:{{business.introduce}}</a></td>							
-							<td >
-								<a class="buy" style="color:white" ng-click='click_buy({{$index}},$event)'>支付</a>
-							</td>
-						</tr>
-						<tr>
-							<td class='teach_font'><a href="http://{{defaultURL}}SerID{{$index}}.htm" style="text-decoration:none;color:red">报价:{{business.price}}</a></td>									
-						<tr>	
-					</table>
-					
-				</ul>
-			</div>
-		</div>
+		
 	</ion-content>
 </ion-view>
 

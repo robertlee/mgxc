@@ -3,7 +3,6 @@ import org.apache.log4j.Logger;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 import com.uletian.ultcrm.business.service.WeixinConfig;
@@ -12,7 +11,7 @@ import com.uletian.ultcrm.weixin.ApplicationListener;
 @SpringBootApplication
 @EnableConfigurationProperties({WeixinConfig.class}) 
 @EnableScheduling
-@EnableCaching
+
 public class ULeTianCrmWeixinApplication {
 	private static Logger logger = Logger.getLogger(ULeTianCrmWeixinApplication.class);
     public static void main(String[] args) {

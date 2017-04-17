@@ -25,7 +25,8 @@ public interface TimeSegmentRepository extends PagingAndSortingRepository<TimeSe
 	 @Query("from TimeSegment where storeid = ?1 and dateSegment between ?2 and ?3") 
 	 public List<TimeSegment> queryTimeSegmentInPeriodByStoreId(Long storeId, Date startdate, Date enddate);
 	
-	 public List<TimeSegment> findByStoreAndBusiTypeId(Store store,Long busiTypeId);
+	 @Query("from TimeSegment where coachid = ?1") 
+	 public List<TimeSegment> findByCoachId(Long coachid);
 	 
 	 //public List<TimeSegment> findByCoachId(Long coachId);	 
 	 
@@ -34,5 +35,8 @@ public interface TimeSegmentRepository extends PagingAndSortingRepository<TimeSe
 	 @Query("select ts from TimeSegment ts where ts.id in ?1")
 	 public List<TimeSegment> findByIds(Collection<Long> ids);
 
-    
+//	 @Query("select id, coachid, dateSegment, timeSegment, busiTypeId from TimeSegment ts where ts.coachid = ?1 and ts.dateSegment=?2")
+	 @Query("from TimeSegment ts where ts.coachid = ?1 and ts.dateSegment=?2")
+	 public List<TimeSegment> queryTimeSegments(long coachid, Date appointDate);
 }
+

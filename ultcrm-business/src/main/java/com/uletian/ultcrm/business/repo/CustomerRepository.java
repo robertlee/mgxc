@@ -19,4 +19,7 @@ public interface CustomerRepository extends PagingAndSortingRepository<Customer,
 	Customer findByOpenid(String openId);
 	
 	Customer findByCrmCustomerId(String crmCustomerId);
+	
+	@Query("from Customer where id = ?1")
+	public Customer findById(Long id);	
 }

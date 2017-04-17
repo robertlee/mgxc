@@ -13,8 +13,8 @@ import com.uletian.ultcrm.business.entity.Customer;
 import com.uletian.ultcrm.business.entity.TemplateMessageResultCount;
 import com.uletian.ultcrm.business.repo.CustomerRepository;
 import com.uletian.ultcrm.business.repo.TemplateMessageResultCountRepository;
+import com.uletian.ultcrm.common.util.StringUtils;
 
-import reactor.util.StringUtils;
 import weixin.popular.bean.EventMessage;
 import weixin.popular.bean.xmlmessage.XMLMessage;
 import weixin.popular.event.EventHandler;

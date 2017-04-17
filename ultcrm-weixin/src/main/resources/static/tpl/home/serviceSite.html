@@ -1,0 +1,24 @@
+<link rel="stylesheet" href="/css/home/staticPage.css">
+<ion-view view-title="芒果学车●线下报名点">
+	<ion-content class="service-content">	
+		<div class="service-site">
+			<nav class="nav">
+				<h2>线下报名点</h2>
+				<a ng-click="goHomePage()"></a>
+			</nav>
+			<ul>				
+				<li class="clearfix" ng-repeat="item in addressList">
+					<h3>{{item.name}}</h3>	
+					<img class="site-img" src="/img/home/null.png" alt="">			
+					<p>电话:<a href="tel:{{item.phone}}">{{item.phone}}</a></p>
+					<p ng-click="goLocation(item.id)">导航:{{item.content}}</p>
+				</li>
+
+				<li>
+					<span>更多服务站敬请期待...</span>
+					<i><img src="/img/home/my_5.png" alt="">统一服务热线：<a href="tel:4008-935-866">4008-935-866</a></i>
+				</li>
+			</ul>
+		</div>
+	</ion-content>
+</ion-view>

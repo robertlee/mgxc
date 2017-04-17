@@ -6,7 +6,7 @@
 		background-size:cover;
 	}
 </style>
-<ion-view view-title="教练详情">
+<ion-view view-title="芒果学车●教练详情">
 	<div class="fixtop hasmenu">
 		<a ng-click="goBack()" class="back"></a>
 		<div class="uc-center">{{coachDetail.name}}({{coachDetail.desc}})</div>
@@ -26,8 +26,8 @@
 		<div class="perlistItem" data-temp="temp-header3" id="PlaceCont"> 
 		
 			<h2><img class="pIco1" src="/img/coach/perIco1.png">练车场地</h2>
-			<div class="peraddress">
-				<a href="http://{{defaultURL}}local/local{{coachDetail.storeid}}.html" style="text-decoration:none;color:red">{{store.name}}:{{store.fullAddress}}</a>				
+			<div class="peraddress">				
+				<a ng-click="toLocation(coachDetail.storeid)" style="text-decoration:none;color:red">{{store.name}}:{{store.fullAddress}}</a>
 				<span class="Icospan"></span>
 			</div>
 		</div>
@@ -70,9 +70,5 @@
 		</div>
 		
 	</ion-content>
-	<div class="jzbox">
-		<a ng-click="toServicePage({{coachDetail.id}})" class="bnt disable">现在预约</a>
-		<span class="spant2">¥</span>
-		<span class="spant1">119.</span>.00元/小时
-	</div>
+
 </ion-view>

@@ -55,6 +55,7 @@ ultcrm.controller('orderListCtrl', function($scope,$location,$http,$stateParams,
 	}
 	
 	$http.get("/getOrderListByCustomerId/"+customer.id).success(function(data){
+		console.log(data);
 		//$scope.$apply(function(){
 			//时间降序
 			$scope.newOrderList = data['new'].sort(function(a,b){
@@ -243,23 +244,25 @@ ultcrm.controller('orderListCtrl', function($scope,$location,$http,$stateParams,
 	
 	$scope.modifyTime = function(order) {
 		
-		// 跳转到时段选择页面
-		var urlStr = '/getOrderInfo/'+order.id;
-		$http.get(urlStr)
-		.success(function(data, status, headers, config) {
-			
-			//appointmentService.setCourseName(data.techCourseName);
-			//appointmentService.setSeryName(data.techSeryName);
-			//appointmentService.setModelName(data.techModelName);
-		    //appointmentService.setStoreName(data.storeName);
-			//appointmentService.setBusinessTypeId(data.businessTypeId);
-			//appointmentService.setOrderId(order.id);
-			
-			$state.go("index.timesegment",{orderInfoById:data}, {reload: true});
-			
-		})
-		.error(function(data, status, headers, config) {
-		});
+		// 跳转到时段修改页面
+		$state.go("index.updatetimesegment",{orderId:order.id}, {reload: true});
+		
+//		var urlStr = '/getOrderInfo/'+order.id;
+//		$http.get(urlStr)
+//		.success(function(data, status, headers, config) {
+//			
+//			//appointmentService.setCourseName(data.techCourseName);
+//			//appointmentService.setSeryName(data.techSeryName);
+//			//appointmentService.setModelName(data.techModelName);
+//		    //appointmentService.setStoreName(data.storeName);
+//			//appointmentService.setBusinessTypeId(data.businessTypeId);
+//			//appointmentService.setOrderId(order.id);
+//			
+//			$state.go("index.timesegment",{orderInfoById:data}, {reload: true});
+//			
+//		})
+//		.error(function(data, status, headers, config) {
+//		});
 	}	
 	
 	
